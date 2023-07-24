@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxupjagoajmyf"]
+
+[ext_resource type="Texture2D" uid="uid://ch0id56ogs0qr" path="res://sprites/gegner.png" id="1_8mk6v"]
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_y0cvv"]
+[ext_resource type="PackedScene" uid="uid://b5kq1yq22ybt3" path="res://scenes/healthbar.tscn" id="3_nqnd6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3id58"]
+radius = 12.0
+
+[node name="enemy" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_y0cvv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+texture = ExtResource("1_8mk6v")
+region_enabled = true
+region_rect = Rect2(0, 0, 40, 40)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3id58")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 5.0
+avoidance_enabled = true
+radius = 2.0
+neighbor_distance = 15.0
+
+[node name="healthbar" parent="." instance=ExtResource("3_nqnd6")]
+position = Vector2(0, -20)
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

@@ -1,0 +1,11 @@
+enum GemType{
+	RUBY,
+	SAPHIRE,	
+	TOPAZ,
+	AQUAMARIN,
+	DIAMOND,
+	OPAL,
+	EMERALD,
+	AMETHYST,
+	QUARTZ
+}

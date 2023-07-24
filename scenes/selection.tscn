@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bswwqwyt2no62"]
+
+[ext_resource type="Texture2D" uid="uid://d1xl2mwelprtw" path="res://sprites/gems.png" id="1_67eo7"]
+[ext_resource type="Script" path="res://scenes/selection.gd" id="2_uec3o"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5alea"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cmp41"]
+size = Vector2(47, 47)
+
+[node name="selection" type="Node2D"]
+material = SubResource("CanvasItemMaterial_5alea")
+script = ExtResource("2_uec3o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = ExtResource("1_67eo7")
+region_enabled = true
+region_rect = Rect2(0, 384, 64, 64)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_cmp41")

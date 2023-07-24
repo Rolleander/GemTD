@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpufs3fxsxh4a"]
+
+[ext_resource type="Script" path="res://ui/board_ui.gd" id="1_883fb"]
+
+[node name="board_ui" type="CanvasLayer"]
+script = ExtResource("1_883fb")
+
+[node name="FpsLabel" type="Label" parent="."]
+offset_left = 52.0
+offset_top = 44.0
+offset_right = 194.0
+offset_bottom = 70.0
+text = "Fps
+"
+
+[node name="WaveLabel" type="Label" parent="."]
+offset_left = 46.0
+offset_top = 14.0
+offset_right = 188.0
+offset_bottom = 66.0
+text = "Wave
+
+"

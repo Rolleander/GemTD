@@ -1,0 +1,8 @@
+enum GemQuality{
+	CHIPPED,
+	FLAWED,
+	NORMAL,
+	FLAWLESS,
+	PERFECT,
+	GREAT
+}

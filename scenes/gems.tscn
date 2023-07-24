@@ -1,0 +1,112 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqke7jfsjdq8y"]
+
+[ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="1_kuc45"]
+[ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="2_opbc8"]
+
+[node name="gems" type="Node2D"]
+
+[node name="GemTypesInfo" type="Node" parent="."]
+
+[node name="Ruby" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Ruby"
+descirption = "Splash"
+color = Color(0.898039, 0, 0, 1)
+attack_scene = "ruby_attack"
+
+[node name="Saphire" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Saphire"
+descirption = "Slow"
+color = Color(0.215686, 0.411765, 1, 1)
+attack_scene = "ruby_attack"
+
+[node name="Topaz" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Topaz"
+descirption = "Multi"
+color = Color(0.929412, 0.705882, 0.329412, 1)
+attack_scene = "ruby_attack"
+
+[node name="Aquamarine" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Aquamarine"
+descirption = "Fast"
+color = Color(0.466667, 0.811765, 0.929412, 1)
+attack_scene = "ruby_attack"
+
+[node name="Diamond" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Diamond"
+descirption = "Ground"
+color = Color(0.901961, 0.92549, 0.984314, 1)
+attack_scene = "ruby_attack"
+
+[node name="Opal" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Opal"
+descirption = "Buff Speed"
+color = Color(0.0588235, 0.0901961, 0.0745098, 1)
+attack_scene = "ruby_attack"
+
+[node name="Emerald" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Emerald"
+descirption = "Poison"
+color = Color(0, 0.580392, 0.105882, 1)
+attack_scene = "ruby_attack"
+
+[node name="Amethyst" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Amethyst"
+descirption = "Air"
+color = Color(0.662745, 0.00392157, 0.996078, 1)
+attack_scene = "ruby_attack"
+
+[node name="Quartz" type="Node" parent="GemTypesInfo"]
+script = ExtResource("1_kuc45")
+label = "Quartz"
+descirption = "Buff Range"
+color = Color(0.576471, 0.309804, 0.0431373, 1)
+attack_scene = "ruby_attack"
+
+[node name="GemQualityInfo" type="Node" parent="."]
+
+[node name="Chipped" type="Node" parent="GemQualityInfo"]
+script = ExtResource("2_opbc8")
+label = "Chipped"
+
+[node name="Flawed" type="Node" parent="GemQualityInfo"]
+script = ExtResource("2_opbc8")
+label = "Flawed"
+damage_scale = 1.4
+range_scale = 1.2
+attack_delay_scale = 0.9
+
+[node name="Normal" type="Node" parent="GemQualityInfo"]
+script = ExtResource("2_opbc8")
+label = "Normal"
+damage_scale = 2.2
+range_scale = 1.32
+attack_delay_scale = 0.8
+
+[node name="Flawless" type="Node" parent="GemQualityInfo"]
+script = ExtResource("2_opbc8")
+label = "Flawless"
+damage_scale = 3.7
+range_scale = 1.48
+attack_delay_scale = 0.7
+
+[node name="Perfect" type="Node" parent="GemQualityInfo"]
+script = ExtResource("2_opbc8")
+label = "Perfect"
+damage_scale = 6.5
+range_scale = 1.7
+attack_delay_scale = 0.6
+
+[node name="Great" type="Node" parent="GemQualityInfo"]
+script = ExtResource("2_opbc8")
+label = "Great"
+damage_scale = 30.0
+range_scale = 2.3
+attack_delay_scale = 0.5
