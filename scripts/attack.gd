@@ -10,6 +10,7 @@ class_name Attack
 @export var targets_ground : bool = true
 
 var gem : Gem
+var active = false
 
 func init():
 	if gem.quality ==null || gem.type == null:
@@ -19,3 +20,6 @@ func init():
 	damage = round(damage* quality_info.damage_scale)
 	attack_range *= quality_info.range_scale
 	attack_delay *= quality_info.attack_delay_scale
+
+func in_range(source : Node2D, target : Node2D, range : float) -> bool:
+	return source.global_position.distance_to(target.global_position) <= range/ 2

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=2 format=3 uid="uid://b726i3xa5fqtp"]
+
+[ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="1_q2f4j"]
+
+[resource]
+script = ExtResource("1_q2f4j")
+label = "Chipped"
+damage_scale = 1.0
+range_scale = 1.0
+attack_delay_scale = 1.0
+quality = 0

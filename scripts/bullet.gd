@@ -18,7 +18,7 @@ func _physics_process(delta):
 	var dir = (target.global_position-global_position).normalized() 
 	position += dir * speed * delta
 	if global_position.distance_to(target.global_position) <= HIT_SIZE :
-		target.hit(source)
+		source.bullet_hit(target)
 		queue_free()
 		return
 		

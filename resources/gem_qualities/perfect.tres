@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=2 format=3 uid="uid://mvayr202cj7b"]
+
+[ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="1_13u2l"]
+
+[resource]
+script = ExtResource("1_13u2l")
+label = "Perfect"
+damage_scale = 6.8
+range_scale = 1.7
+attack_delay_scale = 0.6
+quality = 4

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddh7yjq8fyg5"]
-
-[ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="1_rf271"]
-
-[node name="GemQualityInfo" type="Node"]
-script = ExtResource("1_rf271")

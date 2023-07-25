@@ -11,8 +11,11 @@ var spawn_target = 0
 var spawned = 0
 var selected_object
 var spawn_timer = Timer.new()
+var gem_chances : GemChances = GemChances.new()
 
 func _ready():
+	Events.enemy_killed.connect(_enemy_killed)
+	Events.gem_selected.connect(_selected_gem)
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(_spawn_enemy)
 
@@ -25,9 +28,9 @@ func _start_wave():
 	spawned = 0
 	spawn_target += 1
 	spawn_timer.start(0.3)
+	Events.emit_signal("wave_started")
 
 func placed_gem(gem: Gem):
-	gem.selected.connect(_selected_gem)
 	Game.remaining_placements-=1	
 	_update_selection(gem)
 	
@@ -46,10 +49,10 @@ func _spawn_enemy():
 	var enemy = preload("res://scenes/enemy.tscn").instantiate() as Enemy
 	enemy.waypoints = get_tree().get_first_node_in_group("waypoints").get_children()
 	enemy.position = get_tree().get_first_node_in_group("spawn_point").position
-	enemy.enemy_died.connect(_enemy_died)
 	enemies.add_child(enemy)
 	alive +=1
 	spawned += 1
+	Events.emit_signal("enemy_spawned", enemy)
 	if spawned == spawn_target:
 		spawn_timer.stop()
 	
@@ -63,10 +66,15 @@ func _selected_gem(selected_gem : Gem):
 			gem.activate(gem == selected_gem)
 		_finish_building()						
 
-func _enemy_died(enemy: Enemy):
+func _enemy_killed(enemy: Enemy, attack: Attack):
 	alive-=1
 	if alive == 0:
-		_start_building()
+		_wave_ended()	
+
+func _wave_ended():
+	Events.emit_signal("wave_ended")
+	_start_building()
+	
 
 func _update_selection(object):
 	selected_object = object

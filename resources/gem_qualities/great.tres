@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=2 format=3 uid="uid://bh50jjy8ri4vh"]
+
+[ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="1_2mivs"]
+
+[resource]
+script = ExtResource("1_2mivs")
+label = "Great"
+damage_scale = 30.0
+range_scale = 2.3
+attack_delay_scale = 0.5
+quality = 5

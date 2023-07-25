@@ -2,10 +2,8 @@ extends Node2D
 
 class_name Gem
 
-signal selected(gem : Gem)
-
-const Quality = preload("res://scripts/gem_quality.gd").GemQuality
-const Type = preload("res://scripts/gem_types.gd").GemType
+const GemQuality = preload("res://scripts/gem_quality.gd").GemQuality
+const GemType = preload("res://scripts/gem_types.gd").GemType
 const SPRITE_SIZE = 64
 const RANGE_RING = 800.0
 @onready var sprite = $Sprite2D
@@ -16,14 +14,18 @@ const RANGE_RING = 800.0
 @onready var range_ring = $RangRing
 
 var glowing = 0
-var type : Type
-var quality : Quality
+var type : GemType
+var quality : GemQuality
 var rock = false
 var special_combination = false
 var kills = 0
 var exp = 0
 var under_construction = false
 var attack : Attack
+
+func _ready():
+	Events.wave_started.connect(func():	attack.active = true)
+	Events.wave_ended.connect(func():attack.active = false)
 
 func _set_attack(attack : Attack):
 	self.attack = attack

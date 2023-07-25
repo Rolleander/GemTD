@@ -5,19 +5,21 @@ class_name ProjectileAttack
 @export var splash_range : float = 0
 @export var bullet_speed : float = 15
 @export var bullet_source : Node2D
+@export var hit_buff : EnemyBuff
 
 var timer = Timer.new()
 var attack_ready = true
 
 func _ready():
+	bullet_source.visible = false
 	add_child(timer)
 	timer.timeout.connect(_on_timer_timeout)
 
 func _physics_process(delta):
-	if Game.construction_phase || !attack_ready:
+	if !active || !attack_ready:
 		return
 	for enemy in Game.get_enemies():
-		if enemy.alive && global_position.distance_to(enemy.global_position) <= attack_range/2:
+		if enemy.alive && in_range(self, enemy, attack_range):
 			_attack(enemy)
 			return
 			
@@ -28,8 +30,17 @@ func _attack(enemy : Enemy):
 	bullet.target = enemy
 	bullet.source = self
 	bullet.speed = bullet_speed
-	bullet.add_child(bullet_source.duplicate())
+	var render = bullet_source.duplicate()
+	render.visible = true
+	bullet.add_child(render)
 	add_child(bullet)	
+	
+func bullet_hit(target : Enemy):
+	target.hit(self)
+	if splash_range > 0:
+		for enemy in Game.get_enemies():
+			if enemy != target && enemy.alive && in_range(enemy, target, splash_range):
+				enemy.hit(self)
 	
 func _on_timer_timeout():
 	attack_ready = true	

@@ -41,6 +41,9 @@ func _unhandled_input(event):
 		_set_zoom_level(_zoom_level - ZOOM_SPEED)
 	if event.is_action_pressed("click"):
 		click()
+	if event.is_action_pressed("start"):
+		for e in Game.get_enemies():
+			e.kill()
 	
 
 func _set_zoom_level(value: float) -> void:
@@ -72,6 +75,7 @@ func place_gem():
 	var gem = preload("res://scenes/gem.tscn").instantiate()
 	gem.position = pos
 	maze.add_child(gem)
+	gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
 	path_map.block_path(pos)
 	Game.placed_gem(gem)
 	if Game.remaining_placements ==0:

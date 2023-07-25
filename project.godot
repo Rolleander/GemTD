@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GemChances="*res://scripts/gem_chances.gd"
 Globals="*res://scripts/globals.gd"
+Events="*res://scripts/events.gd"
 Game="*res://scripts/game.gd"
 
 [display]

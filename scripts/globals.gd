@@ -7,12 +7,13 @@ const GemTypeInfo = preload("res://scripts/GemTypeInfo.gd")
 const GemQualityInfo = preload("res://scripts/GemQualityInfo.gd")
 const Quality = preload("res://scripts/gem_quality.gd").GemQuality
 const Type = preload("res://scripts/gem_types.gd").GemType
-var _gems = preload("res://scenes/gems.tscn").instantiate()
-var _gem_type_infos = _gems.find_child("GemTypesInfo").get_children()
-var _gem_quality_infos = _gems.find_child("GemQualityInfo").get_children()
+var setup = preload("res://resources/_setup.tres") 
 
 func get_gem_info(type : Type) -> GemTypeInfo:
-	return _gem_type_infos[type] 
+	return setup.gem_types[type] 
 
 func get_quality_info(quality : Quality) -> GemQualityInfo:
-	return _gem_quality_infos[quality] 
+	return setup.gem_qualities[quality] 
+
+func get_roll_chances(level) ->RollChances:
+	return setup.roll_chances[level]
