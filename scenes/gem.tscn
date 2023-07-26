@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bm44dol1vru50" path="res://sprites/selection.png" id="6_dkcgr"]
 [ext_resource type="Texture2D" uid="uid://brxi0l2bcml0g" path="res://sprites/sheen.png" id="6_no3jf"]
 [ext_resource type="Texture2D" uid="uid://cw2nhdwbvul3q" path="res://sprites/range_circle.png" id="7_8j4da"]
+[ext_resource type="FontFile" uid="uid://ctt5j6fiwwvno" path="res://fonts/RobotoCondensed-Regular.ttf" id="9_b65tk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75hv5"]
 radius = 18.0
@@ -45,13 +46,13 @@ scale_curve = SubResource("CurveTexture_nmh1s")
 color = Color(1, 1, 1, 0.780392)
 color_ramp = SubResource("GradientTexture1D_rtvka")
 
-[sub_resource type="LabelSettings" id="LabelSettings_jisa2"]
-line_spacing = -2.0
-font_size = 10
-
 [sub_resource type="LabelSettings" id="LabelSettings_pt4b2"]
 line_spacing = -2.0
-font_size = 10
+font = ExtResource("9_b65tk")
+font_size = 30
+outline_size = 2
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.894118)
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-1, 0)
@@ -109,25 +110,14 @@ process_material = SubResource("ParticleProcessMaterial_065kt")
 texture = ExtResource("6_no3jf")
 lifetime = 3.0
 
-[node name="LabelShadow" type="Label" parent="."]
-modulate = Color(0, 0, 0, 1)
-z_index = 14
-offset_left = -93.0
-offset_top = -35.0
-offset_right = 97.0
-offset_bottom = -9.0
-text = "Test
-"
-label_settings = SubResource("LabelSettings_jisa2")
-horizontal_alignment = 1
-
 [node name="Label" type="Label" parent="."]
 z_index = 15
-texture_filter = 1
-offset_left = -94.0
-offset_top = -36.0
-offset_right = 96.0
-offset_bottom = -10.0
+offset_left = -68.0
+offset_top = -38.0
+offset_right = 274.0
+offset_bottom = 64.0
+scale = Vector2(0.4, 0.4)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Test
 "
 label_settings = SubResource("LabelSettings_pt4b2")

@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_q2f4j")
-label = "Chipped"
-damage_scale = 1.0
-range_scale = 1.0
-attack_delay_scale = 1.0
+label = ""
+damage_scale = 2.3
+range_scale = 1.32
+attack_delay_scale = 0.8
 quality = 0

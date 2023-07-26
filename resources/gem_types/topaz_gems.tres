@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_8tg7q")
-label = "Saphire"
-descirption = "Slow"
-color = Color(0.054902, 0.372549, 1, 1)
+label = "Topaz"
+descirption = "Multi"
+color = Color(0.858824, 0.678431, 0, 1)
 attack = ExtResource("1_ks1vn")
-type = 1
+type = 2

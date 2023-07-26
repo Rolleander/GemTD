@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dcb0mj55c6k08"]
+[gd_scene load_steps=24 format=3 uid="uid://dcb0mj55c6k08"]
 
 [ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_4164p"]
 [ext_resource type="Texture2D" uid="uid://dgt2n6g4hsgmp" path="res://sprites/blue_particle.png" id="2_gksrn"]
@@ -114,21 +114,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_061kj"]
+colors = PackedColorArray(0.654232, 0.654232, 0.654232, 1, 1, 1, 1, 0.203922)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g8ghl"]
+gradient = SubResource("Gradient_061kj")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j0jgy"]
 particle_flag_disable_z = true
-gravity = Vector3(-500, 0, 0)
+gravity = Vector3(0, 0, 0)
 initial_velocity_max = 10.0
-angular_velocity_min = -110.31
-angular_velocity_max = 229.3
+angular_velocity_min = -211.2
+angular_velocity_max = 330.19
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_min = 0.01
 scale_max = 0.3
+color_ramp = SubResource("GradientTexture1D_g8ghl")
 
 [node name="ruby_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
 position = Vector2(0, -1)
 script = ExtResource("1_4164p")
-bullet_speed = 300.0
+bullet_speed = 250.0
 bullet_source = NodePath("AnimatedSprite2D")
 damage = 5.0
 attack_range = 300.0
@@ -142,7 +149,7 @@ texture = ExtResource("2_gksrn")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.698039)
 material = SubResource("CanvasItemMaterial_1nr2t")
-position = Vector2(0.25, 0)
+position = Vector2(6.25, 1)
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_onb8l")
 frame_progress = 0.245013
@@ -150,12 +157,11 @@ speed_scale = 4.0
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="AnimatedSprite2D"]
 show_behind_parent = true
-position = Vector2(-15, 0)
+position = Vector2(-10, 1.42857)
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_j0jgy")
 texture = ExtResource("4_f5q3u")
 lifetime = 0.5
-local_coords = true
 
 [node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
 visible = false

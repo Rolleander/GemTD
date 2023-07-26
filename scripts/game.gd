@@ -1,6 +1,6 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 5
+const PLACEMENTS_PER_ROUND = 25
 const ENEMIES = 10
 
 var construction_phase = true
@@ -12,6 +12,7 @@ var spawned = 0
 var selected_object
 var spawn_timer = Timer.new()
 var gem_chances : GemChances = GemChances.new()
+var combos 
 
 func _ready():
 	Events.enemy_killed.connect(_enemy_killed)
@@ -33,6 +34,8 @@ func _start_wave():
 func placed_gem(gem: Gem):
 	Game.remaining_placements-=1	
 	_update_selection(gem)
+	combos = CombinationsCheck.check(get_tree().get_nodes_in_group("building"))
+	
 	
 func _start_building():
 	construction_phase = true
@@ -91,3 +94,7 @@ func clear_selection():
 		selected_object.selection.visible = false
 		selected_object.range_ring.visible = false
 		selected_object= null
+
+
+
+	

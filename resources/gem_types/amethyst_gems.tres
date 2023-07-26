@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_5noiv")
-label = "Emerald"
-descirption = "Poison"
-color = Color(0.0745098, 0.698039, 0.0117647, 1)
+label = "Amethyst"
+descirption = "Air"
+color = Color(0.682353, 0.407843, 1, 1)
 attack = ExtResource("1_vn2tc")
-type = 6
+type = 7

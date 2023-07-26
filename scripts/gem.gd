@@ -9,7 +9,6 @@ const RANGE_RING = 800.0
 @onready var sprite = $Sprite2D
 @onready var glow = $Glow
 @onready var label = $Label
-@onready var labelShadow = $LabelShadow
 @onready var selection = $SelectionRing
 @onready var range_ring = $RangRing
 
@@ -51,7 +50,6 @@ func make_rock():
 func activate(picked : bool):
 	remove_from_group("building")
 	remove_child(label)
-	remove_child(labelShadow)
 	remove_child($BuildingRing)
 	under_construction = false
 	if picked:			

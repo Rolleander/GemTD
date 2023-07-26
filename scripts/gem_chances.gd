@@ -4,7 +4,7 @@ class_name GemChances
 
 const Quality = preload("res://scripts/gem_quality.gd").GemQuality
 const Type = preload("res://scripts/gem_types.gd").GemType
-var level = 1
+var level = 0
 
 func get_random_quality():
 	var chance = Globals.get_roll_chances(level).get_as_dict()

@@ -8,6 +8,8 @@ func _ready():
 
 func init_basic_gem(type : GemType, quality : GemQuality):
 	add_to_group("building")
+	self.type = type
+	self.quality = quality 
 	under_construction = true
 	sprite.region_rect.position = Vector2(type * SPRITE_SIZE, quality * SPRITE_SIZE)
 	var scale = 1 + (quality * 0.3)
@@ -19,9 +21,9 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 	if quality_info.label != null:
 		label_text += quality_info.label +"\n"
 	label_text += type_info.label
+	label.label_settings = label.label_settings.duplicate()
+	label.label_settings.font_color =  type_info.color.lightened(0.5)
 	label.text = label_text
-	labelShadow.text = label_text
-	label.modulate = type_info.color.lightened(0.5)
 
 func _on_static_body_2d_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("click"):

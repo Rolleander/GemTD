@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("2_a2eaw")
-label = "Ruby"
-descirption = "Splash"
-color = Color(0.843137, 0, 0, 1)
+label = "Saphire"
+descirption = "Slow"
+color = Color(0, 0.423529, 0.941176, 1)
 attack = ExtResource("1_tpl2x")
-type = 0
+type = 1

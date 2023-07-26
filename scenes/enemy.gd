@@ -9,7 +9,7 @@ class_name Enemy
 
 var path = []
 var target = -1
-var max_health = 20
+var max_health = 150
 var health = max_health
 var started = false 
 var alive = true
@@ -41,7 +41,7 @@ func kill():
 func _damage(damage, source : Attack) -> bool:
 	if health <= 0:
 		return false
-	health-=1
+	health-=damage
 	if health <1:
 		_death(source)
 		return true
