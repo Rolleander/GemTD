@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=2 format=3 uid="uid://dxbr1uou236ph"]
+[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=3 format=3 uid="uid://dxbr1uou236ph"]
 
 [ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="1_ka65w"]
+[ext_resource type="PackedScene" uid="uid://11j2386p4xmq" path="res://gems/normal.tscn" id="1_v3jfx"]
 
 [resource]
 script = ExtResource("1_ka65w")
-label = "Flawed"
-damage_scale = 1.4
-range_scale = 1.2
+label = ""
+damage_scale = 2.3
+range_scale = 1.32
 attack_delay_scale = 0.9
-quality = 1
+quality = 2
+scene = ExtResource("1_v3jfx")

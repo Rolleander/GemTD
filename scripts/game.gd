@@ -1,6 +1,6 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 25
+const PLACEMENTS_PER_ROUND = 5
 const ENEMIES = 10
 
 var construction_phase = true

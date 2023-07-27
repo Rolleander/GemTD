@@ -108,11 +108,11 @@ lifetime = 3.0
 
 [node name="Label" type="Label" parent="."]
 z_index = 15
-offset_left = -59.0
-offset_top = -39.0
-offset_right = 283.0
-offset_bottom = 63.0
-scale = Vector2(0.35, 0.35)
+offset_left = -68.0
+offset_top = -38.0
+offset_right = 274.0
+offset_bottom = 64.0
+scale = Vector2(0.4, 0.4)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Test
 "

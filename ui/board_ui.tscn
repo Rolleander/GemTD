@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=3 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" path="res://ui/board_ui.gd" id="1_883fb"]
+[ext_resource type="Texture2D" uid="uid://cq332ex7o84n1" path="res://sprites/button.png" id="2_17p5c"]
 
 [node name="board_ui" type="CanvasLayer"]
 script = ExtResource("1_883fb")
@@ -21,3 +22,12 @@ offset_bottom = 66.0
 text = "Wave
 
 "
+
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 257.0
+offset_top = 143.0
+offset_right = 265.0
+offset_bottom = 151.0
+tooltip_text = "Macht cooles zeug"
+icon = ExtResource("2_17p5c")

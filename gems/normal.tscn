@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://11j2386p4xmq"]
+
+[ext_resource type="Texture2D" uid="uid://h2d5p41l50ry" path="res://sprites/gems/normal.png" id="1_bif8u"]
+[ext_resource type="Texture2D" uid="uid://brxi0l2bcml0g" path="res://sprites/sheen.png" id="3_3rukt"]
+
+[sub_resource type="Gradient" id="Gradient_sk8im"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rtvka"]
+gradient = SubResource("Gradient_sk8im")
+
+[sub_resource type="Curve" id="Curve_ny3bb"]
+_data = [Vector2(0.546392, 0.463158), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nmh1s"]
+curve = SubResource("Curve_ny3bb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vklob"]
+lifetime_randomness = 0.65
+emission_shape = 1
+emission_sphere_radius = 20.0
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 0.4
+gravity = Vector3(0, -5, 0)
+angular_velocity_min = -64.2
+angular_velocity_max = 82.55
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 720.0
+scale_min = 0.1
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_nmh1s")
+color = Color(1, 1, 1, 0.780392)
+color_ramp = SubResource("GradientTexture1D_rtvka")
+
+[node name="normal" type="Sprite2D"]
+texture = ExtResource("1_bif8u")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 45)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 8
+position = Vector2(0, -2)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_vklob")
+texture = ExtResource("3_3rukt")
+lifetime = 3.0

@@ -4,13 +4,13 @@ class_name Gem
 
 const GemQuality = preload("res://scripts/gem_quality.gd").GemQuality
 const GemType = preload("res://scripts/gem_types.gd").GemType
-const SPRITE_SIZE = 64
+const Boulder = preload("res://gems/boulder.tscn")
 const RANGE_RING = 800.0
-@onready var sprite = $Sprite2D
 @onready var glow = $Glow
 @onready var label = $Label
 @onready var selection = $SelectionRing
 @onready var range_ring = $RangRing
+@onready var graphic = $Graphic
 
 var glowing = 0
 var type : GemType
@@ -42,10 +42,10 @@ func _process(delta):
 func make_rock():
 	rock = true
 	glow.visible = false
-	sprite.region_rect.position = Vector2(0, 6 * SPRITE_SIZE)
-	remove_child($GPUParticles2D)
 	add_to_group("rocks")
 	remove_child(attack)
+	graphic.get_child(0).queue_free()
+	graphic.add_child(Boulder.instantiate())
 	
 func activate(picked : bool):
 	remove_from_group("building")

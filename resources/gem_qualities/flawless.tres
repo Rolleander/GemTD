@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=2 format=3 uid="uid://dhj1i0ydybq48"]
+[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=3 format=3 uid="uid://dhj1i0ydybq48"]
 
+[ext_resource type="PackedScene" uid="uid://7vqmqarqfihj" path="res://gems/flawless.tscn" id="1_85u8l"]
 [ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="1_lffbc"]
 
 [resource]
@@ -7,5 +8,6 @@ script = ExtResource("1_lffbc")
 label = "Flawless"
 damage_scale = 4.2
 range_scale = 1.48
-attack_delay_scale = 0.7
-quality = 4
+attack_delay_scale = 0.85
+quality = 3
+scene = ExtResource("1_85u8l")
