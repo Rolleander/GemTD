@@ -17,6 +17,7 @@ var _zoom_level = 1.5
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Events.wave_started.connect(func(): selection.visible = false)
 	NavigationServer2D.map_set_use_edge_connections(get_world_2d().navigation_map, false)
 	var rect = tilemap.get_used_rect()
 	var start = rect.position * Globals.TILE_SIZE 

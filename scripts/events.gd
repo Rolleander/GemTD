@@ -2,6 +2,7 @@ extends Node
 
 signal wave_started()
 signal wave_ended()
+signal unselect()
 signal gem_selected(gem : Gem)
 signal enemy_spawned(enemy : Enemy)
 signal enemy_killed(enemy: Enemy, attack: Attack)

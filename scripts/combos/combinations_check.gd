@@ -14,9 +14,9 @@ func check(gems : Array):
 				fusion[key] = [[gem] as Array[Gem], 1]
 	for f in fusion.keys():
 		if fusion[f][1] >=2:
-			combos.append(GemFusion.new(fusion[f][0].slice(0,1)))
+			combos.append(GemFusion.new(fusion[f][0], 2))
 		if fusion[f][1] >=4:
-			combos.append(GemFusion.new(fusion[f][0].slice(0,3)))
+			combos.append(GemFusion.new(fusion[f][0], 4))
 	print(combos)
 	return combos
 

@@ -1,6 +1,6 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 5
+const PLACEMENTS_PER_ROUND = 15
 const ENEMIES = 10
 
 var construction_phase = true
@@ -12,15 +12,15 @@ var spawned = 0
 var selected_object
 var spawn_timer = Timer.new()
 var gem_chances : GemChances = GemChances.new()
-var combos 
+var build_menu
 
 func _ready():
 	Events.enemy_killed.connect(_enemy_killed)
-	Events.gem_selected.connect(_selected_gem)
+	Events.gem_selected.connect(_update_selection)
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(_spawn_enemy)
 
-func _finish_building():
+func finish_building():
 	#var maze = get_tree().get_first_node_in_group("maze_node")
 	construction_phase = false
 	_start_wave()
@@ -32,10 +32,9 @@ func _start_wave():
 	Events.emit_signal("wave_started")
 
 func placed_gem(gem: Gem):
-	Game.remaining_placements-=1	
-	_update_selection(gem)
-	combos = CombinationsCheck.check(get_tree().get_nodes_in_group("building"))
-	
+	Game.remaining_placements-=1		
+	_update_selection(gem)	
+	Events.gem_selected.emit(gem)
 	
 func _start_building():
 	construction_phase = true
@@ -58,17 +57,7 @@ func _spawn_enemy():
 	Events.emit_signal("enemy_spawned", enemy)
 	if spawned == spawn_target:
 		spawn_timer.stop()
-	
-func _selected_gem(selected_gem : Gem):
-	_update_selection(selected_gem)
-	if construction_phase && remaining_placements <= 0:
-		var building = get_tree().get_nodes_in_group("building")
-		if !building.has(selected_gem):
-			return
-		for gem in building:
-			gem.activate(gem == selected_gem)
-		_finish_building()						
-
+				
 func _enemy_killed(enemy: Enemy, attack: Attack):
 	alive-=1
 	if alive == 0:
@@ -94,7 +83,8 @@ func clear_selection():
 		selected_object.selection.visible = false
 		selected_object.range_ring.visible = false
 		selected_object= null
-
+		get_tree().get_first_node_in_group("BuildMenu").visible = false
+		Events.unselect.emit()
 
 
 	

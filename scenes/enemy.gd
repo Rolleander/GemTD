@@ -5,11 +5,11 @@ class_name Enemy
 @onready var navigation = $NavigationAgent2D
 @onready var health_bar = $healthbar
 @export var waypoints : Array[Node]
-@export var speed = 150
+@export var speed = 80
 
 var path = []
 var target = -1
-var max_health = 150
+var max_health = 300
 var health = max_health
 var started = false 
 var alive = true

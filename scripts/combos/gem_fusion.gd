@@ -1,17 +1,17 @@
 extends Combination
 
 class_name GemFusion
+var fusion_size : int
 
-func _init(gems : Array[Gem]):
+func _init(gems : Array[Gem], fusion_size : int):
 	self.gems = gems
+	self.fusion_size = fusion_size
 
-func fuse(target : Gem):
+func fuse(target : Gem) -> Gem:
 	var quality = target.quality 
 	quality += gems.size() / 2
-	var gem = preload("res://scenes/gem.tscn").instantiate()
-	gem.position = target
-	target.get_parent().add_child(gem)
-	gem.init_basic_gem(target.type, quality)
-	gem.activate(true)	
-	clear_material()
-	
+	target.init_basic_gem(target.type, quality)
+	gems.erase(target)
+	for g in gems:		
+		g.make_rock()
+	return target

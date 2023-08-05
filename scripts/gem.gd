@@ -19,14 +19,18 @@ var rock = false
 var special_combination = false
 var kills = 0
 var exp = 0
+var level = 0
 var under_construction = false
 var attack : Attack
+var gem_name : String
 
 func _ready():
 	Events.wave_started.connect(func():	attack.active = true)
 	Events.wave_ended.connect(func():attack.active = false)
 
 func _set_attack(attack : Attack):
+	if self.attack != null:
+		self.attack.queue_free()
 	self.attack = attack
 	attack.gem = self
 	attack.init()
@@ -40,6 +44,7 @@ func _process(delta):
 	pass
 
 func make_rock():
+	gem_name = "Mazing Rock"
 	rock = true
 	glow.visible = false
 	add_to_group("rocks")

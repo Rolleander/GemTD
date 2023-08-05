@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=5 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Texture2D" uid="uid://cq332ex7o84n1" path="res://sprites/button.png" id="2_17p5c"]
+[ext_resource type="Script" path="res://ui/BuildMenu.gd" id="3_x7hxt"]
+[ext_resource type="Script" path="res://ui/GemInfo.gd" id="4_vuwf8"]
 
 [node name="board_ui" type="CanvasLayer"]
 script = ExtResource("1_883fb")
@@ -31,3 +33,121 @@ offset_right = 265.0
 offset_bottom = 151.0
 tooltip_text = "Macht cooles zeug"
 icon = ExtResource("2_17p5c")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 1574.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="GemInfo" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -145.0
+offset_right = 190.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("4_vuwf8")
+
+[node name="Name" type="Label" parent="GemInfo"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 2.0
+offset_right = 47.0
+offset_bottom = 28.0
+text = "Gem"
+
+[node name="BuildMenu" type="Panel" parent="." groups=["BuildMenu"]]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -190.0
+offset_top = -68.0
+offset_right = 190.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("3_x7hxt")
+
+[node name="Keep" type="Button" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 64.0
+offset_bottom = 64.0
+tooltip_text = "Keep the gem and start next wave"
+text = "Keep"
+
+[node name="Downgrade" type="Button" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 68.0
+offset_top = 6.0
+offset_right = 126.0
+offset_bottom = 64.0
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Down
+"
+
+[node name="Fusion2" type="Button" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 130.0
+offset_top = 6.0
+offset_right = 188.0
+offset_bottom = 64.0
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Fus2
+"
+
+[node name="Fusion4" type="Button" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 192.0
+offset_top = 6.0
+offset_right = 250.0
+offset_bottom = 64.0
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Fus4
+"
+
+[node name="Combine" type="Button" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 255.0
+offset_top = 6.0
+offset_right = 313.0
+offset_bottom = 64.0
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Comb
+"
+
+[node name="Reroll" type="Button" parent="BuildMenu"]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 318.0
+offset_top = 6.0
+offset_right = 376.0
+offset_bottom = 64.0
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Roll
+"
+
+[connection signal="pressed" from="BuildMenu/Keep" to="BuildMenu" method="_on_keep_pressed"]
+[connection signal="pressed" from="BuildMenu/Downgrade" to="BuildMenu" method="_on_downgrade_pressed"]
+[connection signal="pressed" from="BuildMenu/Fusion2" to="BuildMenu" method="_on_fusion_2_pressed"]
+[connection signal="pressed" from="BuildMenu/Fusion4" to="BuildMenu" method="_on_fusion_4_pressed"]
+[connection signal="pressed" from="BuildMenu/Combine" to="BuildMenu" method="_on_combine_pressed"]
+[connection signal="pressed" from="BuildMenu/Reroll" to="BuildMenu" method="_on_reroll_pressed"]
