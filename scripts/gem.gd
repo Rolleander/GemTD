@@ -6,13 +6,12 @@ const GemQuality = preload("res://scripts/gem_quality.gd").GemQuality
 const GemType = preload("res://scripts/gem_types.gd").GemType
 const Boulder = preload("res://gems/boulder.tscn")
 const RANGE_RING = 800.0
-@onready var glow = $Glow
 @onready var label = $Label
 @onready var selection = $SelectionRing
 @onready var range_ring = $RangRing
 @onready var graphic = $Graphic
+@onready var glow = $Glow
 
-var glowing = 0
 var type : GemType
 var quality : GemQuality
 var rock = false
@@ -37,16 +36,12 @@ func _set_attack(attack : Attack):
 	var range_scale = attack.attack_range / RANGE_RING
 	range_ring.scale = Vector2(range_scale, range_scale)
 	add_child(attack)
-	
-func _process(delta):
-	glowing +=0.03
-	glow.modulate.a = sin(glowing) * 0.05 + 0.05 + 0.13
-	pass
+
 
 func make_rock():
-	gem_name = "Mazing Rock"
 	rock = true
-	glow.visible = false
+	gem_name = "Mazing Rock"
+	glow.queue_free()
 	add_to_group("rocks")
 	remove_child(attack)
 	graphic.get_child(0).queue_free()

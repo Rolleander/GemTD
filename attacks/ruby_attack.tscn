@@ -1,118 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://dcb0mj55c6k08"]
+[gd_scene load_steps=12 format=3 uid="uid://dcb0mj55c6k08"]
 
 [ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_4164p"]
-[ext_resource type="Texture2D" uid="uid://dgt2n6g4hsgmp" path="res://sprites/blue_particle.png" id="2_gksrn"]
 [ext_resource type="Texture2D" uid="uid://c8wbkao3a75ai" path="res://sprites/fireball.png" id="3_t5oie"]
 [ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="4_f5q3u"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1nr2t"]
-blend_mode = 1
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ovh3f"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(0, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u0sfm"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(96, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mjfmv"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(192, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ohlm4"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(288, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqeer"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(384, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_74hc3"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(480, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iun2v"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(576, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trkgy"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(672, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gi5lo"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(768, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7wo5n"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(864, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ld7ey"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(960, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8eafc"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(1056, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5bigw"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(1152, 0, 96, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_th0ow"]
-atlas = ExtResource("3_t5oie")
-region = Rect2(1248, 0, 96, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_onb8l"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ovh3f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u0sfm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mjfmv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ohlm4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xqeer")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_74hc3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iun2v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_trkgy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gi5lo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7wo5n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ld7ey")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8eafc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5bigw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_th0ow")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="Gradient" id="Gradient_061kj"]
 colors = PackedColorArray(0.654232, 0.654232, 0.654232, 1, 1, 1, 1, 0.203922)
@@ -132,38 +22,73 @@ scale_min = 0.01
 scale_max = 0.3
 color_ramp = SubResource("GradientTexture1D_g8ghl")
 
-[node name="ruby_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
-position = Vector2(0, -1)
+[sub_resource type="Gradient" id="Gradient_rvpff"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_050u3"]
+gradient = SubResource("Gradient_rvpff")
+fill = 1
+fill_from = Vector2(0.474359, 0.482906)
+fill_to = Vector2(0.846154, 0.162393)
+
+[sub_resource type="Gradient" id="Gradient_71o5a"]
+offsets = PackedFloat32Array(0, 0.344473, 0.74036, 1)
+colors = PackedColorArray(1, 0, 0, 0.815686, 1, 0.603922, 0, 0.768627, 0.25098, 0, 0, 0.470588, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rdg0h"]
+gradient = SubResource("Gradient_71o5a")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q0whc"]
+particle_flag_disable_z = true
+direction = Vector3(1000, 0, 0)
+spread = 170.67
+gravity = Vector3(0, 0, 0)
+initial_velocity_max = 22.53
+angular_velocity_min = -51.89
+angular_velocity_max = 97.3
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 37.427
+damping_max = 38.779
+scale_min = 0.15
+scale_max = 0.35
+color_ramp = SubResource("GradientTexture1D_rdg0h")
+
+[node name="ruby_attack" type="Node2D" node_paths=PackedStringArray("bullet_source", "hit_effect")]
 script = ExtResource("1_4164p")
-bullet_speed = 500.0
-bullet_source = NodePath("AnimatedSprite2D")
+bullet_speed = 400.0
+bullet_source = NodePath("Sprite2d")
 damage = 5.0
 attack_range = 300.0
 attack_delay = 0.8
+hit_effect = NodePath("HitExplosion")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("2_gksrn")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.698039)
-material = SubResource("CanvasItemMaterial_1nr2t")
+[node name="Sprite2d" type="Sprite2D" parent="."]
 position = Vector2(6.25, 1)
 scale = Vector2(0.7, 0.7)
-sprite_frames = SubResource("SpriteFrames_onb8l")
-frame_progress = 0.245013
-speed_scale = 4.0
+texture = ExtResource("3_t5oie")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="AnimatedSprite2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Sprite2d"]
 show_behind_parent = true
-position = Vector2(-10, 1.42857)
+position = Vector2(-8.57143, -1.42857)
 amount = 15
 process_material = SubResource("ParticleProcessMaterial_j0jgy")
 texture = ExtResource("4_f5q3u")
 lifetime = 0.5
 
-[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+[node name="PointLight2D" type="PointLight2D" parent="Sprite2d"]
+position = Vector2(12, -1.21428)
+scale = Vector2(0.372767, 0.350446)
+color = Color(1, 0.305882, 0, 1)
+energy = 1.2
+texture = SubResource("GradientTexture2D_050u3")
+
+[node name="HitExplosion" type="GPUParticles2D" parent="."]
 visible = false
-position = Vector2(-53.2143, -4.28571)
+self_modulate = Color(1, 1, 1, 0.227451)
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_q0whc")
 texture = ExtResource("4_f5q3u")
+lifetime = 0.3
+explosiveness = 0.82
+local_coords = true

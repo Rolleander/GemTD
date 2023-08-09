@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://cy6jakwjkqtws"]
 
-[ext_resource type="PackedScene" uid="uid://dcb0mj55c6k08" path="res://attacks/ruby_attack.tscn" id="1_islfu"]
+[ext_resource type="PackedScene" uid="uid://bgxb67n6xasin" path="res://attacks/emerald_attack.tscn" id="1_q0rox"]
 [ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_oxhgi"]
 
 [resource]
@@ -8,5 +8,5 @@ script = ExtResource("2_oxhgi")
 label = "Emerald"
 descirption = "Poison"
 color = Color(0.0745098, 0.698039, 0.0117647, 1)
-attack = ExtResource("1_islfu")
+attack = ExtResource("1_q0rox")
 type = 6

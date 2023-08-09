@@ -83,7 +83,8 @@ func clear_selection():
 		selected_object.selection.visible = false
 		selected_object.range_ring.visible = false
 		selected_object= null
-		get_tree().get_first_node_in_group("BuildMenu").visible = false
+		for menu in get_tree().get_nodes_in_group("BuildMenu"):
+			menu.visible = false		
 		Events.unselect.emit()
 
 

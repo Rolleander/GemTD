@@ -1,153 +1,158 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=6 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" path="res://ui/board_ui.gd" id="1_883fb"]
-[ext_resource type="Texture2D" uid="uid://cq332ex7o84n1" path="res://sprites/button.png" id="2_17p5c"]
+[ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
 [ext_resource type="Script" path="res://ui/BuildMenu.gd" id="3_x7hxt"]
 [ext_resource type="Script" path="res://ui/GemInfo.gd" id="4_vuwf8"]
+[ext_resource type="Script" path="res://ui/RockMenu.gd" id="5_e8wht"]
 
 [node name="board_ui" type="CanvasLayer"]
 script = ExtResource("1_883fb")
 
 [node name="FpsLabel" type="Label" parent="."]
-offset_left = 52.0
-offset_top = 44.0
-offset_right = 194.0
-offset_bottom = 70.0
+offset_left = 16.0
+offset_top = 41.0
+offset_right = 1936.0
+offset_bottom = 67.0
 text = "Fps
 "
 
 [node name="WaveLabel" type="Label" parent="."]
-offset_left = 46.0
+offset_left = 13.0
 offset_top = 14.0
-offset_right = 188.0
+offset_right = 1933.0
 offset_bottom = 66.0
 text = "Wave
 
 "
 
-[node name="Button" type="Button" parent="."]
-visible = false
-offset_left = 257.0
-offset_top = 143.0
-offset_right = 265.0
-offset_bottom = 151.0
-tooltip_text = "Macht cooles zeug"
-icon = ExtResource("2_17p5c")
-
-[node name="Panel" type="Panel" parent="."]
-offset_left = 1574.0
-offset_right = 1920.0
-offset_bottom = 1080.0
-
-[node name="GemInfo" type="Panel" parent="."]
+[node name="MarginContainer" type="VBoxContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -190.0
-offset_top = -145.0
-offset_right = 190.0
-offset_bottom = -1.0
+offset_left = -209.0
+offset_top = -174.0
+offset_right = 210.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("2_48epx")
+
+[node name="GemInfo" type="Panel" parent="MarginContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
 script = ExtResource("4_vuwf8")
 
-[node name="Name" type="Label" parent="GemInfo"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 2.0
-offset_right = 47.0
-offset_bottom = 28.0
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/GemInfo"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 8
+
+[node name="Name" type="Label" parent="MarginContainer/GemInfo/MarginContainer"]
+layout_mode = 2
 text = "Gem"
 
-[node name="BuildMenu" type="Panel" parent="." groups=["BuildMenu"]]
+[node name="Level" type="Label" parent="MarginContainer/GemInfo/MarginContainer"]
+layout_direction = 3
+layout_mode = 2
+text = "Lv.1
+"
+
+[node name="BuildMenu" type="Panel" parent="MarginContainer" groups=["BuildMenu"]]
 visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -190.0
-offset_top = -68.0
-offset_right = 190.0
-grow_horizontal = 2
-grow_vertical = 0
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 6
 script = ExtResource("3_x7hxt")
 
-[node name="Keep" type="Button" parent="BuildMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BuildMenu"]
 layout_mode = 1
-anchors_preset = -1
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 64.0
-offset_bottom = 64.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Keep" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 40)
+layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 text = "Keep"
 
-[node name="Downgrade" type="Button" parent="BuildMenu"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 68.0
-offset_top = 6.0
-offset_right = 126.0
-offset_bottom = 64.0
+[node name="Downgrade" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
 text = "Down
 "
 
-[node name="Fusion2" type="Button" parent="BuildMenu"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 130.0
-offset_top = 6.0
-offset_right = 188.0
-offset_bottom = 64.0
+[node name="Fusion2" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
 text = "Fus2
 "
 
-[node name="Fusion4" type="Button" parent="BuildMenu"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 192.0
-offset_top = 6.0
-offset_right = 250.0
-offset_bottom = 64.0
+[node name="Fusion4" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
 text = "Fus4
 "
 
-[node name="Combine" type="Button" parent="BuildMenu"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 255.0
-offset_top = 6.0
-offset_right = 313.0
-offset_bottom = 64.0
+[node name="Combine" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
 text = "Comb
 "
 
-[node name="Reroll" type="Button" parent="BuildMenu"]
-layout_mode = 1
-anchors_preset = -1
-offset_left = 318.0
-offset_top = 6.0
-offset_right = 376.0
-offset_bottom = 64.0
+[node name="Reroll" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
 text = "Roll
 "
 
-[connection signal="pressed" from="BuildMenu/Keep" to="BuildMenu" method="_on_keep_pressed"]
-[connection signal="pressed" from="BuildMenu/Downgrade" to="BuildMenu" method="_on_downgrade_pressed"]
-[connection signal="pressed" from="BuildMenu/Fusion2" to="BuildMenu" method="_on_fusion_2_pressed"]
-[connection signal="pressed" from="BuildMenu/Fusion4" to="BuildMenu" method="_on_fusion_4_pressed"]
-[connection signal="pressed" from="BuildMenu/Combine" to="BuildMenu" method="_on_combine_pressed"]
-[connection signal="pressed" from="BuildMenu/Reroll" to="BuildMenu" method="_on_reroll_pressed"]
+[node name="RockMenu" type="Panel" parent="MarginContainer" groups=["BuildMenu"]]
+visible = false
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+size_flags_vertical = 6
+script = ExtResource("5_e8wht")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/RockMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reroll" type="Button" parent="MarginContainer/RockMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Roll
+"
+
+[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer/BuildMenu" method="_on_keep_pressed"]
+[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
+[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
+[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Fusion4" to="MarginContainer/BuildMenu" method="_on_fusion_4_pressed"]
+[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer/BuildMenu" method="_on_combine_pressed"]
+[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer/BuildMenu" method="_on_reroll_pressed"]
+[connection signal="pressed" from="MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer/RockMenu" method="_on_reroll_pressed"]

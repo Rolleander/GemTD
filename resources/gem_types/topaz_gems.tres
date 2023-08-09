@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://ce8rrciangvbo"]
 
-[ext_resource type="PackedScene" uid="uid://dcb0mj55c6k08" path="res://attacks/ruby_attack.tscn" id="1_ks1vn"]
+[ext_resource type="PackedScene" uid="uid://c4t8ih51d881l" path="res://attacks/topaz_attack.tscn" id="1_2btnn"]
 [ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_8tg7q"]
 
 [resource]
@@ -8,5 +8,5 @@ script = ExtResource("2_8tg7q")
 label = "Topaz"
 descirption = "Multi"
 color = Color(0.858824, 0.678431, 0, 1)
-attack = ExtResource("1_ks1vn")
+attack = ExtResource("1_2btnn")
 type = 2

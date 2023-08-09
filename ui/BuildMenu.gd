@@ -1,10 +1,10 @@
 extends Panel
 
-@onready var downgrade = $Downgrade
-@onready var fusion2 = $Fusion2
-@onready var fusion4 = $Fusion4
-@onready var combine = $Combine
-@onready var reroll = $Reroll
+@onready var downgrade = $HBoxContainer/Downgrade
+@onready var fusion2 = $HBoxContainer/Fusion2
+@onready var fusion4 = $HBoxContainer/Fusion4
+@onready var combine = $HBoxContainer/Combine
+@onready var reroll = $HBoxContainer/Reroll
 
 var combos = []
 
@@ -19,6 +19,7 @@ func _open(gem : Gem):
 		downgrade.disabled =  gem.quality == 0
 		fusion2.disabled = true
 		fusion4.disabled = true
+		reroll.disabled  = Game.remaining_placements == 0
 		for c in combos:
 			if c.gems.has(gem):
 				if c is GemFusion:
@@ -65,4 +66,8 @@ func _on_combine_pressed():
 
 
 func _on_reroll_pressed():
-	pass # Replace with function body.
+	if Game.remaining_placements > 0:
+		Game.remaining_placements-=1
+		var selected_gem = Game.selected_object as Gem
+		selected_gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
+	

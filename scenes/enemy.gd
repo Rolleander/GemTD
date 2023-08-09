@@ -6,6 +6,8 @@ class_name Enemy
 @onready var health_bar = $healthbar
 @export var waypoints : Array[Node]
 @export var speed = 80
+@onready var hit_effects = $HitEffects
+@onready var sprite = $Sprite
 
 var path = []
 var target = -1
@@ -30,6 +32,8 @@ func _process(delta):
 	health_bar.health_percent = float(health) / max_health 	
 		
 func _physics_process(_delta : float):
+	if !alive:
+		return
 	if navigation.is_navigation_finished():
 		_next_waypoint()
 	var dir = to_local(navigation.get_next_path_position()).normalized()
@@ -55,7 +59,12 @@ func hit(attack : Attack):
 
 func _death(killer : Attack):
 	Events.emit_signal("enemy_killed", self, killer)
-	queue_free()
+	Events.delayed_destroy(self, 1)
+	sprite.visible = false
+	health_bar.visible = false
+
+func add_hit_effect(effect : Node2D):
+	hit_effects.add_child(effect)
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	velocity = safe_velocity
