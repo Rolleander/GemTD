@@ -7,7 +7,7 @@
 [sub_resource type="Gradient" id="Gradient_061kj"]
 colors = PackedColorArray(0.654232, 0.654232, 0.654232, 1, 1, 1, 1, 0.203922)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_g8ghl"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qytdw"]
 gradient = SubResource("Gradient_061kj")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j0jgy"]
@@ -20,13 +20,13 @@ orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
 scale_min = 0.01
 scale_max = 0.3
-color_ramp = SubResource("GradientTexture1D_g8ghl")
+color_ramp = SubResource("GradientTexture1D_qytdw")
 
-[sub_resource type="Gradient" id="Gradient_rvpff"]
+[sub_resource type="Gradient" id="Gradient_k1uab"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_050u3"]
-gradient = SubResource("Gradient_rvpff")
+gradient = SubResource("Gradient_k1uab")
 fill = 1
 fill_from = Vector2(0.474359, 0.482906)
 fill_to = Vector2(0.846154, 0.162393)
@@ -75,6 +75,7 @@ amount = 15
 process_material = SubResource("ParticleProcessMaterial_j0jgy")
 texture = ExtResource("4_f5q3u")
 lifetime = 0.5
+fixed_fps = 60
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2d"]
 position = Vector2(12, -1.21428)

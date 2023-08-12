@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvvtwcedfsig3"]
+
+[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_m5fis"]
+[ext_resource type="Texture2D" uid="uid://c3liyqtvj3agq" path="res://sprites/bubble.png" id="2_uxniu"]
+
+[sub_resource type="Gradient" id="Gradient_wp23h"]
+colors = PackedColorArray(1, 1, 1, 0.858824, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_is3mc"]
+gradient = SubResource("Gradient_wp23h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mypk4"]
+emission_shape = 1
+emission_sphere_radius = 7.71
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = -210.52
+angular_velocity_max = 343.79
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.05
+scale_max = 0.25
+color_ramp = SubResource("GradientTexture1D_is3mc")
+
+[sub_resource type="Gradient" id="Gradient_rvpff"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t3fp3"]
+gradient = SubResource("Gradient_rvpff")
+fill = 1
+fill_from = Vector2(0.474359, 0.482906)
+fill_to = Vector2(0.846154, 0.162393)
+
+[node name="saphire_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
+script = ExtResource("1_m5fis")
+bullet_speed = 225.0
+bullet_source = NodePath("Bullet")
+damage = 10.0
+attack_range = 400.0
+
+[node name="Bullet" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_mypk4")
+texture = ExtResource("2_uxniu")
+lifetime = 0.3
+fixed_fps = 60
+
+[node name="PointLight2D" type="PointLight2D" parent="Bullet"]
+position = Vector2(0.232138, 9.53674e-07)
+scale = Vector2(0.601004, 0.565848)
+color = Color(0, 0.364706, 0.835294, 1)
+energy = 1.2
+texture = SubResource("GradientTexture2D_t3fp3")

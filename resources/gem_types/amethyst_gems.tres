@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://bx3tovknvlpx5"]
 
-[ext_resource type="PackedScene" uid="uid://dcb0mj55c6k08" path="res://attacks/ruby_attack.tscn" id="1_vn2tc"]
+[ext_resource type="PackedScene" uid="uid://c04eh0hyhrv3j" path="res://attacks/amethyst_attack.tscn" id="1_h7agr"]
 [ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_5noiv"]
 
 [resource]
@@ -8,5 +8,5 @@ script = ExtResource("2_5noiv")
 label = "Amethyst"
 descirption = "Air"
 color = Color(0.682353, 0.407843, 1, 1)
-attack = ExtResource("1_vn2tc")
+attack = ExtResource("1_h7agr")
 type = 7

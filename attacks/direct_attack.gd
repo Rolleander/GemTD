@@ -8,3 +8,4 @@ func _ready():
 			
 func _attack(target : Enemy):
 	_hit(target)
+	return true

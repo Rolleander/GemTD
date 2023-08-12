@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://c1thspxkc4kn4"]
 
-[ext_resource type="PackedScene" uid="uid://dcb0mj55c6k08" path="res://attacks/ruby_attack.tscn" id="1_bd4gc"]
+[ext_resource type="PackedScene" uid="uid://imkvnw5cclwa" path="res://attacks/diamond_attack.tscn" id="1_rujbr"]
 [ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_0s618"]
 
 [resource]
@@ -8,5 +8,5 @@ script = ExtResource("2_0s618")
 label = "Diamond"
 descirption = "Ground"
 color = Color(0.913725, 0.92549, 1, 1)
-attack = ExtResource("1_bd4gc")
+attack = ExtResource("1_rujbr")
 type = 4

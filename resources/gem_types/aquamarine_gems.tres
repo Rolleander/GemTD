@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://debvtrswbopg4"]
 
-[ext_resource type="PackedScene" uid="uid://dcb0mj55c6k08" path="res://attacks/ruby_attack.tscn" id="1_qomeu"]
+[ext_resource type="PackedScene" uid="uid://62rjt5si8wiv" path="res://attacks/aquamarine_attack.tscn" id="1_ols28"]
 [ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_7xe5i"]
 
 [resource]
@@ -8,5 +8,5 @@ script = ExtResource("2_7xe5i")
 label = "Aquamarine"
 descirption = "Fast"
 color = Color(0, 0.737255, 0.843137, 1)
-attack = ExtResource("1_qomeu")
+attack = ExtResource("1_ols28")
 type = 3

@@ -20,7 +20,7 @@ void fragment(){
 	vec3 f1 = texture(noise_img2, vec2(u + speed *  TIME,v- rand)).rgb;
 	vec3 f2 = texture(noise_img, vec2(u +rand ,v + speed  * TIME)).rgb;
 	vec3 f3 = texture(noise_img2, vec2(u -rand ,v- speed *  TIME)).rgb;
-	vec3 color = f1*f2*f3;
+	vec3 color = f1 * f2 * f3;
 	color.rgb *= glow_color*1.0 + vec3(0.5);
 	COLOR.rgb = color;
 	COLOR.a = clamp(COLOR.a, 0.0, energy);

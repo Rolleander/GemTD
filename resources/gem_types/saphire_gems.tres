@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://dmi6uq88ig44k"]
 
-[ext_resource type="PackedScene" uid="uid://dcb0mj55c6k08" path="res://attacks/ruby_attack.tscn" id="1_tpl2x"]
+[ext_resource type="PackedScene" uid="uid://bvvtwcedfsig3" path="res://attacks/saphire_attack.tscn" id="1_g6wk8"]
 [ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_a2eaw"]
 
 [resource]
@@ -8,5 +8,5 @@ script = ExtResource("2_a2eaw")
 label = "Saphire"
 descirption = "Slow"
 color = Color(0, 0.423529, 0.941176, 1)
-attack = ExtResource("1_tpl2x")
+attack = ExtResource("1_g6wk8")
 type = 1

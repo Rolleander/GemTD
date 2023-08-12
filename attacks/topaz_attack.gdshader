@@ -1,18 +1,16 @@
 shader_type canvas_item;
-
+render_mode blend_add;
 uniform sampler2D noise : repeat_enable;
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform vec2 scroll = vec2(0.1,0.1);
+const float dist_power = 0.3;
 
-void fragment(){ float speed_factor = TIME ;
-
-float thickness_factor = 0.2; // float thickness_factor = (1.0 - pow(COLOR.a, 2));
-
-vec2 fake_UV = vec2(abs(0.5 - UV.y) * thickness_factor, COLOR.a + speed_factor);
-
-vec4 n = texture(noise, fake_UV);
-
-float grey = 1.0 - (0.2126 * n.r + 0.7152 * n.g + 0.0722 * n.b);
-
-if (grey < 0.55) { COLOR.a = COLOR.a * pow(grey, 2); }
-
-if (grey < 0.5) { discard; } 
+void fragment(){ 
+vec4 noise_col = texture(noise, UV +scroll * TIME);	
+///vec4 screen_color = texture(SCREEN_TEXTURE, SCREEN_UV+ dist_power * noise_col.rr );
+vec4 color = texture(TEXTURE, UV);
+//COLOR.rgb = n1 * n2 - screen_color.rgb;
+float modu = COLOR.a / color.a;
+COLOR = noise_col*0.7 + color * 0.6;
+COLOR.a = color.a * modu;
 }

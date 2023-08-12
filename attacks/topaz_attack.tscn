@@ -1,12 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4t8ih51d881l"]
+[gd_scene load_steps=16 format=3 uid="uid://c4t8ih51d881l"]
 
 [ext_resource type="Script" path="res://attacks/topaz_attack.gd" id="1_3e3ug"]
 [ext_resource type="Texture2D" uid="uid://bleg0ud0phapp" path="res://sprites/purple_spot.png" id="2_hd4ji"]
 [ext_resource type="Texture2D" uid="uid://di6l4quka02mv" path="res://sprites/yellowlight.png" id="3_m7jlg"]
 [ext_resource type="Shader" path="res://attacks/topaz_attack.gdshader" id="3_sns2l"]
+[ext_resource type="Texture2D" uid="uid://b4gls68co6s60" path="res://sprites/thunder.png" id="4_7yp14"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sbqdb"]
+blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_f45sq"]
-colors = PackedColorArray(1, 1, 0, 0.462745, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_igoho"]
 gradient = SubResource("Gradient_f45sq")
@@ -31,20 +35,20 @@ orbit_velocity_max = 0.0
 angle_min = -300.0
 angle_max = 402.2
 scale_min = 0.1
-scale_max = 0.1
+scale_max = 0.15
 scale_curve = SubResource("CurveTexture_o0rby")
 color = Color(0.92549, 0.8, 0.317647, 1)
 color_ramp = SubResource("GradientTexture1D_igoho")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_sqphi"]
-seed = 20
-frequency = 0.1275
+seed = 23
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wpuvr"]
 noise = SubResource("FastNoiseLite_sqphi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiiwh"]
 shader = ExtResource("3_sns2l")
+shader_parameter/scroll = Vector2(1.9, -2)
 shader_parameter/noise = SubResource("NoiseTexture2D_wpuvr")
 
 [sub_resource type="Gradient" id="Gradient_8dgw7"]
@@ -59,21 +63,25 @@ parallel_targets = 1000
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
-amount = 3
+material = SubResource("CanvasItemMaterial_sbqdb")
+amount = 1
 process_material = SubResource("ParticleProcessMaterial_b3ali")
 texture = ExtResource("2_hd4ji")
-lifetime = 0.5
+lifetime = 0.2
 local_coords = true
 
 [node name="Line" type="Line2D" parent="GPUParticles2D"]
 visible = false
 material = SubResource("ShaderMaterial_wiiwh")
-scale = Vector2(10.3358, 9.15798)
+scale = Vector2(53.7218, 30.6337)
 points = PackedVector2Array(-5, 4.59459, -1.36364, 0.27027)
 width = 0.5
 gradient = SubResource("Gradient_8dgw7")
+texture = ExtResource("4_7yp14")
+texture_mode = 2
 
 [node name="PointLight2D" type="PointLight2D" parent="GPUParticles2D"]
+visible = false
 color = Color(1, 1, 0, 1)
 energy = 0.87
 texture = ExtResource("3_m7jlg")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://imkvnw5cclwa"]
+
+[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_6osml"]
+[ext_resource type="Texture2D" uid="uid://bnehs24allnoa" path="res://sprites/diamond_blast.png" id="2_b0p7c"]
+
+[sub_resource type="Gradient" id="Gradient_vepx4"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7ocxu"]
+gradient = SubResource("Gradient_vepx4")
+fill = 1
+fill_from = Vector2(0.474359, 0.482906)
+fill_to = Vector2(0.846154, 0.162393)
+
+[node name="diamond_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
+script = ExtResource("1_6osml")
+bullet_speed = 350.0
+bullet_source = NodePath("DiamondBlast")
+damage = 10.0
+attack_range = 300.0
+targets_air = false
+
+[node name="DiamondBlast" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.764706)
+position = Vector2(-2, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_b0p7c")
+
+[node name="PointLight2D" type="PointLight2D" parent="DiamondBlast"]
+position = Vector2(32, 0)
+scale = Vector2(1.59319, 1.4721)
+energy = 0.59
+texture = SubResource("GradientTexture2D_7ocxu")

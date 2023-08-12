@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4q3e2nu2q5tc"]
+
+[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_axsyc"]
+[ext_resource type="Texture2D" uid="uid://cml4rhdefeeau" path="res://sprites/quartz_blast.png" id="2_ijn4n"]
+
+[sub_resource type="Gradient" id="Gradient_vyrh5"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mc31t"]
+gradient = SubResource("Gradient_vyrh5")
+fill = 1
+fill_from = Vector2(0.474359, 0.482906)
+fill_to = Vector2(0.846154, 0.162393)
+
+[node name="quartz_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
+modulate = Color(1, 1, 1, 0.67451)
+script = ExtResource("1_axsyc")
+bullet_speed = 300.0
+bullet_source = NodePath("QuartzBlast")
+damage = 4.0
+attack_range = 400.0
+
+[node name="QuartzBlast" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_ijn4n")
+
+[node name="PointLight2D" type="PointLight2D" parent="QuartzBlast"]
+position = Vector2(16, 0)
+scale = Vector2(1.24972, 1.25167)
+color = Color(0.639216, 0.443137, 0.113725, 1)
+energy = 0.92
+texture = SubResource("GradientTexture2D_mc31t")

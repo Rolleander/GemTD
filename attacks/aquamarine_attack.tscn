@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://62rjt5si8wiv"]
+
+[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_fjqde"]
+[ext_resource type="Texture2D" uid="uid://cd8upgu1j5o31" path="res://sprites/aquablast.png" id="2_eh6wh"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tdrjx"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_8l236"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sw0fr"]
+gradient = SubResource("Gradient_8l236")
+fill = 1
+fill_from = Vector2(0.474359, 0.482906)
+fill_to = Vector2(0.846154, 0.162393)
+
+[node name="aquamarine_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
+script = ExtResource("1_fjqde")
+bullet_speed = 400.0
+bullet_source = NodePath("Aquablast")
+damage = 4.0
+attack_range = 240.0
+attack_delay = 0.3
+
+[node name="Aquablast" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.521569)
+material = SubResource("CanvasItemMaterial_tdrjx")
+position = Vector2(-1.5, 0)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_eh6wh")
+
+[node name="PointLight2D" type="PointLight2D" parent="Aquablast"]
+position = Vector2(24.2857, 0)
+scale = Vector2(1.0346, 0.978794)
+color = Color(0.0980392, 0.803922, 1, 1)
+energy = 1.2
+texture = SubResource("GradientTexture2D_sw0fr")

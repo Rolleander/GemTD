@@ -39,17 +39,17 @@ func _physics_process(delta):
 	var attacked = false
 	for enemy in Game.get_enemies():
 		if enemy.alive && in_range(self, enemy, attack_range):
-			_attack(enemy)
-			targets+=1
-			attacked = true
-			if targets >= parallel_targets:
-				break
+			if _attack(enemy):
+				targets+=1
+				attacked = true
+				if targets >= parallel_targets:
+					break
 	if attacked:
 		attack_ready  = false
 		timer.start(attack_delay)
 			
 func _attack(target : Enemy):
-	pass
+	return false
 
 func in_range(source : Node2D, target : Node2D, range : float) -> bool:
 	return source.global_position.distance_to(target.global_position) <= range/ 2

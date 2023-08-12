@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://be06of4xdksj3"]
 
-[ext_resource type="PackedScene" uid="uid://dcb0mj55c6k08" path="res://attacks/ruby_attack.tscn" id="1_5bi6y"]
+[ext_resource type="PackedScene" uid="uid://cx4g6cs1tksta" path="res://attacks/opal_attack.tscn" id="1_ust84"]
 [ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_15cuc"]
 
 [resource]
@@ -8,5 +8,5 @@ script = ExtResource("2_15cuc")
 label = "Opal"
 descirption = "Buff Speed"
 color = Color(0.0823529, 0.0901961, 0.0941176, 1)
-attack = ExtResource("1_5bi6y")
+attack = ExtResource("1_ust84")
 type = 5

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx4g6cs1tksta"]
+
+[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_gma7u"]
+[ext_resource type="Texture2D" uid="uid://gb32t5helwp0" path="res://sprites/opal_blast.png" id="2_lgqp4"]
+
+[sub_resource type="Gradient" id="Gradient_0ceon"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixt6h"]
+gradient = SubResource("Gradient_0ceon")
+fill = 1
+fill_from = Vector2(0.474359, 0.482906)
+fill_to = Vector2(0.846154, 0.162393)
+
+[node name="opal_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
+modulate = Color(1, 1, 1, 0.698039)
+script = ExtResource("1_gma7u")
+bullet_speed = 300.0
+bullet_source = NodePath("OpalBlast")
+damage = 4.0
+attack_range = 400.0
+
+[node name="OpalBlast" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_lgqp4")
+
+[node name="PointLight2D" type="PointLight2D" parent="OpalBlast"]
+position = Vector2(10, 0)
+scale = Vector2(0.989583, 0.956473)
+color = Color(0.364706, 0.364706, 0.364706, 1)
+energy = 0.4
+blend_mode = 1
+texture = SubResource("GradientTexture2D_ixt6h")

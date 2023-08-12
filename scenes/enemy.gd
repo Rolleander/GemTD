@@ -5,16 +5,17 @@ class_name Enemy
 @onready var navigation = $NavigationAgent2D
 @onready var health_bar = $healthbar
 @export var waypoints : Array[Node]
-@export var speed = 80
+@export var speed = 180
 @onready var hit_effects = $HitEffects
 @onready var sprite = $Sprite
 
 var path = []
 var target = -1
-var max_health = 300
+var max_health = 1000
 var health = max_health
 var started = false 
 var alive = true
+var projected_damage = 0
 
 func _ready():
 	navigation.max_speed = speed
@@ -47,7 +48,6 @@ func _damage(damage, source : Attack) -> bool:
 		return false
 	health-=damage
 	if health <1:
-		_death(source)
 		return true
 	return false
 		
@@ -55,13 +55,16 @@ func hit(attack : Attack):
 	if !alive:
 		return
 	if _damage(attack.damage, attack):
-		attack.gem.killed(self)	
+		_death(attack)
 
 func _death(killer : Attack):
+	alive = false
 	Events.emit_signal("enemy_killed", self, killer)
 	Events.delayed_destroy(self, 1)
 	sprite.visible = false
 	health_bar.visible = false
+	if killer != null:
+		killer.gem.killed(self)	
 
 func add_hit_effect(effect : Node2D):
 	hit_effects.add_child(effect)

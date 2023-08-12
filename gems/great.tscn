@@ -37,7 +37,7 @@ color = Color(1, 1, 1, 0.780392)
 color_ramp = SubResource("GradientTexture1D_rtvka")
 
 [node name="great" type="Sprite2D"]
-position = Vector2(-2, -1)
+position = Vector2(-3, 4)
 texture = ExtResource("1_cqjtt")
 offset = Vector2(0, -10)
 region_enabled = true

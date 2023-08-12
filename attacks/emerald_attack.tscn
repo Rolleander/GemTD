@@ -39,6 +39,7 @@ amount = 35
 process_material = SubResource("ParticleProcessMaterial_j0jgy")
 texture = ExtResource("4_grplc")
 lifetime = 0.5
+fixed_fps = 60
 trail_lifetime = 3.7
 trail_sections = 20
 trail_section_subdivisions = 10
