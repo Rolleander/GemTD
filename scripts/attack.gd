@@ -38,7 +38,7 @@ func _physics_process(delta):
 	var targets = 0
 	var attacked = false
 	for enemy in Game.get_enemies():
-		if enemy.alive && in_range(self, enemy, attack_range):
+		if enemy.alive && _can_target(enemy) && in_range(self, enemy, attack_range):
 			if _attack(enemy):
 				targets+=1
 				attacked = true
@@ -47,6 +47,12 @@ func _physics_process(delta):
 	if attacked:
 		attack_ready  = false
 		timer.start(attack_delay)
+
+func _can_target(enemy : Enemy):
+	if enemy.flying:
+		return targets_air
+	else:
+		return targets_ground	
 			
 func _attack(target : Enemy):
 	return false

@@ -16,10 +16,20 @@ var health = max_health
 var started = false 
 var alive = true
 var projected_damage = 0
+var flying = false
 
 func _ready():
-	navigation.max_speed = speed
+	navigation.max_speed = speed	
 	_next_waypoint()
+
+func set_flying(flying : bool):
+	self.flying = flying
+	if flying:
+		navigation.navigation_layers = 2
+		collision_mask = 0
+	else:
+		navigation.navigation_layers = 1
+		collision_mask = 2
 
 func _next_waypoint():
 	target+=1

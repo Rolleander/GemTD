@@ -54,6 +54,7 @@ func _spawn_enemy():
 	enemies.add_child(enemy)
 	alive +=1
 	spawned += 1
+	enemy.set_flying(alive % 2 == 1)
 	Events.emit_signal("enemy_spawned", enemy)
 	if spawned == spawn_target:
 		spawn_timer.stop()

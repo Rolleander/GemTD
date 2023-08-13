@@ -30,3 +30,4 @@ func _attack(target : Enemy):
 	line.add_point( line.to_local(self.global_position))
 	line.add_point( line.to_local(target.global_position))
 	lines.append(line)
+	return true

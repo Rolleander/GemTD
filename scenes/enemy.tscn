@@ -31,6 +31,7 @@ target_desired_distance = 5.0
 avoidance_enabled = true
 radius = 2.0
 neighbor_distance = 15.0
+debug_enabled = true
 
 [node name="HitEffects" type="Node2D" parent="."]
 z_index = 5
