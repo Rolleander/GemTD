@@ -54,11 +54,15 @@ func _on_fusion_2_pressed():
 	var selected_gem = Game.selected_object
 	for c in combos:
 		if c.gems.has(selected_gem):
-			if c is GemFusion:				
+			if c is GemFusion && c.fusion_size == 2:				
 				_end_building(c.fuse(selected_gem))
 
 func _on_fusion_4_pressed():
-	pass # Replace with function body.
+	var selected_gem = Game.selected_object
+	for c in combos:
+		if c.gems.has(selected_gem):
+			if c is GemFusion && c.fusion_size == 4:				
+				_end_building(c.fuse(selected_gem))
 
 
 func _on_combine_pressed():

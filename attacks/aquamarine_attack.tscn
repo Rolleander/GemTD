@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://62rjt5si8wiv"]
+[gd_scene load_steps=9 format=3 uid="uid://62rjt5si8wiv"]
 
 [ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_fjqde"]
 [ext_resource type="Texture2D" uid="uid://cd8upgu1j5o31" path="res://sprites/aquablast.png" id="2_eh6wh"]
+[ext_resource type="Script" path="res://attacks/smoketrail.gd" id="3_m4iyx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tdrjx"]
 blend_mode = 1
@@ -14,6 +15,13 @@ gradient = SubResource("Gradient_8l236")
 fill = 1
 fill_from = Vector2(0.474359, 0.482906)
 fill_to = Vector2(0.846154, 0.162393)
+
+[sub_resource type="Curve" id="Curve_8h12p"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_tko02"]
+colors = PackedColorArray(0.568627, 0.815686, 0.815686, 0, 0, 1, 1, 1)
 
 [node name="aquamarine_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
 script = ExtResource("1_fjqde")
@@ -36,3 +44,11 @@ scale = Vector2(1.0346, 0.978794)
 color = Color(0.0980392, 0.803922, 1, 1)
 energy = 1.2
 texture = SubResource("GradientTexture2D_sw0fr")
+
+[node name="SmokeTrail" type="Line2D" parent="."]
+width = 8.0
+width_curve = SubResource("Curve_8h12p")
+gradient = SubResource("Gradient_tko02")
+script = ExtResource("3_m4iyx")
+limited_lifetime = true
+wildness = 10.0

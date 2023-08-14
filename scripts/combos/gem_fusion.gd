@@ -9,7 +9,7 @@ func _init(gems : Array[Gem], fusion_size : int):
 
 func fuse(target : Gem) -> Gem:
 	var quality = target.quality 
-	quality += gems.size() / 2
+	quality += fusion_size / 2
 	target.init_basic_gem(target.type, quality)
 	gems.erase(target)
 	for g in gems:		
