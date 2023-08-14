@@ -19,14 +19,16 @@ func _attack(enemy : Enemy):
 	var bullet = Bullet.new()
 	var trail_source = find_child("SmokeTrail")
 	if trail_source != null:
-		var trail = trail_source.duplicate()
+		var trail = trail_source.duplicate() as SmokeTrail
 		trail.position = self.position
+		trail.width =  trail.width  * attack_scale
 		get_tree().get_first_node_in_group("TrailNode").add_child(trail)
 		bullet.trail = trail
 	bullet.target = enemy
 	bullet.source = self
 	bullet.speed = bullet_speed
-	var render = bullet_source.duplicate(0b1110)
+	var render = bullet_source.duplicate(0b1110) as Node2D
+	render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))
 	render.visible = true
 	bullet.add_child(render)
 	bullet.look_at(enemy.global_position)

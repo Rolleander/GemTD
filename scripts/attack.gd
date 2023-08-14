@@ -17,6 +17,7 @@ var gem : Gem
 var active = false
 var timer = Timer.new()
 var attack_ready = false
+var attack_scale = 1.0
 
 func _ready():
 	add_child(timer)
@@ -31,6 +32,7 @@ func init():
 	damage = round(damage* quality_info.damage_scale)
 	attack_range *= quality_info.range_scale
 	attack_delay *= quality_info.attack_delay_scale
+	attack_scale += gem.quality *.05
 
 func _physics_process(delta):
 	if !active || !attack_ready:
