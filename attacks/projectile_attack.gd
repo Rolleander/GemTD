@@ -13,9 +13,8 @@ func _physics_process(delta):
 	super(delta)
 
 func _attack(enemy : Enemy):
-	if enemy.health - enemy.projected_damage <=0:
+	if enemy.health.value - enemy.projected_damage <=0:
 		return false
-	enemy.projected_damage += damage	
 	var bullet = Bullet.new()
 	var trail_source = find_child("SmokeTrail")
 	if trail_source != null:
@@ -27,6 +26,8 @@ func _attack(enemy : Enemy):
 	bullet.target = enemy
 	bullet.source = self
 	bullet.speed = bullet_speed
+	bullet.projected_damage = enemy.calc_damage(gem.damage.value)	
+	enemy.projected_damage += bullet.projected_damage
 	var render = bullet_source.duplicate(0b1110) as Node2D
 	render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))
 	render.visible = true
@@ -37,4 +38,3 @@ func _attack(enemy : Enemy):
 	
 func bullet_hit(target : Enemy):
 	_hit(target)
-	target.projected_damage-=damage

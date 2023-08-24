@@ -5,7 +5,7 @@ class_name EnemyBuff
 enum Operation{
 	SET,
 	ADD,
-	MUL
+	MUL,
 }
 
 enum Attribute{
@@ -19,3 +19,4 @@ enum Attribute{
 @export var operation : Operation = Operation.ADD
 @export var attribute : Attribute
 @export var continous : bool  = false
+@export var permanent : bool  = false

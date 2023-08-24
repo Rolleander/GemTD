@@ -8,6 +8,7 @@ var speed : float
 var target : Enemy
 var source : Attack 
 #var randomness : float = 0.02
+var projected_damage = 0
 var direction  
 var trail : SmokeTrail
 
@@ -32,6 +33,7 @@ func _physics_process(delta):
 	#direction = lerp(direction.rotated( randf_range(-randomness,randomness)), global_position.direction_to(target.global_position),0.05)
 	if global_position.distance_to(target.global_position) <= HIT_SIZE :
 		source.bullet_hit(target)
+		target.projected_damage -= projected_damage
 		if trail != null:
 			trail.stop()
 		queue_free()

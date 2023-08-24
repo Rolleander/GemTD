@@ -8,8 +8,10 @@ class_name Attack
 @export var description : String 
 @export var targets_air : bool = true
 @export var targets_ground : bool = true
-@export var hit_buff : EnemyBuff
+@export var hit_buffs : Array[EnemyBuff]
+@export var aura_buffs : Array[EnemyBuff]
 @export var hit_effect : GPUParticles2D
+@export var tower_buffs : Array[TowerBuff]
 @export var splash_range : float = 0
 @export var parallel_targets : int = 1
 
@@ -21,7 +23,7 @@ var attack_scale = 1.0
 
 func _ready():
 	add_child(timer)
-	timer.start(attack_delay)
+	timer.start(gem.attack_delay.value)
 	timer.timeout.connect(_on_timer_timeout)
 
 func init():
@@ -35,12 +37,16 @@ func init():
 	attack_scale += gem.quality *.05
 
 func _physics_process(delta):
-	if !active || !attack_ready:
+	if !active:
+		return
+	if aura_buffs.size() > 0:
+		_apply_aura_buffs()
+	if !attack_ready:
 		return
 	var targets = 0
 	var attacked = false
 	for enemy in Game.get_enemies():
-		if enemy.alive && _can_target(enemy) && in_range(self, enemy, attack_range):
+		if enemy.alive && _can_target(enemy) && in_range(self, enemy, gem.attack_range.value):
 			if _attack(enemy):
 				targets+=1
 				attacked = true
@@ -48,7 +54,13 @@ func _physics_process(delta):
 					break
 	if attacked:
 		attack_ready  = false
-		timer.start(attack_delay)
+		timer.start(gem.attack_delay.value)
+		
+func _apply_aura_buffs():
+	for enemy in Game.get_enemies():
+		if enemy.alive && _can_target(enemy) && in_range(self, enemy, gem.attack_range.value):
+			for buff in aura_buffs:
+				BuffUtils.add_enemy_buff(enemy, gem, buff)
 
 func _can_target(enemy : Enemy):
 	if enemy.flying:

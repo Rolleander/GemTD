@@ -21,6 +21,7 @@ Globals="*res://scripts/globals.gd"
 Events="*res://scripts/events.gd"
 Game="*res://scripts/game.gd"
 CombinationsCheck="*res://scripts/combos/combinations_check.gd"
+BuffUtils="*res://scripts/buffs/buff_utils.gd"
 
 [display]
 

@@ -22,6 +22,7 @@ func _ready():
 
 func finish_building():
 	#var maze = get_tree().get_first_node_in_group("maze_node")
+	BuffUtils.update_tower_buffs()
 	construction_phase = false
 	_start_wave()
 
@@ -44,7 +45,7 @@ func get_enemies() :
 	return get_tree().get_first_node_in_group("enemies_node").get_children() 
 	
 func get_gems():
-	return get_tree().get_first_node_in_group("gems").get_children() 
+	return get_tree().get_nodes_in_group("gems")
 
 func _spawn_enemy():
 	var enemies = get_tree().get_first_node_in_group("enemies_node")

@@ -62,7 +62,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_hgqvf")
 
 [node name="PointLight2D" type="PointLight2D" parent="AmethystBlast"]
-position = Vector2(16.4978, 0)
+position = Vector2(12.4978, 0)
 scale = Vector2(1.39056, 1.29855)
 color = Color(0.694118, 0.313726, 1, 1)
 texture = SubResource("GradientTexture2D_ehp16")

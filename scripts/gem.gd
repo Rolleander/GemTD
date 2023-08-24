@@ -22,6 +22,10 @@ var level = 0
 var under_construction = false
 var attack : Attack
 var gem_name : String
+var damage = TowerBuffableValue.new(self, TowerBuff.Attribute.DAMAGE)
+var attack_range = TowerBuffableValue.new(self, TowerBuff.Attribute.RANGE)
+var attack_delay = TowerBuffableValue.new(self, TowerBuff.Attribute.ATTACK_DELAY)
+var buffs = [] as Array[TowerBuff]
 
 func _ready():
 	Events.wave_started.connect(func():	attack.active = true)
@@ -36,7 +40,9 @@ func _set_attack(attack : Attack):
 	var range_scale = attack.attack_range / RANGE_RING
 	range_ring.scale = Vector2(range_scale, range_scale)
 	add_child(attack)
-
+	self.damage.value_set(attack.damage)
+	self.attack_range.value_set(attack.attack_range)
+	self.attack_delay.value_set(attack.attack_delay)
 
 func make_rock():
 	rock = true

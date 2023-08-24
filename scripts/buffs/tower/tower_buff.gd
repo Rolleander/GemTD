@@ -11,7 +11,8 @@ enum Operation{
 enum Attribute{
 	DAMAGE,
 	ATTACK_DELAY,
-	RANGE
+	RANGE,
+	EXP_GAIN
 }
 
 @export var value : float = 1

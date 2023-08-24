@@ -36,7 +36,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_b0p7c")
 
 [node name="PointLight2D" type="PointLight2D" parent="DiamondBlast"]
-position = Vector2(32, 0)
+position = Vector2(4, 0)
 scale = Vector2(1.59319, 1.4721)
 energy = 0.59
 texture = SubResource("GradientTexture2D_7ocxu")

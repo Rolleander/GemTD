@@ -5,21 +5,23 @@ class_name Enemy
 @onready var navigation = $NavigationAgent2D
 @onready var health_bar = $healthbar
 @export var waypoints : Array[Node]
-@export var speed = 180
 @onready var hit_effects = $HitEffects
 @onready var sprite = $Sprite
 
 var path = []
 var target = -1
 var max_health = 1000
-var health = max_health
+var health = EnemyBuffableValue.new(self, EnemyBuff.Attribute.HEALTH, max_health)
+var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 150)
+var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 1)
+var damage_scale = 1.0
 var started = false 
 var alive = true
 var projected_damage = 0
 var flying = false
+var buffs = [] as Array[EnemyBuffInstance]
 
 func _ready():
-	navigation.max_speed = speed	
 	_next_waypoint()
 
 func set_flying(flying : bool):
@@ -40,34 +42,48 @@ func _next_waypoint():
 
 func _process(delta):
 	#_damage(1)
-	health_bar.health_percent = float(health) / max_health 	
+	health_bar.health_percent = float(health.value) / max_health 	
 		
-func _physics_process(_delta : float):
+func _physics_process(delta : float):
 	if !alive:
 		return
 	if navigation.is_navigation_finished():
 		_next_waypoint()
 	var dir = to_local(navigation.get_next_path_position()).normalized()
-	navigation.velocity = dir * speed
+	navigation.max_speed = speed.value	
+	navigation.velocity = dir * speed.value
+	health.update()
+	speed.update()
+	armor.update()
+	if health.value <=0:
+		_death(null)
+	BuffUtils.progress_enemy_buffs(self, delta)
 		
 func kill():
 	_death(null)
 		
-func _damage(damage, source : Attack) -> bool:
-	if health <= 0:
+func _damage(source : Attack) -> bool:
+	if health.value <= 0:
 		return false
-	health-=damage
-	if health <1:
+	for buff in source.hit_buffs:
+		BuffUtils.add_enemy_buff(self, source.gem, buff)	
+	health.value_add( calc_damage(source.gem.damage.value) *-1)
+	if health.value <1:
 		return true
 	return false
+		
+func calc_damage(damage : float):
+	return (damage / armor.value) * damage_scale
 		
 func hit(attack : Attack):
 	if !alive:
 		return
-	if _damage(attack.damage, attack):
+	if _damage(attack):
 		_death(attack)
 
 func _death(killer : Attack):
+	if !alive:
+		return
 	alive = false
 	Events.emit_signal("enemy_killed", self, killer)
 	Events.delayed_destroy(self, 1)
