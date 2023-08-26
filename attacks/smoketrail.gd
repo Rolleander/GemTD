@@ -25,10 +25,11 @@ func start():
 		stop()
 		
 func stop():
+	if stopped:
+		return
 	stopped = true
 	tween.tween_property(self, "modulate:a",  0.0,  randf_range(lifetime[0], lifetime[1]))
 	tween.tween_callback(queue_free)
-
 
 func _process(delta):
 	if tick > tick_speed:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://imkvnw5cclwa"]
 
-[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_6osml"]
+[ext_resource type="Script" path="res://attacks/diamond_attack.gd" id="1_jj5u5"]
 [ext_resource type="Texture2D" uid="uid://bnehs24allnoa" path="res://sprites/diamond_blast.png" id="2_b0p7c"]
 [ext_resource type="Script" path="res://attacks/smoketrail.gd" id="3_tx8ro"]
 
@@ -22,10 +22,10 @@ offsets = PackedFloat32Array(0, 0.489209, 1)
 colors = PackedColorArray(0.568627, 0.815686, 0.815686, 0, 0.709804, 0.717647, 0.705882, 0.909804, 0.82705, 0.87614, 1, 1)
 
 [node name="diamond_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
-script = ExtResource("1_6osml")
-bullet_speed = 350.0
+script = ExtResource("1_jj5u5")
+bullet_speed = 300.0
 bullet_source = NodePath("DiamondBlast")
-damage = 10.0
+damage = 15.0
 attack_range = 300.0
 targets_air = false
 

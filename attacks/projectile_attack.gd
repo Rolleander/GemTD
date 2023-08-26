@@ -15,6 +15,12 @@ func _physics_process(delta):
 func _attack(enemy : Enemy):
 	if enemy.health.value - enemy.projected_damage <=0:
 		return false
+	var bullet = _spawn_bullet(enemy)
+	enemy.projected_damage += bullet.projected_damage
+	add_child(bullet)	
+	return true
+	
+func _spawn_bullet(enemy : Enemy):
 	var bullet = Bullet.new()
 	var trail_source = find_child("SmokeTrail")
 	if trail_source != null:
@@ -26,15 +32,17 @@ func _attack(enemy : Enemy):
 	bullet.target = enemy
 	bullet.source = self
 	bullet.speed = bullet_speed
-	bullet.projected_damage = enemy.calc_damage(gem.damage.value)	
-	enemy.projected_damage += bullet.projected_damage
+	bullet.projected_damage = enemy.calc_damage(gem.damage.value * hit_damage_scale)	
+	bullet.hit_damage_scale = hit_damage_scale
 	var render = bullet_source.duplicate(0b1110) as Node2D
 	render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))
 	render.visible = true
 	bullet.add_child(render)
-	bullet.look_at(enemy.global_position)
-	add_child(bullet)	
-	return true
+	bullet.look_at(enemy.global_position)	
+	return bullet
 	
-func bullet_hit(target : Enemy):
+func bullet_hit(bullet : Bullet, target : Enemy):
+	var store = hit_damage_scale
+	hit_damage_scale = bullet.hit_damage_scale
 	_hit(target)
+	hit_damage_scale = store

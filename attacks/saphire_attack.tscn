@@ -1,7 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://bvvtwcedfsig3"]
+[gd_scene load_steps=10 format=3 uid="uid://bvvtwcedfsig3"]
 
-[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_m5fis"]
+[ext_resource type="Script" path="res://attacks/saphire_attack.gd" id="1_yycbl"]
+[ext_resource type="Script" path="res://scripts/buffs/enemy/enemy_buff.gd" id="2_fk20p"]
 [ext_resource type="Texture2D" uid="uid://c3liyqtvj3agq" path="res://sprites/bubble.png" id="2_uxniu"]
+
+[sub_resource type="Resource" id="Resource_svpfj"]
+script = ExtResource("2_fk20p")
+duration = 4
+value = 1.0
+operation = 2
+attribute = 1
+continous = false
+permanent = false
+name = ""
+description = ""
+stack_group = ""
+priority = 0
 
 [sub_resource type="Gradient" id="Gradient_wp23h"]
 colors = PackedColorArray(1, 1, 1, 0.858824, 1, 1, 1, 0)
@@ -33,11 +47,12 @@ fill_from = Vector2(0.474359, 0.482906)
 fill_to = Vector2(0.846154, 0.162393)
 
 [node name="saphire_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
-script = ExtResource("1_m5fis")
-bullet_speed = 225.0
+script = ExtResource("1_yycbl")
+bullet_speed = 280.0
 bullet_source = NodePath("Bullet")
 damage = 10.0
 attack_range = 400.0
+hit_buffs = Array[ExtResource("2_fk20p")]([SubResource("Resource_svpfj")])
 
 [node name="Bullet" type="GPUParticles2D" parent="."]
 amount = 20

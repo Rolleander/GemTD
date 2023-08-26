@@ -11,6 +11,8 @@ var source : Attack
 var projected_damage = 0
 var direction  
 var trail : SmokeTrail
+var hit_damage_scale = 1
+
 
 func _ready():
 	z_index = 20
@@ -32,7 +34,7 @@ func _physics_process(delta):
 	#var dir = (target.global_position-global_position).normalized() 
 	#direction = lerp(direction.rotated( randf_range(-randomness,randomness)), global_position.direction_to(target.global_position),0.05)
 	if global_position.distance_to(target.global_position) <= HIT_SIZE :
-		source.bullet_hit(target)
+		source.bullet_hit(self, target)
 		target.projected_damage -= projected_damage
 		if trail != null:
 			trail.stop()

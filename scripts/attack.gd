@@ -20,6 +20,7 @@ var active = false
 var timer = Timer.new()
 var attack_ready = false
 var attack_scale = 1.0
+var hit_damage_scale = 1.0
 
 func _ready():
 	add_child(timer)

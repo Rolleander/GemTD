@@ -115,6 +115,8 @@ y_sort_enabled = true
 
 [node name="Trails" type="Node2D" parent="." groups=["TrailNode"]]
 
+[node name="Effects" type="Node2D" parent="." groups=["Effects"]]
+
 [node name="waypoints" type="Node" parent="." groups=["waypoints"]]
 
 [node name="wp1" type="Node2D" parent="waypoints"]
