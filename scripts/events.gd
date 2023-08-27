@@ -6,6 +6,7 @@ signal unselect()
 signal gem_selected(gem : Gem)
 signal enemy_spawned(enemy : Enemy)
 signal enemy_killed(enemy: Enemy, attack: Attack)
+signal damage_dealt(enemy: Enemy, gem : Gem, damage : float)
 
 @onready var overlay_text_scene = preload("res://scenes/overlay_text.tscn")
 

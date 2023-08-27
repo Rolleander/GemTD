@@ -1,7 +1,20 @@
 extends ProjectileAttack
-const CRIT_SCALE = 1.5
-const CRIT_DMG = 4.0 
-const CRIT_CHANCE = 0.2
+var CRIT_SCALE = 1.5
+var CRIT_DMG = 2.0
+var CRIT_CHANCE = 0.25
+
+func _ready():
+	super()
+	if gem.quality == GemQualityInfo.Quality.GREAT:
+		CRIT_SCALE = 2.0
+		CRIT_DMG = 5.0
+		var buff = EnemyBuff.new()
+		buff.attribute = EnemyBuff.Attribute.ARMOR
+		buff.operation = EnemyBuff.Operation.MUL
+		buff.value = 0.85
+		buff.description = "-15% Armor"
+		buff.name = "Great Diamond Armor Loss"
+		aura_buffs.append(buff)
 
 func _spawn_bullet(enemy : Enemy):
 	var bullet = super(enemy)

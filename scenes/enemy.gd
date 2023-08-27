@@ -67,7 +67,8 @@ func _damage(source : Attack) -> bool:
 		return false
 	for buff in source.hit_buffs:
 		BuffUtils.add_enemy_buff(self, source.gem, buff)	
-	var damage = calc_damage(source.gem.damage.value * source.hit_damage_scale)
+	var damage = min(health.value, calc_damage(source.gem.damage.value * source.hit_damage_scale))
+	Events.emit_signal("damage_dealt",self, source.gem, damage)
 	health.value_add( damage *-1)
 	if health.value <1:
 		return true

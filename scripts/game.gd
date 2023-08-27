@@ -34,9 +34,10 @@ func _start_wave():
 
 func placed_gem(gem: Gem):
 	Game.remaining_placements-=1		
+	BuffUtils.update_tower_buffs()
 	_update_selection(gem)	
 	Events.gem_selected.emit(gem)
-	
+
 func _start_building():
 	construction_phase = true
 	remaining_placements = PLACEMENTS_PER_ROUND

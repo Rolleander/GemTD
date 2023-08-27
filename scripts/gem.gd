@@ -26,10 +26,12 @@ var damage = TowerBuffableValue.new(self, TowerBuff.Attribute.DAMAGE)
 var attack_range = TowerBuffableValue.new(self, TowerBuff.Attribute.RANGE)
 var attack_delay = TowerBuffableValue.new(self, TowerBuff.Attribute.ATTACK_DELAY)
 var buffs = [] as Array[TowerBuff]
+var damage_dealt = 0
 
 func _ready():
 	Events.wave_started.connect(func():	attack.active = true)
 	Events.wave_ended.connect(func():attack.active = false)
+	add_to_group("gems")		
 
 func _set_attack(attack : Attack):
 	if self.attack != null:
@@ -49,6 +51,7 @@ func make_rock():
 	gem_name = "Mazing Rock"
 	glow.queue_free()
 	add_to_group("rocks")
+	remove_from_group("gems")
 	remove_child(attack)
 	graphic.get_child(0).queue_free()
 	graphic.add_child(Boulder.instantiate())
@@ -58,11 +61,9 @@ func activate(picked : bool):
 	remove_child(label)
 	remove_child($BuildingRing)
 	under_construction = false
-	if picked:			
-		add_to_group("gems")		
-	else:
+	if !picked:	
 		make_rock()
-
+		
 func killed(enemy: Enemy):
 	kills+=1
 

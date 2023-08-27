@@ -19,3 +19,4 @@ func update():
 				value = buff.value
 			elif buff.operation == TowerBuff.Operation.MUL:
 				value *= buff.value
+	

@@ -11,7 +11,7 @@ func current_value():
 	if buff.continous:
 		var base = 1 if buff.operation == EnemyBuff.Operation.MUL else 0
 		var time = progress / buff.duration
-		value= lerp(base, buff.value,  time)
+		value= lerpf(base, buff.value,  time)
 	else:
 		value= buff.value
 	if 	buff.attribute == EnemyBuff.Attribute.HEALTH && buff.operation == EnemyBuff.Operation.ADD:

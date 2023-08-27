@@ -24,6 +24,18 @@ func _apply_buff(buffs: Array, buff : Buff) -> bool:
 				else:
 					return false
 	return true
+	
+func _apply_tower_buff(buffs: Array, buff : TowerBuff) -> bool:
+	if buff.stack_group !=null:
+		for b in buffs:
+			if b.stack_group == buff.stack_group:
+				if b.priority <= buff.priority:
+					buffs.erase(b)
+					break
+				else:
+					return false
+	buffs.append(buff)				
+	return true
 
 func progress_enemy_buffs(enemy : Enemy, delta):
 	for i in range(enemy.buffs.size()-1, -1, -1):
@@ -43,7 +55,8 @@ func update_tower_buffs():
 			continue
 		for target in Game.get_gems():
 			if in_range(source, target, source.attack_range.root):
-				target.buffs.append_array(source.attack.tower_buffs)		
+				for buff in source.attack.tower_buffs:
+					_apply_tower_buff(target.buffs, buff)
 	for gem in Game.get_gems():
 		gem.damage.update() 
 		gem.attack_range.update()

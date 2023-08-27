@@ -26,6 +26,21 @@ func _ready():
 	add_child(timer)
 	timer.start(gem.attack_delay.value)
 	timer.timeout.connect(_on_timer_timeout)
+	hit_buffs = _duplicate_e_buff(hit_buffs)
+	aura_buffs = _duplicate_e_buff(aura_buffs)
+	tower_buffs = _duplicate_t_buff(tower_buffs)
+
+func _duplicate_e_buff(array : Array):
+	var duplicates = [] as Array[EnemyBuff]
+	for a in array:
+		duplicates.append(a.duplicate())
+	return duplicates
+	
+func _duplicate_t_buff(array : Array):
+	var duplicates = [] as Array[TowerBuff]
+	for a in array:
+		duplicates.append(a.duplicate())
+	return duplicates
 
 func init():
 	if gem.quality ==null || gem.type == null:
