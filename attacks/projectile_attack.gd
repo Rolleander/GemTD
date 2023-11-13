@@ -13,12 +13,10 @@ func _physics_process(delta):
 	super(delta)
 
 func _attack(enemy : Enemy):
-	if enemy.health.value - enemy.projected_damage <=0:
-		return false
+	super(enemy)
 	var bullet = _spawn_bullet(enemy)
 	enemy.projected_damage += bullet.projected_damage
 	add_child(bullet)	
-	return true
 	
 func _spawn_bullet(enemy : Enemy):
 	var bullet = Bullet.new()

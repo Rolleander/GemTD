@@ -18,6 +18,7 @@ func update():
 				value += instance.current_value()
 				if instance.done && buff.permanent:
 					root += instance.current_value()
+					instance.register_damage()
 			elif buff.operation == EnemyBuff.Operation.SET:
 				value = buff.value
 				if instance.done && buff.permanent:

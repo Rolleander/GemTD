@@ -56,7 +56,7 @@ colors = PackedColorArray(0.516319, 0.516318, 3.85046e-07, 1, 1, 1, 0, 0.301961)
 
 [node name="topaz_attack" type="Node2D" node_paths=PackedStringArray("hit_effect")]
 script = ExtResource("1_3e3ug")
-damage = 5.0
+damage = 2.5
 attack_range = 350.0
 hit_effect = NodePath("GPUParticles2D")
 parallel_targets = 1000

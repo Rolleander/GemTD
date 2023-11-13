@@ -10,7 +10,7 @@ class_name Enemy
 
 var path = []
 var target = -1
-var max_health = 1000
+var max_health = 400
 var health = EnemyBuffableValue.new(self, EnemyBuff.Attribute.HEALTH, max_health)
 var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 150)
 var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 1)
@@ -56,18 +56,20 @@ func _physics_process(delta : float):
 	speed.update()
 	armor.update()
 	if health.value <=0:
+		for buff in buffs:
+			buff.register_damage()
 		_death(null)
 	BuffUtils.progress_enemy_buffs(self, delta)
 		
 func kill():
 	_death(null)
 		
-func _damage(source : Attack) -> bool:
+func _damage(source : Attack, damage_factor : float = 1.0) -> bool:
 	if health.value <= 0:
 		return false
 	for buff in source.hit_buffs:
 		BuffUtils.add_enemy_buff(self, source.gem, buff)	
-	var damage = min(health.value, calc_damage(source.gem.damage.value * source.hit_damage_scale))
+	var damage = min(health.value, calc_damage(source.gem.damage.value * source.hit_damage_scale * damage_factor))
 	Events.emit_signal("damage_dealt",self, source.gem, damage)
 	health.value_add( damage *-1)
 	if health.value <1:
@@ -77,10 +79,10 @@ func _damage(source : Attack) -> bool:
 func calc_damage(damage : float):
 	return (damage / armor.value) * damage_scale
 		
-func hit(attack : Attack):
+func hit(attack : Attack, damage_factor : float = 1.0):
 	if !alive:
 		return
-	if _damage(attack):
+	if _damage(attack, damage_factor):
 		_death(attack)
 
 func _death(killer : Attack):

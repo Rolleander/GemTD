@@ -53,10 +53,12 @@ func _spawn_enemy():
 	var enemy = preload("res://scenes/enemy.tscn").instantiate() as Enemy
 	enemy.waypoints = get_tree().get_first_node_in_group("waypoints").get_children()
 	enemy.position = get_tree().get_first_node_in_group("spawn_point").position
+	enemy.max_health = 150 * wave + 100 
+	enemy.health.value_set( enemy.max_health)
 	enemies.add_child(enemy)
 	alive +=1
 	spawned += 1
-	enemy.set_flying(alive % 2 == 1)
+	#enemy.set_flying(alive % 2 == 1)
 	Events.emit_signal("enemy_spawned", enemy)
 	if spawned == spawn_target:
 		spawn_timer.stop()
@@ -67,6 +69,7 @@ func _enemy_killed(enemy: Enemy, attack: Attack):
 		_wave_ended()	
 
 func _wave_ended():
+	wave+=1
 	Events.emit_signal("wave_ended")
 	_start_building()
 	

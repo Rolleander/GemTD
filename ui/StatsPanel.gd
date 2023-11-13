@@ -14,6 +14,11 @@ func _ready():
 		table.add_child(value)		
 	_fill_stats()
 	Events.damage_dealt.connect(_damage_dealt)
+	Events.wave_started.connect(_wave_started)
+
+func _wave_started():
+	for gem in Game.get_gems():
+		gem.damage_dealt = 0
 	
 func _damage_dealt(enemy: Enemy, gem : Gem, damage : float):
 	gem.damage_dealt += damage

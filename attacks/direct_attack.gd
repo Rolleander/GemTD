@@ -7,5 +7,6 @@ func _ready():
 
 			
 func _attack(target : Enemy):
+	super(target)
 	_hit(target)
 	return true

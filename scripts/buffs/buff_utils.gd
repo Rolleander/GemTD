@@ -10,8 +10,6 @@ func add_enemy_buff (enemy : Enemy, source : Gem,  buff : EnemyBuff) -> bool:
 	instance.source = source	
 	instance.target = enemy
 	enemy.buffs.append(instance)
-	if buff.duration > 0:
-		Events.delayed(func(): enemy.buffs.erase(buff), buff.duration)
 	return true
 
 func _apply_buff(buffs: Array, buff : Buff) -> bool:

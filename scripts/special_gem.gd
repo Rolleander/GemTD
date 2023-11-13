@@ -6,3 +6,27 @@ class_name SpecialGem
 @export var name : String
 @export var description : String
 @export var scene : PackedScene 
+
+#
+# 
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
