@@ -1,17 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=13 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
 [ext_resource type="Script" path="res://ui/BuildMenu.gd" id="3_x7hxt"]
 [ext_resource type="FontFile" uid="uid://dq8eis0yythi0" path="res://fonts/RobotoCondensed-Bold.ttf" id="4_5kyyh"]
 [ext_resource type="Script" path="res://ui/GemInfo.gd" id="4_vuwf8"]
+[ext_resource type="PackedScene" uid="uid://dpqg4gejg3m4s" path="res://ui/BuffList.tscn" id="5_cjofp"]
 [ext_resource type="Script" path="res://ui/RockMenu.gd" id="5_e8wht"]
+[ext_resource type="Shortcut" uid="uid://bfwc0v5ig06nm" path="res://resources/shortcuts/keep.tres" id="6_2msh0"]
+[ext_resource type="Shortcut" uid="uid://bodt36xthb64s" path="res://resources/shortcuts/reroll.tres" id="6_xbq5d"]
 [ext_resource type="Script" path="res://ui/StatsPanel.gd" id="7_vpxac"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n3b1d"]
 font = ExtResource("4_5kyyh")
 font_size = 20
 font_color = Color(0.196078, 1, 0.262745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksh6u"]
+bg_color = Color(0.121569, 0.74902, 1, 1)
 
 [node name="board_ui" type="CanvasLayer"]
 script = ExtResource("1_883fb")
@@ -31,183 +37,6 @@ offset_right = 1933.0
 offset_bottom = 66.0
 text = "Wave
 
-"
-
-[node name="MarginContainer" type="VBoxContainer" parent="."]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -209.0
-offset_top = -174.0
-offset_right = 210.0
-grow_horizontal = 2
-grow_vertical = 0
-theme = ExtResource("2_48epx")
-
-[node name="GemInfo" type="Panel" parent="MarginContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-script = ExtResource("4_vuwf8")
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/GemInfo"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/GemInfo/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Gem"
-
-[node name="Level" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_direction = 3
-layout_mode = 2
-size_flags_horizontal = 10
-text = "Lv.1
-"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 70
-alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-
-[node name="AtkLabel" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "ATK:
-"
-
-[node name="AtkValue" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "ATK
-"
-label_settings = SubResource("LabelSettings_n3b1d")
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-
-[node name="SpdLabel" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-text = "SPD:
-"
-
-[node name="SpdValue" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
-layout_mode = 2
-text = "SPD
-"
-label_settings = SubResource("LabelSettings_n3b1d")
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-
-[node name="RngLabel" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
-layout_mode = 2
-text = "RNG:"
-
-[node name="RngValue" type="Label" parent="MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
-layout_mode = 2
-text = "RNG
-"
-label_settings = SubResource("LabelSettings_n3b1d")
-
-[node name="BuildMenu" type="Panel" parent="MarginContainer" groups=["BuildMenu"]]
-visible = false
-custom_minimum_size = Vector2(0, 70)
-layout_mode = 2
-size_flags_vertical = 6
-script = ExtResource("3_x7hxt")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BuildMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Keep" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 40)
-layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-text = "Keep"
-
-[node name="Downgrade" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
-text = "Down
-"
-
-[node name="Fusion2" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
-text = "Fus2
-"
-
-[node name="Fusion4" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
-text = "Fus4
-"
-
-[node name="Combine" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
-text = "Comb
-"
-
-[node name="Reroll" type="Button" parent="MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
-text = "Roll
-"
-
-[node name="RockMenu" type="Panel" parent="MarginContainer" groups=["BuildMenu"]]
-visible = false
-custom_minimum_size = Vector2(0, 70)
-layout_mode = 2
-size_flags_vertical = 6
-script = ExtResource("5_e8wht")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/RockMenu"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Reroll" type="Button" parent="MarginContainer/RockMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
-text = "Roll
 "
 
 [node name="StatsPanel" type="Panel" parent="."]
@@ -249,10 +78,246 @@ text = "0
 label_settings = SubResource("LabelSettings_n3b1d")
 horizontal_alignment = 2
 
-[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer/BuildMenu" method="_on_keep_pressed"]
-[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
-[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
-[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Fusion4" to="MarginContainer/BuildMenu" method="_on_fusion_4_pressed"]
-[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer/BuildMenu" method="_on_combine_pressed"]
-[connection signal="pressed" from="MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer/BuildMenu" method="_on_reroll_pressed"]
-[connection signal="pressed" from="MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer/RockMenu" method="_on_reroll_pressed"]
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -320.0
+offset_right = 479.0
+grow_vertical = 0
+theme_override_constants/margin_left = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="MarginContainer" type="VBoxContainer" parent="MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("2_48epx")
+alignment = 2
+
+[node name="BuffList" parent="MarginContainer2/MarginContainer" instance=ExtResource("5_cjofp")]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+
+[node name="GemInfo" type="Panel" parent="MarginContainer2/MarginContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+script = ExtResource("4_vuwf8")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/GemInfo"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Gem"
+
+[node name="Level" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Lv.1
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="AtkLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "ATK:
+"
+
+[node name="AtkValue" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "ATK
+"
+label_settings = SubResource("LabelSettings_n3b1d")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SpdLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "SPD:
+"
+
+[node name="SpdValue" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+text = "SPD
+"
+label_settings = SubResource("LabelSettings_n3b1d")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="RngLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+text = "RNG:"
+
+[node name="RngValue" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+text = "RNG
+"
+label_settings = SubResource("LabelSettings_n3b1d")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.23
+
+[node name="killLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+layout_mode = 2
+text = "Kills:
+"
+
+[node name="Kills" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 2
+text = "
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.31
+
+[node name="killLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+text = "EXP"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 8
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_ksh6u")
+step = 0.5
+value = 20.0
+show_percentage = false
+
+[node name="BuildMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+script = ExtResource("3_x7hxt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/BuildMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Keep" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 40)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+shortcut = ExtResource("6_2msh0")
+text = "Keep"
+
+[node name="Downgrade" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Down
+"
+
+[node name="Fusion2" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Fus2
+"
+
+[node name="Fusion4" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Fus4
+"
+
+[node name="Combine" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+text = "Comb
+"
+
+[node name="Reroll" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+shortcut = ExtResource("6_xbq5d")
+text = "Roll
+"
+
+[node name="RockMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+script = ExtResource("5_e8wht")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/RockMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reroll" type="Button" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+tooltip_text = "Keep the gem and start next wave"
+disabled = true
+shortcut = ExtResource("6_xbq5d")
+text = "Roll
+"
+
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion4" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_4_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_combine_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_reroll_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/RockMenu" method="_on_reroll_pressed"]

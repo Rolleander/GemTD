@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://rlpdqf7riatc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipxpd"]
+bg_color = Color(0, 0.45098, 0.670588, 0.443137)
+
+[node name="BuffDisplay" type="Panel"]
+custom_minimum_size = Vector2(300, 26)
+offset_right = 300.0
+offset_bottom = 26.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ipxpd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 25.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "test
+"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "test
+"
+vertical_alignment = 1

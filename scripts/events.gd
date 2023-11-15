@@ -3,9 +3,10 @@ extends Node
 signal wave_started()
 signal wave_ended()
 signal unselect()
+signal field_clicked(location : Vector2)
 signal gem_selected(gem : Gem)
 signal enemy_spawned(enemy : Enemy)
-signal enemy_killed(enemy: Enemy, attack: Attack)
+signal enemy_killed(enemy: Enemy, killer: Gem)
 signal damage_dealt(enemy: Enemy, gem : Gem, damage : float)
 
 @onready var overlay_text_scene = preload("res://scenes/overlay_text.tscn")

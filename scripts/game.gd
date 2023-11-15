@@ -63,9 +63,9 @@ func _spawn_enemy():
 	if spawned == spawn_target:
 		spawn_timer.stop()
 				
-func _enemy_killed(enemy: Enemy, attack: Attack):
+func _enemy_killed(enemy: Enemy, killer: Gem):
 	alive-=1
-	if alive == 0:
+	if alive == 0 && spawned == spawn_target:
 		_wave_ended()	
 
 func _wave_ended():
@@ -91,7 +91,10 @@ func clear_selection():
 		selected_object= null
 		for menu in get_tree().get_nodes_in_group("BuildMenu"):
 			menu.visible = false		
-		Events.unselect.emit()
+	Events.unselect.emit()
 
+func reselect():
+	if selected_object != null:
+		Events.gem_selected.emit(selected_object)
 
 	

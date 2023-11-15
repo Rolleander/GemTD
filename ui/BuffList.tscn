@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpqg4gejg3m4s"]
+
+[ext_resource type="Script" path="res://ui/BuffList.gd" id="1_rl8nc"]
+
+[node name="BuffList" type="VBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+offset_right = 30.0
+offset_bottom = 30.0
+script = ExtResource("1_rl8nc")

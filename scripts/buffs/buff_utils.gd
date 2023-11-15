@@ -49,7 +49,7 @@ func update_tower_buffs():
 		if gem.level > 0:
 			_add_level_buff(gem)
 	for source in Game.get_gems():
-		if source.attack.tower_buffs.size() ==0 :
+		if  source.under_construction || source.attack.tower_buffs.size() ==0:
 			continue
 		for target in Game.get_gems():
 			if in_range(source, target, source.attack_range.root):

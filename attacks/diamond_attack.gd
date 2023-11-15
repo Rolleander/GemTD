@@ -14,6 +14,7 @@ func _ready():
 		buff.value = 0.85
 		buff.description = "-15% Armor"
 		buff.name = "Great Diamond Armor Loss"
+		buff.stack_group = "GreatDiamondArmorLoss"
 		aura_buffs.append(buff)
 
 func _spawn_bullet(enemy : Enemy):

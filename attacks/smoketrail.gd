@@ -13,13 +13,8 @@ var wild_speed := 0.1
 var point_age := [0.0]
 var stopped := false
 
-var tween : Tween
-
 func start():
 	z_index = 19
-	tween = create_tween()
-	tween.set_trans( Tween.TRANS_CIRC)
-	tween.set_ease( Tween.EASE_OUT)
 	clear_points()
 	if limited_lifetime:
 		stop()
@@ -28,6 +23,9 @@ func stop():
 	if stopped:
 		return
 	stopped = true
+	var tween = create_tween()
+	tween.set_trans( Tween.TRANS_CIRC)
+	tween.set_ease( Tween.EASE_OUT)
 	tween.tween_property(self, "modulate:a",  0.0,  randf_range(lifetime[0], lifetime[1]))
 	tween.tween_callback(queue_free)
 

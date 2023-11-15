@@ -1,13 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://h3iwjdc165q0"]
+[gd_scene load_steps=20 format=3 uid="uid://h3iwjdc165q0"]
 
 [ext_resource type="Script" path="res://scenes/board.gd" id="1_5hojr"]
 [ext_resource type="Texture2D" uid="uid://d02eh0y20ihvx" path="res://sprites/ground.png" id="1_l6j72"]
 [ext_resource type="Script" path="res://scenes/PathMap.gd" id="3_48f3y"]
 [ext_resource type="PackedScene" uid="uid://bswwqwyt2no62" path="res://scenes/selection.tscn" id="3_i2dv8"]
 [ext_resource type="Script" path="res://scenes/grid.gd" id="4_5foo5"]
+[ext_resource type="Script" path="res://scenes/Camera2D.gd" id="5_k5bi2"]
 [ext_resource type="Texture2D" uid="uid://ckaybkl7sfvjo" path="res://sprites/grid.png" id="5_m7g8r"]
 [ext_resource type="Texture2D" uid="uid://yv2tj2tuiecw" path="res://sprites/empty.png" id="6_j3bwo"]
 [ext_resource type="PackedScene" uid="uid://dpufs3fxsxh4a" path="res://ui/board_ui.tscn" id="8_d57mh"]
+[ext_resource type="Texture2D" uid="uid://d28akodhfj4gt" path="res://sprites/grid_selection.png" id="9_5ijkb"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_36xd5"]
 vertices = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
@@ -71,7 +73,7 @@ blend_mode = 3
 [sub_resource type="CircleShape2D" id="CircleShape2D_2uban"]
 radius = 24.0
 
-[node name="board" type="Node2D"]
+[node name="board" type="Node2D" groups=["board"]]
 y_sort_enabled = true
 script = ExtResource("1_5hojr")
 
@@ -99,6 +101,7 @@ limit_top = 0
 limit_right = 1000
 limit_bottom = 672
 position_smoothing_enabled = true
+script = ExtResource("5_k5bi2")
 
 [node name="grid" type="Node2D" parent="."]
 material = SubResource("CanvasItemMaterial_oh8tk")
@@ -155,4 +158,9 @@ shape = SubResource("CircleShape2D_2uban")
 [node name="spawn_point" type="Node2D" parent="." groups=["spawn_point"]]
 position = Vector2(15, 167)
 
-[node name="board_ui" parent="." instance=ExtResource("8_d57mh")]
+[node name="board_ui" parent="." groups=["board_ui"] instance=ExtResource("8_d57mh")]
+
+[node name="Marker" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 1, 0, 1)
+texture = ExtResource("9_5ijkb")

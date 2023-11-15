@@ -12,7 +12,7 @@ func _ready():
 	var atkdelay_buff = tower_buffs[0]
 	atkdelay_buff.value = speed_mul
 	atkdelay_buff.name = "Opal Haste "+str(gem.quality+1)
-	atkdelay_buff.description = str(buff_percent)+"% Attack Speed Increase"
+	atkdelay_buff.description = "+ "+str(buff_percent)+"% Attack Speed"
 	atkdelay_buff.stack_group = "OpalHaste"
 	atkdelay_buff.priority = gem.quality
 	

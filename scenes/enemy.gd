@@ -20,6 +20,7 @@ var alive = true
 var projected_damage = 0
 var flying = false
 var buffs = [] as Array[EnemyBuffInstance]
+var spawning = true
 
 func _ready():
 	_next_waypoint()
@@ -45,6 +46,7 @@ func _process(delta):
 	health_bar.health_percent = float(health.value) / max_health 	
 		
 func _physics_process(delta : float):
+	spawning = false
 	if !alive:
 		return
 	if navigation.is_navigation_finished():
@@ -55,26 +57,26 @@ func _physics_process(delta : float):
 	health.update()
 	speed.update()
 	armor.update()
-	if health.value <=0:
+	if health.value <=0 && alive:
+		var killer = null
 		for buff in buffs:
-			buff.register_damage()
-		_death(null)
+			if buff.register_damage() > 0:
+				killer = buff.source
+		_death(killer)
 	BuffUtils.progress_enemy_buffs(self, delta)
 		
 func kill():
 	_death(null)
 		
 func _damage(source : Attack, damage_factor : float = 1.0) -> bool:
-	if health.value <= 0:
+	if health.value <= 0 || !alive:
 		return false
 	for buff in source.hit_buffs:
 		BuffUtils.add_enemy_buff(self, source.gem, buff)	
 	var damage = min(health.value, calc_damage(source.gem.damage.value * source.hit_damage_scale * damage_factor))
 	Events.emit_signal("damage_dealt",self, source.gem, damage)
 	health.value_add( damage *-1)
-	if health.value <1:
-		return true
-	return false
+	return health.value <= 0
 		
 func calc_damage(damage : float):
 	return (damage / armor.value) * damage_scale
@@ -83,18 +85,18 @@ func hit(attack : Attack, damage_factor : float = 1.0):
 	if !alive:
 		return
 	if _damage(attack, damage_factor):
-		_death(attack)
+		_death(attack.gem)
 
-func _death(killer : Attack):
+func _death(killer : Gem):
 	if !alive:
 		return
 	alive = false
-	Events.emit_signal("enemy_killed", self, killer)
+	Events.enemy_killed.emit(self, killer)
 	Events.delayed_destroy(self, 1)
 	sprite.visible = false
 	health_bar.visible = false
 	if killer != null:
-		killer.gem.killed(self)	
+		killer.killed(self)	
 
 func add_hit_effect(effect : Node2D):
 	hit_effects.add_child(effect)

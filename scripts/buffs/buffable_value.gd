@@ -8,10 +8,13 @@ func update():
 	
 func value_add(value : float):
 	self.root += value
+	update()
 
 func value_mul(value : float):
 	self.root *= value
+	update()
 
 func value_set(value : float):
 	self.root = value
+	update()
 

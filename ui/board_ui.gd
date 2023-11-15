@@ -4,7 +4,9 @@ extends CanvasLayer
 @onready var fps = $FpsLabel as Label
 
 func _ready():
-	pass # Replace with function body.
+	$MarginContainer2/MarginContainer/GemInfo.visible = false
+	$MarginContainer2/MarginContainer/BuildMenu.visible = false
+	$MarginContainer2/MarginContainer/RockMenu.visible = false
 
 
 func _process(delta):

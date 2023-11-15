@@ -24,8 +24,10 @@ func update(delta):
 		progress+=delta 
 		done = progress >= buff.duration
 		
-func register_damage():
+func register_damage() -> float:
 	if damageDealt || current_value() >=0 || buff.attribute != EnemyBuff.Attribute.HEALTH: 
-		return
-	Events.emit_signal("damage_dealt", target, source, current_value() *-1)
+		return 0
+	var damage = current_value() *-1
+	Events.emit_signal("damage_dealt", target, source, damage)
 	damageDealt = true
+	return damage

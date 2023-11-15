@@ -18,6 +18,7 @@ var rock = false
 var special_combination = false
 var kills = 0
 var exp = 0
+var levelup_exp = 10
 var level = 0
 var under_construction = false
 var attack : Attack
@@ -49,10 +50,11 @@ func _set_attack(attack : Attack):
 func make_rock():
 	rock = true
 	gem_name = "Mazing Rock"
-	glow.queue_free()
+	glow.visible = false
 	add_to_group("rocks")
 	remove_from_group("gems")
-	remove_child(attack)
+	if attack.get_parent() == self:
+		remove_child(attack)
 	graphic.get_child(0).queue_free()
 	graphic.add_child(Boulder.instantiate())
 	
@@ -66,6 +68,8 @@ func activate(picked : bool):
 		
 func killed(enemy: Enemy):
 	kills+=1
+	LevelUp.gain_exp_from(self, enemy)
+	Game.reselect()
 
 func _on_static_body_2d_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("click"):

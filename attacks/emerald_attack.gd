@@ -2,6 +2,7 @@ extends ProjectileAttack
 
 func _ready():
 	super()
+	attack_scale += gem.quality *.1
 	var speed_mul =  0.9 - gem.quality * 0.05
 	var duration = 3 + gem.quality
 	var slow_buff = hit_buffs[0]
@@ -21,7 +22,7 @@ func _ready():
 		poison_buff.value = -550
 		speed_mul = 0.6
 		duration = 10
-		splash_range = 50
+		splash_range = 100
 	slow_buff.duration =duration
 	poison_buff.duration =duration
 	var slow_percent = (1 - speed_mul) * 100
@@ -34,3 +35,9 @@ func _ready():
 	poison_buff.stack_group = "EmeraldPoison"
 	poison_buff.priority = gem.quality	
 	poison_buff.description = str((poison_buff.value*-1) / poison_buff.duration) +" DMG per second Poison over "+str(poison_buff.duration)+" seconds"
+
+
+func _spawn_bullet(enemy : Enemy):
+	var bullet = super(enemy)
+	bullet.fadeout = 0.7
+	return bullet

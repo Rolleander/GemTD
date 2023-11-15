@@ -67,13 +67,12 @@ shape = SubResource("CircleShape2D_75hv5")
 z_index = 1
 
 [node name="BuildingRing" type="Sprite2D" parent="."]
-modulate = Color(0.372549, 1, 1, 0.607843)
-scale = Vector2(0.07, 0.07)
+modulate = Color(0.372549, 1, 1, 0.517647)
+scale = Vector2(0.075, 0.075)
 texture = ExtResource("5_movmr")
 
 [node name="SelectionRing" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(0.827451, 0.901961, 0.992157, 0.607843)
+modulate = Color(0, 0.901961, 0.0823529, 0.745098)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_dkcgr")
 

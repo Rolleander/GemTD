@@ -8,7 +8,7 @@ var lines  = []
 
 func _ready():
 	super()
-	line.width = 0.2 + gem.quality * 0.15
+	line.width = 0.1 + gem.quality * 0.25
 	
 func _physics_process(delta):
 	super(delta)

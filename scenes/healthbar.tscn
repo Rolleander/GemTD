@@ -9,6 +9,7 @@ script = ExtResource("1_f1utg")
 health_percent = 0.5
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.509804)
 texture = ExtResource("2_0kqqt")
 region_enabled = true
 region_rect = Rect2(0, 0, 40, 7)

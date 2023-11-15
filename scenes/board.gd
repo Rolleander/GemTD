@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var selection = $selection as Selection
-@onready var camera = $Camera2D
+@onready var camera = $Camera2D as Camera2D
 @onready var tilemap = $TileMap
 @onready var maze = $Maze
 @onready var rock_collision = $RockCollision
@@ -10,14 +10,8 @@ extends Node2D
 @onready var enemies = $Enemies
 @onready var path_map = $PathMap as PathMap
 
-const ZOOM_SPEED = 0.1
-const MIN_ZOOM = 0.8 
-const MAX_ZOOM = 2
-var _zoom_level = 1.5
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	Events.wave_started.connect(func(): selection.visible = false)
 	NavigationServer2D.map_set_use_edge_connections(get_world_2d().navigation_map, false)
 	var rect = tilemap.get_used_rect()
 	var start = rect.position * Globals.TILE_SIZE 
@@ -27,56 +21,45 @@ func _ready():
 	camera.set_limit(SIDE_RIGHT, end.x)
 	camera.set_limit(SIDE_BOTTOM, end.y)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-
-	if Game.construction_phase && Game.remaining_placements > 0:
-		var pos = Vector2i((get_local_mouse_position() / Globals.GRID_SIZE).round() ) 
-		selection.visible = selection.valid_place()
-		selection.position = (pos * Globals.GRID_SIZE) 
-
+func _get_camera_rect() -> Rect2:
+	var pos = camera.get_screen_center_position()
+	var half_size = get_viewport_rect().size * 0.5
+	#half_size.x = half_size.x / camera.scale.x
+	#half_size.y = half_size.y / camera.scale.y
+	return Rect2(pos - half_size, pos + half_size)
+	
+			
 func _unhandled_input(event):
-	if event.is_action_pressed("zoom_in"):
-		_set_zoom_level(_zoom_level + ZOOM_SPEED)
-	if event.is_action_pressed("zoom_out"):
-		_set_zoom_level(_zoom_level - ZOOM_SPEED)
 	if event.is_action_pressed("click"):
-		click()
+		_click()
 	if event.is_action_pressed("start"):
 		for e in Game.get_enemies():
 			e.kill()
-	
 
-func _set_zoom_level(value: float) -> void:
-	# We limit the value between `min_zoom` and `max_zoom`
-	_zoom_level = clamp(value, MIN_ZOOM, MAX_ZOOM)
-	var tween = create_tween()
-	# Then, we ask the tween node to animate the camera's `zoom` property from its current value
-	# to the target zoom level.
-	tween.set_ease(Tween.EASE_OUT)
-	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(camera, "zoom", Vector2(_zoom_level, _zoom_level),	0.2)
-
-func click():#
-	if Game.construction_phase:
-		if selection.valid_place():
-			place_gem()
-	else:
-		Game.clear_selection()
+func _click():
+	Game.clear_selection()
+	if selection.valid_place():
+		if Game.construction_phase && await _placement_allowed():
+			Events.field_clicked.emit(selection.position)
 		
-func place_gem():	
-	if !Game.construction_phase || Game.remaining_placements <= 0:
-		return 
+func _placement_allowed() -> bool:
 	var pos = selection.position
 	var path = [spawn_point.position]
 	for w in waypoints.get_children():
 		path.append(w.position)
-	if  ! await path_map.placing_allowed(pos, path):
-		return
+	return await path_map.placing_allowed(pos, path)
+		
+func place_gem():	
+	if !Game.construction_phase || Game.remaining_placements <= 0:
+		return 
+	var pos = $Marker.position
 	var gem = preload("res://scenes/gem.tscn").instantiate()
+	gem.under_construction = true
 	gem.position = pos
 	maze.add_child(gem)
-	gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
+	var type = Game.gem_chances.get_random_type()
+	var quality = Game.gem_chances.get_random_quality()
+	gem.init_basic_gem(type, quality)
 	path_map.block_path(pos)
 	Game.placed_gem(gem)
 	if Game.remaining_placements ==0:

@@ -33,10 +33,16 @@ func _spawn_bullet(enemy : Enemy):
 	bullet.projected_damage = enemy.calc_damage(gem.damage.value * hit_damage_scale)	
 	bullet.hit_damage_scale = hit_damage_scale
 	var render = bullet_source.duplicate(0b1110) as Node2D
-	render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))
-	render.visible = true
+	if render is GPUParticles2D:
+		var material = (render.process_material as ParticleProcessMaterial).duplicate()
+		material.scale_min *= attack_scale
+		material.scale_max *= attack_scale
+		render.process_material = material
+	else:	
+		render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))
 	bullet.add_child(render)
 	bullet.look_at(enemy.global_position)	
+	render.visible=true
 	return bullet
 	
 func bullet_hit(bullet : Bullet, target : Enemy):

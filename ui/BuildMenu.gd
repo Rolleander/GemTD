@@ -11,10 +11,11 @@ var combos = []
 func _ready():
 	Events.wave_started.connect(func(): visible = false)
 	Events.gem_selected.connect(_open)
+	Events.unselect.connect(func(): visible = false)
 
 func _open(gem : Gem):
-	if gem.is_in_group("building"):
-		visible = true
+	visible = gem.is_in_group("building") && !gem.rock
+	if visible:
 		combos = CombinationsCheck.check(get_tree().get_nodes_in_group("building"))
 		downgrade.disabled =  gem.quality == 0
 		fusion2.disabled = true
@@ -34,6 +35,7 @@ func _end_building(keep_gem : Gem):
 		if gem != keep_gem:
 			gem.activate(false)
 	keep_gem.activate(true)
+	BuffUtils.update_tower_buffs()
 	Events.gem_selected.emit(keep_gem)
 	Game.finish_building()	
 
@@ -71,7 +73,7 @@ func _on_combine_pressed():
 
 func _on_reroll_pressed():
 	if Game.remaining_placements > 0:
-		Game.remaining_placements-=1
 		var selected_gem = Game.selected_object as Gem
 		selected_gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
+		Game.placed_gem(selected_gem)
 	

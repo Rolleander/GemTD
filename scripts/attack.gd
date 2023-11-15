@@ -37,6 +37,7 @@ func _ready():
 	hit_buffs = _duplicate_e_buff(hit_buffs)
 	aura_buffs = _duplicate_e_buff(aura_buffs)
 	tower_buffs = _duplicate_t_buff(tower_buffs)
+	Events.wave_started.connect(func(): hitlist.clear())
 
 func _duplicate_e_buff(array : Array):
 	var duplicates = [] as Array[EnemyBuff]
@@ -58,7 +59,7 @@ func init():
 	damage = round(damage* quality_info.damage_scale)
 	attack_range *= quality_info.range_scale
 	attack_delay *= quality_info.attack_delay_scale
-	attack_scale += gem.quality *.05
+	attack_scale += gem.quality *.1
 
 func _physics_process(delta):
 	if !active:
@@ -88,7 +89,7 @@ func _physics_process(delta):
 func _targetable_enemies() -> Array[Enemy]:
 	var enemies = [] as Array[Enemy]
 	for enemy in Game.get_enemies():
-		if enemy.alive && _can_target(enemy) && in_range(self, enemy, gem.attack_range.value):
+		if !enemy.spawning &&  enemy.alive && _can_target(enemy) && in_range(self, enemy, gem.attack_range.value):
 			enemies.append(enemy)
 	return enemies 
 

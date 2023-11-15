@@ -7,6 +7,7 @@ func _ready():
 	static_body.input_event.connect(_on_static_body_2d_input_event)
 
 func init_glow(scale : float, color : Color):
+	glow.visible = true
 	glow.scale= Vector2(scale,scale) * 0.25
 	glow.material.set_shader_parameter("glow_color", color)
 	glow.material.set_shader_parameter("rand", randf())
@@ -17,7 +18,6 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 	add_to_group("building")
 	self.type = type
 	self.quality = quality 
-	under_construction = true
 	var scale = 1 + (quality * 0.25)
 	var type_info = Globals.get_gem_info(type)
 	var quality_info = Globals.get_quality_info(quality)
@@ -30,7 +30,7 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 	_set_attack(type_info.attack.instantiate())
 	var label_text = ""
 	gem_name = ""
-	if quality_info.label != null:
+	if quality_info.label != null && !quality_info.label.is_empty():
 		label_text += quality_info.label +"\n"
 		gem_name +=quality_info.label+" "
 	label_text += type_info.label
