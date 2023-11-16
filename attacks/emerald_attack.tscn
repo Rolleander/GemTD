@@ -53,7 +53,7 @@ color_ramp = SubResource("GradientTexture1D_g8ghl")
 
 [node name="emerald_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
 script = ExtResource("1_puytj")
-bullet_speed = 200.0
+bullet_speed = 260.0
 bullet_source = NodePath("GPUParticles2D")
 damage = 4.5
 attack_range = 300.0

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxupjagoajmyf"]
+[gd_scene load_steps=6 format=3 uid="uid://bxupjagoajmyf"]
 
 [ext_resource type="Texture2D" uid="uid://ch0id56ogs0qr" path="res://sprites/gegner.png" id="1_8mk6v"]
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_y0cvv"]
 [ext_resource type="PackedScene" uid="uid://b5kq1yq22ybt3" path="res://scenes/healthbar.tscn" id="3_nqnd6"]
+[ext_resource type="Texture2D" uid="uid://bm44dol1vru50" path="res://sprites/selection.png" id="4_fkrk0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3id58"]
 radius = 12.0
@@ -11,6 +12,7 @@ radius = 12.0
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 2
+input_pickable = true
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_y0cvv")
@@ -38,4 +40,11 @@ z_index = 5
 [node name="healthbar" parent="." instance=ExtResource("3_nqnd6")]
 position = Vector2(0, -20)
 
+[node name="SelectionRing" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0.901961, 0.0823529, 0.745098)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("4_fkrk0")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

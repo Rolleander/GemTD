@@ -138,6 +138,7 @@ func _hit(target : Enemy):
 		hit.one_shot = true
 		hit.emitting = true
 		Events.delayed_destroy(hit, hit.lifetime * 1.5)
+	#todo hit splash even when target died
 	if splash_range > 0:
 		for enemy in Game.get_enemies():
 			if enemy != target && enemy.alive && in_range(enemy, target, splash_range):

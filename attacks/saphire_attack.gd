@@ -13,7 +13,7 @@ func _ready():
 	var slow_percent = (1 - speed_mul) * 100
 	slow_buff.value = speed_mul
 	slow_buff.name = "Saphire Slow "+str(gem.quality+1)
-	slow_buff.description = str(speed_mul)+"% Slow"
+	slow_buff.description =  str((1-speed_mul)*100)+"% Slow"
 	slow_buff.stack_group = "SaphireSlow"
 	slow_buff.priority = gem.quality
 	

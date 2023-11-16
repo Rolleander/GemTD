@@ -29,6 +29,10 @@ LevelUp="*res://scripts/levelup.gd"
 window/size/viewport_width=1600
 window/size/viewport_height=900
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/csv-data-importer/plugin.cfg")
+
 [gui]
 
 theme/custom="res://ui/theme.tres"

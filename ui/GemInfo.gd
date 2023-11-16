@@ -7,10 +7,11 @@ extends Panel
 @onready var range_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3/RngValue
 @onready var exp_bar = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer/ProgressBar as ProgressBar
 @onready var kills_label = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/Kills
+@onready var buffList = get_parent().get_node("BuffList")
 
 func _ready():
 	Events.gem_selected.connect(_open)
-	Events.unselect.connect(func(): visible = false)
+	Events.unselect.connect(func(): visible = false; buffList.visible = false)
 	
 func _open(gem : Gem):
 	visible =true
@@ -27,6 +28,8 @@ func _open(gem : Gem):
 	level_label.visible = !gem.rock
 	$MarginContainer/VBoxContainer/HBoxContainer2.visible = !gem.rock
 	$MarginContainer/VBoxContainer/HBoxContainer3.visible = !gem.rock
+	if !gem.rock:
+		buffList.open(gem.buffs)
 
 func _buffed_text(value : BuffableValue):
 	var text = str(snappedf( value.value,0.01))

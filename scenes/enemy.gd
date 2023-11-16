@@ -7,12 +7,13 @@ class_name Enemy
 @export var waypoints : Array[Node]
 @onready var hit_effects = $HitEffects
 @onready var sprite = $Sprite
+@onready var selection = $SelectionRing
 
 var path = []
 var target = -1
 var max_health = 400
 var health = EnemyBuffableValue.new(self, EnemyBuff.Attribute.HEALTH, max_health)
-var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 150)
+var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 100)
 var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 1)
 var damage_scale = 1.0
 var started = false 
@@ -30,9 +31,11 @@ func set_flying(flying : bool):
 	if flying:
 		navigation.navigation_layers = 2
 		collision_mask = 0
+		z_index = 5
 	else:
 		navigation.navigation_layers = 1
 		collision_mask = 2
+		z_index = 0
 
 func _next_waypoint():
 	target+=1
@@ -95,6 +98,8 @@ func _death(killer : Gem):
 	Events.delayed_destroy(self, 1)
 	sprite.visible = false
 	health_bar.visible = false
+	selection.visible = false
+	navigation.avoidance_enabled = false
 	if killer != null:
 		killer.killed(self)	
 
@@ -102,6 +107,11 @@ func add_hit_effect(effect : Node2D):
 	hit_effects.add_child(effect)
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
+	if !alive:
+		return
 	velocity = safe_velocity
 	move_and_slide()
 
+func _on_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("click"):
+		Events.enemy_selected.emit(self)
