@@ -27,12 +27,17 @@ var damage = TowerBuffableValue.new(self, TowerBuff.Attribute.DAMAGE)
 var attack_range = TowerBuffableValue.new(self, TowerBuff.Attribute.RANGE)
 var attack_delay = TowerBuffableValue.new(self, TowerBuff.Attribute.ATTACK_DELAY)
 var buffs = [] as Array[TowerBuff]
-var damage_dealt = 0
+var damage_dealt = DamageCounter.new()
 
 func _ready():
 	Events.wave_started.connect(func():	attack.active = true)
 	Events.wave_ended.connect(func():attack.active = false)
 	add_to_group("gems")		
+
+func _physics_process(delta):
+	if rock:
+		return
+	damage_dealt.update(delta)
 
 func _set_attack(attack : Attack):
 	if self.attack != null:

@@ -9,6 +9,12 @@ func add_enemy_buff (enemy : Enemy, source : Gem,  buff : EnemyBuff) -> bool:
 	instance.buff = buff	
 	instance.source = source	
 	instance.target = enemy
+	if buff.attribute == EnemyBuff.Attribute.HEALTH:
+		instance.target_value = enemy.health
+	elif buff.attribute == EnemyBuff.Attribute.ARMOR:
+		instance.target_value = enemy.armor
+	elif buff.attribute == EnemyBuff.Attribute.SPEED:
+		instance.target_value = enemy.speed
 	enemy.buffs.append(instance)
 	return true
 
@@ -18,6 +24,8 @@ func _apply_buff(buffs: Array, buff : Buff) -> bool:
 			if b.buff.stack_group == buff.stack_group:
 				if b.buff.priority <= buff.priority:
 					buffs.erase(b)
+					if b.buff.permanent:
+						b.target_value.apply_permanent(b)
 					break
 				else:
 					return false

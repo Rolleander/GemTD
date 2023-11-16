@@ -4,8 +4,8 @@ var buff : EnemyBuff
 var source : Gem
 var target : Enemy
 var done = false
-var damageDealt = false
 var progress = 0
+var target_value : EnemyBuffableValue
 
 func current_value():
 	var value 
@@ -22,12 +22,4 @@ func current_value():
 func update(delta):
 	if buff.duration >0:
 		progress+=delta 
-		done = progress >= buff.duration
-		
-func register_damage() -> float:
-	if damageDealt || current_value() >=0 || buff.attribute != EnemyBuff.Attribute.HEALTH: 
-		return 0
-	var damage = current_value() *-1
-	Events.emit_signal("damage_dealt", target, source, damage)
-	damageDealt = true
-	return damage
+		done = progress >= buff.duration	

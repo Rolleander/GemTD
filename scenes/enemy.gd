@@ -12,9 +12,9 @@ class_name Enemy
 var path = []
 var target = -1
 var max_health = 400
-var health = EnemyBuffableValue.new(self, EnemyBuff.Attribute.HEALTH, max_health)
+var health = HealthValue.new(self, max_health)
 var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 100)
-var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 1)
+var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 0)
 var damage_scale = 1.0
 var started = false 
 var alive = true
@@ -61,11 +61,7 @@ func _physics_process(delta : float):
 	speed.update()
 	armor.update()
 	if health.value <=0 && alive:
-		var killer = null
-		for buff in buffs:
-			if buff.register_damage() > 0:
-				killer = buff.source
-		_death(killer)
+		_death(health.killer)
 	BuffUtils.progress_enemy_buffs(self, delta)
 		
 func kill():
@@ -82,7 +78,7 @@ func _damage(source : Attack, damage_factor : float = 1.0) -> bool:
 	return health.value <= 0
 		
 func calc_damage(damage : float):
-	return (damage / armor.value) * damage_scale
+	return maxf(damage * damage_scale - armor.value, 0.5) 
 		
 func hit(attack : Attack, damage_factor : float = 1.0):
 	if !alive:

@@ -12,6 +12,7 @@ var gem_chances : GemChances = GemChances.new()
 var build_menu
 
 func _ready():
+	Engine.time_scale = 1.5
 	add_child(wave)
 	Events.gem_selected.connect(_update_selection)
 	Events.wave_ended.connect(func(): _start_building())
