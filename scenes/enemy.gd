@@ -9,13 +9,14 @@ class_name Enemy
 @onready var sprite = $Sprite
 @onready var selection = $SelectionRing
 
+
 var path = []
 var target = -1
 var max_health = 400
 var health = HealthValue.new(self, max_health)
 var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 1)
-var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 0)
-var damage_scale = 1.0
+var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 1)
+var plating =  EnemyBuffableValue.new(self, EnemyBuff.Attribute.PLATING, 0)
 var started = false 
 var alive = true
 var projected_damage = 0
@@ -73,13 +74,14 @@ func _damage(source : Attack, damage_factor : float = 1.0) -> bool:
 		return false
 	for buff in source.hit_buffs:
 		BuffUtils.add_enemy_buff(self, source.gem, buff)	
-	var damage = min(health.value, calc_damage(source.gem.damage.value * source.hit_damage_scale * damage_factor))
-	Events.emit_signal("damage_dealt",self, source.gem, damage)
+	health.update()
+	var damage = minf(health.value, calc_damage(source.gem.damage.value * damage_factor))
+	source.gem.damage_dealt.dealt(damage)
 	health.value_add( damage *-1)
 	return health.value <= 0
 		
 func calc_damage(damage : float):
-	return maxf(damage * damage_scale - armor.value, 0.5) 
+	return maxf((damage - plating.value) / armor.value, 0.5) 
 		
 func hit(attack : Attack, damage_factor : float = 1.0):
 	if !alive:

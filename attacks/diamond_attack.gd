@@ -8,6 +8,7 @@ func _ready():
 	if gem.quality == GemQualityInfo.Quality.GREAT:
 		CRIT_SCALE = 2.0
 		CRIT_DMG = 5.0
+		description = "Only hits ground units, chance to crit for 5x damage"
 		var buff = EnemyBuff.new()
 		buff.attribute = EnemyBuff.Attribute.ARMOR
 		buff.operation = EnemyBuff.Operation.MUL

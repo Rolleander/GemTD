@@ -12,10 +12,13 @@ operation = 2
 attribute = 1
 continous = false
 permanent = false
+aura_range = 0.0
 name = ""
 description = ""
 stack_group = ""
+stack_size = 1
 priority = 0
+order = 0
 
 [sub_resource type="Resource" id="Resource_bvxte"]
 script = ExtResource("2_diub1")
@@ -25,10 +28,13 @@ operation = 1
 attribute = 0
 continous = true
 permanent = true
+aura_range = 0.0
 name = ""
 description = ""
 stack_group = ""
+stack_size = 1
 priority = 0
+order = 0
 
 [sub_resource type="Gradient" id="Gradient_061kj"]
 interpolation_mode = 2

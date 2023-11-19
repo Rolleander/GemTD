@@ -22,6 +22,9 @@ enum Targeting{
 @export var parallel_targets : int = 1
 @export var targeting : Targeting = Targeting.FIRST
 
+#enemy hitsize radius
+const E_R = 20
+
 var gem : Gem
 var active = false
 var timer = Timer.new()
@@ -79,7 +82,7 @@ func _physics_process(delta):
 func _targetable_enemies() -> Array[Enemy]:
 	var enemies = [] as Array[Enemy]
 	for enemy in Game.get_enemies():
-		if !enemy.spawning &&  enemy.alive && _can_target(enemy) && Utils.in_range(self, enemy, gem.attack_range.value):
+		if !enemy.spawning &&  enemy.alive && _can_target(enemy) && Utils.in_range(self, enemy, gem.attack_range.value ,E_R ):
 			enemies.append(enemy)
 	return enemies 
 
@@ -100,9 +103,12 @@ func _should_target(enemy : Enemy) -> bool:
 	return true
 		
 func _apply_aura_buffs():
-	for enemy in Game.get_enemies():
-		if enemy.alive && _can_target(enemy) && Utils.in_range(self, enemy, gem.attack_range.value):
-			for buff in aura_buffs:
+	for buff in aura_buffs:
+		var range = gem.attack_range.value
+		if buff.aura_range >0:
+			range = buff.aura_range
+		for enemy in Game.get_enemies():
+			if !enemy.spawning && enemy.alive && _can_target(enemy) && Utils.in_range(self, enemy, range , E_R):
 				BuffUtils.add_enemy_buff(enemy, gem, buff)
 
 func _can_target(enemy : Enemy):
@@ -116,7 +122,7 @@ func _attack(target : Enemy):
 	hitlist.push_front(target)
 
 func _hit(target : Enemy):
-	target.hit(self)
+	target.hit(self, hit_damage_scale)
 	var hit = null
 	if hit_effect!= null:
 		hit = hit_effect.duplicate()
@@ -128,8 +134,8 @@ func _hit(target : Enemy):
 	#todo hit splash even when target died
 	if splash_range > 0:
 		for enemy in Game.get_enemies():
-			if enemy != target && enemy.alive && Utils.in_range(enemy, target, splash_range):
-				enemy.hit(self, splash_damage_factor)
+			if enemy != target && enemy.alive && Utils.in_range(enemy, target, splash_range , E_R):
+				enemy.hit(self, hit_damage_scale * splash_damage_factor)
 	return hit
 
 func _on_timer_timeout():

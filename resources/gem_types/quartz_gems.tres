@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_1ri54")
 label = "Quartz"
-descirption = "Buff Range"
+descirption = ""
 color = Color(0.447059, 0.298039, 0.0666667, 1)
 attack = ExtResource("1_atnyh")
 type = 8

@@ -57,6 +57,7 @@ script = ExtResource("1_3e3ug")
 damage = 7.5
 attack_range = 280.0
 attack_delay = 1.6
+description = "Hits all enemies in range with every attack"
 hit_effect = NodePath("GPUParticles2D")
 parallel_targets = 1000
 

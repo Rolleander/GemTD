@@ -12,10 +12,13 @@ operation = 2
 attribute = 1
 continous = false
 permanent = false
+aura_range = 0.0
 name = ""
 description = ""
 stack_group = ""
+stack_size = 1
 priority = 0
+order = 0
 
 [sub_resource type="Gradient" id="Gradient_wp23h"]
 colors = PackedColorArray(1, 1, 1, 0.858824, 1, 1, 1, 0)

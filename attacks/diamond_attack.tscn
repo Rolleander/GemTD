@@ -28,6 +28,7 @@ bullet_source = NodePath("DiamondBlast")
 damage = 10.0
 attack_range = 300.0
 attack_delay = 0.8
+description = "Only hits ground units, chance to crit for double damage"
 targets_air = false
 
 [node name="DiamondBlast" type="Sprite2D" parent="."]

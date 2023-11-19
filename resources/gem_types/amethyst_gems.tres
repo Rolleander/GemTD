@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_5noiv")
 label = "Amethyst"
-descirption = "Air"
+descirption = ""
 color = Color(0.682353, 0.407843, 1, 1)
 attack = ExtResource("1_h7agr")
 type = 7

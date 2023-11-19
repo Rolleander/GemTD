@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="EnemyBuff" load_steps=2 format=3 uid="uid://c068lr0sgvkys"]
+
+[ext_resource type="Script" path="res://scripts/buffs/enemy/enemy_buff.gd" id="1_60csi"]
+
+[resource]
+script = ExtResource("1_60csi")
+duration = 1
+value = 0.5
+operation = 0
+attribute = 1
+continous = false
+permanent = false
+name = "Stun"
+description = "Speed reduced to minimum"
+stack_group = "Stun"
+priority = 0
+order = 500

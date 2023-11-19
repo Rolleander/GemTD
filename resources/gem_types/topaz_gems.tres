@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_8tg7q")
 label = "Topaz"
-descirption = "Multi"
+descirption = ""
 color = Color(0.858824, 0.678431, 0, 1)
 attack = ExtResource("1_2btnn")
 type = 2

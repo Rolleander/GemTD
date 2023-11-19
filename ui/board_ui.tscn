@@ -104,7 +104,7 @@ horizontal_alignment = 2
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -320.0
+offset_top = -423.0
 offset_right = 479.0
 grow_vertical = 0
 theme_override_constants/margin_left = 70
@@ -120,7 +120,7 @@ custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 
 [node name="GemInfo" type="Panel" parent="MarginContainer2/MarginContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 script = ExtResource("4_vuwf8")
 
@@ -129,6 +129,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 8
@@ -206,7 +207,6 @@ label_settings = SubResource("LabelSettings_n3b1d")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
 theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3"]
@@ -239,9 +239,9 @@ text = "EXP"
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 8
+theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 8
+theme_override_constants/margin_bottom = 6
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer"]
 layout_mode = 2
@@ -251,6 +251,22 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_ksh6u")
 step = 0.5
 value = 20.0
 show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+
+[node name="AttackInfo" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.854902, 0.74902, 0.301961, 1)
+theme_override_font_sizes/font_size = 17
+text = "test"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="BuildMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
 custom_minimum_size = Vector2(0, 70)

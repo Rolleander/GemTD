@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_a2eaw")
 label = "Saphire"
-descirption = "Slow"
+descirption = ""
 color = Color(0, 0.423529, 0.941176, 1)
 attack = ExtResource("1_g6wk8")
 type = 1

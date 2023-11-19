@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_7xe5i")
 label = "Aquamarine"
-descirption = "Fast"
+descirption = ""
 color = Color(0, 0.737255, 0.843137, 1)
 attack = ExtResource("1_ols28")
 type = 3

@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_15cuc")
 label = "Opal"
-descirption = "Buff Speed"
+descirption = ""
 color = Color(0.0823529, 0.0901961, 0.0941176, 1)
 attack = ExtResource("1_ust84")
 type = 5

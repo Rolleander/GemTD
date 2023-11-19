@@ -53,6 +53,7 @@ bullet_source = NodePath("AmethystBlast")
 damage = 15.0
 attack_range = 400.0
 attack_delay = 0.8
+description = "Only hits air units"
 targets_ground = false
 
 [node name="AmethystBlast" type="Sprite2D" parent="."]

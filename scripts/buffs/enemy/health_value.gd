@@ -2,6 +2,8 @@ extends EnemyBuffableValue
 class_name HealthValue
 
 var killer : Gem
+var outstanding_damages = []
+var remaining_damage_dealt = false
 
 func _init(owner : Enemy, value : float = 0.0):
 	self.attribute = EnemyBuff.Attribute.HEALTH
@@ -9,8 +11,10 @@ func _init(owner : Enemy, value : float = 0.0):
 	self.root = value	
 	
 func update():
-	super()
-	for instance in owner.buffs:
+	value = root
+	outstanding_damages.clear()
+	for i in range(owner.buffs.size()-1, -1, -1):
+		var instance = owner.buffs[i] as EnemyBuffInstance
 		var buff = instance.buff as EnemyBuff
 		if killer != null:
 			return
@@ -25,11 +29,19 @@ func update():
 				value *=  instance.current_value()	
 				if instance.done && buff.permanent:
 					root *= instance.current_value()
-
+			if instance.done:
+				owner.buffs.remove_at(i)
+	if value <=0 && !remaining_damage_dealt:
+		remaining_damage_dealt = true	
+		for dmg in outstanding_damages:
+			var damage = dmg.dmg
+			var instance = dmg.src
+			instance.source.damage_dealt.dealt(damage)
+							
 func apply_permanent(instance : EnemyBuffInstance):
 	var damage =instance.current_value()*-1
 	root -= damage
-	Events.damage_dealt.emit(owner, instance.source, damage)
+	instance.source.damage_dealt.dealt(damage)
 
 func _add_health(instance : EnemyBuffInstance):
 	var add = instance.current_value()
@@ -40,9 +52,14 @@ func _add_health(instance : EnemyBuffInstance):
 		return	
 	var damage = minf(value, add *-1)
 	value -= damage
-	if (instance.done && instance.buff.permanent) || value ==0:
-		var source = instance.source
-		root -= damage
-		if value ==0:
-			killer =source	
-		Events.damage_dealt.emit(owner, source, damage)
+	if instance.buff.permanent :
+		if instance.done: 
+			var source = instance.source
+			root -= damage
+			if value <=0:
+				killer =source	
+			instance.source.damage_dealt.dealt(damage)
+		else:
+			var dmg = { "dmg" : damage, "src" : instance }
+			outstanding_damages.append(dmg)
+

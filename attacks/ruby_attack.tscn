@@ -57,6 +57,7 @@ bullet_source = NodePath("Sprite2d")
 damage = 8.0
 attack_range = 300.0
 attack_delay = 0.8
+description = "Does splash damage"
 hit_effect = NodePath("HitExplosion")
 splash_range = 2.0
 

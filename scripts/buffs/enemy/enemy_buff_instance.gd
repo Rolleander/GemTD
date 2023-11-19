@@ -6,6 +6,13 @@ var target : Enemy
 var done = false
 var progress = 0
 var target_value : EnemyBuffableValue
+var armor_on_init 
+
+func _init(buff : EnemyBuff, source : Gem, target : Enemy):
+	self.buff = buff	
+	self.source = source	
+	self.target = target
+	armor_on_init = target.armor.value
 
 func current_value():
 	var value 
@@ -16,7 +23,7 @@ func current_value():
 	else:
 		value= buff.value
 	if 	buff.attribute == EnemyBuff.Attribute.HEALTH && buff.operation == EnemyBuff.Operation.ADD:
-		value *= target.damage_scale
+		value = value/ armor_on_init
 	return value
 
 func update(delta):
