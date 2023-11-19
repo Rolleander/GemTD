@@ -6,8 +6,5 @@
 [resource]
 script = ExtResource("1_dlhob")
 label = "Chipped"
-damage_scale = 1.0
-range_scale = 1.0
-attack_delay_scale = 1.0
 quality = 0
 scene = ExtResource("1_tnupy")

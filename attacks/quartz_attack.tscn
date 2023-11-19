@@ -15,7 +15,7 @@ fill_to = Vector2(0.846154, 0.162393)
 [node name="quartz_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
 modulate = Color(1, 1, 1, 0.67451)
 script = ExtResource("1_axsyc")
-bullet_speed = 300.0
+bullet_speed = 13.0
 bullet_source = NodePath("QuartzBlast")
 damage = 4.0
 attack_range = 400.0

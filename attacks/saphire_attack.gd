@@ -9,7 +9,7 @@ func _ready():
 	if gem.quality == GemQualityInfo.Quality.GREAT:
 		speed_mul = 0.5
 		slow_buff.duration = 10
-		splash_range = 100
+		splash_range = 2.5
 	var slow_percent = (1 - speed_mul) * 100
 	slow_buff.value = speed_mul
 	slow_buff.name = "Saphire Slow "+str(gem.quality+1)

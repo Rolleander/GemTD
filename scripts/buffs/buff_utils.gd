@@ -60,7 +60,7 @@ func update_tower_buffs():
 		if  source.under_construction || source.attack.tower_buffs.size() ==0:
 			continue
 		for target in Game.get_gems():
-			if in_range(source, target, source.attack_range.root):
+			if Utils.in_range(source, target, source.attack_range.root):
 				for buff in source.attack.tower_buffs:
 					_apply_tower_buff(target.buffs, buff)
 	for gem in Game.get_gems():
@@ -77,5 +77,3 @@ func _add_level_buff(gem : Gem):
 	level_buff.operation = TowerBuff.Operation.MUL
 	gem.buffs.append(level_buff)
 
-func in_range(source : Node2D, target : Node2D, range : float) -> bool:
-	return source.global_position.distance_to(target.global_position) <= range/ 2		

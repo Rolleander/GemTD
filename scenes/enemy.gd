@@ -13,7 +13,7 @@ var path = []
 var target = -1
 var max_health = 400
 var health = HealthValue.new(self, max_health)
-var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 100)
+var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 1)
 var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 0)
 var damage_scale = 1.0
 var started = false 
@@ -22,6 +22,7 @@ var projected_damage = 0
 var flying = false
 var buffs = [] as Array[EnemyBuffInstance]
 var spawning = true
+var money = 0
 
 func _ready():
 	_next_waypoint()
@@ -55,8 +56,8 @@ func _physics_process(delta : float):
 	if navigation.is_navigation_finished():
 		_next_waypoint()
 	var dir = to_local(navigation.get_next_path_position()).normalized()
-	navigation.max_speed = speed.value	
-	navigation.velocity = dir * speed.value
+	navigation.max_speed = (speed.value	* Globals.GRID_SIZE)
+	navigation.velocity = dir * (speed.value * Globals.GRID_SIZE)
 	health.update()
 	speed.update()
 	armor.update()

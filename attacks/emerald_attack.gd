@@ -22,7 +22,7 @@ func _ready():
 		poison_buff.value = -550
 		speed_mul = 0.6
 		duration = 10
-		splash_range = 100
+		splash_range = 2.5
 	slow_buff.duration =duration
 	poison_buff.duration =duration
 	var slow_percent = (1 - speed_mul) * 100

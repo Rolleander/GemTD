@@ -44,7 +44,7 @@ func _physics_process(delta):
 		_stop()
 		return
 	look_at(target.global_position)
-	position += direction * speed * delta
+	position += direction * (speed * Globals.GRID_SIZE) * delta
 	var distance = global_position.distance_to(target.global_position)
 	var maxTurn = maxf(0.1, (100.0-distance) / 100.0)	
 	direction = lerp(direction, global_position.direction_to(target.global_position),maxTurn)

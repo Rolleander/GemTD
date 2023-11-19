@@ -40,8 +40,8 @@ func _spawn_bullet(enemy : Enemy):
 		render.process_material = material
 	else:	
 		render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))
+	bullet.look_at(enemy.global_position)
 	bullet.add_child(render)
-	bullet.look_at(enemy.global_position)	
 	render.visible=true
 	return bullet
 	

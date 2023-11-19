@@ -79,7 +79,7 @@ func _physics_process(delta):
 func _targetable_enemies() -> Array[Enemy]:
 	var enemies = [] as Array[Enemy]
 	for enemy in Game.get_enemies():
-		if !enemy.spawning &&  enemy.alive && _can_target(enemy) && in_range(self, enemy, gem.attack_range.value):
+		if !enemy.spawning &&  enemy.alive && _can_target(enemy) && Utils.in_range(self, enemy, gem.attack_range.value):
 			enemies.append(enemy)
 	return enemies 
 
@@ -101,7 +101,7 @@ func _should_target(enemy : Enemy) -> bool:
 		
 func _apply_aura_buffs():
 	for enemy in Game.get_enemies():
-		if enemy.alive && _can_target(enemy) && in_range(self, enemy, gem.attack_range.value):
+		if enemy.alive && _can_target(enemy) && Utils.in_range(self, enemy, gem.attack_range.value):
 			for buff in aura_buffs:
 				BuffUtils.add_enemy_buff(enemy, gem, buff)
 
@@ -114,9 +114,6 @@ func _can_target(enemy : Enemy):
 func _attack(target : Enemy):
 	hitlist.erase(target)
 	hitlist.push_front(target)
-
-func in_range(source : Node2D, target : Node2D, range : float) -> bool:
-	return source.global_position.distance_to(target.global_position) <= range/ 2
 
 func _hit(target : Enemy):
 	target.hit(self)
@@ -131,7 +128,7 @@ func _hit(target : Enemy):
 	#todo hit splash even when target died
 	if splash_range > 0:
 		for enemy in Game.get_enemies():
-			if enemy != target && enemy.alive && in_range(enemy, target, splash_range):
+			if enemy != target && enemy.alive && Utils.in_range(enemy, target, splash_range):
 				enemy.hit(self, splash_damage_factor)
 	return hit
 

@@ -15,7 +15,7 @@ const RANGE_RING = 800.0
 var type : GemType 
 var quality : GemQuality
 var rock = false
-var special_combination : SpecialGem
+var special_combination = null
 var kills = 0
 var exp = 0
 var levelup_exp = 10
@@ -44,7 +44,7 @@ func set_attack(attack : Attack):
 		self.attack.queue_free()
 	self.attack = attack
 	attack.gem = self
-	var range_scale = attack.attack_range / RANGE_RING
+	var range_scale = (attack.attack_range * Globals.TILE_SIZE) / RANGE_RING
 	range_ring.scale = Vector2(range_scale, range_scale)
 	add_child(attack)
 	self.damage.value_set(attack.damage)

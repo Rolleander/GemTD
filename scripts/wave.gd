@@ -32,12 +32,12 @@ func _spawn_enemy():
 	enemy.waypoints = get_tree().get_first_node_in_group("waypoints").get_children()
 	enemy.position = get_tree().get_first_node_in_group("spawn_point").position
 	enemy.max_health = waves[current].Health
+	var speed = waves[current].Speed
+	var money = waves[current].Money
 	var air = waves[current].Enemy == "A"
 	enemy.health.value_set( enemy.max_health)
-	if air:
-		enemy.speed.value_set(75 + current * 1.25)
-	else:	
-		enemy.speed.value_set(100 + current * 2.5 )
+	enemy.speed.value_set(speed)
+	enemy.money = money
 	enemies.add_child(enemy)
 	alive +=1
 	spawned += 1

@@ -23,6 +23,7 @@ Game="*res://scripts/game.gd"
 CombinationsCheck="*res://scripts/combos/combinations_check.gd"
 BuffUtils="*res://scripts/buffs/buff_utils.gd"
 LevelUp="*res://scripts/levelup.gd"
+Utils="*res://scripts/Utils.gd"
 
 [display]
 

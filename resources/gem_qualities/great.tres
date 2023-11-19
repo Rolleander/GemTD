@@ -6,8 +6,5 @@
 [resource]
 script = ExtResource("1_2mivs")
 label = "Great"
-damage_scale = 45.0
-range_scale = 1.75
-attack_delay_scale = 1.0
 quality = 5
 scene = ExtResource("1_cvloe")

@@ -26,8 +26,9 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 	for n in graphic.get_children():
 		graphic.remove_child(n)
 	graphic.add_child(render)
-	set_attack(type_info.attack.instantiate())
-	_init_attack_stats()
+	var atk = type_info.attack.instantiate()
+	_init_attack_stats(atk)
+	set_attack(atk)
 	var label_text = ""
 	gem_name = ""
 	if quality_info.label != null && !quality_info.label.is_empty():
@@ -39,7 +40,7 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 	label.label_settings.font_color =  type_info.color.lightened(0.5)
 	label.text = label_text
 
-func _init_attack_stats():
+func _init_attack_stats(attack : Attack):
 	var index = type * 6 + quality
 	var stats = preload("res://resources/standard_gems.csv").records[index]	
 	attack.damage = stats.Damage

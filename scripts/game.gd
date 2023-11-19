@@ -26,7 +26,7 @@ func finish_building():
 	wave.start_wave()
 
 func _enemy_killed(enemy: Enemy, killer: Gem):
-	money+=1
+	money+=enemy.money
 
 func placed_gem(gem: Gem):
 	Game.remaining_placements-=1		

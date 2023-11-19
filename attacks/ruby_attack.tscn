@@ -52,13 +52,13 @@ color_ramp = SubResource("GradientTexture1D_rdg0h")
 
 [node name="ruby_attack" type="Node2D" node_paths=PackedStringArray("bullet_source", "hit_effect")]
 script = ExtResource("1_4164p")
-bullet_speed = 400.0
+bullet_speed = 14.0
 bullet_source = NodePath("Sprite2d")
 damage = 8.0
 attack_range = 300.0
 attack_delay = 0.8
 hit_effect = NodePath("HitExplosion")
-splash_range = 80.0
+splash_range = 2.0
 
 [node name="Sprite2d" type="Sprite2D" parent="."]
 position = Vector2(6.25, 1)

@@ -47,7 +47,7 @@ fill_to = Vector2(0.846154, 0.162393)
 
 [node name="saphire_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
 script = ExtResource("1_yycbl")
-bullet_speed = 280.0
+bullet_speed = 13.0
 bullet_source = NodePath("Bullet")
 damage = 5.0
 attack_range = 370.0
