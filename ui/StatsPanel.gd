@@ -8,7 +8,7 @@ const MAX_ROWS = 10
 var tab = 0
 
 func _ready():
-	for i in MAX_ROWS-1:
+	for i in MAX_ROWS:
 		var name = name_label.duplicate()
 		var value = value_label.duplicate()
 		table.add_child(name)		
@@ -26,15 +26,21 @@ func _damage_dealt(enemy: Enemy, gem : Gem, damage : float):
 
 func _fill_stats():
 	var stats = _calc_stats()
+	var total = 0
 	for i in MAX_ROWS:
-		var name = table.get_child(i*2)
-		var value = table.get_child(i*2+1)
+		var name = table.get_child(i*2+2)
+		var value = table.get_child(i*2+3)
 		if i < stats.size():
+			var stat = round(stats[i]["value"])
+			total += stat
 			name.text = stats[i]["name"]
-			value.text = str(round(stats[i]["value"]))
+			value.text = str(stat)
 		else:
 			name.text=""
 			value.text=""
+	table.get_child(0).text = "Total"
+	table.get_child(1).text = str(total)
+	
 			
 func _calc_stats():
 	var stats = []

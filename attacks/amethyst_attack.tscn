@@ -28,12 +28,10 @@ gradient = SubResource("Gradient_22hqn")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oe5c8"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
 initial_velocity_max = 10.0
 angular_velocity_min = -211.2
 angular_velocity_max = 330.19
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, 0, 0)
 scale_min = 0.01
 scale_max = 0.1
 color_ramp = SubResource("GradientTexture1D_g8ghl")
@@ -52,8 +50,9 @@ material = SubResource("CanvasItemMaterial_l8w2n")
 script = ExtResource("1_2tafp")
 bullet_speed = 420.0
 bullet_source = NodePath("AmethystBlast")
-damage = 20.0
+damage = 15.0
 attack_range = 400.0
+attack_delay = 0.8
 targets_ground = false
 
 [node name="AmethystBlast" type="Sprite2D" parent="."]

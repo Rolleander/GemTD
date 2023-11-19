@@ -7,7 +7,7 @@
 script = ExtResource("1_q2f4j")
 label = "Flawed"
 damage_scale = 1.4
-range_scale = 1.2
-attack_delay_scale = 0.95
+range_scale = 1.15
+attack_delay_scale = 1.25
 quality = 1
 scene = ExtResource("1_rdu3t")

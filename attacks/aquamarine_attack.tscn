@@ -27,9 +27,9 @@ colors = PackedColorArray(0.568627, 0.815686, 0.815686, 0, 0, 1, 1, 1)
 script = ExtResource("1_fjqde")
 bullet_speed = 400.0
 bullet_source = NodePath("Aquablast")
-damage = 4.0
+damage = 6.0
 attack_range = 240.0
-attack_delay = 0.3
+attack_delay = 0.4
 
 [node name="Aquablast" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.521569)

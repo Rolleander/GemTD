@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_lffbc")
 label = "Flawless"
-damage_scale = 3.5
-range_scale = 1.48
-attack_delay_scale = 0.85
+damage_scale = 6.5
+range_scale = 1.45
+attack_delay_scale = 1.25
 quality = 3
 scene = ExtResource("1_85u8l")

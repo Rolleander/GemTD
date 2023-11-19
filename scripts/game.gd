@@ -30,6 +30,7 @@ func _enemy_killed(enemy: Enemy, killer: Gem):
 
 func placed_gem(gem: Gem):
 	Game.remaining_placements-=1		
+	gem.add_to_group("building")
 	BuffUtils.update_tower_buffs()
 	_update_selection(gem)	
 	Events.gem_selected.emit(gem)

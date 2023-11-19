@@ -15,7 +15,6 @@ func init_glow(scale : float, color : Color):
 	glow.material.set_shader_parameter("energy", 0.7)
 
 func init_basic_gem(type : GemType, quality : GemQuality):
-	add_to_group("building")
 	self.type = type
 	self.quality = quality 
 	var scale = 1 + (quality * 0.25)
@@ -27,7 +26,8 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 	for n in graphic.get_children():
 		graphic.remove_child(n)
 	graphic.add_child(render)
-	_set_attack(type_info.attack.instantiate())
+	set_attack(type_info.attack.instantiate())
+	_init_attack_stats()
 	var label_text = ""
 	gem_name = ""
 	if quality_info.label != null && !quality_info.label.is_empty():
@@ -38,6 +38,14 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 	label.label_settings = label.label_settings.duplicate()
 	label.label_settings.font_color =  type_info.color.lightened(0.5)
 	label.text = label_text
+
+func _init_attack_stats():
+	var index = type * 6 + quality
+	var stats = preload("res://resources/standard_gems.csv").records[index]	
+	attack.damage = stats.Damage
+	attack.attack_delay = stats.Speed
+	attack.attack_range = stats.Range	
+	attack.attack_scale += quality *.1
 
 func _on_static_body_2d_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("click"):

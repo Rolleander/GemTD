@@ -20,6 +20,7 @@ func _open(gem : Gem):
 		downgrade.disabled =  gem.quality == 0
 		fusion2.disabled = true
 		fusion4.disabled = true
+		combine.disabled = true
 		reroll.disabled  = Game.remaining_placements == 0
 		for c in combos:
 			if c.gems.has(gem):
@@ -28,10 +29,11 @@ func _open(gem : Gem):
 						fusion2.disabled = false
 					if c.fusion_size == 4:
 						fusion4.disabled = false
-
+				if c is GemCombine:
+					combine.disabled = false
+					
 func _end_building(keep_gem : Gem):
-	var building = get_tree().get_nodes_in_group("building")
-	for gem in building:
+	for gem in get_tree().get_nodes_in_group("building"):
 		if gem != keep_gem:
 			gem.activate(false)
 	keep_gem.activate(true)
@@ -68,7 +70,11 @@ func _on_fusion_4_pressed():
 
 
 func _on_combine_pressed():
-	pass # Replace with function body.
+	var selected_gem = Game.selected_gem
+	for c in combos:
+		if c.gems.has(selected_gem):
+			if c is GemCombine:				
+				_end_building(c.combine(selected_gem))
 
 
 func _on_reroll_pressed():

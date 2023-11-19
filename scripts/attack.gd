@@ -51,16 +51,6 @@ func _duplicate_t_buff(array : Array):
 		duplicates.append(a.duplicate())
 	return duplicates
 
-func init():
-	if gem.quality ==null || gem.type == null:
-		return
-	var type_info = Globals.get_gem_info(gem.type)
-	var quality_info = Globals.get_quality_info(gem.quality)
-	damage = round(damage* quality_info.damage_scale)
-	attack_range *= quality_info.range_scale
-	attack_delay *= quality_info.attack_delay_scale
-	attack_scale += gem.quality *.1
-
 func _physics_process(delta):
 	if !active:
 		return

@@ -25,8 +25,9 @@ colors = PackedColorArray(0.568627, 0.815686, 0.815686, 0, 0.709804, 0.717647, 0
 script = ExtResource("1_jj5u5")
 bullet_speed = 300.0
 bullet_source = NodePath("DiamondBlast")
-damage = 12.0
+damage = 10.0
 attack_range = 300.0
+attack_delay = 0.8
 targets_air = false
 
 [node name="DiamondBlast" type="Sprite2D" parent="."]

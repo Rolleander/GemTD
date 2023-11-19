@@ -12,10 +12,10 @@ const RANGE_RING = 800.0
 @onready var graphic = $Graphic
 @onready var glow = $Glow
 
-var type : GemType
+var type : GemType 
 var quality : GemQuality
 var rock = false
-var special_combination = false
+var special_combination : SpecialGem
 var kills = 0
 var exp = 0
 var levelup_exp = 10
@@ -39,12 +39,11 @@ func _physics_process(delta):
 		return
 	damage_dealt.update(delta)
 
-func _set_attack(attack : Attack):
+func set_attack(attack : Attack):
 	if self.attack != null:
 		self.attack.queue_free()
 	self.attack = attack
 	attack.gem = self
-	attack.init()
 	var range_scale = attack.attack_range / RANGE_RING
 	range_ring.scale = Vector2(range_scale, range_scale)
 	add_child(attack)

@@ -1,6 +1,7 @@
 extends Combination
 
 class_name GemFusion
+
 var fusion_size : int
 
 func _init(gems : Array[Gem], fusion_size : int):
