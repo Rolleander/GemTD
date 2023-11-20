@@ -9,14 +9,14 @@ class_name Enemy
 @onready var sprite = $Sprite
 @onready var selection = $SelectionRing
 
-
 var path = []
 var target = -1
 var max_health = 400
-var health = HealthValue.new(self, max_health)
+var health = EnemyBuffableValue.new(self,EnemyBuff.Attribute.HEALTH, max_health)
 var speed = EnemyBuffableValue.new(self, EnemyBuff.Attribute.SPEED, 1)
 var armor = EnemyBuffableValue.new(self, EnemyBuff.Attribute.ARMOR, 1)
 var plating =  EnemyBuffableValue.new(self, EnemyBuff.Attribute.PLATING, 0)
+var limiter =  EnemyBuffableValue.new(self, EnemyBuff.Attribute.LIMITER, 0)
 var started = false 
 var alive = true
 var projected_damage = 0
@@ -24,6 +24,7 @@ var flying = false
 var buffs = [] as Array[EnemyBuffInstance]
 var spawning = true
 var money = 0
+var killer = null
 
 func _ready():
 	_next_waypoint()
@@ -47,8 +48,7 @@ func _next_waypoint():
 	navigation.target_position = waypoints[target].position	
 
 func _process(delta):
-	#_damage(1)
-	health_bar.health_percent = float(health.value) / max_health 	
+	health_bar.health_percent = clampf(float(health.value) / max_health ,0,1)
 		
 func _physics_process(delta : float):
 	spawning = false
@@ -63,7 +63,7 @@ func _physics_process(delta : float):
 	speed.update()
 	armor.update()
 	if health.value <=0 && alive:
-		_death(health.killer)
+		_death(killer)
 	BuffUtils.progress_enemy_buffs(self, delta)
 		
 func kill():
@@ -75,13 +75,19 @@ func _damage(source : Attack, damage_factor : float = 1.0) -> bool:
 	for buff in source.hit_buffs:
 		BuffUtils.add_enemy_buff(self, source.gem, buff)	
 	health.update()
-	var damage = minf(health.value, calc_damage(source.gem.damage.value * damage_factor))
+	var damage = calc_damage(source.gem.damage.value * damage_factor)
 	source.gem.damage_dealt.dealt(damage)
 	health.value_add( damage *-1)
 	return health.value <= 0
 		
-func calc_damage(damage : float):
-	return maxf((damage - plating.value) / armor.value, 0.5) 
+func calc_damage(damage : float, ignore_attributes : Array[EnemyBuff.Attribute] = []):
+	if !ignore_attributes.has(EnemyBuff.Attribute.LIMITER) && limiter.value > 0:
+		damage = minf(damage, limiter.value)
+	if !ignore_attributes.has(EnemyBuff.Attribute.PLATING):
+		damage -= plating.value
+	if !ignore_attributes.has(EnemyBuff.Attribute.ARMOR):
+		damage = damage / armor.value
+	return minf(damage, health.value)
 		
 func hit(attack : Attack, damage_factor : float = 1.0):
 	if !alive:
@@ -92,6 +98,7 @@ func hit(attack : Attack, damage_factor : float = 1.0):
 func _death(killer : Gem):
 	if !alive:
 		return
+	self.killer = killer	
 	alive = false
 	Events.enemy_killed.emit(self, killer)
 	Events.delayed_destroy(self, 1)

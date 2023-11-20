@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4q3e2nu2q5tc"]
 
-[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_axsyc"]
+[ext_resource type="Script" path="res://attacks/quartz_attack.gd" id="1_p7ttg"]
 [ext_resource type="Texture2D" uid="uid://cml4rhdefeeau" path="res://sprites/quartz_blast.png" id="2_ijn4n"]
 
 [sub_resource type="Gradient" id="Gradient_vyrh5"]
@@ -14,7 +14,7 @@ fill_to = Vector2(0.846154, 0.162393)
 
 [node name="quartz_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
 modulate = Color(1, 1, 1, 0.67451)
-script = ExtResource("1_axsyc")
+script = ExtResource("1_p7ttg")
 bullet_speed = 13.0
 bullet_source = NodePath("QuartzBlast")
 damage = 4.0

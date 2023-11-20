@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=16 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shortcut" uid="uid://bfwc0v5ig06nm" path="res://resources/shortcuts/keep.tres" id="6_2msh0"]
 [ext_resource type="Shortcut" uid="uid://bodt36xthb64s" path="res://resources/shortcuts/reroll.tres" id="6_xbq5d"]
 [ext_resource type="Script" path="res://ui/StatsPanel.gd" id="7_vpxac"]
+[ext_resource type="PackedScene" uid="uid://crtuc0o7i7mny" path="res://ui/CostButton.tscn" id="11_ux7db"]
 [ext_resource type="Script" path="res://ui/GemLevel.gd" id="11_xmjju"]
 [ext_resource type="Script" path="res://ui/EnemyPanel.gd" id="12_ur731"]
 
@@ -278,19 +279,23 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
 [node name="Keep" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 40)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 shortcut = ExtResource("6_2msh0")
 text = "Keep"
 
 [node name="Downgrade" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
@@ -298,7 +303,7 @@ text = "Down
 "
 
 [node name="Fusion2" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
@@ -306,7 +311,7 @@ text = "Fus2
 "
 
 [node name="Fusion4" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
@@ -314,24 +319,21 @@ text = "Fus4
 "
 
 [node name="Combine" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
 text = "Comb
 "
 
-[node name="Reroll" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="Reroll" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
+tooltip_text = "Roll for a new gem"
 shortcut = ExtResource("6_xbq5d")
-text = "Roll
-"
+type = 1
+cost = 1
 
 [node name="RockMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
-visible = false
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 script = ExtResource("5_e8wht")
@@ -341,17 +343,19 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 5.0
+offset_right = -7.0
+offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Reroll" type="Button" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer"]
-custom_minimum_size = Vector2(64, 0)
+[node name="Reroll" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-disabled = true
+tooltip_text = "Roll for a new gem"
 shortcut = ExtResource("6_xbq5d")
-text = "Roll
-"
+type = 1
+cost = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 3
@@ -369,7 +373,7 @@ theme_override_constants/margin_bottom = 70
 [node name="Panel" type="Panel" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Panel"]
+[node name="LevelMenu" type="VBoxContainer" parent="MarginContainer/Panel"]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 7.0
@@ -377,24 +381,22 @@ offset_right = 307.0
 offset_bottom = 150.0
 script = ExtResource("11_xmjju")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/LevelMenu"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/Panel/LevelMenu/HBoxContainer"]
 layout_mode = 2
 text = "GemLevel:"
 
-[node name="GemLevel" type="Label" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
+[node name="GemLevel" type="Label" parent="MarginContainer/Panel/LevelMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Upgrage" type="Button" parent="MarginContainer/Panel/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 40)
+[node name="Upgrade" parent="MarginContainer/Panel/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-size_flags_stretch_ratio = 0.55
-tooltip_text = "Keep the gem and start next wave"
-text = "Upgrade"
+tooltip_text = "Roll for a new gem"
+cost = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="."]
 anchors_preset = 7
@@ -468,4 +470,4 @@ text = "5/50
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_combine_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_reroll_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/RockMenu" method="_on_reroll_pressed"]
-[connection signal="pressed" from="MarginContainer/Panel/VBoxContainer/HBoxContainer/Upgrage" to="MarginContainer/Panel/VBoxContainer" method="_on_upgrade_pressed"]
+[connection signal="pressed" from="MarginContainer/Panel/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/Panel/LevelMenu" method="_on_upgrade_pressed"]

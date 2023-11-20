@@ -4,7 +4,7 @@ extends Panel
 @onready var fusion2 = $HBoxContainer/Fusion2
 @onready var fusion4 = $HBoxContainer/Fusion4
 @onready var combine = $HBoxContainer/Combine
-@onready var reroll = $HBoxContainer/Reroll
+@onready var reroll = $HBoxContainer/Reroll as CostButton
 
 var combos = []
 
@@ -21,7 +21,11 @@ func _open(gem : Gem):
 		fusion2.disabled = true
 		fusion4.disabled = true
 		combine.disabled = true
-		reroll.disabled  = Game.remaining_placements == 0
+		if Game.free_rerolls > 0:
+			reroll.cost = 0
+		else:				
+			reroll.cost = 50 + Game.reroll_count * 25
+			reroll.type = CostButton.CostType.MONEY
 		for c in combos:
 			if c.gems.has(gem):
 				if c is GemFusion:
@@ -31,7 +35,8 @@ func _open(gem : Gem):
 						fusion4.disabled = false
 				if c is GemCombine:
 					combine.disabled = false
-					
+
+
 func _end_building(keep_gem : Gem):
 	for gem in get_tree().get_nodes_in_group("building"):
 		if gem != keep_gem:
@@ -78,8 +83,11 @@ func _on_combine_pressed():
 
 
 func _on_reroll_pressed():
-	if Game.remaining_placements > 0:
-		var selected_gem = Game.selected_gem
-		selected_gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
-		Game.placed_gem(selected_gem)
-	
+	if reroll.cost == 0:
+		#free reroll
+		Game.free_rerolls -= 1
+	else:
+		Game.reroll_count += 1
+	var selected_gem = Game.selected_gem
+	selected_gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
+	Game.placed_gem(selected_gem)

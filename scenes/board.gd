@@ -50,7 +50,7 @@ func _placement_allowed() -> bool:
 	return await path_map.placing_allowed(pos, path)
 		
 func place_gem():	
-	if !Game.construction_phase || Game.remaining_placements <= 0:
+	if !Game.construction_phase:
 		return 
 	var pos = $Marker.position
 	var gem = preload("res://scenes/gem.tscn").instantiate()
@@ -62,6 +62,8 @@ func place_gem():
 	gem.init_basic_gem(type, quality)
 	path_map.block_path(pos)
 	Game.placed_gem(gem)
+	print("placed, remaining "+str(Game.remaining_placements))
 	if Game.remaining_placements ==0:
 		selection.visible = false
+		$Marker.visible = false
 		

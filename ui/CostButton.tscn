@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://crtuc0o7i7mny"]
+
+[ext_resource type="Script" path="res://ui/CostButton.gd" id="1_yy545"]
+[ext_resource type="Texture2D" uid="uid://bf6xkn1b3y1p7" path="res://sprites/icons/gem.png" id="2_wttni"]
+[ext_resource type="Texture2D" uid="uid://blq4hq3omm705" path="res://sprites/icons/dice.png" id="3_npxu8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pigug"]
+bg_color = Color(0.309804, 0.309804, 0.309804, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color(0.458824, 0.458824, 0.458824, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_2q4wo"]
+resource_local_to_scene = true
+font_size = 18
+
+[node name="CostButton" type="Button"]
+custom_minimum_size = Vector2(60, 60)
+script = ExtResource("1_yy545")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 22.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pigug")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 38.0
+offset_bottom = 22.0
+text = "1000
+"
+label_settings = SubResource("LabelSettings_2q4wo")
+horizontal_alignment = 2
+
+[node name="IconM" type="Sprite2D" parent="Panel"]
+position = Vector2(49, 11)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_wttni")
+
+[node name="IconR" type="Sprite2D" parent="Panel"]
+visible = false
+position = Vector2(49, 11)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_npxu8")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -4,8 +4,10 @@ const PLACEMENTS_PER_ROUND = 5
 
 var construction_phase = true
 var remaining_placements = PLACEMENTS_PER_ROUND
+var free_rerolls = 0
+var reroll_count = 0
 var wave = Wave.new("")
-var money = 0
+var money = 10
 var selected_gem : Gem
 var selected_enemy : Enemy
 var gem_chances : GemChances = GemChances.new()
@@ -29,13 +31,13 @@ func _enemy_killed(enemy: Enemy, killer: Gem):
 	money+=enemy.money
 
 func placed_gem(gem: Gem):
-	Game.remaining_placements-=1		
 	gem.add_to_group("building")
 	BuffUtils.update_tower_buffs()
 	_update_selection(gem)	
 	Events.gem_selected.emit(gem)
 
 func _start_building():
+	reroll_count = 0
 	construction_phase = true
 	remaining_placements = PLACEMENTS_PER_ROUND
 	

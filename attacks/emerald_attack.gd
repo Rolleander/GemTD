@@ -18,13 +18,14 @@ func _ready():
 	if gem.quality == GemQualityInfo.Quality.PERFECT:
 		poison_buff.value = -440
 		duration = 8
-	if gem.quality == GemQualityInfo.Quality.GREAT:
-		poison_buff.value = -550
-		speed_mul = 0.6
-		duration = 10
-		splash_range = 2.5
 	slow_buff.duration =duration
-	poison_buff.duration =duration
+	poison_buff.duration =duration		
+	if gem.quality == GemQualityInfo.Quality.GREAT:
+		poison_buff.value = -650
+		speed_mul = 0.6
+		poison_buff.duration = 60
+		slow_buff.duration = 10
+		splash_range = 2.5
 	var slow_percent = (1 - speed_mul) * 100
 	slow_buff.value = speed_mul
 	slow_buff.name = "Emerald Slow "+str(gem.quality+1)

@@ -14,6 +14,8 @@ func update():
 	for i in range(owner.buffs.size()-1, -1, -1):
 		var instance = owner.buffs[i] as EnemyBuffInstance
 		var buff = instance.buff as EnemyBuff
+		if instance.is_damage_buff():
+			continue
 		if buff.attribute == attribute:
 			if buff.operation == EnemyBuff.Operation.ADD:
 				value += instance.current_value()
@@ -31,4 +33,6 @@ func update():
 				owner.buffs.remove_at(i)
 	
 func apply_permanent(instance : EnemyBuffInstance):
+	if instance.is_damage_buff():
+		return
 	root += instance.current_value()

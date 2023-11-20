@@ -1,0 +1,35 @@
+combos:
+
+- lucky lapislazuli
+- massive meteorite
+- amber 
+- azurite
+- cobalt
+- sulfur
+- magnesite
+- moonstone
+- obsidian
+- onyx
+- pearl
+- smoky quartz
+- tigers eye
+- turquoise 
+- zircon
+- zincite
+- amazonite
+- labradorite
+- pyrite
+
+
+
+enemy types:
+
+- normal
+- air
+- plated armor
+- swarm
+- spawner
+- passive healer
+- ghost (cant be targeted when hidden)
+- massive (not affected by aoe and splash)
+

@@ -15,7 +15,8 @@ enum Attribute{
 	HEALTH,
 	SPEED,
 	ARMOR,
-	PLATING
+	PLATING,
+	LIMITER
 }
 
 ##time in seconds the buff is active, time of 0 means it will stay forever

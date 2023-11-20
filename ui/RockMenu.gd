@@ -23,13 +23,12 @@ func _open_field(position : Vector2):
 	rock = null
 	
 func _on_reroll_pressed():
-	if Game.remaining_placements > 0:
-		if rock != null:
-			rock.queue_free()
-			var gem = preload("res://scenes/gem.tscn").instantiate()
-			gem.position = field_position
-			get_tree().get_first_node_in_group("maze_node").add_child(gem)
-			gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
-			Game.placed_gem(gem)
-		else:
-			get_tree().get_first_node_in_group("board").place_gem()
+	if rock != null:
+		rock.queue_free()
+		var gem = preload("res://scenes/gem.tscn").instantiate()
+		gem.position = field_position
+		get_tree().get_first_node_in_group("maze_node").add_child(gem)
+		gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
+		Game.placed_gem(gem)
+	else:
+		get_tree().get_first_node_in_group("board").place_gem()
