@@ -1,8 +1,10 @@
 extends Node2D
 
+class_name Board
+
 @onready var selection = $selection as Selection
 @onready var camera = $Camera2D as Camera2D
-@onready var tilemap = $TileMap
+@onready var tilemap = $TileMap as TileMap
 @onready var maze = $Maze
 @onready var rock_collision = $RockCollision
 @onready var spawn_point = $spawn_point
@@ -16,10 +18,11 @@ func _ready():
 	var rect = tilemap.get_used_rect()
 	var start = rect.position * Globals.TILE_SIZE 
 	var end = rect.end * Globals.TILE_SIZE 
-	camera.set_limit(SIDE_LEFT, start.x)
-	camera.set_limit(SIDE_TOP, start.y)
-	camera.set_limit(SIDE_RIGHT, end.x)
-	camera.set_limit(SIDE_BOTTOM, end.y)
+	var d = 4 * Globals.TILE_SIZE
+	camera.set_limit(SIDE_LEFT, start.x - d)
+	camera.set_limit(SIDE_TOP, start.y -d)
+	camera.set_limit(SIDE_RIGHT, end.x +d)
+	camera.set_limit(SIDE_BOTTOM, end.y +d)
 
 func _get_camera_rect() -> Rect2:
 	var pos = camera.get_screen_center_position()
@@ -38,12 +41,12 @@ func _unhandled_input(event):
 
 func _click():
 	Game.clear_selection()
-	if selection.valid_place():
+	if selection.visible:
 		if Game.construction_phase && await _placement_allowed():
 			Events.field_clicked.emit(selection.position)
 		
 func _placement_allowed() -> bool:
-	var pos = selection.position
+	var pos =  Vector2(selection.position)
 	var path = [spawn_point.position]
 	for w in waypoints.get_children():
 		path.append(w.position)
@@ -62,8 +65,7 @@ func place_gem():
 	gem.init_basic_gem(type, quality)
 	path_map.block_path(pos)
 	Game.placed_gem(gem)
-	print("placed, remaining "+str(Game.remaining_placements))
+	$Marker.visible = false
 	if Game.remaining_placements ==0:
 		selection.visible = false
-		$Marker.visible = false
 		

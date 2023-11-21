@@ -1,10 +1,28 @@
 extends Gem
 
 @onready var static_body = $StaticBody2D
+@onready var comb_animation = $CombineRing/AnimationPlayer as AnimationPlayer
+
+var active_combo : GemCombine = null
 
 func _ready():
 	super()
 	static_body.input_event.connect(_on_static_body_2d_input_event)
+	$CombineRing.hide()
+
+func show_combine(combo : GemCombine):
+	if active_combo == null || combo.gems.size() != active_combo.gems.size():
+		comb_animation.play("combine_ring")		
+	active_combo = combo
+	$CombineRing.show()
+
+func hide_combine():
+	active_combo = null
+	$CombineRing.hide()
+	comb_animation.stop()
+
+func make_rock():
+	super()
 
 func init_glow(scale : float, color : Color):
 	glow.visible = true

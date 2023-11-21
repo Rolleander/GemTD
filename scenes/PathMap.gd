@@ -12,6 +12,9 @@ func block_path(position : Vector2, block = true):
 	set_cell(0, Vector2i(x,y-1), 0, Vector2( tile,0))
 	set_cell(0, Vector2i(x-1,y-1), 0, Vector2( tile,0))
 
+func is_blocked(position : Vector2):
+	return Utils.selection_tile_is(self, position, Vector2i( 1,0))
+
 func placing_allowed(position : Vector2,  path : Array) -> bool :
 	block_path(position)
 	var valid = await _valid_path(path)

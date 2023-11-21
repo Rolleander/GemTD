@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2lx465fr1gd"]
+[gd_scene load_steps=18 format=3 uid="uid://c2lx465fr1gd"]
 
 [ext_resource type="Script" path="res://scenes/gem_scene.gd" id="1_au3o4"]
 [ext_resource type="Texture2D" uid="uid://bor4kxtuletfm" path="res://sprites/shadow.png" id="2_ahsfg"]
@@ -11,6 +11,27 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75hv5"]
 radius = 18.0
+
+[sub_resource type="Animation" id="Animation_qjo6m"]
+resource_name = "combine_ring"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.353553, 0.901254),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.65, 0.65)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_why26"]
+_data = {
+"combine_ring": SubResource("Animation_qjo6m")
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_pt4b2"]
 line_spacing = -2.0
@@ -70,6 +91,17 @@ z_index = 1
 modulate = Color(0.372549, 1, 1, 0.517647)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("5_movmr")
+
+[node name="CombineRing" type="Sprite2D" parent="."]
+modulate = Color(0.847059, 0.517647, 0, 0.85098)
+scale = Vector2(0.64873, 0.64873)
+texture = ExtResource("6_dkcgr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CombineRing"]
+libraries = {
+"": SubResource("AnimationLibrary_why26")
+}
+speed_scale = 1.52
 
 [node name="SelectionRing" type="Sprite2D" parent="."]
 modulate = Color(0, 0.901961, 0.0823529, 0.745098)

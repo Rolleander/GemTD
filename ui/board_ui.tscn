@@ -349,6 +349,7 @@ offset_right = -7.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 5
 
 [node name="Reroll" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
@@ -356,6 +357,11 @@ tooltip_text = "Roll for a new gem"
 shortcut = ExtResource("6_xbq5d")
 type = 1
 cost = 1
+
+[node name="Remove" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Roll for a new gem"
+type = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 3
@@ -470,4 +476,5 @@ text = "5/50
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_combine_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_reroll_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/RockMenu" method="_on_reroll_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Remove" to="MarginContainer2/MarginContainer/RockMenu" method="_on_remove_pressed"]
 [connection signal="pressed" from="MarginContainer/Panel/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/Panel/LevelMenu" method="_on_upgrade_pressed"]

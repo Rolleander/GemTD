@@ -1,13 +1,13 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 5
+const PLACEMENTS_PER_ROUND = 50
 
 var construction_phase = true
 var remaining_placements = PLACEMENTS_PER_ROUND
 var free_rerolls = 0
 var reroll_count = 0
 var wave = Wave.new("")
-var money = 10
+var money = 10 + 500
 var selected_gem : Gem
 var selected_enemy : Enemy
 var gem_chances : GemChances = GemChances.new()
@@ -33,6 +33,7 @@ func _enemy_killed(enemy: Enemy, killer: Gem):
 func placed_gem(gem: Gem):
 	gem.add_to_group("building")
 	BuffUtils.update_tower_buffs()
+	CombinationsCheck.check()
 	_update_selection(gem)	
 	Events.gem_selected.emit(gem)
 

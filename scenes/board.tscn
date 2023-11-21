@@ -15,6 +15,7 @@
 vertices = PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-12, -12, 12, -12, 12, 12, -12, 12)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ih5va"]
 texture = ExtResource("6_j3bwo")
@@ -32,6 +33,7 @@ sources/0 = SubResource("TileSetAtlasSource_ih5va")
 vertices = PackedVector2Array(1584, 0, 1584, 1344, 0, 1344, 0, 0)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 0, 1344, 1584, 1344, 1584, 0)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bgyjx"]
 texture = ExtResource("1_l6j72")
