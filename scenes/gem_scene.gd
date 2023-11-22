@@ -23,8 +23,11 @@ func hide_combine():
 
 func make_rock():
 	super()
+	hide_combine()
+	$PointLight2D.visible = false
 
 func init_glow(scale : float, color : Color):
+	$PointLight2D.visible = true
 	glow.visible = true
 	glow.scale= Vector2(scale,scale) * 0.25
 	glow.material.set_shader_parameter("glow_color", color)

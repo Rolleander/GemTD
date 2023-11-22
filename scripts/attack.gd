@@ -65,8 +65,11 @@ func _physics_process(delta):
 	var targetCount = enemies.size()	
 	var targets = 0
 	var attacked = false
-	if targeting == Targeting.SPREAD && targetCount > parallel_targets:
-		enemies.sort_custom(_sort_targets)
+	if targetCount > parallel_targets:
+		if targeting == Targeting.SPREAD:
+			enemies.sort_custom(_sort_spread_targets)
+		else:
+			enemies.sort_custom(_sort_first_targets)
 	for enemy in enemies:
 		targetCount-=1		
 		if  targetCount < parallel_targets ||  _should_target(enemy):
@@ -86,7 +89,7 @@ func _targetable_enemies() -> Array[Enemy]:
 			enemies.append(enemy)
 	return enemies 
 
-func _sort_targets(a : Enemy, b : Enemy):
+func _sort_spread_targets(a : Enemy, b : Enemy):
 	if !_should_target(a):
 		return false
 	var hita = hitlist.find(a)
@@ -96,6 +99,15 @@ func _sort_targets(a : Enemy, b : Enemy):
 	if hita != -1 && hitb == -1:
 		return a
 	return hita > hitb
+
+func _sort_first_targets(a : Enemy, b : Enemy):
+	if !_should_target(a):
+		return false
+	if a.target > b.target:
+		return true
+	if a.target < b.target:
+		return false		
+	return a.navigation.distance_to_target() <= b.navigation.distance_to_target()
 
 func _should_target(enemy : Enemy) -> bool:
 	if enemy.health.value - enemy.projected_damage <=0:

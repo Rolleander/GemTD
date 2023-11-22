@@ -8,8 +8,8 @@
 shader = ExtResource("1_fgbls")
 shader_parameter/speed = 2.96
 shader_parameter/strength = 20.81
-shader_parameter/progress = 1.0
-shader_parameter/alpha = 0.0
+shader_parameter/progress = 0.55
+shader_parameter/alpha = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuego"]
 shader = ExtResource("3_eewp0")
@@ -54,8 +54,10 @@ _data = {
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 
 [node name="NoiseCombined" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(869.5, 10)
 scale = Vector2(13.7363, 8.25781)
 texture = ExtResource("1_iywcf")
@@ -68,6 +70,7 @@ offset_right = -698.0
 offset_bottom = -207.0
 
 [node name="shockwave" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_vuego")
 offset_left = 2525.0
 offset_top = -1669.0

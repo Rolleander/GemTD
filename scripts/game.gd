@@ -1,13 +1,13 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 50
+const PLACEMENTS_PER_ROUND = 5
 
 var construction_phase = true
 var remaining_placements = PLACEMENTS_PER_ROUND
 var free_rerolls = 0
 var reroll_count = 0
 var wave = Wave.new("")
-var money = 10 + 500
+var money = 10 
 var selected_gem : Gem
 var selected_enemy : Enemy
 var gem_chances : GemChances = GemChances.new()

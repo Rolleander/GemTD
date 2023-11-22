@@ -31,7 +31,7 @@ func _spawn_enemy():
 	var enemy = preload("res://scenes/enemy.tscn").instantiate() as Enemy
 	enemy.waypoints = get_tree().get_first_node_in_group("waypoints").get_children()
 	enemy.position = get_tree().get_first_node_in_group("spawn_point").position
-	enemy.max_health = waves[current].Health
+	enemy.max_health = waves[current].Health 
 	var speed = waves[current].Speed
 	var money = waves[current].Money
 	var air = waves[current].Enemy == "A"

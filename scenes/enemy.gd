@@ -2,12 +2,13 @@ extends CharacterBody2D
 
 class_name Enemy 
 
-@onready var navigation = $NavigationAgent2D
+@onready var navigation = $NavigationAgent2D as NavigationAgent2D
 @onready var health_bar = $healthbar
 @export var waypoints : Array[Node]
 @onready var hit_effects = $HitEffects
 @onready var sprite = $Sprite
 @onready var selection = $SelectionRing
+@onready var animation = $AnimationPlayer
 
 var path = []
 var target = -1
@@ -56,6 +57,7 @@ func _physics_process(delta : float):
 		return
 	if navigation.is_navigation_finished():
 		_next_waypoint()
+	#$Label.text = str(target)+" | "+str(round(navigation.distance_to_target()))	
 	var dir = to_local(navigation.get_next_path_position()).normalized()
 	navigation.max_speed = (speed.value	* Globals.GRID_SIZE)
 	navigation.velocity = dir * (speed.value * Globals.GRID_SIZE)
@@ -106,6 +108,7 @@ func _death(killer : Gem):
 	health_bar.visible = false
 	selection.visible = false
 	navigation.avoidance_enabled = false
+	animation.play("explosion")
 	if killer != null:
 		killer.killed(self)	
 

@@ -72,7 +72,6 @@ func _on_fusion_4_pressed():
 			if c is GemFusion && c.fusion_size == 4:				
 				_end_building(c.fuse(selected_gem))
 
-
 func _on_combine_pressed():
 	var selected_gem = Game.selected_gem
 	for c in CombinationsCheck.oneshot_combos:

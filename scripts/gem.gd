@@ -32,7 +32,6 @@ var damage_dealt = DamageCounter.new()
 func _ready():
 	Events.wave_started.connect(func():	attack.active = true)
 	Events.wave_ended.connect(func():attack.active = false)
-	add_to_group("gems")		
 
 func _physics_process(delta):
 	if rock:
@@ -67,7 +66,9 @@ func activate(picked : bool):
 	remove_child(label)
 	remove_child($BuildingRing)
 	under_construction = false
-	if !picked:	
+	if picked:	
+		add_to_group("gems")		
+	else:
 		make_rock()
 		
 func killed(enemy: Enemy):
