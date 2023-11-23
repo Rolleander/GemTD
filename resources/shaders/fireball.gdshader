@@ -4,6 +4,7 @@ uniform float speed =   0.05;
 uniform float strength = 20.0;
 uniform float progress = 0.5;
 uniform float alpha = 1;
+uniform float offset = 0;
 
 float snoise(vec3 uv, float res)
 {
@@ -39,7 +40,8 @@ void fragment() {
 	for(int i = 1; i <= 5; i++)
 	{
 		float power = pow(2.0, float(i));
-		color += (1.5 / power) * snoise(coord + vec3(0.,-TIME*speed*0.1, TIME*speed*0.2*0.1), power*floor(strength));
+		float t = TIME + offset;
+		color += (1.5 / power) * snoise(coord + vec3(0.,-t*speed*0.1, t*speed*0.2*0.1), power*floor(strength));
 	}
 	COLOR = vec4( color, pow(max(color,0.),2.)*0.4, pow(max(color,0.),3.)*0.15 , 1.0);
 	COLOR.a = min((COLOR.r + COLOR.g + COLOR.b),  alpha);

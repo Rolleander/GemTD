@@ -10,6 +10,7 @@ shader_parameter/speed = 2.96
 shader_parameter/strength = 20.81
 shader_parameter/progress = 0.55
 shader_parameter/alpha = 1.0
+shader_parameter/offset = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vuego"]
 shader = ExtResource("3_eewp0")

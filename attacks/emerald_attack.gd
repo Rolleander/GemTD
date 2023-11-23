@@ -21,7 +21,7 @@ func _ready():
 	slow_buff.duration =duration
 	poison_buff.duration =duration		
 	if gem.quality == GemQualityInfo.Quality.GREAT:
-		poison_buff.value = -650
+		poison_buff.value = -4200
 		speed_mul = 0.6
 		poison_buff.duration = 60
 		slow_buff.duration = 10

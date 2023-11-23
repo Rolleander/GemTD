@@ -28,6 +28,7 @@ var money = 0
 var killer = null
 
 func _ready():
+	($fire.material as ShaderMaterial).set_shader_parameter("offset", randf_range(-100,100))
 	_next_waypoint()
 
 func set_flying(flying : bool):

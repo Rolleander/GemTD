@@ -3,6 +3,7 @@ extends Node2D
 class_name Bullet
 
 const HIT_SIZE = 10
+
 #var direction = Vector2.RIGHT
 var speed : float
 var target : Enemy
@@ -14,6 +15,7 @@ var trail : SmokeTrail
 var hit_damage_scale = 1
 var hit = false
 var fadeout = 0.15
+var turn_speed = 200.0
 
 func _ready():
 	z_index = 20
@@ -46,7 +48,7 @@ func _physics_process(delta):
 	look_at(target.global_position)
 	position += direction * (speed * Globals.GRID_SIZE) * delta
 	var distance = global_position.distance_to(target.global_position)
-	var maxTurn = maxf(0.1, (100.0-distance) / 100.0)	
+	var maxTurn = maxf(0.1, (turn_speed-distance) / turn_speed)	
 	direction = lerp(direction, global_position.direction_to(target.global_position),maxTurn)
 	if trail != null:
 		trail.add_trail(global_position)
