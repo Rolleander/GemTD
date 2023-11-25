@@ -19,8 +19,9 @@ combos:
 - amazonite
 - labradorite
 - pyrite
-
-
+- copper
+- platinum
+- graviton :  buff that makes unit targetable by ground & air
 
 enemy types:
 
@@ -28,8 +29,10 @@ enemy types:
 - air
 - plated armor
 - swarm
-- spawner
+- splitter (spawns small units on death)
 - passive healer
 - ghost (cant be targeted when hidden)
 - massive (not affected by aoe and splash)
-
+- teleporter (jumps to waypoints) ?
+- airborne (ground, become air units after taking % of dmg)
+- crashlanding (air, become ground units after taking % of dmg)

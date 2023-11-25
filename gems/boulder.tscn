@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvk4vovwvbvqg"]
+[gd_scene load_steps=3 format=3 uid="uid://cvk4vovwvbvqg"]
 
-[ext_resource type="Texture2D" uid="uid://dh7d8nyh1qiik" path="res://sprites/gems/stone.png" id="1_d3bdm"]
+[ext_resource type="Texture2D" uid="uid://ceklfc3e4ode3" path="res://sprites/gems/rocks.png" id="1_vajvx"]
+[ext_resource type="Script" path="res://gems/boulder.gd" id="2_rfwq2"]
 
 [node name="boulder" type="Sprite2D"]
-texture = ExtResource("1_d3bdm")
+texture = ExtResource("1_vajvx")
+region_enabled = true
+region_rect = Rect2(0, 0, 50, 50)
+script = ExtResource("2_rfwq2")

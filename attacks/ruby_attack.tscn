@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dcb0mj55c6k08"]
 
-[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_4164p"]
+[ext_resource type="Script" path="res://attacks/ruby_attack.gd" id="1_usrhe"]
 [ext_resource type="Texture2D" uid="uid://c8wbkao3a75ai" path="res://sprites/fireball.png" id="3_t5oie"]
 [ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="4_f5q3u"]
 
@@ -51,7 +51,7 @@ scale_max = 0.35
 color_ramp = SubResource("GradientTexture1D_rdg0h")
 
 [node name="ruby_attack" type="Node2D" node_paths=PackedStringArray("bullet_source", "hit_effect")]
-script = ExtResource("1_4164p")
+script = ExtResource("1_usrhe")
 bullet_source = NodePath("Sprite2d")
 damage = 8.0
 attack_range = 300.0

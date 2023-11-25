@@ -9,6 +9,7 @@ class_name Enemy
 @onready var sprite = $Sprite
 @onready var selection = $SelectionRing
 @onready var animation = $AnimationPlayer
+@onready var label = $Label
 
 var path = []
 var target = -1
@@ -102,9 +103,10 @@ func _death(killer : Gem):
 	if !alive:
 		return
 	self.killer = killer	
+	input_pickable = false
 	alive = false
 	Events.enemy_killed.emit(self, killer)
-	Events.delayed_destroy(self, 1)
+	Events.delayed_destroy(self, 3)
 	sprite.visible = false
 	health_bar.visible = false
 	selection.visible = false

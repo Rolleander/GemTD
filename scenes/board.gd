@@ -18,11 +18,10 @@ func _ready():
 	var rect = tilemap.get_used_rect()
 	var start = rect.position * Globals.TILE_SIZE 
 	var end = rect.end * Globals.TILE_SIZE 
-	var d = 4 * Globals.TILE_SIZE
-	camera.set_limit(SIDE_LEFT, start.x - d)
-	camera.set_limit(SIDE_TOP, start.y -d)
-	camera.set_limit(SIDE_RIGHT, end.x +d)
-	camera.set_limit(SIDE_BOTTOM, end.y +d)
+	camera.set_limit(SIDE_LEFT, start.x )
+	camera.set_limit(SIDE_TOP, start.y )
+	camera.set_limit(SIDE_RIGHT, end.x )
+	camera.set_limit(SIDE_BOTTOM, end.y )
 
 func _get_camera_rect() -> Rect2:
 	var pos = camera.get_screen_center_position()

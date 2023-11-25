@@ -10,16 +10,19 @@ var target : Enemy
 var source : Attack 
 #var randomness : float = 0.02
 var projected_damage = 0
-var direction  
+var direction  : Vector2
 var trail : SmokeTrail
 var hit_damage_scale = 1
 var hit = false
 var fadeout = 0.15
 var turn_speed = 200.0
+var angle_spread
 
 func _ready():
 	z_index = 20
-	direction = (target.global_position-global_position).normalized() 
+	look_at(target.global_position)
+	rotation += randf_range(-angle_spread, angle_spread)
+	direction = Vector2(cos(rotation),sin(rotation)) 
 	if trail!=null:
 		trail.start()
 
@@ -42,10 +45,10 @@ func _stop():
 func _physics_process(delta):
 	if hit:
 		return
-	if !is_instance_valid(target) || !target.alive:
+	if !is_instance_valid(target):
 		_stop()
 		return
-	look_at(target.global_position)
+	rotation = direction.angle() 
 	position += direction * (speed * Globals.GRID_SIZE) * delta
 	var distance = global_position.distance_to(target.global_position)
 	var maxTurn = maxf(0.1, (turn_speed-distance) / turn_speed)	

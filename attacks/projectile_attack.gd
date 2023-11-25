@@ -4,6 +4,7 @@ class_name ProjectileAttack
 
 @export var bullet_speed : float = 15
 @export var bullet_source : Node2D
+@export var angle_spread : float = 0.8
 
 func _ready():
 	super()
@@ -39,8 +40,8 @@ func _spawn_bullet(enemy : Enemy):
 		material.scale_max *= attack_scale
 		render.process_material = material
 	else:	
-		render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))
-	bullet.look_at(enemy.global_position)
+		render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))	
+	bullet.angle_spread = angle_spread
 	bullet.add_child(render)
 	render.visible=true
 	return bullet

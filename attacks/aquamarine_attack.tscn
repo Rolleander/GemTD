@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://62rjt5si8wiv"]
 
-[ext_resource type="Script" path="res://attacks/projectile_attack.gd" id="1_fjqde"]
+[ext_resource type="Script" path="res://attacks/aquamarine_attack.gd" id="1_0w5ch"]
 [ext_resource type="Texture2D" uid="uid://cd8upgu1j5o31" path="res://sprites/aquablast.png" id="2_eh6wh"]
 [ext_resource type="Script" path="res://attacks/smoketrail.gd" id="3_m4iyx"]
 
@@ -24,9 +24,10 @@ point_count = 2
 colors = PackedColorArray(0.568627, 0.815686, 0.815686, 0, 0, 1, 1, 1)
 
 [node name="aquamarine_attack" type="Node2D" node_paths=PackedStringArray("bullet_source")]
-script = ExtResource("1_fjqde")
+script = ExtResource("1_0w5ch")
 bullet_speed = 17.0
 bullet_source = NodePath("Aquablast")
+angle_spread = 1.6
 damage = 6.0
 attack_range = 240.0
 attack_delay = 0.4

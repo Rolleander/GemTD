@@ -25,6 +25,7 @@ colors = PackedColorArray(0.568627, 0.815686, 0.815686, 0, 0.709804, 0.717647, 0
 script = ExtResource("1_jj5u5")
 bullet_speed = 14.5
 bullet_source = NodePath("DiamondBlast")
+angle_spread = 1.0
 damage = 10.0
 attack_range = 300.0
 attack_delay = 0.8

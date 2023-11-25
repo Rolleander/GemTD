@@ -15,7 +15,7 @@ enum Targeting{
 @export var targets_ground : bool = true
 @export var hit_buffs : Array[EnemyBuff]
 @export var aura_buffs : Array[EnemyBuff]
-@export var hit_effect : GPUParticles2D
+@export var hit_effect : Node2D
 @export var tower_buffs : Array[TowerBuff]
 @export var splash_range : float = 0
 @export var splash_damage_factor : float = 0.5
@@ -134,8 +134,9 @@ func _attack(target : Enemy):
 	hitlist.push_front(target)
 
 func _hit(target : Enemy):
-	target.hit(self, hit_damage_scale)
 	var hit = null
+	if target.alive:
+		target.hit(self, hit_damage_scale)
 	if hit_effect!= null:
 		hit = hit_effect.duplicate()
 		target.add_hit_effect(hit)
@@ -143,7 +144,6 @@ func _hit(target : Enemy):
 		hit.one_shot = true
 		hit.emitting = true
 		Events.delayed_destroy(hit, hit.lifetime * 1.5)
-	#todo hit splash even when target died
 	if splash_range > 0:
 		for enemy in Game.get_enemies():
 			if enemy != target && enemy.alive && Utils.in_range(enemy, target, splash_range , E_R):

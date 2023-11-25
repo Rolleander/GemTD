@@ -13,7 +13,7 @@ func _ready():
 		buff.attribute = EnemyBuff.Attribute.ARMOR
 		buff.operation = EnemyBuff.Operation.MUL
 		buff.value = 0.85
-		buff.description = "-15% Armor"
+		buff.description = "-15% Armor for ground"
 		buff.name = "Great Diamond Armor Loss"
 		buff.stack_group = "GreatDiamondArmorLoss"
 		aura_buffs.append(buff)
@@ -26,3 +26,4 @@ func _spawn_bullet(enemy : Enemy):
 		render.transform =  render.transform.scaled(Vector2(CRIT_SCALE, CRIT_SCALE))
 		Events.overlay_text(gem, "CRIT!!!")
 	return bullet
+

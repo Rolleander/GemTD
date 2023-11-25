@@ -2,6 +2,7 @@ extends Gem
 
 @onready var static_body = $StaticBody2D
 @onready var comb_animation = $CombineRing/AnimationPlayer as AnimationPlayer
+@onready var dmg_label = $DmgLabel
 
 var active_combo : GemCombine = null
 
@@ -25,6 +26,10 @@ func make_rock():
 	super()
 	hide_combine()
 	$PointLight2D.visible = false
+
+#func _process(delta):
+	#dmg_label.text = str(damage_dealt.current)
+	#dmg_label.visible = damage_dealt.current > 0
 
 func init_glow(scale : float, color : Color):
 	$PointLight2D.visible = true
