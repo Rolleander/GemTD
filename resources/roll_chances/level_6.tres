@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_q2nvu")
-level = 0
+level = 6
 upgrade_cost = 200
 chipped = 10
 flawed = 30
