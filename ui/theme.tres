@@ -1,6 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://6i6l70xtnywh"]
-
-[ext_resource type="FontFile" uid="uid://ctt5j6fiwwvno" path="res://fonts/RobotoCondensed-Regular.ttf" id="1_834sq"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://6i6l70xtnywh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ybwqv"]
 bg_color = Color(0.0509804, 0.203922, 0.258824, 1)
@@ -31,7 +29,6 @@ corner_radius_bottom_left = 4
 bg_color = Color(0, 0.701961, 0.54902, 1)
 
 [resource]
-default_font = ExtResource("1_834sq")
 default_font_size = 20
 Button/styles/disabled = SubResource("StyleBoxFlat_ybwqv")
 Button/styles/focus = null

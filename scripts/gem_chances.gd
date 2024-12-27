@@ -27,4 +27,3 @@ func get_upgrade_cost():
 func inc_level():
 	if level < MAX_LEVEL:
 		level+=1
-

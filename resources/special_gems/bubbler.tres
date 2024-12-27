@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="SpecialGem" load_steps=7 format=3 uid="uid://12oxyypyqvwr"]
+
+[ext_resource type="Script" path="res://scripts/basic_gem_id.gd" id="1_vxq2k"]
+[ext_resource type="PackedScene" uid="uid://sf31by7vb4cx" path="res://gems/special/blub_gem.tscn" id="2_l68jq"]
+[ext_resource type="Script" path="res://scripts/special_gem.gd" id="3_3wt6j"]
+
+[sub_resource type="Resource" id="Resource_fw6n6"]
+script = ExtResource("1_vxq2k")
+quality = 0
+type = 1
+
+[sub_resource type="Resource" id="Resource_eeyno"]
+script = ExtResource("1_vxq2k")
+quality = 0
+type = 3
+
+[sub_resource type="Resource" id="Resource_a3ris"]
+script = ExtResource("1_vxq2k")
+quality = 0
+type = 4
+
+[resource]
+script = ExtResource("3_3wt6j")
+recipe = Array[ExtResource("1_vxq2k")]([SubResource("Resource_fw6n6"), SubResource("Resource_eeyno"), SubResource("Resource_a3ris")])
+name = "Bubbler"
+description = "Cool"
+scene = ExtResource("2_l68jq")

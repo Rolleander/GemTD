@@ -4,6 +4,7 @@ class_name RollChances
 
 const Quality = preload("res://scripts/gem_quality.gd").GemQuality
 
+@export var level = 0
 @export var upgrade_cost = 0
 @export var chipped = 100
 @export var flawed = 0

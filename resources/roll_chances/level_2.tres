@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RollChances" load_steps=2 format=3 uid="uid://c4q16joy3m7wn"]
+
+[ext_resource type="Script" path="res://scripts/roll_chances.gd" id="1_mbq2j"]
+
+[resource]
+script = ExtResource("1_mbq2j")
+level = 2
+upgrade_cost = 50
+chipped = 60
+flawed = 30
+normal = 10
+flawless = 0
+perfect = 0

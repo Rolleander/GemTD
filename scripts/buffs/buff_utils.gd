@@ -97,4 +97,3 @@ func _add_level_buff(gem : Gem):
 	level_buff.value = gem.level * LEVEL_DMG_INC
 	level_buff.operation = TowerBuff.Operation.ADD_ROOT_MUL
 	gem.buffs.append(level_buff)
-
