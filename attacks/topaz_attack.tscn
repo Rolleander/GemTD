@@ -1,9 +1,9 @@
 [gd_scene load_steps=16 format=3 uid="uid://c4t8ih51d881l"]
 
-[ext_resource type="Script" path="res://attacks/topaz_attack.gd" id="1_3e3ug"]
+[ext_resource type="Script" uid="uid://3wndt0wbi0q3" path="res://attacks/topaz_attack.gd" id="1_3e3ug"]
 [ext_resource type="Texture2D" uid="uid://bleg0ud0phapp" path="res://sprites/purple_spot.png" id="2_hd4ji"]
 [ext_resource type="Texture2D" uid="uid://di6l4quka02mv" path="res://sprites/yellowlight.png" id="3_m7jlg"]
-[ext_resource type="Shader" path="res://attacks/topaz_attack.gdshader" id="3_sns2l"]
+[ext_resource type="Shader" uid="uid://dfap87p68f2mt" path="res://attacks/topaz_attack.gdshader" id="3_sns2l"]
 [ext_resource type="Texture2D" uid="uid://b4gls68co6s60" path="res://sprites/thunder.png" id="4_7yp14"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sbqdb"]
@@ -46,8 +46,8 @@ noise = SubResource("FastNoiseLite_sqphi")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wiiwh"]
 shader = ExtResource("3_sns2l")
-shader_parameter/scroll = Vector2(1.9, -2)
 shader_parameter/noise = SubResource("NoiseTexture2D_wpuvr")
+shader_parameter/scroll = Vector2(1.9, -2)
 
 [sub_resource type="Gradient" id="Gradient_8dgw7"]
 colors = PackedColorArray(0.516319, 0.516318, 3.85046e-07, 1, 1, 1, 0, 0.301961)

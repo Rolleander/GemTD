@@ -39,13 +39,15 @@ func _unhandled_input(event):
 			e.kill()
 
 func _click():
+	selection.update_position_from_mouse()
 	Game.clear_selection()
-	if selection.visible:
-		if Game.construction_phase && await _placement_allowed():
-			Events.field_clicked.emit(selection.position)
+	if !selection.visible || !selection.valid_place():
+		return
+	var placement_position: Vector2 = selection.position
+	if Game.construction_phase && await _placement_allowed(placement_position):
+		Events.field_clicked.emit(placement_position)
 		
-func _placement_allowed() -> bool:
-	var pos =  Vector2(selection.position)
+func _placement_allowed(pos: Vector2) -> bool:
 	var path = [spawn_point.position]
 	for w in waypoints.get_children():
 		path.append(w.position)

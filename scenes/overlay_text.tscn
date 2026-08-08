@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://rk24k0q4msmt"]
 
-[ext_resource type="Script" path="res://scenes/overlay_text.gd" id="1_xirnh"]
+[ext_resource type="Script" uid="uid://1tw44p7a4at0" path="res://scenes/overlay_text.gd" id="1_xirnh"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="1_y8hvy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dcluu"]
@@ -38,7 +38,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21msw"]
 _data = {
-"fade": SubResource("Animation_yhn33")
+&"fade": SubResource("Animation_yhn33")
 }
 
 [node name="overlay_text" type="Node2D"]

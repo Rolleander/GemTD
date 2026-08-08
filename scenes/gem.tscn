@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://c2lx465fr1gd"]
 
-[ext_resource type="Script" path="res://scenes/gem_scene.gd" id="1_au3o4"]
+[ext_resource type="Script" uid="uid://bogwyx6k75m67" path="res://scenes/gem_scene.gd" id="1_au3o4"]
 [ext_resource type="Texture2D" uid="uid://bor4kxtuletfm" path="res://sprites/shadow.png" id="2_ahsfg"]
-[ext_resource type="Shader" path="res://resources/shaders/gem_glow.gdshader" id="3_i34h3"]
+[ext_resource type="Shader" uid="uid://0fugujcim8sg" path="res://resources/shaders/gem_glow.gdshader" id="3_i34h3"]
 [ext_resource type="Texture2D" uid="uid://dv17q5j3g4wve" path="res://sprites/range.png" id="5_movmr"]
 [ext_resource type="Texture2D" uid="uid://bm44dol1vru50" path="res://sprites/selection.png" id="6_dkcgr"]
 [ext_resource type="Texture2D" uid="uid://cw2nhdwbvul3q" path="res://sprites/range_circle.png" id="7_8j4da"]
@@ -30,7 +30,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_why26"]
 _data = {
-"combine_ring": SubResource("Animation_qjo6m")
+&"combine_ring": SubResource("Animation_qjo6m")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_pt4b2"]
@@ -59,12 +59,12 @@ noise = SubResource("FastNoiseLite_ffu7e")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2t2yh"]
 resource_local_to_scene = true
 shader = ExtResource("3_i34h3")
+shader_parameter/noise_img = SubResource("NoiseTexture2D_i1qu8")
+shader_parameter/noise_img2 = SubResource("NoiseTexture2D_q05tk")
 shader_parameter/glow_color = Color(1, 0, 0, 1)
 shader_parameter/rand = 0.685
 shader_parameter/speed = 0.1
 shader_parameter/energy = 0.3
-shader_parameter/noise_img = SubResource("NoiseTexture2D_i1qu8")
-shader_parameter/noise_img2 = SubResource("NoiseTexture2D_q05tk")
 
 [sub_resource type="Animation" id="Animation_aaf7c"]
 resource_name = "glow"
@@ -97,7 +97,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r0mgt"]
 _data = {
-"glow": SubResource("Animation_aaf7c")
+&"glow": SubResource("Animation_aaf7c")
 }
 
 [node name="Node2D" type="Node2D"]

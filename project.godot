@@ -12,7 +12,7 @@ config_version=5
 
 config/name="GemTD"
 run/main_scene="res://scenes/board.tscn"
-config/features=PackedStringArray("4.3", "Mobile")
+config/features=PackedStringArray("4.4", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -29,6 +29,11 @@ Utils="*res://scripts/Utils.gd"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/stretch/scale=1.5
+
+[dotnet]
+
+project/assembly_name="GemTD"
 
 [editor_plugins]
 

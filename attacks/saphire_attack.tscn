@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bvvtwcedfsig3"]
 
-[ext_resource type="Script" path="res://attacks/saphire_attack.gd" id="1_yycbl"]
-[ext_resource type="Script" path="res://scripts/buffs/enemy/enemy_buff.gd" id="2_fk20p"]
+[ext_resource type="Script" uid="uid://c5qr17474h5jl" path="res://attacks/saphire_attack.gd" id="1_yycbl"]
+[ext_resource type="Script" uid="uid://dnn2mgo3mu4vl" path="res://scripts/buffs/enemy/enemy_buff.gd" id="2_fk20p"]
 [ext_resource type="Texture2D" uid="uid://c3liyqtvj3agq" path="res://sprites/bubble.png" id="2_uxniu"]
 
 [sub_resource type="Resource" id="Resource_svpfj"]

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://dmi6uq88ig44k"]
 
 [ext_resource type="PackedScene" uid="uid://bvvtwcedfsig3" path="res://attacks/saphire_attack.tscn" id="1_g6wk8"]
-[ext_resource type="Script" path="res://scripts/GemTypeInfo.gd" id="2_a2eaw"]
+[ext_resource type="Script" uid="uid://b0mqttusyyw85" path="res://scripts/GemTypeInfo.gd" id="2_a2eaw"]
 
 [resource]
 script = ExtResource("2_a2eaw")

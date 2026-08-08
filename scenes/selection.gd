@@ -32,27 +32,36 @@ func _field_clicked(location : Vector2):
 	if Game.construction_phase && Game.remaining_placements >0:
 		marker.visible = true
 
-func valid_place():
-	var grid_pos_1 = Vector2i((position / Globals.GRID_SIZE).round() )  
-	var grid_pos_2 = Vector2i((position / Globals.GRID_SIZE).round() ) - Vector2i(1,1)
-	var grid = tilemap.get_used_rect()
-	grid.size.x *= 2
-	grid.size.y *= 2
-	if !grid.has_point(grid_pos_1) || !grid.has_point(grid_pos_2):		
-		return false
+func valid_place() -> bool:
+	var grid_pos := Vector2i((position / Globals.GRID_SIZE).round())
 	if pathmap.is_blocked(position):
 		return false
 	for x in 2:
-		for y in 2:	
-			var tile_pos = Vector2i((grid_pos_1 -Vector2i(x,y))/ 2) 
-			if tilemap.get_cell_atlas_coords(0, tile_pos) ==Vector2i( 3,0): 
+		for y in 2:
+			var occupied_cell := grid_pos - Vector2i(x, y)
+			if !_is_playable_map_cell(occupied_cell):
 				return false
 	return true
 
-func _process(delta):
+
+func _is_playable_map_cell(grid_cell: Vector2i) -> bool:
+	if pathmap.get_cell_source_id(0, grid_cell) == -1:
+		return false
+	var map_cell := Vector2i(
+		floori(grid_cell.x / 2.0),
+		floori(grid_cell.y / 2.0)
+	)
+	var atlas_coords := tilemap.get_cell_atlas_coords(0, map_cell)
+	return atlas_coords != Vector2i(3, 0)
+
+func update_position_from_mouse() -> void:
+	var grid_pos := Vector2i((get_global_mouse_position() / Globals.GRID_SIZE).round())
+	position = grid_pos * Globals.GRID_SIZE
+	visible = valid_place()
+
+
+func _process(_delta):
 	if Game.construction_phase && Game.remaining_placements > 0:
-		var pos = Vector2i((get_global_mouse_position() / Globals.GRID_SIZE).round() ) 
-		position = (pos * Globals.GRID_SIZE) 
-		visible = valid_place()
+		update_position_from_mouse()
 	else:
 		visible = false

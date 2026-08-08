@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://62rjt5si8wiv"]
 
-[ext_resource type="Script" path="res://attacks/aquamarine_attack.gd" id="1_0w5ch"]
+[ext_resource type="Script" uid="uid://mubky1ohwxcb" path="res://attacks/aquamarine_attack.gd" id="1_0w5ch"]
 [ext_resource type="Texture2D" uid="uid://cd8upgu1j5o31" path="res://sprites/aquablast.png" id="2_eh6wh"]
-[ext_resource type="Script" path="res://attacks/smoketrail.gd" id="3_m4iyx"]
+[ext_resource type="Script" uid="uid://c3pejech4nao7" path="res://attacks/smoketrail.gd" id="3_m4iyx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tdrjx"]
 blend_mode = 1

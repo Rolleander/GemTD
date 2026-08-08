@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bgxb67n6xasin"]
 
-[ext_resource type="Script" path="res://attacks/emerald_attack.gd" id="1_puytj"]
-[ext_resource type="Script" path="res://scripts/buffs/enemy/enemy_buff.gd" id="2_diub1"]
+[ext_resource type="Script" uid="uid://ipa2fndt5v70" path="res://attacks/emerald_attack.gd" id="1_puytj"]
+[ext_resource type="Script" uid="uid://dnn2mgo3mu4vl" path="res://scripts/buffs/enemy/enemy_buff.gd" id="2_diub1"]
 [ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="4_grplc"]
 
 [sub_resource type="Resource" id="Resource_84h6e"]

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SpecialGem" load_steps=7 format=3 uid="uid://12oxyypyqvwr"]
 
-[ext_resource type="Script" path="res://scripts/basic_gem_id.gd" id="1_vxq2k"]
+[ext_resource type="Script" uid="uid://dr2tcdhdjlok1" path="res://scripts/basic_gem_id.gd" id="1_vxq2k"]
 [ext_resource type="PackedScene" uid="uid://sf31by7vb4cx" path="res://gems/special/blub_gem.tscn" id="2_l68jq"]
-[ext_resource type="Script" path="res://scripts/special_gem.gd" id="3_3wt6j"]
+[ext_resource type="Script" uid="uid://26qmlrxb2ahx" path="res://scripts/special_gem.gd" id="3_3wt6j"]
 
 [sub_resource type="Resource" id="Resource_fw6n6"]
 script = ExtResource("1_vxq2k")

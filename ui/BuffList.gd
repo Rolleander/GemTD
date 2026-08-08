@@ -3,15 +3,41 @@ extends VBoxContainer
 	
 func open(buffs : Array):
 	visible = true
-	for child in  get_children():
+	for child in get_children():
+		remove_child(child)
 		child.queue_free()
+	var sorted_buffs: Array = buffs.duplicate()
+	sorted_buffs.sort_custom(_sort_buffs_for_display)
 	custom_minimum_size.x = 300
-	custom_minimum_size.y =  buffs.size() * 30	
-	for buff in buffs:
+	custom_minimum_size.y = sorted_buffs.size() * 30
+	for buff in sorted_buffs:
 		if buff is TowerBuff:
 			_create_tower_buff(buff)
 		elif buff is EnemyBuffInstance:
-			_create_enemy_buff(buff)	
+			_create_enemy_buff(buff)
+
+
+func _sort_buffs_for_display(a, b) -> bool:
+	var name_comparison := _buff_name(a).naturalnocasecmp_to(_buff_name(b))
+	if name_comparison != 0:
+		return name_comparison < 0
+	return _buff_description(a).naturalnocasecmp_to(_buff_description(b)) < 0
+
+
+func _buff_name(buff) -> String:
+	if buff is TowerBuff:
+		return buff.name
+	if buff is EnemyBuffInstance:
+		return buff.buff.name
+	return ""
+
+
+func _buff_description(buff) -> String:
+	if buff is TowerBuff:
+		return buff.description
+	if buff is EnemyBuffInstance:
+		return buff.buff.description
+	return ""
 
 func _create_enemy_buff(buff : EnemyBuffInstance):
 	var duration = -1

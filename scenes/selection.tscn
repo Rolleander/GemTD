@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bswwqwyt2no62"]
 
 [ext_resource type="Texture2D" uid="uid://d28akodhfj4gt" path="res://sprites/grid_selection.png" id="2_gbwlx"]
-[ext_resource type="Script" path="res://scenes/selection.gd" id="2_uec3o"]
+[ext_resource type="Script" uid="uid://du0k2pbounrjn" path="res://scenes/selection.gd" id="2_uec3o"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5alea"]
 blend_mode = 1

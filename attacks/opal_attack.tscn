@@ -1,14 +1,14 @@
 [gd_scene load_steps=7 format=3 uid="uid://cx4g6cs1tksta"]
 
-[ext_resource type="Script" path="res://attacks/opal_attack.gd" id="1_unlb2"]
-[ext_resource type="Script" path="res://scripts/buffs/tower/tower_buff.gd" id="2_58bvk"]
+[ext_resource type="Script" uid="uid://nod4ive6aa7q" path="res://attacks/opal_attack.gd" id="1_unlb2"]
+[ext_resource type="Script" uid="uid://cqktew38x1ud7" path="res://scripts/buffs/tower/tower_buff.gd" id="2_58bvk"]
 [ext_resource type="Texture2D" uid="uid://gb32t5helwp0" path="res://sprites/opal_blast.png" id="2_lgqp4"]
 
 [sub_resource type="Resource" id="Resource_2iscc"]
 resource_local_to_scene = true
 script = ExtResource("2_58bvk")
 value = 1.0
-operation = 2
+operation = 3
 attribute = 1
 name = ""
 description = ""

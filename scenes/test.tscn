@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://dlx1pr2oljuth"]
 
-[ext_resource type="Shader" path="res://resources/shaders/fireball.gdshader" id="1_fgbls"]
+[ext_resource type="Shader" uid="uid://dfhk6snbtu47v" path="res://resources/shaders/fireball.gdshader" id="1_fgbls"]
 [ext_resource type="Texture2D" uid="uid://08y133vunh4x" path="res://sprites/noise_combined.png" id="1_iywcf"]
-[ext_resource type="Shader" path="res://resources/shaders/shockwave.gdshader" id="3_eewp0"]
+[ext_resource type="Shader" uid="uid://cc21dqub7pu56" path="res://resources/shaders/shockwave.gdshader" id="3_eewp0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r1aiv"]
 shader = ExtResource("1_fgbls")
@@ -49,7 +49,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yr7ie"]
 _data = {
-"explosion": SubResource("Animation_xffxl")
+&"explosion": SubResource("Animation_xffxl")
 }
 
 [node name="Node2D" type="Node2D"]

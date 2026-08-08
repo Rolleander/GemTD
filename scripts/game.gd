@@ -7,10 +7,10 @@ var remaining_placements = PLACEMENTS_PER_ROUND
 var free_rerolls = 0
 var reroll_count = 0
 var wave = Wave.new("")
-var money = 10 
-var selected_gem : Gem
-var selected_enemy : Enemy
-var gem_chances : GemChances = GemChances.new()
+var money = 1000
+var selected_gem: Gem
+var selected_enemy: Enemy
+var gem_chances: GemChances = GemChances.new()
 var build_menu
 
 func _ready():
@@ -28,13 +28,13 @@ func finish_building():
 	wave.start_wave()
 
 func _enemy_killed(enemy: Enemy, killer: Gem):
-	money+=enemy.money
+	money += enemy.money
 
 func placed_gem(gem: Gem):
 	gem.add_to_group("building")
 	BuffUtils.update_tower_buffs()
 	CombinationsCheck.check()
-	_update_selection(gem)	
+	_update_selection(gem)
 	Events.gem_selected.emit(gem)
 
 func _start_building():
@@ -42,8 +42,8 @@ func _start_building():
 	construction_phase = true
 	remaining_placements = PLACEMENTS_PER_ROUND
 	
-func get_enemies() :
-	return get_tree().get_first_node_in_group("enemies_node").get_children() 
+func get_enemies():
+	return get_tree().get_first_node_in_group("enemies_node").get_children()
 	
 func get_gems():
 	return get_tree().get_nodes_in_group("gems")
@@ -51,30 +51,28 @@ func get_gems():
 func _update_selection(object):
 	if object is Gem:
 		selected_gem = object
-		if !object.rock: 
+		if !object.rock:
 			object.range_ring.visible = true
 		for gem in get_tree().get_first_node_in_group("maze_node").get_children():
 			if gem != object:
 				gem.selection.visible = false
-				gem.range_ring.visible = false	
+				gem.range_ring.visible = false
 	elif object is Enemy:
 		selected_enemy = object
 		for enemy in get_enemies():
 			if enemy != object:
 				enemy.selection.visible = false
-	object.selection.visible = true 
+	object.selection.visible = true
 
 func clear_selection():
-	if selected_gem !=null:
+	if selected_gem != null:
 		selected_gem.selection.visible = false
 		selected_gem.range_ring.visible = false
-		selected_gem= null
+		selected_gem = null
 		for menu in get_tree().get_nodes_in_group("BuildMenu"):
-			menu.visible = false		
+			menu.visible = false
 	Events.unselect.emit()
 
 func reselect():
 	if selected_gem != null:
 		Events.gem_selected.emit(selected_gem)
-
-	

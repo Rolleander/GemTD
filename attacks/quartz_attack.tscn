@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c4q3e2nu2q5tc"]
 
-[ext_resource type="Script" path="res://attacks/quartz_attack.gd" id="1_p7ttg"]
+[ext_resource type="Script" uid="uid://bkilqtxpuq83e" path="res://attacks/quartz_attack.gd" id="1_p7ttg"]
 [ext_resource type="Texture2D" uid="uid://cml4rhdefeeau" path="res://sprites/quartz_blast.png" id="2_ijn4n"]
 
 [sub_resource type="Gradient" id="Gradient_vyrh5"]

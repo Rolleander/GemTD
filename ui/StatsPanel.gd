@@ -1,4 +1,4 @@
-extends Panel
+extends PanelContainer
 
 @onready var name_label = $MarginContainer2/VBoxContainer/GemTable/GemName
 @onready var value_label = $MarginContainer2/VBoxContainer/GemTable/GemValue

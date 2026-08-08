@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dcb0mj55c6k08"]
 
-[ext_resource type="Script" path="res://attacks/ruby_attack.gd" id="1_usrhe"]
+[ext_resource type="Script" uid="uid://cpkc0gm2alxi0" path="res://attacks/ruby_attack.gd" id="1_usrhe"]
 [ext_resource type="Texture2D" uid="uid://c8wbkao3a75ai" path="res://sprites/fireball.png" id="3_t5oie"]
 [ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="4_f5q3u"]
 

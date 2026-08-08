@@ -26,4 +26,3 @@ func _spawn_bullet(enemy : Enemy):
 		render.transform =  render.transform.scaled(Vector2(CRIT_SCALE, CRIT_SCALE))
 		Events.overlay_text(gem, "CRIT!!!")
 	return bullet
-

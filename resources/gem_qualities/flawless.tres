@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GemQualityInfo" load_steps=3 format=3 uid="uid://dhj1i0ydybq48"]
 
 [ext_resource type="PackedScene" uid="uid://7vqmqarqfihj" path="res://gems/flawless.tscn" id="1_85u8l"]
-[ext_resource type="Script" path="res://scripts/GemQualityInfo.gd" id="1_lffbc"]
+[ext_resource type="Script" uid="uid://bxe4jviba1eq5" path="res://scripts/GemQualityInfo.gd" id="1_lffbc"]
 
 [resource]
 script = ExtResource("1_lffbc")

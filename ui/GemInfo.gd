@@ -1,4 +1,4 @@
-extends Panel
+extends PanelContainer
 
 @onready var name_label = $MarginContainer/VBoxContainer/HBoxContainer/Name
 @onready var level_label = $MarginContainer/VBoxContainer/HBoxContainer/Level
@@ -30,14 +30,16 @@ func _open(gem : Gem):
 	if gem.rock:
 		info_label.text = "Blocks enemies path"
 	else:
-		var info = gem.attack.description
+		var info_lines: Array[String] = []
+		if !gem.attack.description.is_empty():
+			info_lines.append(gem.attack.description)
 		for buff in gem.attack.hit_buffs:
-			info += "Attacks apply "+_enem_buff_text(buff)+ "\n"
+			info_lines.append("Attacks apply " + _enem_buff_text(buff))
 		for buff in gem.attack.aura_buffs:
-			info +=  "Enemy aura with "+ _enem_buff_text(buff) + "\n"
+			info_lines.append("Enemy aura with " + _enem_buff_text(buff))
 		for buff in gem.attack.tower_buffs:
-			info += "Gem aura with "+  buff.description + " ["+buff.name+"]\n"		
-		info_label.text = info
+			info_lines.append("Gem aura with " + buff.description + " [" + buff.name + "]")
+		info_label.text = "\n".join(info_lines)
 	
 	$MarginContainer/VBoxContainer/HBoxContainer2.visible = !gem.rock
 	$MarginContainer/VBoxContainer/HBoxContainer3.visible = !gem.rock

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://imkvnw5cclwa"]
 
-[ext_resource type="Script" path="res://attacks/diamond_attack.gd" id="1_jj5u5"]
+[ext_resource type="Script" uid="uid://cagknfjig55s1" path="res://attacks/diamond_attack.gd" id="1_jj5u5"]
 [ext_resource type="Texture2D" uid="uid://bnehs24allnoa" path="res://sprites/diamond_blast.png" id="2_b0p7c"]
-[ext_resource type="Script" path="res://attacks/smoketrail.gd" id="3_tx8ro"]
+[ext_resource type="Script" uid="uid://c3pejech4nao7" path="res://attacks/smoketrail.gd" id="3_tx8ro"]
 
 [sub_resource type="Gradient" id="Gradient_vepx4"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
