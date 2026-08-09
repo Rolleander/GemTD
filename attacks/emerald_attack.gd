@@ -29,13 +29,14 @@ func _ready():
 	var slow_percent = (1 - speed_mul) * 100
 	slow_buff.value = speed_mul
 	slow_buff.name = "Emerald Slow " + str(gem.quality + 1)
-	slow_buff.description = str(slow_percent) + "% Slow"
+	slow_buff.description = str(roundi(slow_percent)) + "% Slow"
 	slow_buff.stack_group = "EmeraldSlow"
 	slow_buff.priority = gem.quality
 	poison_buff.name = "Emerald Poison " + str(gem.quality + 1)
 	poison_buff.stack_group = "EmeraldPoison"
 	poison_buff.priority = gem.quality
-	poison_buff.description = str((poison_buff.value * -1) / poison_buff.duration) + " Damage per second"
+	var poison_damage_per_second: float = (poison_buff.value * -1) / poison_buff.duration
+	poison_buff.description = str(roundi(poison_damage_per_second)) + " Damage per second"
 
 
 func _spawn_bullet(enemy: Enemy):

@@ -10,9 +10,9 @@ func _ready():
 	var buff = TowerBuff.new()
 	buff.attribute = TowerBuff.Attribute.ATTACK_DELAY
 	buff.operation = TowerBuff.Operation.ADD_ROOT_MUL
-	buff.value = speed_mul
+	buff.value = speed_mul - 1.0
 	buff.name = "Aquamarine Haste "
-	buff.description = "+ "+str(buff_percent)+"% Attack Speed"
+	buff.description = "+ " + str(roundi(buff_percent)) + "% Attack Speed"
 	buff.stack_group = "AquaHaste"
 	buff.priority = gem.quality
 	tower_buffs.append(buff)

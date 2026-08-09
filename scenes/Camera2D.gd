@@ -1,7 +1,7 @@
 extends Camera2D
 
-const SCROLL_BORDER = 70
-const SCROLL_SPEED = 840.0
+const SCROLL_BORDER = 40
+const SCROLL_SPEED = 600.0
 const ZOOM_SPEED = 0.1
 const MIN_ZOOM = 0.8 
 const MAX_ZOOM = 2

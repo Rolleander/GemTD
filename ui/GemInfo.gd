@@ -3,8 +3,11 @@ extends PanelContainer
 @onready var name_label = $MarginContainer/VBoxContainer/HBoxContainer/Name
 @onready var level_label = $MarginContainer/VBoxContainer/HBoxContainer/Level
 @onready var damage_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/AtkValue
+@onready var damage_buff_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer/AtkBuff as Label
 @onready var speed_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2/SpdValue
+@onready var speed_buff_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2/SpdBuff as Label
 @onready var range_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3/RngValue
+@onready var range_buff_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3/RngBuff as Label
 @onready var exp_bar = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer/ProgressBar as ProgressBar
 @onready var kills_label = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/Kills
 @onready var buffList = get_parent().get_node("BuffList")
@@ -18,9 +21,9 @@ func _open(gem : Gem):
 	visible =true
 	name_label.text = gem.gem_name
 	level_label.text = "Lv. "+str(gem.level)
-	damage_label.text = _buffed_text(gem.damage)	
-	speed_label.text = _buffed_text(gem.attack_delay)	
-	range_label.text = _buffed_text(gem.attack_range)	
+	_set_buffed_value(damage_label, damage_buff_label, gem.damage)
+	_set_buffed_value(speed_label, speed_buff_label, gem.attack_delay, true)
+	_set_buffed_value(range_label, range_buff_label, gem.attack_range)
 	exp_bar.tooltip_text = str(gem.exp)+" / "+str(gem.levelup_exp)
 	exp_bar.min_value = LevelUp.get_levelup_exp(gem.level)
 	exp_bar.max_value = gem.levelup_exp
@@ -53,10 +56,21 @@ func _enem_buff_text(buff : EnemyBuff):
 	text += " ["+buff.name+"]"
 	return text
 
-func _buffed_text(value : BuffableValue):
-	var text = str(snappedf( value.value,0.01))
-	var buff = value.value - value.root	
-	var percent = snappedf( (buff / value.root) * 100, 0.01)
-	if buff != 0:
-		text+= " ("+str(percent)+"%)"
-	return text
+func _set_buffed_value(
+	value_label: Label,
+	percent_label: Label,
+	value: BuffableValue,
+	invert_percent: bool = false
+) -> void:
+	value_label.text = str(snappedf(value.value, 0.01))
+	var buff: float = value.value - value.root
+	if is_zero_approx(buff) || is_zero_approx(value.root):
+		percent_label.visible = false
+		return
+
+	var percent: float = snappedf((buff / value.root) * 100, 0.01)
+	if invert_percent:
+		percent *= -1
+	var sign := "+" if percent >= 0 else ""
+	percent_label.text = " (" + sign + str(roundi(percent)) + "%)"
+	percent_label.visible = true

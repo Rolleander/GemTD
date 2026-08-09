@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=17 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
@@ -17,6 +17,11 @@
 [sub_resource type="LabelSettings" id="LabelSettings_n3b1d"]
 font = ExtResource("4_5kyyh")
 font_size = 20
+font_color = Color(0.196078, 1, 0.262745, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_buff_value"]
+font = ExtResource("4_5kyyh")
+font_size = 14
 font_color = Color(0.196078, 1, 0.262745, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksh6u"]
@@ -165,6 +170,11 @@ text = "ATK"
 label_settings = SubResource("LabelSettings_n3b1d")
 vertical_alignment = 1
 
+[node name="AtkBuff" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_buff_value")
+vertical_alignment = 1
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -181,6 +191,11 @@ text = "SPD"
 label_settings = SubResource("LabelSettings_n3b1d")
 vertical_alignment = 1
 
+[node name="SpdBuff" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_buff_value")
+vertical_alignment = 1
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -195,6 +210,11 @@ vertical_alignment = 1
 layout_mode = 2
 text = "RNG"
 label_settings = SubResource("LabelSettings_n3b1d")
+vertical_alignment = 1
+
+[node name="RngBuff" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_buff_value")
 vertical_alignment = 1
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer"]

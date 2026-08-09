@@ -92,7 +92,8 @@ func update_tower_buffs():
 func _add_level_buff(gem : Gem):
 	var level_buff = TowerBuff.new()
 	level_buff.name = "Level-Up Bonus"
-	level_buff.description = "+ " +str(gem.level * LEVEL_DMG_INC * 100)+"% DMG"
+	var damage_percent := roundi(gem.level * LEVEL_DMG_INC * 100)
+	level_buff.description = "+ " + str(damage_percent) + "% DMG"
 	level_buff.attribute = TowerBuff.Attribute.DAMAGE
 	level_buff.value = gem.level * LEVEL_DMG_INC
 	level_buff.operation = TowerBuff.Operation.ADD_ROOT_MUL
