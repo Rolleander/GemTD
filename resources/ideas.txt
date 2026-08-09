@@ -1,4 +1,13 @@
-combos:
+gem combos:
+
+chipped 
+
+
+
+
+
+
+combo name ideas:
 
 - lucky lapislazuli
 - massive meteorite

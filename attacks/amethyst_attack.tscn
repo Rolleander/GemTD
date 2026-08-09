@@ -50,6 +50,8 @@ material = SubResource("CanvasItemMaterial_l8w2n")
 script = ExtResource("1_dn3jw")
 bullet_speed = 16.0
 bullet_source = NodePath("AmethystBlast")
+angle_spread = 1.6
+curve_strength = 1.8
 damage = 15.0
 attack_range = 400.0
 attack_delay = 0.8
@@ -73,10 +75,10 @@ show_behind_parent = true
 material = SubResource("CanvasItemMaterial_7td20")
 position = Vector2(-28.5714, -1.42857)
 amount = 20
-process_material = SubResource("ParticleProcessMaterial_oe5c8")
 texture = ExtResource("3_dqlmm")
 lifetime = 0.3
 fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_oe5c8")
 
 [node name="SmokeTrail" type="Line2D" parent="."]
 width = 15.0

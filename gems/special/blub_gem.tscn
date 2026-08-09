@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://sf31by7vb4cx"]
+[gd_scene load_steps=2 format=3 uid="uid://sf31by7vb4cx"]
+
+[ext_resource type="Script" uid="uid://dhl77wk4o2611" path="res://attacks/projectile_attack.gd" id="1_m6j28"]
 
 [node name="blub_gem" type="Node2D"]
+script = ExtResource("1_m6j28")
+metadata/_custom_type_script = "uid://dhl77wk4o2611"

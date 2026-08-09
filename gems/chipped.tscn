@@ -42,6 +42,6 @@ region_rect = Rect2(0, 0, 64, 40)
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 z_index = 8
 amount = 5
-process_material = SubResource("ParticleProcessMaterial_vklob")
 texture = ExtResource("2_7o7iu")
 lifetime = 3.0
+process_material = SubResource("ParticleProcessMaterial_vklob")

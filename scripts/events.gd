@@ -20,8 +20,15 @@ func delayed_set(target, propertyName, delay, value):
 func delayed_destroy(target : Node2D, delay : float):
 	delayed(func(): target.queue_free(), delay)
 
-func overlay_text(target : Node2D, text : String):
+func overlay_text(
+	target: Node2D,
+	text: String,
+	color: Color = Color(1.0, 0.313726, 0.160784, 1.0),
+	font_size: int = 30
+):
 	var instance = overlay_text_scene.instantiate()
 	instance.position = target.position
 	instance.text = text
+	instance.text_color = color
+	instance.font_size = font_size
 	get_tree().get_first_node_in_group("Effects").add_child(instance)

@@ -4,10 +4,10 @@ const LEVEL_DMG_INC = 0.1
 #gem size radius
 const G_R = 18
 
-func add_enemy_buff (enemy : Enemy, source : Gem,  buff : EnemyBuff) -> bool:	
+func add_enemy_buff(enemy: Enemy, source: Gem, buff: EnemyBuff) -> bool:
 	if !_remove_existing_enemy_buffs(enemy.buffs, buff):
 		return false
-	var instance =  EnemyBuffInstance.new(buff, source, enemy)		
+	var instance = EnemyBuffInstance.new(buff, source, enemy)
 	if buff.attribute == EnemyBuff.Attribute.HEALTH:
 		instance.target_value = enemy.health
 	elif buff.attribute == EnemyBuff.Attribute.ARMOR:
@@ -18,14 +18,14 @@ func add_enemy_buff (enemy : Enemy, source : Gem,  buff : EnemyBuff) -> bool:
 	enemy.buffs.sort_custom(_order_enemy_buffs)
 	return true
 
-func _remove_existing_enemy_buffs(buffs: Array, buff : EnemyBuff) -> bool:
+func _remove_existing_enemy_buffs(buffs: Array, buff: EnemyBuff) -> bool:
 	var remove = []
 	var instances = 0
 	for b in buffs:
 		if b.buff.stack_group == buff.stack_group:
 			if b.buff.priority <= buff.priority:
-				instances +=1
-				if instances >= buff.stack_size: 
+				instances += 1
+				if instances >= buff.stack_size:
 					remove.append(b)
 			else:
 				return false
@@ -35,24 +35,24 @@ func _remove_existing_enemy_buffs(buffs: Array, buff : EnemyBuff) -> bool:
 			b.target_value.apply_permanent(b)
 	return true
 	
-func _order_enemy_buffs( a : EnemyBuffInstance, b : EnemyBuffInstance):
+func _order_enemy_buffs(a: EnemyBuffInstance, b: EnemyBuffInstance):
 	return _order_buffs(a.buff, b.buff)
 	
-func _apply_tower_buff(buffs: Array, buff : TowerBuff) -> bool:
+func _apply_tower_buff(buffs: Array, buff: TowerBuff) -> bool:
 	if !_remove_existing_tower_buffs(buffs, buff):
 		return false
-	buffs.append(buff)			
-	buffs.sort_custom(_order_buffs)	
+	buffs.append(buff)
+	buffs.sort_custom(_order_buffs)
 	return true
 	
-func _remove_existing_tower_buffs(buffs : Array, buff : TowerBuff):
+func _remove_existing_tower_buffs(buffs: Array, buff: TowerBuff):
 	var remove = []
 	var instances = 0
 	for b in buffs:
 		if b.stack_group == buff.stack_group:
 			if b.priority <= buff.priority:
-				instances +=1
-				if instances >= buff.stack_size: 
+				instances += 1
+				if instances >= buff.stack_size:
 					remove.append(b)
 			else:
 				return false
@@ -60,13 +60,13 @@ func _remove_existing_tower_buffs(buffs : Array, buff : TowerBuff):
 		buffs.erase(r)
 	return true
 	
-func _order_buffs( a : Buff, b : Buff):
+func _order_buffs(a: Buff, b: Buff):
 	return a.order <= b.order
 
-func progress_enemy_buffs(enemy : Enemy, delta):
-	for i in range(enemy.buffs.size()-1, -1, -1):
+func progress_enemy_buffs(enemy: Enemy, delta):
+	for i in range(enemy.buffs.size() - 1, -1, -1):
 		var buff = enemy.buffs[i] as EnemyBuffInstance
-		if  buff.done:
+		if buff.done:
 			enemy.buffs.remove_at(i)
 			continue
 		buff.update(delta)
@@ -78,18 +78,18 @@ func update_tower_buffs():
 		if gem.level > 0:
 			_add_level_buff(gem)
 	for source in Game.get_gems():
-		if  source.under_construction || source.attack.tower_buffs.size() ==0:
+		if source.under_construction || source.attack.tower_buffs.size() == 0:
 			continue
 		for target in Game.get_gems():
-			if Utils.in_range(source, target, source.attack_range.root , G_R):
+			if Utils.in_range(source, target, source.attack_range.root, G_R):
 				for buff in source.attack.tower_buffs:
 					_apply_tower_buff(target.buffs, buff)
 	for gem in Game.get_gems():
-		gem.damage.update() 
+		gem.damage.update()
 		gem.attack_range.update()
-		gem.attack_delay.update() 
+		gem.attack_delay.update()
 
-func _add_level_buff(gem : Gem):
+func _add_level_buff(gem: Gem):
 	var level_buff = TowerBuff.new()
 	level_buff.name = "Level-Up Bonus"
 	var damage_percent := roundi(gem.level * LEVEL_DMG_INC * 100)
@@ -98,3 +98,12 @@ func _add_level_buff(gem : Gem):
 	level_buff.value = gem.level * LEVEL_DMG_INC
 	level_buff.operation = TowerBuff.Operation.ADD_ROOT_MUL
 	gem.buffs.append(level_buff)
+
+func list_gems_in_range(gem: Gem, range: float):
+	var gems = []
+	for target in Game.get_gems():
+		if target.under_construction || gem == target:
+			continue
+		if Utils.in_range(gem, target, range, G_R):
+			gems.append(gem)
+	return gems

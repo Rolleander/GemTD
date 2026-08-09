@@ -10,6 +10,11 @@ class_name Enemy
 @onready var selection = $SelectionRing
 @onready var animation = $AnimationPlayer
 @onready var label = $Label
+@onready var damage_smoke = $DamageSmoke as GPUParticles2D
+
+const SMOKE_START_HEALTH_PERCENT := 0.4
+const HIT_FLASH_COLOR := Color(1.0, 0.48, 0.48, 1.0)
+const HIT_FLASH_DURATION := 0.16
 
 var path = []
 var target = -1
@@ -27,6 +32,7 @@ var buffs = [] as Array[EnemyBuffInstance]
 var spawning = true
 var money = 0
 var killer = null
+var hit_flash_tween: Tween
 
 func _ready():
 	($fire.material as ShaderMaterial).set_shader_parameter("offset", randf_range(-100,100))
@@ -51,7 +57,9 @@ func _next_waypoint():
 	navigation.target_position = waypoints[target].position	
 
 func _process(delta):
-	health_bar.health_percent = clampf(float(health.value) / max_health ,0,1)
+	var health_percent := clampf(float(health.value) / max_health, 0.0, 1.0)
+	health_bar.health_percent = health_percent
+	_update_damage_smoke(health_percent)
 		
 func _physics_process(delta : float):
 	spawning = false
@@ -82,6 +90,8 @@ func _damage(source : Attack, damage_factor : float = 1.0) -> bool:
 	var damage = calc_damage(source.gem.damage.value * damage_factor)
 	source.gem.damage_dealt.dealt(damage)
 	health.value_add( damage *-1)
+	if damage > 0.0:
+		_flash_on_hit()
 	return health.value <= 0
 		
 func calc_damage(damage : float, ignore_attributes : Array[EnemyBuff.Attribute] = []):
@@ -108,6 +118,7 @@ func _death(killer : Gem):
 	Events.enemy_killed.emit(self, killer)
 	Events.delayed_destroy(self, 3)
 	sprite.visible = false
+	damage_smoke.emitting = false
 	health_bar.visible = false
 	selection.visible = false
 	navigation.avoidance_enabled = false
@@ -117,6 +128,27 @@ func _death(killer : Gem):
 
 func add_hit_effect(effect : Node2D):
 	hit_effects.add_child(effect)
+
+func _flash_on_hit():
+	if hit_flash_tween != null && hit_flash_tween.is_valid():
+		hit_flash_tween.kill()
+	sprite.self_modulate = HIT_FLASH_COLOR
+	hit_flash_tween = create_tween()
+	hit_flash_tween.set_trans(Tween.TRANS_QUAD)
+	hit_flash_tween.set_ease(Tween.EASE_OUT)
+	hit_flash_tween.tween_property(sprite, "self_modulate", Color.WHITE, HIT_FLASH_DURATION)
+
+func _update_damage_smoke(health_percent: float):
+	if !alive || health_percent >= SMOKE_START_HEALTH_PERCENT:
+		damage_smoke.emitting = false
+		return
+	var damage_severity := clampf(
+		(SMOKE_START_HEALTH_PERCENT - health_percent) / SMOKE_START_HEALTH_PERCENT,
+		0.0,
+		1.0
+	)
+	damage_smoke.amount_ratio = lerpf(0.08, 1.0, smoothstep(0.0, 1.0, damage_severity))
+	damage_smoke.emitting = true
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 	if !alive:

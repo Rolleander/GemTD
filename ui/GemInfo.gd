@@ -8,6 +8,7 @@ extends PanelContainer
 @onready var speed_buff_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2/SpdBuff as Label
 @onready var range_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3/RngValue
 @onready var range_buff_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3/RngBuff as Label
+@onready var exp_container = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2
 @onready var exp_bar = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer/ProgressBar as ProgressBar
 @onready var kills_label = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/Kills
 @onready var buffList = get_parent().get_node("BuffList")
@@ -24,10 +25,13 @@ func _open(gem : Gem):
 	_set_buffed_value(damage_label, damage_buff_label, gem.damage)
 	_set_buffed_value(speed_label, speed_buff_label, gem.attack_delay, true)
 	_set_buffed_value(range_label, range_buff_label, gem.attack_range)
-	exp_bar.tooltip_text = str(gem.exp)+" / "+str(gem.levelup_exp)
-	exp_bar.min_value = LevelUp.get_levelup_exp(gem.level)
-	exp_bar.max_value = gem.levelup_exp
-	exp_bar.value = gem.exp
+	var show_exp := !gem.rock && gem.level < LevelUp.SHARE_LEVEL
+	exp_container.visible = show_exp
+	if show_exp:
+		exp_bar.tooltip_text = str(gem.exp)+" / "+str(gem.levelup_exp)
+		exp_bar.min_value = LevelUp.get_levelup_exp(gem.level)
+		exp_bar.max_value = gem.levelup_exp
+		exp_bar.value = gem.exp
 	kills_label.text = str(gem.kills)
 	level_label.visible = !gem.rock
 	if gem.rock:

@@ -28,6 +28,7 @@ script = ExtResource("1_0w5ch")
 bullet_speed = 17.0
 bullet_source = NodePath("Aquablast")
 angle_spread = 1.6
+curve_strength = 3.0
 damage = 6.0
 attack_range = 240.0
 attack_delay = 0.4

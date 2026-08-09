@@ -75,4 +75,3 @@ func _get_recipe_matches(gems : Array, recipe : Array[BasicGemId]):
 	if matches < recipe.size():
 		target_gems.clear()
 	return target_gems
-

@@ -5,6 +5,8 @@ class_name ProjectileAttack
 @export var bullet_speed : float = 15
 @export var bullet_source : Node2D
 @export var angle_spread : float = 0.8
+## How far projectiles bow away from a direct flight path. Zero flies directly.
+@export_range(0.0, 3.0, 0.05) var curve_strength: float = 0.0
 
 func _ready():
 	super()
@@ -42,6 +44,7 @@ func _spawn_bullet(enemy : Enemy):
 	else:	
 		render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))	
 	bullet.angle_spread = angle_spread
+	bullet.curve_strength = curve_strength
 	bullet.add_child(render)
 	render.visible=true
 	return bullet
