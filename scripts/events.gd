@@ -8,6 +8,7 @@ signal gem_selected(gem: Gem)
 signal enemy_selected(enemy: Enemy)
 signal enemy_spawned(enemy: Enemy)
 signal enemy_killed(enemy: Enemy, killer: Gem)
+signal enemy_reached_end(enemy: Enemy)
 
 @onready var overlay_text_scene = preload("res://scenes/overlay_text.tscn")
 
@@ -32,3 +33,22 @@ func overlay_text(
 	instance.text_color = color
 	instance.font_size = font_size
 	get_tree().get_first_node_in_group("Effects").add_child(instance)
+
+func screen_text(
+	text: String,
+	color: Color = Color(1.0, 0.313726, 0.160784, 1.0),
+	font_size: int = 30,
+	delay = 3.0,
+	offset = Vector2(0, 0)
+):
+	var screen_text_layer = get_tree().get_first_node_in_group("ScreenText") as Control
+	if screen_text_layer == null:
+		push_error("ScreenText UI layer was not found.")
+		return
+	var instance = overlay_text_scene.instantiate()
+	instance.text = text
+	instance.text_color = color
+	instance.font_size = font_size
+	instance.delay = delay
+	screen_text_layer.add_child(instance)
+	instance.position = Vector2.ZERO + offset

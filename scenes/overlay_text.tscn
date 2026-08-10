@@ -45,12 +45,11 @@ _data = {
 script = ExtResource("1_xirnh")
 
 [node name="Label" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
 z_index = 12
 offset_left = -115.0
-offset_top = -40.0
+offset_top = -30.0
 offset_right = 347.0
-offset_bottom = -1.0
+offset_bottom = 57.0
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("1_y8hvy")
 text = "Test
@@ -60,7 +59,7 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_21msw")
+&"": SubResource("AnimationLibrary_21msw")
 }
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

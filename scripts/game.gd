@@ -11,14 +11,16 @@ var money = 10
 var selected_gem: Gem
 var selected_enemy: Enemy
 var gem_chances: GemChances = GemChances.new()
+var lives = 10
 
 func _ready():
 	Engine.time_scale = 1.5
 	add_child(wave)
 	Events.gem_selected.connect(_update_selection)
-	Events.wave_ended.connect(func(): _start_building())
+	Events.wave_ended.connect(_wave_ended)
 	Events.enemy_killed.connect(_enemy_killed)
 	Events.enemy_selected.connect(_update_selection)
+	Events.enemy_reached_end.connect(_enemy_reached_end)
 	
 func finish_building():
 	BuffUtils.update_tower_buffs()
@@ -28,6 +30,11 @@ func finish_building():
 func _enemy_killed(enemy: Enemy, killer: Gem):
 	money += enemy.money
 
+func _enemy_reached_end(enemy: Enemy):
+	lives -= 1
+	if lives <= 0:
+		_game_over()
+
 func placed_gem(gem: Gem):
 	gem.under_construction = true
 	gem.remove_from_group("gems")
@@ -36,6 +43,11 @@ func placed_gem(gem: Gem):
 	CombinationsCheck.check()
 	_update_selection(gem)
 	Events.gem_selected.emit(gem)
+
+func _wave_ended():
+	if lives <= 0:
+		return
+	_start_building()
 
 func _start_building():
 	reroll_count = 0
@@ -76,3 +88,7 @@ func clear_selection():
 func reselect():
 	if selected_gem != null:
 		Events.gem_selected.emit(selected_gem)
+
+func _game_over():
+	for e in Game.get_enemies():
+		e.kill()

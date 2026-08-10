@@ -11,17 +11,17 @@ func _ready():
 	Events.gem_selected.connect(_open)
 	Events.unselect.connect(func(): visible = false)
 
-func _open(gem : Gem):
+func _open(gem: Gem):
 	visible = gem.is_in_group("building") && !gem.rock
 	if visible:
-		downgrade.disabled =  gem.quality == 0
+		downgrade.disabled = gem.quality == 0
 		fusion2.disabled = true
 		fusion4.disabled = true
 		combine.disabled = true
 		if Game.free_rerolls > 0:
 			reroll.cost = 0
 			reroll.disabled = false
-		else:				
+		else:
 			reroll.cost = 50 + Game.reroll_count * 25
 			reroll.type = CostButton.CostType.MONEY
 		for c in CombinationsCheck.construction_fusions:
@@ -30,11 +30,11 @@ func _open(gem : Gem):
 					fusion2.disabled = false
 				if c.fusion_size == 4:
 					fusion4.disabled = false
-		for c in CombinationsCheck.oneshot_combos:			
+		for c in CombinationsCheck.oneshot_combos:
 			if c.gems.has(gem):
 				combine.disabled = false
 
-func _end_building(keep_gem : Gem):
+func _end_building(keep_gem: Gem):
 	for gem in get_tree().get_nodes_in_group("building"):
 		if gem != keep_gem:
 			gem.activate(false)
@@ -42,7 +42,7 @@ func _end_building(keep_gem : Gem):
 	CombinationsCheck.check()
 	BuffUtils.update_tower_buffs()
 	Events.gem_selected.emit(keep_gem)
-	Game.finish_building()	
+	Game.finish_building()
 
 func _on_keep_pressed():
 	var selected_gem = Game.selected_gem
@@ -51,32 +51,37 @@ func _on_keep_pressed():
 		var building = get_tree().get_nodes_in_group("building")
 		if !building.has(selected_gem):
 			return
+		Events.screen_text("Picked " + selected_gem.gem_name, Color.AZURE, 60)
 		_end_building(selected_gem)
 
 func _on_downgrade_pressed():
 	var selected_gem = Game.selected_gem
-	selected_gem.init_basic_gem(selected_gem.type, selected_gem.quality -1)
+	selected_gem.init_basic_gem(selected_gem.type, selected_gem.quality - 1)
+	Events.screen_text("Downgraded to " + selected_gem.gem_name, Color.AZURE, 60)
 	_end_building(selected_gem)
 
 func _on_fusion_2_pressed():
 	var selected_gem = Game.selected_gem
 	for c in CombinationsCheck.construction_fusions:
 		if c.gems.has(selected_gem):
-			if c is GemFusion && c.fusion_size == 2:				
+			if c is GemFusion && c.fusion_size == 2:
+				Events.screen_text("Fused to " + c.fusion_name + "!", Color.SKY_BLUE, 70)
 				_end_building(c.fuse(selected_gem))
 
 func _on_fusion_4_pressed():
 	var selected_gem = Game.selected_gem
 	for c in CombinationsCheck.construction_fusions:
 		if c.gems.has(selected_gem):
-			if c is GemFusion && c.fusion_size == 4:				
+			if c is GemFusion && c.fusion_size == 4:
+				Events.screen_text("Super-fused to" + c.fusion_name + "!!", Color.SKY_BLUE, 70)
 				_end_building(c.fuse(selected_gem))
 
 func _on_combine_pressed():
 	var selected_gem = Game.selected_gem
 	for c in CombinationsCheck.oneshot_combos:
 		if c.gems.has(selected_gem):
-			if c is GemCombine:				
+			if c is GemCombine:
+				Events.screen_text("One-Shot combined " + c.combination.name + "!!!", Color.LIME_GREEN, 80)
 				_end_building(c.combine(selected_gem))
 
 func _on_reroll_pressed():

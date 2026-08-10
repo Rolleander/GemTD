@@ -16,12 +16,12 @@ class_name Board
 func _ready():
 	NavigationServer2D.map_set_use_edge_connections(get_world_2d().navigation_map, false)
 	var rect = tilemap.get_used_rect()
-	var start = rect.position * Globals.TILE_SIZE 
-	var end = rect.end * Globals.TILE_SIZE 
-	camera.set_limit(SIDE_LEFT, start.x )
-	camera.set_limit(SIDE_TOP, start.y )
-	camera.set_limit(SIDE_RIGHT, end.x )
-	camera.set_limit(SIDE_BOTTOM, end.y )
+	var start = rect.position * Globals.TILE_SIZE
+	var end = rect.end * Globals.TILE_SIZE
+	camera.set_limit(SIDE_LEFT, start.x)
+	camera.set_limit(SIDE_TOP, start.y)
+	camera.set_limit(SIDE_RIGHT, end.x)
+	camera.set_limit(SIDE_BOTTOM, end.y)
 
 func _get_camera_rect() -> Rect2:
 	var pos = camera.get_screen_center_position()
@@ -34,9 +34,6 @@ func _get_camera_rect() -> Rect2:
 func _unhandled_input(event):
 	if event.is_action_pressed("click"):
 		_click()
-	if event.is_action_pressed("start"):
-		for e in Game.get_enemies():
-			e.kill()
 
 func _click():
 	selection.update_position_from_mouse()
@@ -53,9 +50,9 @@ func _placement_allowed(pos: Vector2) -> bool:
 		path.append(w.position)
 	return await path_map.placing_allowed(pos, path)
 		
-func place_gem():	
+func place_gem():
 	if !Game.construction_phase:
-		return 
+		return
 	var pos = $Marker.position
 	var gem = preload("res://scenes/gem.tscn").instantiate()
 	gem.under_construction = true
@@ -67,6 +64,5 @@ func place_gem():
 	path_map.block_path(pos)
 	Game.placed_gem(gem)
 	$Marker.visible = false
-	if Game.remaining_placements ==0:
+	if Game.remaining_placements == 0:
 		selection.visible = false
-		

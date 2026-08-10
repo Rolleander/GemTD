@@ -2,15 +2,15 @@ extends Node
 
 class_name Wave
 
-var waves : Array 
+var waves: Array
 var current = 0
 var spawn_target = 0
 var spawned = 0
 var spawn_timer = Timer.new()
 var alive = 0
 
-func _init(file : String):
-	waves = preload("res://resources/waves/standard.csv").records	
+func _init(file: String):
+	waves = preload("res://resources/waves/standard.csv").records
 
 func _ready():
 	add_child(spawn_timer)
@@ -21,25 +21,26 @@ func _ready():
 func start_wave():
 	alive = 0
 	spawned = 0
-	print("waves "+str(waves[current]))
+	print("waves " + str(waves[current]))
 	spawn_target = waves[current].Count
 	spawn_timer.start(0.5)
-	Events.emit_signal("wave_started")	
+	Events.emit_signal("wave_started")
+	Events.screen_text("WAVE " + str(current + 1), Color.ORANGE, 100, 3, Vector2(0, -60))
 
 func _spawn_enemy():
 	var enemies = get_tree().get_first_node_in_group("enemies_node")
 	var enemy = preload("res://scenes/enemy.tscn").instantiate() as Enemy
 	enemy.waypoints = get_tree().get_first_node_in_group("waypoints").get_children()
 	enemy.position = get_tree().get_first_node_in_group("spawn_point").position
-	enemy.max_health = waves[current].Health 
+	enemy.max_health = waves[current].Health
 	var speed = waves[current].Speed
 	var money = waves[current].Money
 	var air = waves[current].Enemy == "A"
-	enemy.health.value_set( enemy.max_health)
+	enemy.health.value_set(enemy.max_health)
 	enemy.speed.value_set(speed)
 	enemy.money = money
 	enemies.add_child(enemy)
-	alive +=1
+	alive += 1
 	spawned += 1
 	enemy.set_flying(air)
 		
@@ -48,10 +49,10 @@ func _spawn_enemy():
 		spawn_timer.stop()
 				
 func _enemy_killed(enemy: Enemy, killer: Gem):
-	alive-=1
+	alive -= 1
 	if alive == 0 && spawned == spawn_target:
-		_wave_ended()	
+		_wave_ended()
 
 func _wave_ended():
-	current+=1
+	current += 1
 	Events.emit_signal("wave_ended")

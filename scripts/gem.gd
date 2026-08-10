@@ -85,6 +85,7 @@ func activate_combination():
 	if !available_combo:
 		return
 	available_combo.combine(self)
+	Events.screen_text("Combined to " + available_combo.combination.name, Color.LIME_GREEN, 70)
 	available_combo = null
 	Game.reselect()
 

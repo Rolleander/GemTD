@@ -1,9 +1,9 @@
 extends Camera2D
 
-const SCROLL_BORDER = 40
+const SCROLL_BORDER = 20
 const SCROLL_SPEED = 600.0
 const ZOOM_SPEED = 0.1
-const MIN_ZOOM = 0.8 
+const MIN_ZOOM = 0.8
 const MAX_ZOOM = 2
 var _zoom_level = 1.5
 
@@ -22,7 +22,7 @@ func _set_zoom_level(value: float) -> void:
 	# to the target zoom level.
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(self, "zoom", Vector2(_zoom_level, _zoom_level),	0.2)
+	tween.tween_property(self, "zoom", Vector2(_zoom_level, _zoom_level), 0.2)
 
 func _process(delta: float) -> void:
 	# Mouse positions use viewport coordinates, so the edge checks must use the
@@ -33,12 +33,12 @@ func _process(delta: float) -> void:
 	var scroll_direction := Vector2.ZERO
 
 	if mouse.x <= SCROLL_BORDER:
-		scroll_direction.x = -(SCROLL_BORDER - mouse.x) / SCROLL_BORDER
+		scroll_direction.x = - (SCROLL_BORDER - mouse.x) / SCROLL_BORDER
 	elif mouse.x >= viewport_size.x - SCROLL_BORDER:
 		scroll_direction.x = (mouse.x - (viewport_size.x - SCROLL_BORDER)) / SCROLL_BORDER
 
 	if mouse.y <= SCROLL_BORDER:
-		scroll_direction.y = -(SCROLL_BORDER - mouse.y) / SCROLL_BORDER
+		scroll_direction.y = - (SCROLL_BORDER - mouse.y) / SCROLL_BORDER
 	elif mouse.y >= viewport_size.y - SCROLL_BORDER:
 		scroll_direction.y = (mouse.y - (viewport_size.y - SCROLL_BORDER)) / SCROLL_BORDER
 
@@ -60,4 +60,3 @@ func _clamp_axis(value: float, lower_limit: float, upper_limit: float, half_view
 	if minimum > maximum:
 		return (lower_limit + upper_limit) * 0.5
 	return clampf(value, minimum, maximum)
-	
