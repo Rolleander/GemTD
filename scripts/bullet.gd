@@ -52,6 +52,16 @@ func _stop():
 	if render is GPUParticles2D:
 		render.emitting = false
 
+func cancel():
+	if hit:
+		return
+	hit = true
+	if is_instance_valid(target):
+		target.projected_damage = maxf(0.0, target.projected_damage - projected_damage)
+	if trail != null:
+		trail.stop()
+	queue_free()
+
 
 func _physics_process(delta):
 	if hit:

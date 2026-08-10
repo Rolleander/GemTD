@@ -10,7 +10,18 @@ class_name ProjectileAttack
 
 func _ready():
 	super()
+	if bullet_source == null:
+		push_error("ProjectileAttack '%s' has no bullet_source configured." % name)
+		active = false
+		set_physics_process(false)
+		return
 	bullet_source.visible = false
+
+func cancel_projectiles():
+	for child in get_children():
+		var bullet := child as Bullet
+		if bullet != null:
+			bullet.cancel()
 	
 func _physics_process(delta):
 	super(delta)

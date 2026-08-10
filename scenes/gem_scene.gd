@@ -7,7 +7,6 @@ const SPARKLE_SHADER = preload("res://resources/shaders/gem_sparkle.gdshader")
 @onready var comb_animation = $CombineRing/AnimationPlayer as AnimationPlayer
 @onready var dmg_label = $DmgLabel
 
-var active_combo : GemCombine = null
 var glow_phase: float = 0.0
 var base_light_energy: float = 0.0
 var base_light_texture_scale: float = 0.0
@@ -18,14 +17,14 @@ func _ready():
 	static_body.input_event.connect(_on_static_body_2d_input_event)
 	$CombineRing.hide()
 
-func show_combine(combo : GemCombine):
-	if active_combo == null || combo.gems.size() != active_combo.gems.size():
-		comb_animation.play("combine_ring")		
-	active_combo = combo
+func show_combine(combo: GemCombine):
+	#if available_combo == null || combo.gems.size() != available_combo.gems.size():
+	comb_animation.play("combine_ring")
+	available_combo = combo
 	$CombineRing.show()
 
 func hide_combine():
-	active_combo = null
+	available_combo = null
 	$CombineRing.hide()
 	comb_animation.stop()
 
@@ -33,6 +32,10 @@ func make_rock():
 	super()
 	hide_combine()
 	$PointLight2D.visible = false
+
+func activate_combination():
+	super()
+	hide_combine()
 
 func _process(delta: float) -> void:
 	if base_light_energy <= 0.0 || rock:
@@ -95,9 +98,9 @@ func _apply_crystal_material(render: Sprite2D, quality_level: int, color: Color)
 		particle_process.scale_max = lerpf(0.5, 0.88, quality_strength)
 		particles.process_material = particle_process
 
-func init_basic_gem(type : GemType, quality : GemQuality):
+func init_basic_gem(type: GemType, quality: GemQuality):
 	self.type = type
-	self.quality = quality 
+	self.quality = quality
 	var type_info = Globals.get_gem_info(type)
 	var quality_info = Globals.get_quality_info(quality)
 	var gem_color: Color = type_info.color.lightened(0.1)
@@ -109,29 +112,29 @@ func init_basic_gem(type : GemType, quality : GemQuality):
 		graphic.remove_child(n)
 		n.queue_free()
 	graphic.add_child(render)
+	update_level_visual()
 	var atk = type_info.attack.instantiate()
 	_init_attack_stats(atk)
 	set_attack(atk)
 	var label_text = ""
 	gem_name = ""
 	if quality_info.label != null && !quality_info.label.is_empty():
-		label_text += quality_info.label +"\n"
-		gem_name +=quality_info.label+" "
+		label_text += quality_info.label + "\n"
+		gem_name += quality_info.label + " "
 	label_text += type_info.label
-	gem_name +=  type_info.label
+	gem_name += type_info.label
 	label.label_settings = label.label_settings.duplicate()
-	label.label_settings.font_color =  type_info.color.lightened(0.5)
+	label.label_settings.font_color = type_info.color.lightened(0.5)
 	label.text = label_text
 
-func _init_attack_stats(attack : Attack):
+func _init_attack_stats(attack: Attack):
 	var index = type * 6 + quality
-	var stats = preload("res://resources/standard_gems.csv").records[index]	
+	var stats = preload("res://resources/standard_gems.csv").records[index]
 	attack.damage = stats.Damage
 	attack.attack_delay = stats.Speed
-	attack.attack_range = stats.Range	
-	attack.attack_scale += quality *.1
+	attack.attack_range = stats.Range
+	attack.attack_scale += quality * .1
 
 func _on_static_body_2d_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("click"):
-		Events.emit_signal("gem_selected",self)
-		
+		Events.emit_signal("gem_selected", self)

@@ -11,18 +11,26 @@ func _init(gems: Array[Gem], combination: SpecialGem):
 func combine(target: Gem) -> Gem:
 	var material = []
 	gems.erase(target)
-	for r in combination.recipe:
-		for gem in gems:
+	var gems_by_exp := gems.duplicate()
+	gems_by_exp.sort_custom(func(a: Gem, b: Gem) -> bool: return a.exp > b.exp)
+	var other_gems = combination.recipe.duplicate()
+	for r in other_gems:
+		if r.quality == target.quality && r.type == target.type:
+			other_gems.erase(r)
+			break
+	for r in other_gems:
+		for gem in gems_by_exp:
 			if gem.quality == r.quality && gem.type == r.type && gem.special_combination == null && !material.has(gem):
 				material.append(gem)
 				break
-	var exp = 0.0
+	var exp = target.exp
 	for g in material:
 		exp += g.exp
-		if g != target:
-			g.make_rock()
-	#init special gem and give exp		
+		g.make_rock()
+	#init special gem and give exp
+	target.name = combination.name
 	target.special_combination = combination
-	target.set_attack(combination.scene.instantiate())
+	var special_scene := combination.scene.instantiate() as SpecialGemScene
+	special_scene.transform(target)
 	LevelUp.gain_exp(target, exp, false)
 	return target

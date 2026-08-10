@@ -102,8 +102,6 @@ func _add_level_buff(gem: Gem):
 func list_gems_in_range(gem: Gem, range: float):
 	var gems = []
 	for target in Game.get_gems():
-		if target.under_construction || gem == target:
-			continue
-		if Utils.in_range(gem, target, range, G_R):
-			gems.append(gem)
+		if !target.under_construction && gem != target && Utils.in_range(gem, target, range, G_R):
+			gems.append(target)
 	return gems

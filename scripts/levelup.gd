@@ -3,13 +3,13 @@ extends Node
 const MAX_LEVEL = 15
 const SHARE_LEVEL = 12
 const SHARE_FACTOR = 0.5
-const SHARE_RANGE = 4.0
+const SHARE_RANGE = 3.5
 const EXP_TEXT_COLOR := Color(0.25, 0.68, 1.0, 1.0)
 const EXP_TEXT_SIZE := 20
 const LEVEL_UP_TEXT_SIZE := 35
 
 func gain_exp_from(gem: Gem, enemy: Enemy):
-	gain_exp(gem, 1.0)
+	gain_exp(gem, 10.0)
 
 func gain_exp(gem: Gem, exp: float, share = true):
 	if share && gem.level >= SHARE_LEVEL:
@@ -21,9 +21,12 @@ func gain_exp(gem: Gem, exp: float, share = true):
 	_gain_exp(gem, exp)
 
 func level_up(gem: Gem):
+	if gem.level >= MAX_LEVEL:
+		return
 	gem.level += 1
 	if gem.level < MAX_LEVEL:
 		gem.levelup_exp = get_levelup_exp(gem.level + 1)
+	gem.update_level_visual()
 	BuffUtils.update_tower_buffs()
 		
 func get_levelup_exp(level: int):
@@ -44,7 +47,8 @@ func _receive_shared_exp(gem: Gem, exp: float):
 func _gain_exp(gem: Gem, exp: float):
 	gem.exp += exp
 	if gem.exp >= gem.levelup_exp:
-		level_up(gem)
+		while gem.level < MAX_LEVEL && gem.exp >= gem.levelup_exp:
+			level_up(gem)
 		Events.overlay_text(gem, "LEVEL UP", EXP_TEXT_COLOR, LEVEL_UP_TEXT_SIZE)
 	else:
 		Events.overlay_text(gem, "+%sXP" % _format_exp(exp), EXP_TEXT_COLOR, EXP_TEXT_SIZE)

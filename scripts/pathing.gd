@@ -20,5 +20,3 @@ func set_block(node : Vector2, blocked = true ):
 	astar.set_point_solid(Vector2i(x-1,y), blocked)
 	astar.set_point_solid(Vector2i(x,y-1), blocked)
 	astar.set_point_solid(Vector2i(x-1,y-1), blocked)
-
-

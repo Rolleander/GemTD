@@ -11,7 +11,6 @@ var money = 10
 var selected_gem: Gem
 var selected_enemy: Enemy
 var gem_chances: GemChances = GemChances.new()
-var build_menu
 
 func _ready():
 	Engine.time_scale = 1.5
@@ -22,7 +21,6 @@ func _ready():
 	Events.enemy_selected.connect(_update_selection)
 	
 func finish_building():
-	#var maze = get_tree().get_first_node_in_group("maze_node")
 	BuffUtils.update_tower_buffs()
 	construction_phase = false
 	wave.start_wave()

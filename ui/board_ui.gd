@@ -8,6 +8,7 @@ func _ready():
 	$MarginContainer2/MarginContainer/GemInfo.visible = false
 	$MarginContainer2/MarginContainer/BuildMenu.visible = false
 	$MarginContainer2/MarginContainer/RockMenu.visible = false
+	$MarginContainer2/MarginContainer/GemMenu.visible = false
 	$MarginContainer3/VBoxContainer/EnemyPanel.visible = false
 
 func _process(delta):
