@@ -15,7 +15,7 @@ const RANGE_RING = 800.0
 var type: GemType
 var quality: GemQuality
 var rock = false
-var special_combination = null
+var special_combination: SpecialGemScene = null
 var kills = 0
 var exp = 0
 var levelup_exp = 10
@@ -95,7 +95,7 @@ func update_level_visual():
 	if render == null:
 		return
 	var level_progress := clampf(float(level) / float(LevelUp.MAX_LEVEL), 0.0, 1.0)
-	var size_multiplier := lerpf(1.0, 2.0, level_progress)
+	var size_multiplier := lerpf(1.0, 1.35, level_progress)
 	var half_height := render.region_rect.size.y * 0.5
 	render.scale = Vector2.ONE * size_multiplier
 	render.offset.y = - half_height * (1.0 - 1.0 / size_multiplier) + (size_multiplier * 5.0)

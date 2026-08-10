@@ -30,12 +30,10 @@ func combine(target: Gem) -> Gem:
 		g.make_rock()
 	#init special gem and give exp
 	target.gem_name = combination.name
-	target.special_combination = combination
 	var special_scene := combination.scene.instantiate() as SpecialGemScene
 	if special_scene == null:
 		push_error("Special gem scene must extend SpecialGemScene.")
 		return target
-	special_scene.transform(target)
-	special_scene.free()
+	special_scene.install(target)
 	LevelUp.gain_exp(target, exp, false)
 	return target

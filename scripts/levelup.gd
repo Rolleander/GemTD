@@ -12,6 +12,8 @@ func gain_exp_from(gem: Gem, enemy: Enemy):
 	gain_exp(gem, 1.0)
 
 func gain_exp(gem: Gem, exp: float, share = true):
+	if exp <= 0:
+		return
 	if share && gem.level >= SHARE_LEVEL:
 		for neighbour in BuffUtils.list_gems_in_range(gem, SHARE_RANGE):
 			_receive_shared_exp(neighbour, exp * SHARE_FACTOR)

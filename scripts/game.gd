@@ -1,6 +1,6 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 50
+const PLACEMENTS_PER_ROUND = 5
 
 var construction_phase = true
 var remaining_placements = PLACEMENTS_PER_ROUND

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://sf31by7vb4cx"]
 
-[ext_resource type="Script" uid="uid://dtho5hq78o5mn" path="res://scripts/special_gem_scene.gd" id="1_m6j28"]
+[ext_resource type="Script" uid="uid://ceb7r27thihle" path="res://gems/special/blub_gem.gd" id="1_m5kkc"]
 [ext_resource type="Texture2D" uid="uid://vlcc7osg0d56" path="res://sprites/gems_old.png" id="2_id5pr"]
 [ext_resource type="Script" uid="uid://dhl77wk4o2611" path="res://attacks/projectile_attack.gd" id="2_wcdhm"]
 [ext_resource type="Texture2D" uid="uid://c3liyqtvj3agq" path="res://sprites/bubble.png" id="3_qpxo3"]
@@ -66,7 +66,7 @@ fill_from = Vector2(0.474359, 0.482906)
 fill_to = Vector2(0.846154, 0.162393)
 
 [node name="blub_gem" type="Node2D"]
-script = ExtResource("1_m6j28")
+script = ExtResource("1_m5kkc")
 metadata/_custom_type_script = "uid://dtho5hq78o5mn"
 
 [node name="Graphic" type="Sprite2D" parent="."]

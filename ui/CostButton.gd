@@ -2,6 +2,8 @@ extends Button
 
 class_name CostButton
 
+signal action_pressed
+
 enum CostType{
 	MONEY,
 	ROLLS
@@ -58,9 +60,9 @@ func _process(delta):
 		_update_panel()
 
 func _on_pressed():
-	if cost<=0:
-		return
-	if type == CostType.MONEY:
-		Game.money -= cost
-	else:
-		Game.remaining_placements -= cost	
+	if cost > 0:
+		if type == CostType.MONEY:
+			Game.money -= cost
+		else:
+			Game.remaining_placements -= cost
+	action_pressed.emit()

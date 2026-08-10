@@ -487,12 +487,47 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="Combine" type="Button" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer"]
-custom_minimum_size = Vector2(60, 60)
+[node name="Action6" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
-text = "Comb
-"
+tooltip_text = "Roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+type = 1
+cost = 1
+
+[node name="Action5" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+type = 1
+cost = 1
+
+[node name="Action4" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+type = 1
+cost = 1
+
+[node name="Action3" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+type = 1
+cost = 1
+
+[node name="Action2" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+type = 1
+cost = 1
+
+[node name="Action" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+type = 1
+cost = 1
 
 [node name="RockMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
 custom_minimum_size = Vector2(0, 70)
@@ -522,7 +557,7 @@ cost = 1
 
 [node name="Remove" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
+tooltip_text = "Removes the rock from the maze"
 type = 1
 
 [connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
@@ -534,6 +569,5 @@ type = 1
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion4" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_4_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_combine_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_reroll_pressed"]
-[connection signal="pressed" from="MarginContainer2/MarginContainer/GemMenu/HBoxContainer/Combine" to="MarginContainer2/MarginContainer/GemMenu" method="_on_combine_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/RockMenu" method="_on_reroll_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Remove" to="MarginContainer2/MarginContainer/RockMenu" method="_on_remove_pressed"]
