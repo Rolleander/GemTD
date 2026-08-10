@@ -1,14 +1,111 @@
-[gd_scene load_steps=3 format=3 uid="uid://sf31by7vb4cx"]
+[gd_scene load_steps=16 format=3 uid="uid://sf31by7vb4cx"]
 
 [ext_resource type="Script" uid="uid://dtho5hq78o5mn" path="res://scripts/special_gem_scene.gd" id="1_m6j28"]
+[ext_resource type="Texture2D" uid="uid://vlcc7osg0d56" path="res://sprites/gems_old.png" id="2_id5pr"]
 [ext_resource type="Script" uid="uid://dhl77wk4o2611" path="res://attacks/projectile_attack.gd" id="2_wcdhm"]
+[ext_resource type="Texture2D" uid="uid://c3liyqtvj3agq" path="res://sprites/bubble.png" id="3_qpxo3"]
+[ext_resource type="Texture2D" uid="uid://dgt2n6g4hsgmp" path="res://sprites/blue_particle.png" id="5_m5kkc"]
+
+[sub_resource type="Gradient" id="Gradient_m5kkc"]
+colors = PackedColorArray(1, 1, 1, 0.603922, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rtvka"]
+gradient = SubResource("Gradient_m5kkc")
+
+[sub_resource type="Curve" id="Curve_6ce46"]
+_data = [Vector2(0.546392, 0.463158), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nmh1s"]
+curve = SubResource("Curve_6ce46")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ie7ft"]
+lifetime_randomness = 0.65
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 15.2
+angle_max = 720.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 0.456
+angular_velocity_min = -64.2
+angular_velocity_max = 82.55
+gravity = Vector3(0, -10, 0)
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_nmh1s")
+color = Color(1, 1, 1, 0.780392)
+color_ramp = SubResource("GradientTexture1D_rtvka")
+
+[sub_resource type="Gradient" id="Gradient_qpxo3"]
+colors = PackedColorArray(1, 1, 1, 0.858824, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_is3mc"]
+gradient = SubResource("Gradient_qpxo3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m5kkc"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 7.71
+direction = Vector3(0, 0, 0)
+angular_velocity_min = -210.52
+angular_velocity_max = 343.79
+gravity = Vector3(0, 0, 0)
+scale_min = 0.01
+scale_max = 0.04
+color_ramp = SubResource("GradientTexture1D_is3mc")
+
+[sub_resource type="Gradient" id="Gradient_rvpff"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6ce46"]
+gradient = SubResource("Gradient_rvpff")
+fill = 1
+fill_from = Vector2(0.474359, 0.482906)
+fill_to = Vector2(0.846154, 0.162393)
 
 [node name="blub_gem" type="Node2D"]
 script = ExtResource("1_m6j28")
 metadata/_custom_type_script = "uid://dtho5hq78o5mn"
 
 [node name="Graphic" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+texture = ExtResource("2_id5pr")
+region_enabled = true
+region_rect = Rect2(273.808, 28.6146, 29.2662, 31.194)
 
-[node name="Attack" type="Node2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Graphic"]
+z_index = 8
+position = Vector2(0, -9)
+amount = 50
+texture = ExtResource("3_qpxo3")
+lifetime = 3.0
+trail_lifetime = 1.1
+process_material = SubResource("ParticleProcessMaterial_ie7ft")
+
+[node name="Attack" type="Node2D" parent="." node_paths=PackedStringArray("bullet_source")]
 script = ExtResource("2_wcdhm")
+bullet_speed = 13.5
+bullet_source = NodePath("Bullet")
+angle_spread = 1.5
+curve_strength = 1.0
+damage = 22.0
+attack_range = 8.0
+splash_range = 2.0
 metadata/_custom_type_script = "uid://dhl77wk4o2611"
+
+[node name="Bullet" type="GPUParticles2D" parent="Attack"]
+amount = 1000
+texture = ExtResource("5_m5kkc")
+lifetime = 0.5
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_m5kkc")
+
+[node name="PointLight2D" type="PointLight2D" parent="Attack/Bullet"]
+position = Vector2(0.232138, 9.53674e-07)
+scale = Vector2(0.601004, 0.565848)
+color = Color(0.0361253, 0.621841, 0.702273, 1)
+energy = 1.41
+texture = SubResource("GradientTexture2D_6ce46")

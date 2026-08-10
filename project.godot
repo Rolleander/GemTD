@@ -29,6 +29,8 @@ Utils="*res://scripts/Utils.gd"
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/size/window_width_override=2400
+window/size/window_height_override=1400
 window/stretch/scale=1.5
 
 [dotnet]

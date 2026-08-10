@@ -23,14 +23,19 @@ func combine(target: Gem) -> Gem:
 			if gem.quality == r.quality && gem.type == r.type && gem.special_combination == null && !material.has(gem):
 				material.append(gem)
 				break
-	var exp = target.exp
+	var exp = 0
 	for g in material:
 		exp += g.exp
+		target.kills += g.kills
 		g.make_rock()
 	#init special gem and give exp
-	target.name = combination.name
+	target.gem_name = combination.name
 	target.special_combination = combination
 	var special_scene := combination.scene.instantiate() as SpecialGemScene
+	if special_scene == null:
+		push_error("Special gem scene must extend SpecialGemScene.")
+		return target
 	special_scene.transform(target)
+	special_scene.free()
 	LevelUp.gain_exp(target, exp, false)
 	return target

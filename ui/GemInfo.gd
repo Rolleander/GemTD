@@ -10,6 +10,7 @@ extends PanelContainer
 @onready var range_buff_label = $MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3/RngBuff as Label
 @onready var exp_container = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2
 @onready var exp_bar = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer/ProgressBar as ProgressBar
+@onready var exp_value_label = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer/ProgressBar/Value as Label
 @onready var kills_label = $MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer/Kills
 @onready var buffList = get_parent().get_node("BuffList")
 @onready var info_label = $MarginContainer/VBoxContainer/MarginContainer/AttackInfo
@@ -32,6 +33,10 @@ func _open(gem : Gem):
 		exp_bar.min_value = LevelUp.get_levelup_exp(gem.level)
 		exp_bar.max_value = gem.levelup_exp
 		exp_bar.value = gem.exp
+		exp_value_label.text = "%s/%s" % [
+			_format_exp_value(gem.exp),
+			_format_exp_value(gem.levelup_exp)
+		]
 	kills_label.text = str(gem.kills)
 	level_label.visible = !gem.rock
 	if gem.rock:
@@ -59,6 +64,9 @@ func _enem_buff_text(buff : EnemyBuff):
 		text += " for "+str(buff.duration)+"s"
 	text += " ["+buff.name+"]"
 	return text
+
+func _format_exp_value(value: float) -> String:
+	return ("%.1f" % value).trim_suffix(".0")
 
 func _set_buffed_value(
 	value_label: Label,

@@ -24,5 +24,5 @@ func _spawn_bullet(enemy: Enemy):
 		bullet.hit_damage_scale = CRIT_DMG
 		var render = bullet.get_child(0)
 		render.transform = render.transform.scaled(Vector2(CRIT_SCALE, CRIT_SCALE))
-		Events.overlay_text(gem, "CRIT!!!")
+		Events.overlay_text(gem.position, "CRIT!!!")
 	return bullet

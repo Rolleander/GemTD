@@ -15,7 +15,7 @@ var direction  : Vector2
 var trail : SmokeTrail
 var hit_damage_scale = 1
 var hit = false
-var fadeout = 0.15
+var fadeout: float = 0.15
 var turn_speed = 200.0
 var angle_spread: float = 0.0
 var curve_strength: float = 0.0
@@ -43,24 +43,49 @@ func _stop():
 	hit = true
 	if trail != null:
 		trail.stop()
+
+	var particle_emitters = _get_particle_emitters()
+	if particle_emitters.is_empty():
+		# A normal projectile body should vanish on impact; only its detached trail
+		# continues fading so the bullet never hangs motionless in the air.
+		queue_free()
+		return
+
+	var particle_lifetime = fadeout
+	for emitter in particle_emitters:
+		emitter.emitting = false
+		particle_lifetime = maxf(particle_lifetime, emitter.lifetime)
+
+	# Hide a normal bullet body immediately while allowing particle children to
+	# finish. self_modulate affects only the body, not its particle children.
+	var render = get_child(0) as CanvasItem
+	if render != null && !(render is GPUParticles2D):
+		render.self_modulate.a = 0.0
+	for light in find_children("*", "PointLight2D", true, false):
+		(light as PointLight2D).visible = false
+
 	var tween = create_tween()
-	tween.set_trans( Tween.TRANS_CIRC)
-	tween.set_ease( Tween.EASE_OUT)
-	tween.tween_property(self, "modulate:a",  0.0,  fadeout)
+	tween.tween_interval(particle_lifetime * 0.2)
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "modulate:a", 0.0, particle_lifetime * 0.8)
 	tween.tween_callback(queue_free)
-	var render = get_child(0) 
-	if render is GPUParticles2D:
-		render.emitting = false
+
+func _get_particle_emitters() -> Array[GPUParticles2D]:
+	var emitters = [] as Array[GPUParticles2D]
+	for node in find_children("*", "GPUParticles2D", true, false):
+		var emitter = node as GPUParticles2D
+		if emitter != null:
+			emitters.append(emitter)
+	return emitters
 
 func cancel():
 	if hit:
 		return
-	hit = true
 	if is_instance_valid(target):
 		target.projected_damage = maxf(0.0, target.projected_damage - projected_damage)
-	if trail != null:
-		trail.stop()
-	queue_free()
+	projected_damage = 0
+	_stop()
 
 
 func _physics_process(delta):
@@ -71,11 +96,11 @@ func _physics_process(delta):
 		return
 	flight_time += delta
 	rotation = direction.angle()
-	var previous_position := global_position
+	var previous_position = global_position
 	position += direction * (speed * Globals.GRID_SIZE) * delta
 	var distance = global_position.distance_to(target.global_position)
-	var target_direction := global_position.direction_to(target.global_position)
-	var desired_direction := _curved_direction(target_direction, distance)
+	var target_direction = global_position.direction_to(target.global_position)
+	var desired_direction = _curved_direction(target_direction, distance)
 	var maxTurn = maxf(0.1, (turn_speed-distance) / turn_speed)
 	direction = lerp(direction, desired_direction, maxTurn).normalized()
 	if trail != null:
@@ -87,6 +112,7 @@ func _physics_process(delta):
 	if distance <= HIT_SIZE or _passed_through_target(previous_position, global_position):
 		source.bullet_hit(self, target)
 		target.projected_damage -= projected_damage
+		projected_damage = 0
 		_stop()
 		return
 		
@@ -107,16 +133,16 @@ func _curved_direction(target_direction: Vector2, distance: float) -> Vector2:
 	var wave_speed: float = lerpf(1.15, 1.85, curve_variation)
 	var curve_wave: float = 0.84 + sin(flight_time * wave_speed + curve_phase) * 0.16
 	var current_curve: float = curve_strength * curve_variation * curve_wave * curve_fade
-	var sideways := target_direction.orthogonal() * curve_direction
+	var sideways = target_direction.orthogonal() * curve_direction
 	return (target_direction + sideways * current_curve).normalized()
 
 func _passed_through_target(from: Vector2, to: Vector2) -> bool:
 	# A fast projectile may cross the entire hit radius between physics frames.
-	var movement := to - from
-	var movement_length_squared := movement.length_squared()
+	var movement = to - from
+	var movement_length_squared = movement.length_squared()
 	if is_zero_approx(movement_length_squared):
 		return false
-	var target_offset := target.global_position - from
-	var progress := clampf(target_offset.dot(movement) / movement_length_squared, 0.0, 1.0)
-	var closest_point := from + movement * progress
+	var target_offset = target.global_position - from
+	var progress = clampf(target_offset.dot(movement) / movement_length_squared, 0.0, 1.0)
+	var closest_point = from + movement * progress
 	return closest_point.distance_squared_to(target.global_position) <= HIT_SIZE * HIT_SIZE

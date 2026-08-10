@@ -10,6 +10,7 @@ class_name ProjectileAttack
 
 func _ready():
 	super()
+	Events.wave_ended.connect(cancel_projectiles)
 	if bullet_source == null:
 		push_error("ProjectileAttack '%s' has no bullet_source configured." % name)
 		active = false

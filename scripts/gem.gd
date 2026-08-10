@@ -45,16 +45,18 @@ func _physics_process(delta):
 		return
 	damage_dealt.update(delta)
 
-func set_attack(attack: Attack):
+func set_attack(new_attack: Attack):
+	var was_active := is_instance_valid(attack) && attack.active
 	_destroy_attack()
-	self.attack = attack
+	attack = new_attack
 	attack.gem = self
-	var range_scale = (attack.attack_range * Globals.TILE_SIZE) / RANGE_RING
-	range_ring.scale = Vector2(range_scale, range_scale)
-	add_child(attack)
 	self.damage.value_set(attack.damage)
 	self.attack_range.value_set(attack.attack_range)
 	self.attack_delay.value_set(attack.attack_delay)
+	attack.active = was_active
+	var range_scale = (attack.attack_range * Globals.TILE_SIZE) / RANGE_RING
+	range_ring.scale = Vector2(range_scale, range_scale)
+	add_child(attack)
 
 func make_rock():
 	rock = true
@@ -82,7 +84,6 @@ func _destroy_attack():
 func activate_combination():
 	if !available_combo:
 		return
-	_destroy_attack()
 	available_combo.combine(self)
 	available_combo = null
 	Game.reselect()

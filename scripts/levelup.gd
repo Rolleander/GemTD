@@ -5,11 +5,11 @@ const SHARE_LEVEL = 12
 const SHARE_FACTOR = 0.5
 const SHARE_RANGE = 3.5
 const EXP_TEXT_COLOR := Color(0.25, 0.68, 1.0, 1.0)
-const EXP_TEXT_SIZE := 20
+const EXP_TEXT_SIZE := 28
 const LEVEL_UP_TEXT_SIZE := 35
 
 func gain_exp_from(gem: Gem, enemy: Enemy):
-	gain_exp(gem, 10.0)
+	gain_exp(gem, 1.0)
 
 func gain_exp(gem: Gem, exp: float, share = true):
 	if share && gem.level >= SHARE_LEVEL:
@@ -46,12 +46,11 @@ func _receive_shared_exp(gem: Gem, exp: float):
 
 func _gain_exp(gem: Gem, exp: float):
 	gem.exp += exp
+	Events.overlay_text(gem.position, "+%sXP" % _format_exp(exp), EXP_TEXT_COLOR, EXP_TEXT_SIZE)
 	if gem.exp >= gem.levelup_exp:
 		while gem.level < MAX_LEVEL && gem.exp >= gem.levelup_exp:
 			level_up(gem)
-		Events.overlay_text(gem, "LEVEL UP", EXP_TEXT_COLOR, LEVEL_UP_TEXT_SIZE)
-	else:
-		Events.overlay_text(gem, "+%sXP" % _format_exp(exp), EXP_TEXT_COLOR, EXP_TEXT_SIZE)
-
+		Events.overlay_text(gem.position + Vector2(0, -25.0), "LEVEL UP", EXP_TEXT_COLOR, LEVEL_UP_TEXT_SIZE)
+	
 func _format_exp(exp: float) -> String:
 	return ("%.1f" % exp).trim_suffix(".0")

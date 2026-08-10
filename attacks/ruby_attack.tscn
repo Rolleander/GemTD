@@ -69,10 +69,10 @@ texture = ExtResource("3_t5oie")
 show_behind_parent = true
 position = Vector2(-8.57143, -1.42857)
 amount = 15
-process_material = SubResource("ParticleProcessMaterial_j0jgy")
 texture = ExtResource("4_f5q3u")
 lifetime = 0.5
 fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_j0jgy")
 
 [node name="PointLight2D" type="PointLight2D" parent="Sprite2d"]
 position = Vector2(12, -1.21428)
@@ -85,8 +85,8 @@ texture = SubResource("GradientTexture2D_050u3")
 visible = false
 self_modulate = Color(1, 1, 1, 0.227451)
 amount = 15
-process_material = SubResource("ParticleProcessMaterial_q0whc")
 texture = ExtResource("4_f5q3u")
 lifetime = 0.3
 explosiveness = 0.82
 local_coords = true
+process_material = SubResource("ParticleProcessMaterial_q0whc")

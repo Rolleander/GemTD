@@ -6,14 +6,14 @@
 [sub_resource type="Gradient" id="Gradient_sk8im"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rtvka"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2qp3v"]
 gradient = SubResource("Gradient_sk8im")
 
 [sub_resource type="Curve" id="Curve_ny3bb"]
 _data = [Vector2(0.546392, 0.463158), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_nmh1s"]
+[sub_resource type="CurveTexture" id="CurveTexture_w5tvv"]
 curve = SubResource("Curve_ny3bb")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vklob"]
@@ -29,9 +29,9 @@ angular_velocity_min = -64.2
 angular_velocity_max = 82.55
 gravity = Vector3(0, -5, 0)
 scale_min = 0.1
-scale_curve = SubResource("CurveTexture_nmh1s")
+scale_curve = SubResource("CurveTexture_w5tvv")
 color = Color(1, 1, 1, 0.780392)
-color_ramp = SubResource("GradientTexture1D_rtvka")
+color_ramp = SubResource("GradientTexture1D_2qp3v")
 
 [node name="perfect" type="Sprite2D"]
 texture = ExtResource("1_gdefo")

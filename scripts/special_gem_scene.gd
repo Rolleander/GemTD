@@ -17,6 +17,7 @@ func transform(gem: Gem) -> bool:
 		gem.graphic.remove_child(old_graphic)
 		old_graphic.queue_free()
 
+	new_graphic.visible = true
 	gem.graphic.add_child(new_graphic)
 	gem.set_attack(new_attack)
 	return true

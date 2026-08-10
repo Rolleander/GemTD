@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=19 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
@@ -27,6 +27,9 @@ bg_color = Color(0.121569, 0.74902, 0.32549, 1)
 font = ExtResource("4_5kyyh")
 font_size = 14
 font_color = Color(0.196078, 1, 0.262745, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g022i"]
+bg_color = Color(0, 0.403629, 0.889066, 1)
 
 [node name="board_ui" type="CanvasLayer"]
 script = ExtResource("1_883fb")
@@ -357,19 +360,34 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 6
+theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 6
+theme_override_constants/margin_bottom = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer"]
-custom_minimum_size = Vector2(0, 8)
+custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_styles/fill = SubResource("StyleBoxFlat_ksh6u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g022i")
 step = 0.5
 value = 20.0
 show_percentage = false
+
+[node name="Value" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2/MarginContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.85)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 14
+text = "0/10"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2

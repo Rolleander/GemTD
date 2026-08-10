@@ -1,6 +1,6 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 5
+const PLACEMENTS_PER_ROUND = 50
 
 var construction_phase = true
 var remaining_placements = PLACEMENTS_PER_ROUND
@@ -29,6 +29,8 @@ func _enemy_killed(enemy: Enemy, killer: Gem):
 	money += enemy.money
 
 func placed_gem(gem: Gem):
+	gem.under_construction = true
+	gem.remove_from_group("gems")
 	gem.add_to_group("building")
 	BuffUtils.update_tower_buffs()
 	CombinationsCheck.check()

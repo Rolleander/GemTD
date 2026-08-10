@@ -11,7 +11,8 @@ func _ready():
 
 func _open(gem: Gem):
 	self.gem = gem
-	visible = !gem.rock && !gem.under_construction
+	var is_board_gem := gem.is_in_group("gems") && !gem.is_in_group("building")
+	visible = !gem.rock && !gem.under_construction && is_board_gem
 	combine.visible = gem.available_combo != null
 
 func _on_combine_pressed() -> void:
