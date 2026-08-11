@@ -28,11 +28,16 @@ func overlay_text(
 	font_size: int = 30,
 ):
 	var instance = overlay_text_scene.instantiate()
-	instance.position = position
 	instance.text = text
 	instance.text_color = color
 	instance.font_size = font_size
-	get_tree().get_first_node_in_group("Effects").add_child(instance)
+	instance.world_position = position
+	instance.screen_billboard = true
+	var board = get_tree().get_first_node_in_group("board") as Board
+	var billboard_layer = get_tree().get_first_node_in_group("billboard_layer") as Node2D
+	billboard_layer.add_child(instance)
+	instance.board = board
+	instance.sync_billboard()
 
 func screen_text(
 	text: String,

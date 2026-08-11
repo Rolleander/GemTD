@@ -6,11 +6,13 @@ const GemQuality = preload("res://scripts/gem_quality.gd").GemQuality
 const GemType = preload("res://scripts/gem_types.gd").GemType
 const Boulder = preload("res://gems/boulder.tscn")
 const RANGE_RING = 800.0
-@onready var label = $Label
+@onready var billboard = $Billboard
+@onready var label = $Billboard/Label
 @onready var selection = $SelectionRing
 @onready var range_ring = $RangRing
-@onready var graphic = $Graphic
-@onready var glow = $Glow
+@onready var graphic = $Billboard/Graphic
+@onready var glow = $Billboard/Glow
+@onready var board = get_tree().get_first_node_in_group("board") as Board
 
 var type: GemType
 var quality: GemQuality
@@ -44,6 +46,21 @@ func _physics_process(delta):
 	if rock:
 		return
 	damage_dealt.update(delta)
+
+func sync_billboard():
+	pass
+
+func refresh_billboard_effects():
+	pass
+
+func get_attack_origin_screen_position() -> Vector2:
+	return get_viewport().get_canvas_transform() * global_position
+
+func get_attack_origin_world_position() -> Vector2:
+	return global_position
+
+func update_level_visual():
+	pass
 
 func set_attack(new_attack: Attack):
 	var was_active := is_instance_valid(attack) && attack.active
@@ -84,26 +101,15 @@ func _destroy_attack():
 func activate_combination():
 	if !available_combo:
 		return
-	available_combo.combine(self)
-	Events.screen_text("Combined to " + available_combo.combination.name, Color.LIME_GREEN, 70)
-	available_combo = null
+	var selected_combo = available_combo
+	var combination_name = selected_combo.combination.name
+	selected_combo.combine(self)
+	Events.screen_text("Combined to " + combination_name, Color.LIME_GREEN, 70)
 	Game.reselect()
 
-func update_level_visual():
-	if rock || graphic.get_child_count() == 0:
-		return
-	var render := graphic.get_child(0) as Sprite2D
-	if render == null:
-		return
-	var level_progress := clampf(float(level) / float(LevelUp.MAX_LEVEL), 0.0, 1.0)
-	var size_multiplier := lerpf(1.0, 1.35, level_progress)
-	var half_height := render.region_rect.size.y * 0.5
-	render.scale = Vector2.ONE * size_multiplier
-	render.offset.y = - half_height * (1.0 - 1.0 / size_multiplier) + (size_multiplier * 5.0)
-	
 func activate(picked: bool):
 	remove_from_group("building")
-	remove_child(label)
+	label.get_parent().remove_child(label)
 	remove_child($BuildingRing)
 	under_construction = false
 	if picked:

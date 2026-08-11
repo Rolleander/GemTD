@@ -24,6 +24,7 @@ func install(gem: Gem):
 	new_graphic.visible = true
 	gem.special_combination = self
 	gem.graphic.add_child(new_graphic)
+	gem.refresh_billboard_effects()
 	gem.set_attack(new_attack)
 
 func init_menu(menu: GemMenu):

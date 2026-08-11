@@ -35,13 +35,16 @@ func _attack(enemy : Enemy):
 	
 func _spawn_bullet(enemy : Enemy):
 	var bullet = Bullet.new()
+	var attack_origin = gem.get_attack_origin_world_position()
 	var trail_source = find_child("SmokeTrail")
 	if trail_source != null:
 		var trail = trail_source.duplicate() as SmokeTrail
-		trail.position = self.position
+		var trail_parent = get_tree().get_first_node_in_group("billboard_layer") as Node2D
+		trail.position = Vector2.ZERO
 		trail.width =  trail.width  * attack_scale
-		get_tree().get_first_node_in_group("TrailNode").add_child(trail)
+		trail_parent.add_child(trail)
 		bullet.trail = trail
+	bullet.position = to_local(attack_origin)
 	bullet.target = enemy
 	bullet.source = self
 	bullet.speed = bullet_speed
@@ -57,8 +60,8 @@ func _spawn_bullet(enemy : Enemy):
 		render.transform =  render.transform.scaled(Vector2(attack_scale, attack_scale))	
 	bullet.angle_spread = angle_spread
 	bullet.curve_strength = curve_strength
-	bullet.add_child(render)
-	render.visible=true
+	bullet.set_render(render)
+	render.visible = true
 	return bullet
 	
 func bullet_hit(bullet : Bullet, target : Enemy):

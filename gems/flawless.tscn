@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://7vqmqarqfihj"]
+[gd_scene load_steps=9 format=3 uid="uid://7vqmqarqfihj"]
 
 [ext_resource type="Texture2D" uid="uid://bj5jy15w846il" path="res://sprites/gems/flawless.png" id="1_o7i7u"]
 [ext_resource type="Texture2D" uid="uid://brxi0l2bcml0g" path="res://sprites/sheen.png" id="2_vxvbl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t7qe0"]
 
 [sub_resource type="Gradient" id="Gradient_sk8im"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -35,6 +37,7 @@ color = Color(1, 1, 1, 0.780392)
 color_ramp = SubResource("GradientTexture1D_rtvka")
 
 [node name="flawless" type="Sprite2D"]
+material = SubResource("ShaderMaterial_t7qe0")
 texture = ExtResource("1_o7i7u")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 65)

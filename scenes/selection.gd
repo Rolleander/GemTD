@@ -55,7 +55,9 @@ func _is_playable_map_cell(grid_cell: Vector2i) -> bool:
 	return atlas_coords != Vector2i(3, 0)
 
 func update_position_from_mouse() -> void:
-	var grid_pos := Vector2i((get_global_mouse_position() / Globals.GRID_SIZE).round())
+	var board = get_tree().get_first_node_in_group("board") as Board
+	var mouse_position = board.get_world_mouse_position()
+	var grid_pos := Vector2i((mouse_position / Globals.GRID_SIZE).round())
 	position = grid_pos * Globals.GRID_SIZE
 	visible = valid_place()
 

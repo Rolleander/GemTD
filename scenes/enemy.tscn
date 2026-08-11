@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bxupjagoajmyf"]
+[gd_scene load_steps=18 format=3 uid="uid://bxupjagoajmyf"]
 
 [ext_resource type="Texture2D" uid="uid://ch0id56ogs0qr" path="res://sprites/gegner.png" id="1_8mk6v"]
 [ext_resource type="Script" uid="uid://b4x4lrfb7rlf3" path="res://scenes/enemy.gd" id="1_y0cvv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://di6l4quka02mv" path="res://sprites/yellowlight.png" id="6_hj61k"]
 [ext_resource type="Texture2D" uid="uid://dy7i51i4qsiue" path="res://sprites/white.png" id="6_p35bb"]
 [ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="8_smoke"]
+[ext_resource type="Texture2D" uid="uid://bor4kxtuletfm" path="res://sprites/shadow.png" id="9_shadow"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3id58"]
 radius = 12.0
@@ -125,22 +126,10 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("PointLight2D:energy")
+tracks/3/path = NodePath("fire:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1, 0.594604),
-"update": 0,
-"values": [0.0, 1.5, 0.0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("fire:scale")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 0.297302),
 "update": 0,
@@ -158,12 +147,20 @@ z_index = 1
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 2
-input_pickable = true
+input_pickable = false
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_y0cvv")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.45)
+position = Vector2(0, 0)
+scale = Vector2(0.1, 0.075)
+texture = ExtResource("9_shadow")
+
+[node name="VisualBillboard" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="VisualBillboard"]
 z_index = 1
 y_sort_enabled = true
 texture = ExtResource("1_8mk6v")
@@ -180,10 +177,10 @@ avoidance_enabled = true
 radius = 2.0
 neighbor_distance = 15.0
 
-[node name="HitEffects" type="Node2D" parent="."]
+[node name="HitEffects" type="Node2D" parent="VisualBillboard"]
 z_index = 5
 
-[node name="DamageSmoke" type="GPUParticles2D" parent="."]
+[node name="DamageSmoke" type="GPUParticles2D" parent="VisualBillboard"]
 z_index = 2
 position = Vector2(0, -5)
 emitting = false
@@ -194,7 +191,7 @@ lifetime = 1.35
 randomness = 0.65
 process_material = SubResource("ParticleProcessMaterial_damage_smoke")
 
-[node name="healthbar" parent="." instance=ExtResource("3_nqnd6")]
+[node name="healthbar" parent="VisualBillboard" instance=ExtResource("3_nqnd6")]
 position = Vector2(0, -20)
 
 [node name="SelectionRing" type="Sprite2D" parent="."]
@@ -210,12 +207,12 @@ energy = 0.0
 texture = ExtResource("6_hj61k")
 texture_scale = 0.03
 
-[node name="fire" type="Sprite2D" parent="."]
+[node name="fire" type="Sprite2D" parent="VisualBillboard"]
 z_as_relative = false
 material = SubResource("ShaderMaterial_f3gyp")
 texture = ExtResource("6_p35bb")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="VisualBillboard"]
 visible = false
 offset_left = -50.0
 offset_top = -39.0
@@ -228,7 +225,7 @@ theme_override_font_sizes/font_size = 12
 text = "0"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualBillboard"]
 libraries = {
 &"": SubResource("AnimationLibrary_c8hw4")
 }

@@ -6,7 +6,10 @@
 [sub_resource type="LabelSettings" id="LabelSettings_dcluu"]
 font_size = 30
 font_color = Color(1, 0.313726, 0.160784, 1)
-outline_size = 2
+outline_size = 15
+outline_color = Color(0.0352941, 0.0313726, 0.0509804, 0.28)
+shadow_size = 0
+shadow_color = Color(0.160784, 0.160784, 0.160784, 0)
 
 [sub_resource type="Animation" id="Animation_yhn33"]
 resource_name = "fade"

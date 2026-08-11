@@ -1,21 +1,107 @@
 extends Gem
 
+class_name GemScene
+
 const CRYSTAL_SHADER = preload("res://resources/shaders/gem_crystal.gdshader")
 const SPARKLE_SHADER = preload("res://resources/shaders/gem_sparkle.gdshader")
 
 @onready var static_body = $StaticBody2D
 @onready var comb_animation = $CombineRing/AnimationPlayer as AnimationPlayer
-@onready var dmg_label = $DmgLabel
+@onready var dmg_label = $Billboard/DmgLabel
 
 var glow_phase: float = 0.0
 var base_light_energy: float = 0.0
 var base_light_texture_scale: float = 0.0
 var glow_quality_strength: float = 0.0
+var projected_point_lights = []
 
 func _ready():
+	process_priority = 10
 	super()
+	board.attach_billboard(billboard)
+	board.update_billboard(billboard, global_position)
+	tree_exiting.connect(_remove_billboard)
 	static_body.input_event.connect(_on_static_body_2d_input_event)
 	$CombineRing.hide()
+
+func _remove_billboard():
+	_clear_projected_point_lights()
+	if is_instance_valid(billboard):
+		billboard.queue_free()
+
+func sync_billboard():
+	board.update_billboard(billboard, global_position)
+	_sync_projected_point_lights()
+
+func refresh_billboard_effects():
+	board.configure_billboard_particles(billboard)
+	_refresh_projected_point_lights()
+
+func _refresh_projected_point_lights():
+	_clear_projected_point_lights()
+	var world_effects = get_tree().get_first_node_in_group("Effects") as Node2D
+	if world_effects == null:
+		return
+	for node in graphic.find_children("*", "PointLight2D", true, false):
+		var light = node as PointLight2D
+		if light == null:
+			continue
+		var anchor = light.get_parent() as Node2D
+		if anchor == null:
+			continue
+		var local_light_transform = light.transform
+		light.reparent(world_effects, false)
+		projected_point_lights.append({
+			"light": light,
+			"anchor": anchor,
+			"local_transform": local_light_transform,
+		})
+	_sync_projected_point_lights()
+
+func _sync_projected_point_lights():
+	for entry in projected_point_lights:
+		var light = entry["light"] as PointLight2D
+		var anchor = entry["anchor"] as Node2D
+		if !is_instance_valid(light) || !is_instance_valid(anchor):
+			continue
+		var local_light_transform: Transform2D = entry["local_transform"]
+		var light_screen_position = anchor.get_global_transform_with_canvas() * local_light_transform.origin
+		light.global_position = board.screen_to_world_position(light_screen_position)
+
+func _clear_projected_point_lights():
+	for entry in projected_point_lights:
+		var light = entry["light"] as PointLight2D
+		if is_instance_valid(light):
+			light.queue_free()
+	projected_point_lights.clear()
+
+func get_attack_origin_screen_position() -> Vector2:
+	var renders = graphic.find_children("*", "Sprite2D", true, false)
+	if renders.is_empty():
+		return billboard.position
+	var render = renders[0] as Sprite2D
+	return render.get_global_transform_with_canvas() * render.offset
+
+func get_attack_origin_world_position() -> Vector2:
+	var renders = graphic.find_children("*", "Sprite2D", true, false)
+	if renders.is_empty():
+		return global_position
+	var render = renders[0] as Sprite2D
+	var render_center = render.get_global_transform() * render.offset
+	var local_origin = billboard.get_global_transform().affine_inverse() * render_center
+	return global_position + local_origin
+
+func update_level_visual():
+	if rock || graphic.get_child_count() == 0:
+		return
+	var render = graphic.get_child(0) as Sprite2D
+	if render == null:
+		return
+	var level_progress = clampf(float(level) / float(LevelUp.MAX_LEVEL), 0.0, 1.0)
+	var size_multiplier = lerpf(1.0, 1.35, level_progress)
+	var half_height = render.region_rect.size.y * 0.5
+	render.scale = Vector2.ONE * size_multiplier
+	render.offset.y = - half_height * (1.0 - 1.0 / size_multiplier) + (size_multiplier * 5.0) - 6.0
 
 func show_combine(combo: GemCombine):
 	#if available_combo == null || combo.gems.size() != available_combo.gems.size():
@@ -38,6 +124,7 @@ func activate_combination():
 	hide_combine()
 
 func _process(delta: float) -> void:
+	sync_billboard()
 	if base_light_energy <= 0.0 || rock:
 		return
 	glow_phase += delta * lerpf(1.35, 1.7, glow_quality_strength)
@@ -112,6 +199,7 @@ func init_basic_gem(type: GemType, quality: GemQuality):
 		graphic.remove_child(n)
 		n.queue_free()
 	graphic.add_child(render)
+	refresh_billboard_effects()
 	update_level_visual()
 	var atk = type_info.attack.instantiate()
 	_init_attack_stats(atk)

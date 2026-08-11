@@ -140,6 +140,8 @@ func _hit(target : Enemy):
 	if hit_effect!= null:
 		hit = hit_effect.duplicate()
 		target.add_hit_effect(hit)
+		hit.z_as_relative = false
+		hit.z_index = Globals.ATTACK_EFFECT_Z_INDEX
 		hit.visible = true
 		hit.one_shot = true
 		hit.emitting = true

@@ -83,6 +83,9 @@ func clear_selection():
 		selected_gem = null
 		for menu in get_tree().get_nodes_in_group("BuildMenu"):
 			menu.visible = false
+	if is_instance_valid(selected_enemy):
+		selected_enemy.selection.visible = false
+	selected_enemy = null
 	Events.unselect.emit()
 
 func reselect():

@@ -12,27 +12,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_75hv5"]
 radius = 18.0
 
-[sub_resource type="Animation" id="Animation_qjo6m"]
-resource_name = "combine_ring"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.353553, 0.901254),
-"update": 0,
-"values": [Vector2(0.2, 0.2), Vector2(0.65, 0.65)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_why26"]
-_data = {
-&"combine_ring": SubResource("Animation_qjo6m")
-}
-
 [sub_resource type="LabelSettings" id="LabelSettings_pt4b2"]
 line_spacing = -2.0
 font = ExtResource("9_b65tk")
@@ -66,6 +45,27 @@ shader_parameter/quality = 0.0
 shader_parameter/rand = 0.685
 shader_parameter/speed = 0.1
 shader_parameter/energy = 0.3
+
+[sub_resource type="Animation" id="Animation_qjo6m"]
+resource_name = "combine_ring"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.353553, 0.901254),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.65, 0.65)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_why26"]
+_data = {
+&"combine_ring": SubResource("Animation_qjo6m")
+}
 
 [sub_resource type="Animation" id="Animation_aaf7c"]
 resource_name = "glow"
@@ -114,13 +114,46 @@ texture = ExtResource("2_ahsfg")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 3
-input_pickable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_75hv5")
 
-[node name="Graphic" type="Node2D" parent="."]
+[node name="Billboard" type="Node2D" parent="."]
+
+[node name="Graphic" type="Node2D" parent="Billboard"]
 z_index = 1
+
+[node name="Label" type="Label" parent="Billboard"]
+z_index = 15
+offset_left = -59.0
+offset_top = -39.0
+offset_right = 283.0
+offset_bottom = 63.0
+scale = Vector2(0.35, 0.35)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Test"
+label_settings = SubResource("LabelSettings_pt4b2")
+horizontal_alignment = 1
+
+[node name="Glow" type="Sprite2D" parent="Billboard"]
+material = SubResource("ShaderMaterial_2t2yh")
+position = Vector2(0, -6)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_7x51v")
+
+[node name="DmgLabel" type="Label" parent="Billboard"]
+visible = false
+offset_left = -11.0
+offset_top = -38.0
+offset_right = 68.0
+offset_bottom = -2.0
+scale = Vector2(0.3, 0.3)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 50
+text = "200"
+horizontal_alignment = 1
 
 [node name="BuildingRing" type="Sprite2D" parent="."]
 modulate = Color(0.372549, 1, 1, 0.517647)
@@ -148,24 +181,6 @@ visible = false
 modulate = Color(0.329412, 1, 1, 0.498039)
 texture = ExtResource("7_8j4da")
 
-[node name="Label" type="Label" parent="."]
-z_index = 15
-offset_left = -59.0
-offset_top = -39.0
-offset_right = 283.0
-offset_bottom = 63.0
-scale = Vector2(0.35, 0.35)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Test"
-label_settings = SubResource("LabelSettings_pt4b2")
-horizontal_alignment = 1
-
-[node name="Glow" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_2t2yh")
-position = Vector2(0, -6)
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("9_7x51v")
-
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.224235
 texture = ExtResource("9_7x51v")
@@ -175,17 +190,3 @@ texture_scale = 0.224442
 libraries = {
 &"": SubResource("AnimationLibrary_r0mgt")
 }
-
-[node name="DmgLabel" type="Label" parent="."]
-visible = false
-offset_left = -11.0
-offset_top = -38.0
-offset_right = 68.0
-offset_bottom = -2.0
-scale = Vector2(0.3, 0.3)
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 50
-text = "200"
-horizontal_alignment = 1

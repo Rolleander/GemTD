@@ -36,4 +36,7 @@ func combine(target: Gem) -> Gem:
 		return target
 	special_scene.install(target)
 	LevelUp.gain_exp(target, exp, false)
+	# Consumed material gems are rocks now, so rebuild every available recipe
+	# immediately instead of leaving their previous indicators active.
+	CombinationsCheck.check()
 	return target

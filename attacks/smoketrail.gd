@@ -12,10 +12,16 @@ var tick := 0.0
 var wild_speed := 0.1
 var point_age := [0.0]
 var stopped := false
+var world_points = [] as Array[Vector2]
+var board: Board
 
 func start():
-	z_index = 19
+	process_priority = 10
+	z_index = Globals.ATTACK_TRAIL_Z_INDEX
 	clear_points()
+	point_age.clear()
+	world_points.clear()
+	board = get_tree().get_first_node_in_group("board") as Board
 	if limited_lifetime:
 		stop()
 		
@@ -32,10 +38,12 @@ func stop():
 func _process(delta):
 	if tick > tick_speed:
 		tick = 0
-		for p in range(get_point_count()):
+		# Keep the launch point anchored. Moving it makes high-wildness trails look
+		# as if the projectile originated beside or below the tower.
+		for p in range(1, world_points.size()):
 			point_age[p] += 5*delta
-			var rand_vector := Vector2( randf_range(-wild_speed, wild_speed), randf_range(-wild_speed, wild_speed) )
-			points[p] +=( rand_vector * wildness * point_age[p] )
+			var rand_vector = Vector2( randf_range(-wild_speed, wild_speed), randf_range(-wild_speed, wild_speed) )
+			world_points[p] += rand_vector * wildness * point_age[p]
 		#if stopped:
 			# This part is optional and only servers visual polishing purposes.
 			# If a trail is stopped, and a very intense gradient is used, this part can be left in to change the
@@ -49,10 +57,24 @@ func _process(delta):
 			#width += 3
 	else:
 		tick += delta
+	_update_projected_points()
 
 
-func add_trail(point_pos:Vector2, at_pos := -1):
-	if get_point_count() > 0 and point_pos.distance_to( points[get_point_count()-1] ) < min_spawn_distance:
+func add_trail(point_pos:Vector2, at_pos = -1):
+	if !world_points.is_empty() and point_pos.distance_to(world_points[world_points.size() - 1]) < min_spawn_distance:
 		return
-	point_age.append(0.0)
-	add_point(point_pos, at_pos)
+	if at_pos < 0 || at_pos >= world_points.size():
+		world_points.append(point_pos)
+		point_age.append(0.0)
+	else:
+		world_points.insert(at_pos, point_pos)
+		point_age.insert(at_pos, 0.0)
+	_update_projected_points()
+
+func _update_projected_points():
+	if !is_instance_valid(board):
+		return
+	var projected_points = PackedVector2Array()
+	for world_point in world_points:
+		projected_points.append(board.world_to_screen_position(world_point))
+	points = projected_points

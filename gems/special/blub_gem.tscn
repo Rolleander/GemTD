@@ -1,10 +1,36 @@
-[gd_scene load_steps=16 format=3 uid="uid://sf31by7vb4cx"]
+[gd_scene load_steps=22 format=3 uid="uid://sf31by7vb4cx"]
 
 [ext_resource type="Script" uid="uid://ceb7r27thihle" path="res://gems/special/blub_gem.gd" id="1_m5kkc"]
 [ext_resource type="Texture2D" uid="uid://vlcc7osg0d56" path="res://sprites/gems_old.png" id="2_id5pr"]
 [ext_resource type="Script" uid="uid://dhl77wk4o2611" path="res://attacks/projectile_attack.gd" id="2_wcdhm"]
 [ext_resource type="Texture2D" uid="uid://c3liyqtvj3agq" path="res://sprites/bubble.png" id="3_qpxo3"]
 [ext_resource type="Texture2D" uid="uid://dgt2n6g4hsgmp" path="res://sprites/blue_particle.png" id="5_m5kkc"]
+[ext_resource type="Texture2D" uid="uid://bd5tx2sa1aau" path="res://sprites/whitelight.png" id="6_st5ga"]
+[ext_resource type="Shader" uid="uid://co2w2176hmljt" path="res://resources/shaders/wave_shader.gdshader" id="6_wave"]
+[ext_resource type="Texture2D" uid="uid://r0k4spifpsc" path="res://sprites/circle.png" id="7_circle"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wave"]
+frequency = 0.035
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wave"]
+width = 64
+height = 64
+seamless = true
+noise = SubResource("FastNoiseLite_wave")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wave"]
+shader = ExtResource("6_wave")
+shader_parameter/amplitude = 1.21
+shader_parameter/frequency = 7.0
+shader_parameter/rippleRate = 9.2
+shader_parameter/waveAmplitude = 0.1
+shader_parameter/waveFrequency = 4.0
+shader_parameter/blendingAmount = 0.6
+shader_parameter/effect_strength = 0.35
+shader_parameter/wave_color = Color(0.55, 0.9, 1, 1)
+shader_parameter/region_position_px = Vector2(0, 0)
+shader_parameter/region_size_px = Vector2(26, 26)
+shader_parameter/noise = SubResource("NoiseTexture2D_wave")
 
 [sub_resource type="Gradient" id="Gradient_m5kkc"]
 colors = PackedColorArray(1, 1, 1, 0.603922, 1, 1, 1, 0)
@@ -70,11 +96,17 @@ script = ExtResource("1_m5kkc")
 metadata/_custom_type_script = "uid://dtho5hq78o5mn"
 
 [node name="Graphic" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(0, -4)
 texture = ExtResource("2_id5pr")
 region_enabled = true
 region_rect = Rect2(273.808, 28.6146, 29.2662, 31.194)
+
+[node name="WaveOverlay" type="Sprite2D" parent="Graphic"]
+z_index = 1
+material = SubResource("ShaderMaterial_wave")
+position = Vector2(0, -1)
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("7_circle")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Graphic"]
 z_index = 8
@@ -85,7 +117,14 @@ lifetime = 3.0
 trail_lifetime = 1.1
 process_material = SubResource("ParticleProcessMaterial_ie7ft")
 
+[node name="PointLight2D" type="PointLight2D" parent="Graphic"]
+scale = Vector2(0.2, 0.2)
+color = Color(0.154031, 0.498316, 1, 1)
+energy = 1.67
+texture = ExtResource("6_st5ga")
+
 [node name="Attack" type="Node2D" parent="." node_paths=PackedStringArray("bullet_source")]
+visible = false
 script = ExtResource("2_wcdhm")
 bullet_speed = 13.5
 bullet_source = NodePath("Bullet")

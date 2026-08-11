@@ -5,6 +5,7 @@ var oneshot_combos: Array[GemCombine] = []
 var board_combos: Array[GemCombine] = []
 
 func check():
+	_clear_available_combinations()
 	construction_fusions.clear()
 	oneshot_combos.clear()
 	board_combos.clear()
@@ -15,6 +16,14 @@ func check():
 	board_combos.append_array(_check_combine_gems(board_gems))
 	_show_combos(oneshot_combos, building_gems)
 	_show_combos(board_combos, board_gems)
+
+func _clear_available_combinations():
+	var maze = get_tree().get_first_node_in_group("maze_node")
+	if maze == null:
+		return
+	for child in maze.get_children():
+		if child is Gem && child.has_method("hide_combine"):
+			child.call("hide_combine")
 
 func _show_combos(combos, gems):
 	for gem in gems:
