@@ -23,5 +23,6 @@ type = 4
 script = ExtResource("3_3wt6j")
 recipe = Array[ExtResource("1_vxq2k")]([SubResource("Resource_fw6n6"), SubResource("Resource_eeyno"), SubResource("Resource_a3ris")])
 name = "Bubbler"
-description = "Cool"
+description = "Splash damage with slow"
+type = 1
 scene = ExtResource("2_l68jq")

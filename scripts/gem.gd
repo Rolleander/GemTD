@@ -105,6 +105,7 @@ func activate_combination():
 	var combination_name = selected_combo.combination.name
 	selected_combo.combine(self)
 	Events.screen_text("Combined to " + combination_name, Color.LIME_GREEN, 70)
+	BuffUtils.update_tower_buffs()
 	Game.reselect()
 
 func activate(picked: bool):
