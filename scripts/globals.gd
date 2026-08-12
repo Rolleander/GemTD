@@ -68,10 +68,10 @@ var roll_chances: Array[RollChances] = []
 var special_gems: Array[SpecialGem] = []
 
 func _ready() -> void:
-	loader.load_resources_from_folder(gem_types, "res://resources/gem_types")
-	loader.load_resources_from_folder(gem_qualities, "res://resources/gem_qualities")
+	loader.load_resources_from_folder(gem_types, "res://gems/config/gem_types")
+	loader.load_resources_from_folder(gem_qualities, "res://gems/config/gem_qualities")
 	loader.load_resources_from_folder(roll_chances, "res://resources/roll_chances")
-	loader.load_resources_from_folder(special_gems, "res://resources/special_gems")
+	loader.load_resources_from_folder(special_gems, "res://gems/config/special_gems")
 
 func get_gem_info(type: Type) -> GemTypeInfo:
 	for t in gem_types:

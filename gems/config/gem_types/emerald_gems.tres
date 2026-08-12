@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://cy6jakwjkqtws"]
+
+[ext_resource type="PackedScene" uid="uid://bgxb67n6xasin" path="res://gems/basic/attacks/emerald_attack.tscn" id="1_q0rox"]
+[ext_resource type="Script" uid="uid://b0mqttusyyw85" path="res://scripts/GemTypeInfo.gd" id="2_oxhgi"]
+
+[resource]
+script = ExtResource("2_oxhgi")
+label = "Emerald"
+color = Color(0.0745098, 0.698039, 0.0117647, 1)
+attack = ExtResource("1_q0rox")
+type = 6

@@ -10,7 +10,7 @@ signal enemy_spawned(enemy: Enemy)
 signal enemy_killed(enemy: Enemy, killer: Gem)
 signal enemy_reached_end(enemy: Enemy)
 
-@onready var overlay_text_scene = preload("res://scenes/overlay_text.tscn")
+@onready var overlay_text_scene = preload("res://board/overlay_text.tscn")
 
 func delayed(callable: Callable, delay: float):
 	get_tree().create_timer(delay, false).connect("timeout", callable)

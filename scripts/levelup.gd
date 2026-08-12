@@ -44,11 +44,12 @@ func get_levelup_exp(level: int):
 func _receive_shared_exp(gem: Gem, exp: float):
 	if gem.level >= SHARE_LEVEL:
 		return
-	_gain_exp(gem, exp)
+	_gain_exp(gem, exp, true)
 
-func _gain_exp(gem: Gem, exp: float):
+func _gain_exp(gem: Gem, exp: float, shared = false):
 	gem.exp += exp
-	Events.overlay_text(gem.position, "+%sXP" % _format_exp(exp), EXP_TEXT_COLOR, EXP_TEXT_SIZE)
+	Events.overlay_text(gem.position, "+%sXP" % _format_exp(exp), EXP_TEXT_COLOR,
+	 (EXP_TEXT_SIZE - 6) if shared else EXP_TEXT_SIZE)
 	if gem.exp >= gem.levelup_exp:
 		while gem.level < MAX_LEVEL && gem.exp >= gem.levelup_exp:
 			level_up(gem)

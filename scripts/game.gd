@@ -27,8 +27,17 @@ func finish_building():
 	construction_phase = false
 	wave.start_wave()
 
+func gain_money(amount: int, location: Vector2):
+	money += amount
+	Events.overlay_text(
+		location,
+		"+" + str(amount),
+		Color.GOLD,
+		25
+	)
+
 func _enemy_killed(enemy: Enemy, killer: Gem):
-	money += enemy.money
+	gain_money(enemy.money, enemy.get_hit_world_position())
 
 func _enemy_reached_end(enemy: Enemy):
 	lives -= 1

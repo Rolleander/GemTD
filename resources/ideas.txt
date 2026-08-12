@@ -12,46 +12,65 @@ rolling:
 
 early combos:
 
-bubbler = SA:1 + AQ:1 + DI:1
-burner = AM:1 + QZ:1 + RU:1
-what = AQ:1 + EM:1 + OP:1
+splash + slow = SA:1 + AQ:1 + DI:1
+
+aoe attack = AM:1 + QZ:1 + RU:1
+
+poison + splash  = AQ:1 + EM:1 + OP:1
 
 mid combos:
 
-money gem = EM:3 + SA:2 + OP:3
-air defence = AM:2 + QZ:2 + RU:3
-very slow splash stun = EM:4 + RU:2 + QZ:3
+money gem = EM:3 + SA:2 + OP:3	
+-tier2: attacks give +1 money up to half of current wave count (round up)
+
+air defence (air armor loss)= AM:2 + QZ:2 + RU:3
+
+range buffer (tower aura) = EM:4 + RU:2 + QZ:3
+-base: +1.5 range
+-tier1: +2 range
+-tier2: +3 range
 
 perfect combos:
 
  = AM:5 + QZ:3 + DI:2
+- on hit armor reduction
+
  = AQ:5 + OP:3 + EM:2 
+- area ground armor reduction
+- bouncing attacks 
+
  = DI:5 + DI:3 + TO:3
+- stacking attack that triggers effect after conc hits
+- short rage mode: inc attack speed and damage / crit 
+
  = EM:5 + SA:4 + TO:2
+- slow splash stun
+
  = QZ:5 + AQ:2 + AM:4
+- once per turn reroll color of an already placed basic gem 
+- pay money to pick color of an placed basic game
+
  = OP:5 + DI:4 + AQ:3
- = RU:5 + AQ:4 + AM:3
- = SA:5 + TO:4 + RU:4
- = TO:5 + OP:2 + SA:3
+- stronger dmg buff aura
+
+burn = RU:5 + AQ:4 + AM:3
+- sets unit on fire, it continously takes damage and damages other units around it
+
+freeze = SA:5 + TO:4 + RU:4
+- enemy in ice and is stunned until timeout or certain damage done, long immune
+
+thunder = TO:5 + OP:2 + SA:3
+- aoe slow
+- area damage with factor by distance
+- lucky lightning strike with splash slow/stun 
 
 
 effect ideas:
-- freeze tower (enemy in ice and is stunned until timeout or certain damage done, long immune)
 - make air unit attackable by ground towers
 - make ground unit attackable by air towers
-- armor reduction
 - exp multiplicator
 - income multiplicator
-- area damage with factor by distance
-- short rage mode: inc attack speed and damage / crit 
-- lucky lightning strike with splash slow/stun 
 - multi splash / bouncing attacks
-- sets unit on fire, it continously takes damage and damages other units around it
-- once per turn reroll color of an already placed basic gem 
-- stacking attack that triggers effect after conc hits
-
-
-
 
 
 combo name ideas:
@@ -83,7 +102,8 @@ enemy types:
 
 - normal
 - air
-- plated armor
+- plated armor (reduce incoming attack-damage by X)
+- limiter (limit incoming attack-damage to X)
 - swarm
 - splitter (spawns small units on death)
 - passive healer
@@ -91,7 +111,7 @@ enemy types:
 - massive (not affected by aoe and splash)
 - teleporter (jumps to waypoints) ?
 - airborne (ground, become air units after taking % of dmg)
-- crashlanding (air, become ground units after taking % of dmg)
+- crashlanding (air, become ground units after taking % of dmg)  <- doesnt work with pathing 
 
 - damage check boss: two waves parallel, one with single unit and one with multiple. 
 switches between them periodically by time or after damage thresholds?  

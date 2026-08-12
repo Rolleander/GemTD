@@ -29,7 +29,7 @@ func start_wave():
 
 func _spawn_enemy():
 	var enemies = get_tree().get_first_node_in_group("enemies_node")
-	var enemy = preload("res://scenes/enemy.tscn").instantiate() as Enemy
+	var enemy = preload("res://enemies/enemy.tscn").instantiate() as Enemy
 	enemy.waypoints = get_tree().get_first_node_in_group("waypoints").get_children()
 	enemy.position = get_tree().get_first_node_in_group("spawn_point").position
 	enemy.max_health = waves[current].Health

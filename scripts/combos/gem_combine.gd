@@ -34,7 +34,7 @@ func combine(target: Gem) -> Gem:
 	if special_scene == null:
 		push_error("Special gem scene must extend SpecialGemScene.")
 		return target
-	special_scene.install(target)
+	special_scene.setup(target, combination)
 	LevelUp.gain_exp(target, exp, false)
 	# Consumed material gems are rocks now, so rebuild every available recipe
 	# immediately instead of leaving their previous indicators active.

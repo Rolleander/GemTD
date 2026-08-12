@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GemQualityInfo" load_steps=3 format=3 uid="uid://cb41ghptu4pbt"]
+
+[ext_resource type="Script" uid="uid://bxe4jviba1eq5" path="res://scripts/GemQualityInfo.gd" id="1_dlhob"]
+[ext_resource type="PackedScene" uid="uid://bf5h0tngjb0ws" path="res://gems/basic/chipped.tscn" id="1_tnupy"]
+
+[resource]
+script = ExtResource("1_dlhob")
+label = "Chipped"
+quality = 0
+scene = ExtResource("1_tnupy")

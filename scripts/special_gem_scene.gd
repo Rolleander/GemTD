@@ -3,12 +3,18 @@ extends Node2D
 class_name SpecialGemScene
 
 var gem: Gem
-var recipe: SpecialGem
+var settings: SpecialGem
 var tier = 0
 var _upgrade_tiers = []
 
-func install(gem: Gem, template_name: StringName = &"base"):
+func setup(gem: Gem, settings: SpecialGem):
 	self.gem = gem
+	self.settings = settings
+	for r in settings.tiers:
+		_init_upgrade_tier(r.name, r.upgrade_cost)
+	install_template()
+
+func install_template(template_name: StringName = &"base"):
 	var template = get_node_or_null(NodePath(str(template_name))) as Node
 	if template == null:
 		push_error("Special gem template '%s' was not found." % template_name)
@@ -38,10 +44,9 @@ func install(gem: Gem, template_name: StringName = &"base"):
 	gem.set_attack(new_attack)
 
 func _change_gem_to(node_name: String):
-	install(gem, node_name)
+	install_template(node_name)
 	BuffUtils.update_tower_buffs()
 	Game.reselect()
-
 
 func init_menu(menu: GemMenu):
 	if tier >= _upgrade_tiers.size():

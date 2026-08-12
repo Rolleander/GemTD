@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
 [ext_resource type="Script" uid="uid://csraof6ki8qdq" path="res://ui/BuildMenu.gd" id="3_x7hxt"]
-[ext_resource type="FontFile" uid="uid://dq8eis0yythi0" path="res://fonts/RobotoCondensed-Bold.ttf" id="4_5kyyh"]
+[ext_resource type="FontFile" uid="uid://dq8eis0yythi0" path="res://ui/fonts/RobotoCondensed-Bold.ttf" id="4_5kyyh"]
 [ext_resource type="Script" uid="uid://xp3ufep1adt3" path="res://ui/GemInfo.gd" id="4_vuwf8"]
 [ext_resource type="PackedScene" uid="uid://dpqg4gejg3m4s" path="res://ui/BuffList.tscn" id="5_cjofp"]
 [ext_resource type="Script" uid="uid://bkghq8xqgnmng" path="res://ui/RockMenu.gd" id="5_e8wht"]

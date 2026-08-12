@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GemTypeInfo" load_steps=3 format=3 uid="uid://bx3tovknvlpx5"]
+
+[ext_resource type="PackedScene" uid="uid://c04eh0hyhrv3j" path="res://gems/basic/attacks/amethyst_attack.tscn" id="1_h7agr"]
+[ext_resource type="Script" uid="uid://b0mqttusyyw85" path="res://scripts/GemTypeInfo.gd" id="2_5noiv"]
+
+[resource]
+script = ExtResource("2_5noiv")
+label = "Amethyst"
+color = Color(0.682353, 0.407843, 1, 1)
+attack = ExtResource("1_h7agr")
+type = 7

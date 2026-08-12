@@ -29,7 +29,7 @@ func _open_field(position : Vector2):
 func _on_reroll_pressed():
 	if rock != null:
 		rock.queue_free()
-		var gem = preload("res://scenes/gem.tscn").instantiate()
+		var gem = preload("res://gems/gem.tscn").instantiate()
 		gem.position = field_position
 		get_tree().get_first_node_in_group("maze_node").add_child(gem)
 		gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())

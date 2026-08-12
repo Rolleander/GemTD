@@ -1,0 +1,256 @@
+[gd_scene load_steps=21 format=3 uid="uid://bxupjagoajmyf"]
+
+[ext_resource type="Texture2D" uid="uid://ch0id56ogs0qr" path="res://sprites/gegner.png" id="1_8mk6v"]
+[ext_resource type="Script" uid="uid://b4x4lrfb7rlf3" path="res://enemies/enemy.gd" id="1_y0cvv"]
+[ext_resource type="PackedScene" uid="uid://b5kq1yq22ybt3" path="res://board/healthbar.tscn" id="3_nqnd6"]
+[ext_resource type="Texture2D" uid="uid://bm44dol1vru50" path="res://sprites/selection.png" id="4_fkrk0"]
+[ext_resource type="Shader" uid="uid://dfhk6snbtu47v" path="res://resources/shaders/fireball.gdshader" id="5_kt45t"]
+[ext_resource type="Texture2D" uid="uid://di6l4quka02mv" path="res://sprites/yellowlight.png" id="6_hj61k"]
+[ext_resource type="Texture2D" uid="uid://dy7i51i4qsiue" path="res://sprites/white.png" id="6_p35bb"]
+[ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="8_smoke"]
+[ext_resource type="Texture2D" uid="uid://bor4kxtuletfm" path="res://sprites/shadow.png" id="9_shadow"]
+[ext_resource type="Shader" uid="uid://gjdt3oyvn5x6" path="res://resources/shaders/pixel_explosion.gdshader" id="10_pixel_explosion"]
+[ext_resource type="Texture2D" uid="uid://08y133vunh4x" path="res://sprites/noise_combined.png" id="11_explosion_noise"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3id58"]
+radius = 12.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pixel_explosion"]
+resource_local_to_scene = true
+shader = ExtResource("10_pixel_explosion")
+shader_parameter/noise_tex_normal = ExtResource("11_explosion_noise")
+shader_parameter/noise_tex = ExtResource("11_explosion_noise")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 0.22
+shader_parameter/glow_strength = 0.85
+shader_parameter/use_region = true
+shader_parameter/region_position_px = Vector2(0, 0)
+shader_parameter/region_size_px = Vector2(40, 40)
+
+[sub_resource type="Gradient" id="Gradient_damage_smoke"]
+offsets = PackedFloat32Array(0, 0.35, 1)
+colors = PackedColorArray(0.12, 0.11, 0.1, 0.58, 0.2, 0.19, 0.18, 0.42, 0.28, 0.27, 0.26, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture_damage_smoke"]
+gradient = SubResource("Gradient_damage_smoke")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_damage_smoke"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(8, 3, 1)
+direction = Vector3(0, -1, 0)
+spread = 28.0
+initial_velocity_min = 7.0
+initial_velocity_max = 15.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+gravity = Vector3(0, -5, 0)
+scale_min = 0.07
+scale_max = 0.18
+color_ramp = SubResource("GradientTexture_damage_smoke")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f3gyp"]
+resource_local_to_scene = true
+shader = ExtResource("5_kt45t")
+shader_parameter/speed = 1.49
+shader_parameter/strength = 20.81
+shader_parameter/progress = 0.55
+shader_parameter/alpha = 0.0
+shader_parameter/offset = 0.0
+
+[sub_resource type="Animation" id="Animation_djq8u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fire:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("fire:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.55]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("fire:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_iwxal"]
+resource_name = "explosion"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("fire:material:shader_parameter/alpha")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1.46409),
+"update": 0,
+"values": [0.0, 0.5, 0.4, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("fire:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1.8025, 0.535887),
+"update": 0,
+"values": [0.0, 1.0, 1.2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("fire:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("fire:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 0.297302),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(6, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c8hw4"]
+_data = {
+&"RESET": SubResource("Animation_djq8u"),
+&"explosion": SubResource("Animation_iwxal")
+}
+
+[node name="enemy" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 4
+collision_mask = 2
+input_pickable = false
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_y0cvv")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.45)
+position = Vector2(0, 0)
+scale = Vector2(0.1, 0.075)
+texture = ExtResource("9_shadow")
+
+[node name="VisualBillboard" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="VisualBillboard"]
+z_index = 1
+y_sort_enabled = true
+texture = ExtResource("1_8mk6v")
+region_enabled = true
+region_rect = Rect2(0, 0, 40, 40)
+
+[node name="PixelExplosionWarmup" type="Sprite2D" parent="VisualBillboard"]
+show_behind_parent = true
+modulate = Color(1, 1, 1, 0.001)
+material = SubResource("ShaderMaterial_pixel_explosion")
+texture = ExtResource("1_8mk6v")
+region_enabled = true
+region_rect = Rect2(0, 0, 40, 40)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3id58")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 5.0
+avoidance_enabled = true
+radius = 2.0
+neighbor_distance = 15.0
+
+[node name="HitEffects" type="Node2D" parent="VisualBillboard"]
+z_index = 5
+
+[node name="DamageSmoke" type="GPUParticles2D" parent="VisualBillboard"]
+z_index = 2
+position = Vector2(0, -5)
+emitting = false
+amount = 32
+amount_ratio = 0.08
+texture = ExtResource("8_smoke")
+lifetime = 1.35
+randomness = 0.65
+process_material = SubResource("ParticleProcessMaterial_damage_smoke")
+
+[node name="healthbar" parent="VisualBillboard" instance=ExtResource("3_nqnd6")]
+position = Vector2(0, -20)
+
+[node name="SelectionRing" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0, 0.901961, 0.0823529, 0.745098)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("4_fkrk0")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(6, 6)
+color = Color(1, 0.356863, 0, 1)
+energy = 0.0
+texture = ExtResource("6_hj61k")
+texture_scale = 0.03
+
+[node name="fire" type="Sprite2D" parent="VisualBillboard"]
+z_as_relative = false
+material = SubResource("ShaderMaterial_f3gyp")
+texture = ExtResource("6_p35bb")
+
+[node name="Label" type="Label" parent="VisualBillboard"]
+visible = false
+offset_left = -50.0
+offset_top = -39.0
+offset_right = 50.0
+offset_bottom = -15.0
+theme_override_colors/font_color = Color(1, 0.172549, 0.12549, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VisualBillboard"]
+libraries = {
+&"": SubResource("AnimationLibrary_c8hw4")
+}
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
