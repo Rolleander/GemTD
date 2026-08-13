@@ -10,8 +10,9 @@ func _ready():
 	$MarginContainer2/MarginContainer/RockMenu.visible = false
 	$MarginContainer2/MarginContainer/GemMenu.visible = false
 	$MarginContainer3/VBoxContainer/EnemyPanel.visible = false
+	visible = true
 
 func _process(delta):
-	wave.text = "Wave: "+str(Game.wave.current+1)
-	fps.text = "FPS: "+str(Engine.get_frames_per_second())
-	money.text = "Money: "+str(Game.money)
+	wave.text = "Wave: " + str(Game.wave.current + 1)
+	fps.text = "FPS: " + str(Engine.get_frames_per_second())
+	money.text = "Money: " + str(Game.money)

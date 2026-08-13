@@ -1,6 +1,5 @@
-extends VBoxContainer
+extends Panel
 
-@onready var gemLevel = $HBoxContainer/GemLevel
 @onready var upgrade_button = $HBoxContainer/Upgrade as CostButton
 
 func _ready():
@@ -15,7 +14,6 @@ func _on_upgrade_pressed():
 
 func _update_level():
 	var cost = Game.gem_chances.get_upgrade_cost()
-	gemLevel.text = str(Game.gem_chances.level+1)
 	if _upgrade_allowed():
 		upgrade_button.cost = Game.gem_chances.get_upgrade_cost()
 	else: 

@@ -4,23 +4,23 @@ class_name CostButton
 
 signal action_pressed
 
-enum CostType{
+enum CostType {
 	MONEY,
 	ROLLS
 }
-enum EnabledType{
+enum EnabledType {
 	BUILDING,
 	WAVE,
 	BOTH
 }
-@export var type = CostType.MONEY 
-@export var enabled_type = EnabledType.BUILDING 
-@export var cost : int = 0
-@export var sprite : Sprite2D = null
+@export var type = CostType.MONEY
+@export var enabled_type = EnabledType.BUILDING
+@export var cost: int = 0
+@export var sprite: Sprite2D = null
 
 @onready var panel = $Panel
-@onready var c_icon_m = $Panel/IconM 
-@onready var c_icon_r = $Panel/IconR 
+@onready var c_icon_m = $Panel/IconM
+@onready var c_icon_r = $Panel/IconR
 @onready var c_label = $Panel/Label as Label
 
 func _ready():
@@ -38,20 +38,20 @@ func _update_label(value):
 		c_label.label_settings.font_color = Color.WHITE
 		if enabled_type == EnabledType.BOTH:
 			disabled = false
-		elif  enabled_type == EnabledType.BUILDING && Game.construction_phase:		
+		elif enabled_type == EnabledType.BUILDING && Game.construction_phase:
 			disabled = false
-		elif enabled_type == EnabledType.WAVE 	 && !Game.construction_phase:
+		elif enabled_type == EnabledType.WAVE && !Game.construction_phase:
 			disabled = false
-	else :
-		c_label.label_settings.font_color = Color.DARK_RED	
-		disabled = true	
+	else:
+		c_label.label_settings.font_color = Color.DARK_RED
+		disabled = true
 		
-func _update_panel():	
+func _update_panel():
 	c_icon_m.visible = type == CostType.MONEY
 	c_icon_r.visible = type == CostType.ROLLS
 	if type == CostType.MONEY:
 		_update_label(Game.money)
-	else:	 	
+	else:
 		_update_label(Game.remaining_placements)
 		
 func _process(delta):
@@ -66,3 +66,11 @@ func _on_pressed():
 		else:
 			Game.remaining_placements -= cost
 	action_pressed.emit()
+
+func set_hidden(hidden: bool):
+	modulate.a = 0.0 if hidden else 1.0
+	mouse_filter = (
+		Control.MOUSE_FILTER_IGNORE
+		if hidden
+		else Control.MOUSE_FILTER_STOP
+	)

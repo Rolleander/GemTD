@@ -19,13 +19,13 @@ class_name Enemy
 @onready var board = get_tree().get_first_node_in_group("board") as Board
 
 const SMOKE_START_HEALTH_PERCENT := 0.4
-const HIT_FLASH_COLOR := Color(1.0, 0.48, 0.48, 1.0)
-const HIT_FLASH_DURATION := 0.16
 const FLYING_VISUAL_HEIGHT = 52.0
 const NORMAL_SHADOW_OFFSET = Vector2(-4.0, 6.0)
 const FLYING_SHADOW_OFFSET = Vector2.ZERO
 const DAMAGE_SMOKE_TEXTURE = preload("res://sprites/smoke_particle.png")
-const PIXEL_EXPLOSION_DURATION = 0.65
+const HIT_EFFECT = preload("res://enemies/enemy_hit_effect.gd")
+const PIXEL_EXPLOSION_DURATION = 0.8
+const SLOW_TINT = Color(0.72, 0.84, 1.0, 1.0)
 
 var path = []
 var target = -1
@@ -43,7 +43,6 @@ var buffs = [] as Array[EnemyBuffInstance]
 var spawning = true
 var money = 0
 var killer = null
-var hit_flash_tween: Tween
 var shadow_billboard: Node2D
 var smoke_spawn_timer = 0.0
 
@@ -106,12 +105,12 @@ func _physics_process(delta: float):
 		return
 	if navigation.is_navigation_finished():
 		_next_waypoint()
-	#$Label.text = str(target)+" | "+str(round(navigation.distance_to_target()))	
 	var dir = to_local(navigation.get_next_path_position()).normalized()
 	navigation.max_speed = (speed.value * Globals.GRID_SIZE)
 	navigation.velocity = dir * (speed.value * Globals.GRID_SIZE)
 	health.update()
 	speed.update()
+	_update_slow_tint()
 	armor.update()
 	if health.value <= 0 && alive:
 		_death(killer)
@@ -130,7 +129,7 @@ func _damage(source: Attack, damage_factor: float = 1.0) -> bool:
 	source.gem.damage_dealt.dealt(damage)
 	health.value_add(damage * -1)
 	if damage > 0.0:
-		_flash_on_hit()
+		_spawn_hit_effect()
 	return health.value <= 0
 		
 func calc_damage(damage: float, ignore_attributes: Array[EnemyBuff.Attribute] = []):
@@ -172,8 +171,6 @@ func _death(killer: Gem):
 		killer.killed(self)
 
 func _start_pixel_explosion():
-	if hit_flash_tween != null && hit_flash_tween.is_valid():
-		hit_flash_tween.kill()
 	sprite.self_modulate = Color.WHITE
 	sprite.visible = true
 
@@ -189,15 +186,15 @@ func _start_pixel_explosion():
 		explosion_material.set_shader_parameter("region_position_px", sprite.region_rect.position)
 		explosion_material.set_shader_parameter("region_size_px", sprite.region_rect.size)
 	sprite.material = explosion_material
-	var dissolve_tween = create_tween()
-	dissolve_tween.set_trans(Tween.TRANS_LINEAR)
-	dissolve_tween.tween_method(
+	var pixel_explosion_tween = create_tween()
+	pixel_explosion_tween.set_trans(Tween.TRANS_LINEAR)
+	pixel_explosion_tween.tween_method(
 		_set_pixel_explosion_progress.bind(explosion_material),
 		0.0,
 		1.0,
 		PIXEL_EXPLOSION_DURATION
 	)
-	dissolve_tween.tween_callback(func(): sprite.visible = false)
+	pixel_explosion_tween.tween_callback(func(): sprite.visible = false)
 
 func _set_pixel_explosion_progress(progress: float, explosion_material: ShaderMaterial):
 	explosion_material.set_shader_parameter("progress", progress)
@@ -207,14 +204,25 @@ func add_hit_effect(effect: Node2D):
 	hit_effects.add_child(effect)
 	board.configure_billboard_particles(effect)
 
-func _flash_on_hit():
-	if hit_flash_tween != null && hit_flash_tween.is_valid():
-		hit_flash_tween.kill()
-	sprite.self_modulate = HIT_FLASH_COLOR
-	hit_flash_tween = create_tween()
-	hit_flash_tween.set_trans(Tween.TRANS_QUAD)
-	hit_flash_tween.set_ease(Tween.EASE_OUT)
-	hit_flash_tween.tween_property(sprite, "self_modulate", Color.WHITE, HIT_FLASH_DURATION)
+func _spawn_hit_effect():
+	var effect = HIT_EFFECT.new() as EnemyHitEffect
+	var angle = randf() * TAU
+	var radius = sqrt(randf())
+	effect.position = Vector2(
+		cos(angle) * radius * 12.0,
+		sin(angle) * radius * 14.0
+	)
+	effect.rotation = randf() * TAU
+	var random_scale = randf_range(0.55, 1.0)
+	effect.scale = Vector2(random_scale, random_scale)
+	hit_effects.add_child(effect)
+
+func _update_slow_tint():
+	if !alive:
+		sprite.self_modulate = Color.WHITE
+		return
+	var is_slowed = speed.value < speed.root - 0.0001
+	sprite.self_modulate = SLOW_TINT if is_slowed else Color.WHITE
 
 func _update_damage_smoke(health_percent: float, delta: float):
 	if !alive || health_percent >= SMOKE_START_HEALTH_PERCENT:

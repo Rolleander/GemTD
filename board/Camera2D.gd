@@ -7,7 +7,7 @@ const SCROLL_SPEED = 600.0
 const ZOOM_SPEED = 0.1
 const MIN_ZOOM = 0.8
 const MAX_ZOOM = 2
-const MAP_EDGE_BORDER = 200
+const MAP_EDGE_BORDER = 500
 var _zoom_level = 1.5
 var _zoom_tween: Tween
 

@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode blend_mix;
 
 uniform float speed =   0.05;
 uniform float strength = 20.0;
@@ -43,12 +44,18 @@ void fragment() {
 		float t = TIME + offset;
 		color += (1.5 / power) * snoise(coord + vec3(0.,-t*speed*0.1, t*speed*0.2*0.1), power*floor(strength));
 	}
-	COLOR = vec4( color, pow(max(color,0.),2.)*0.4, pow(max(color,0.),3.)*0.15 , 1.0);
-	COLOR.a = min((COLOR.r + COLOR.g + COLOR.b),  alpha);
-	//float r = distance(vec2(0.5,0.5), UV.xy) * 2.0;
-	
-	//COLOR.a = max(0, COLOR.a   * progress* (1.5-r));
-}
+	float flame_mask = smoothstep(-0.2, 0.22, color);
+	float hot_core = smoothstep(0.45, 1.35, color);
+	vec3 fire_color = mix(
+		vec3(0.28, 0.015, 0.0),
+		vec3(1.0, 0.16, 0.015),
+		smoothstep(-0.1, 0.65, color)
+	);
+	fire_color = mix(fire_color, vec3(1.0, 0.72, 0.18), hot_core);
 
+	// Keep a solid core and only fade the irregular outer edge. Deriving alpha
+	// directly from the RGB intensity made the entire effect look additive.
+	COLOR = vec4(fire_color, alpha * flame_mask);
+}
 
 

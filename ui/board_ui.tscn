@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
 [ext_resource type="Script" uid="uid://csraof6ki8qdq" path="res://ui/BuildMenu.gd" id="3_x7hxt"]
 [ext_resource type="FontFile" uid="uid://dq8eis0yythi0" path="res://ui/fonts/RobotoCondensed-Bold.ttf" id="4_5kyyh"]
+[ext_resource type="Script" uid="uid://bfuv40keinl0e" path="res://ui/upgrade_menu.gd" id="4_g022i"]
 [ext_resource type="Script" uid="uid://xp3ufep1adt3" path="res://ui/GemInfo.gd" id="4_vuwf8"]
 [ext_resource type="PackedScene" uid="uid://dpqg4gejg3m4s" path="res://ui/BuffList.tscn" id="5_cjofp"]
 [ext_resource type="Script" uid="uid://bkghq8xqgnmng" path="res://ui/RockMenu.gd" id="5_e8wht"]
@@ -12,7 +13,6 @@
 [ext_resource type="Script" uid="uid://bfbf6v2mr8kur" path="res://ui/StatsPanel.gd" id="7_vpxac"]
 [ext_resource type="Script" uid="uid://cxyr8e56r7856" path="res://ui/gem_menu.gd" id="11_g022i"]
 [ext_resource type="PackedScene" uid="uid://crtuc0o7i7mny" path="res://ui/CostButton.tscn" id="11_ux7db"]
-[ext_resource type="Script" uid="uid://csepjjvor4iah" path="res://ui/GemLevel.gd" id="11_xmjju"]
 [ext_resource type="Script" uid="uid://mb2xdswtgcfp" path="res://ui/EnemyPanel.gd" id="12_ur731"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n3b1d"]
@@ -130,30 +130,56 @@ grow_vertical = 0
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
+[node name="UpgradeMenu" type="Panel" parent="MarginContainer"]
 layout_mode = 2
+script = ExtResource("4_g022i")
 
-[node name="LevelMenu" type="VBoxContainer" parent="MarginContainer/Panel"]
+[node name="LevelMenu" type="VBoxContainer" parent="MarginContainer/UpgradeMenu"]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 7.0
 offset_right = 307.0
 offset_bottom = 150.0
-script = ExtResource("11_xmjju")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Panel/LevelMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UpgradeMenu/LevelMenu"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="MarginContainer/Panel/LevelMenu/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer"]
 layout_mode = 2
 text = "GemLevel:"
 
-[node name="GemLevel" type="Label" parent="MarginContainer/Panel/LevelMenu/HBoxContainer"]
+[node name="GemLevel" type="Label" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Upgrade" parent="MarginContainer/Panel/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UpgradeMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 137.0
+offset_right = -7.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+alignment = 2
+
+[node name="Reroll" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+type = 1
+cost = 1
+
+[node name="Remove" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Removes the rock from the maze"
+type = 1
+
+[node name="Upgrade" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Roll for a new gem"
 cost = 1
@@ -573,7 +599,7 @@ type = 1
 
 [connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="StatsPanel" method="_on_tab_bar_tab_changed"]
-[connection signal="pressed" from="MarginContainer/Panel/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/Panel/LevelMenu" method="_on_upgrade_pressed"]
+[connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu/LevelMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
