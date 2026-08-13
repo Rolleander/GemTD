@@ -6,7 +6,7 @@ func _ready():
 	_update_level()
 
 func _upgrade_allowed() -> bool:
-	return Game.gem_chances.level <7 
+	return Game.gem_chances.level < 7
 
 func _on_upgrade_pressed():
 	Game.gem_chances.inc_level()
@@ -16,5 +16,5 @@ func _update_level():
 	var cost = Game.gem_chances.get_upgrade_cost()
 	if _upgrade_allowed():
 		upgrade_button.cost = Game.gem_chances.get_upgrade_cost()
-	else: 
-		upgrade_button.visible = false
+	else:
+		upgrade_button.set_hidden(true)

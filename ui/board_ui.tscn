@@ -599,7 +599,7 @@ type = 1
 
 [connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="StatsPanel" method="_on_tab_bar_tab_changed"]
-[connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu/LevelMenu" method="_on_upgrade_pressed"]
+[connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
