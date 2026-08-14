@@ -65,10 +65,10 @@ func _start_building():
 	Events.building_phase_started.emit()
 	
 func get_enemies():
-	return get_tree().get_first_node_in_group("enemies_node").get_children()
+	return get_tree().get_first_node_in_group("enemies_node").get_children() as Array[Enemy]
 	
 func get_gems():
-	return get_tree().get_nodes_in_group("gems")
+	return get_tree().get_nodes_in_group("gems") as Array[Gem]
 
 func _update_selection(object):
 	if object is Gem:

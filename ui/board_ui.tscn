@@ -68,7 +68,8 @@ mouse_filter = 2
 
 [node name="MarginContainer5" type="MarginContainer" parent="."]
 offset_right = 366.0
-offset_bottom = 172.0
+offset_bottom = 462.0
+size_flags_vertical = 3
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 
@@ -157,8 +158,8 @@ theme_override_font_sizes/font_size = 27
 text = "1000"
 
 [node name="BuildingPhaseInfo" type="Panel" parent="MarginContainer5/VBoxContainer"]
+custom_minimum_size = Vector2(0, 105)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo"]
 layout_mode = 2
@@ -224,8 +225,9 @@ theme_override_colors/font_color = Color(0.733333, 0.627451, 0.470588, 1)
 theme_override_font_sizes/font_size = 22
 text = "0"
 
-[node name="Control" type="Control" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer"]
+[node name="RecipeInfo" type="VBoxContainer" parent="MarginContainer5/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="MarginContainer4" type="MarginContainer" parent="."]
 anchors_preset = 1

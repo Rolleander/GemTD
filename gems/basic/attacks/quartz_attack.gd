@@ -11,11 +11,11 @@ func _ready():
 	if gem.quality == GemQualityInfo.Quality.GREAT:
 		roll_rounds = 1
 		grant_rerolls = 3
-		desc_text = "Generates 3 free Re-Rolls every wave"
+		desc_text = "Generates 3 free re-rolls every wave"
 	elif roll_rounds > 1:
-		desc_text = "Generates 1 free Re-Roll every " + str(roll_rounds) + " waves"
+		desc_text = "Generates 1 free re-roll every " + str(roll_rounds) + " waves"
 	else:
-		desc_text = "Generates 1 free Re-Roll every wave"
+		desc_text = "Generates 1 free re-roll every wave"
 	_update_description()
 	Events.wave_ended.connect(_wave_ended)
 	
@@ -29,4 +29,5 @@ func _wave_ended():
 	if waves >= roll_rounds:
 		waves = 0
 		Game.free_rerolls += grant_rerolls
+		Events.overlay_text(position, "+" + str(grant_rerolls) + " re-roll", Color.ORANGE, 30)
 	_update_description()

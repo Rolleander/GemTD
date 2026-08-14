@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgv28kihagwiw"]
+
+[ext_resource type="Script" uid="uid://bvjrtpsi3eanj" path="res://ui/combination_info.gd" id="1_8l4ue"]
+[ext_resource type="Texture2D" uid="uid://qi0wi52rt1ue" path="res://sprites/icons/rainbow-rocks.png" id="2_f8giu"]
+
+[node name="CombinationInfo" type="Panel"]
+custom_minimum_size = Vector2(300, 100)
+offset_right = 200.0
+offset_bottom = 100.0
+script = ExtResource("1_8l4ue")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_f8giu")
+expand_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.431373, 0.756863, 0.882353, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Name"
+horizontal_alignment = 1
