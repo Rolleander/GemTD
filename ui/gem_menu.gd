@@ -6,7 +6,7 @@ var action_buttons: Array[CostButton] = []
 var gem: Gem
 var _action_button_index = 0
 var _registered_callbacks: Dictionary = {}
-
+@onready var combine_icon = preload("res://sprites/icons/rainbow-rocks.png")
 
 func _ready():
 	Events.gem_selected.connect(_open)
@@ -28,6 +28,7 @@ func _open(gem: Gem):
 			_registered_callbacks.erase(button)
 		button.enabled_type = CostButton.EnabledType.BOTH
 		button.type = CostButton.CostType.MONEY
+		button.icon = null
 	_action_button_index = 0
 	if gem.special_combination:
 		_init_special_menu()
@@ -45,7 +46,8 @@ func _init_special_menu():
 func _init_basic_menu():
 	if gem.available_combo:
 		var button = register_action_button(func(): gem.activate_combination())
-		button.text = "Comb"
+		button.icon = combine_icon
+		button.tooltip_text = "Combine gems of your board into a special gem"
 		button.cost = 0
 
 func register_action_button(callback: Callable) -> CostButton:

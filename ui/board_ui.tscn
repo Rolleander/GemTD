@@ -1,10 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=30 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
+[ext_resource type="Texture2D" uid="uid://dr15h2pvjsvj4" path="res://sprites/icons/coin_01.png" id="2_4fxvh"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
 [ext_resource type="Script" uid="uid://csraof6ki8qdq" path="res://ui/BuildMenu.gd" id="3_x7hxt"]
+[ext_resource type="Texture2D" uid="uid://brgcc67dlcwsn" path="res://sprites/icons/purple-demon.png" id="3_ya63g"]
 [ext_resource type="FontFile" uid="uid://dq8eis0yythi0" path="res://ui/fonts/RobotoCondensed-Bold.ttf" id="4_5kyyh"]
 [ext_resource type="Script" uid="uid://bfuv40keinl0e" path="res://ui/upgrade_menu.gd" id="4_g022i"]
+[ext_resource type="Texture2D" uid="uid://b33fwhm81te66" path="res://sprites/icons/map_01.png" id="4_psmgc"]
 [ext_resource type="Script" uid="uid://xp3ufep1adt3" path="res://ui/GemInfo.gd" id="4_vuwf8"]
 [ext_resource type="PackedScene" uid="uid://dpqg4gejg3m4s" path="res://ui/BuffList.tscn" id="5_cjofp"]
 [ext_resource type="Script" uid="uid://bkghq8xqgnmng" path="res://ui/RockMenu.gd" id="5_e8wht"]
@@ -43,28 +46,11 @@ bg_color = Color(0, 0.403629, 0.889066, 1)
 script = ExtResource("1_883fb")
 
 [node name="FpsLabel" type="Label" parent="."]
-offset_left = 16.0
-offset_top = 41.0
-offset_right = 1936.0
-offset_bottom = 67.0
+offset_left = 2.0
+offset_top = -5.0
+offset_right = 1922.0
+offset_bottom = 54.0
 text = "Fps
-"
-
-[node name="WaveLabel" type="Label" parent="."]
-offset_left = 13.0
-offset_top = 14.0
-offset_right = 1933.0
-offset_bottom = 66.0
-text = "Wave
-
-"
-
-[node name="MoneyLabel" type="Label" parent="."]
-offset_left = 1295.0
-offset_top = 621.0
-offset_right = 3215.0
-offset_bottom = 675.0
-text = "Money
 "
 
 [node name="ScreenText" type="Control" parent="." groups=["ScreenText"]]
@@ -78,26 +64,118 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="StatsPanel" type="PanelContainer" parent="."]
+[node name="MarginContainer5" type="MarginContainer" parent="."]
+offset_right = 366.0
+offset_bottom = 61.0
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+
+[node name="Panel" type="Panel" parent="MarginContainer5"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer5/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+tooltip_text = "Coins"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_4fxvh")
+expand_mode = 2
+
+[node name="MoneyLabel" type="Label" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "1000"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+tooltip_text = "Current enemy wave"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_ya63g")
+expand_mode = 2
+
+[node name="WaveLabel" type="Label" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "10"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer5/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+tooltip_text = "Length of maze"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer3/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("4_psmgc")
+expand_mode = 2
+
+[node name="PathLabel" type="Label" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "1000"
+
+[node name="MarginContainer4" type="MarginContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -291.0
-offset_bottom = 363.0
+offset_left = -380.0
+offset_bottom = 436.0
 grow_horizontal = 0
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+
+[node name="StatsPanel" type="Panel" parent="MarginContainer4"]
+layout_mode = 2
 script = ExtResource("7_vpxac")
 
-[node name="MarginContainer2" type="MarginContainer" parent="StatsPanel"]
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer4/StatsPanel"]
 layout_mode = 2
+offset_right = 353.0
+offset_bottom = 409.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel/MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer4/StatsPanel/MarginContainer2"]
 layout_mode = 2
 
-[node name="TabBar" type="TabBar" parent="StatsPanel/MarginContainer2/VBoxContainer"]
+[node name="TabBar" type="TabBar" parent="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 current_tab = 0
@@ -107,16 +185,16 @@ tab_1/title = "DPS"
 tab_2/title = "Kills"
 tab_3/title = "Level"
 
-[node name="GemTable" type="GridContainer" parent="StatsPanel/MarginContainer2/VBoxContainer"]
+[node name="GemTable" type="GridContainer" parent="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer"]
 layout_mode = 2
 columns = 2
 
-[node name="GemName" type="Label" parent="StatsPanel/MarginContainer2/VBoxContainer/GemTable"]
+[node name="GemName" type="Label" parent="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/GemTable"]
 layout_mode = 2
 text = "Gem
 "
 
-[node name="GemValue" type="Label" parent="StatsPanel/MarginContainer2/VBoxContainer/GemTable"]
+[node name="GemValue" type="Label" parent="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/GemTable"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
@@ -189,7 +267,7 @@ type = 1
 
 [node name="Upgrade" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
+tooltip_text = "Upgrade the chances to receive higher quality gems"
 icon = ExtResource("7_sx5do")
 icon_alignment = 1
 expand_icon = true
@@ -483,7 +561,7 @@ expand_icon = true
 [node name="Downgrade" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
+tooltip_text = "Downgrade the quality of this gem and keep it"
 disabled = true
 text = "
 "
@@ -494,7 +572,7 @@ expand_icon = true
 [node name="Fusion2" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
+tooltip_text = "Fuse two equal gems to keep a gem of next higher quality"
 disabled = true
 text = "
 "
@@ -505,7 +583,7 @@ expand_icon = true
 [node name="Fusion4" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
+tooltip_text = "Fuse four equal gems to keep a gem of twice higher quality"
 disabled = true
 text = "
 "
@@ -516,7 +594,7 @@ expand_icon = true
 [node name="Combine" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-tooltip_text = "Keep the gem and start next wave"
+tooltip_text = "One-shot combine to a special gem and keep it"
 disabled = true
 text = "
 "
@@ -526,7 +604,7 @@ expand_icon = true
 
 [node name="Reroll" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
+tooltip_text = "Re-roll for a new gem"
 shortcut = ExtResource("6_xbq5d")
 icon = ExtResource("16_ec3ih")
 icon_alignment = 1
@@ -554,43 +632,43 @@ alignment = 2
 
 [node name="Action6" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
 [node name="Action5" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
 [node name="Action4" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
 [node name="Action3" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
 [node name="Action2" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
 [node name="Action" parent="MarginContainer2/MarginContainer/GemMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
-tooltip_text = "Roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
@@ -632,8 +710,8 @@ vertical_icon_alignment = 2
 expand_icon = true
 type = 1
 
-[connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
-[connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="StatsPanel" method="_on_tab_bar_tab_changed"]
+[connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
+[connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="MarginContainer4/StatsPanel" method="_on_tab_bar_tab_changed"]
 [connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]

@@ -6,6 +6,10 @@ var gem: Gem
 var settings: SpecialGem
 var tier = 0
 var _upgrade_tiers = []
+var upgrade_icon: Texture2D
+
+func _init():
+	upgrade_icon = preload("res://sprites/icons/jade-shard.png")
 
 func setup(gem: Gem, settings: SpecialGem):
 	self.gem = gem
@@ -53,7 +57,7 @@ func init_menu(menu: GemMenu):
 		return
 	var upgrade_button = menu.register_action_button(_upgrade_tier)
 	upgrade_button.cost = _upgrade_tiers[tier]["cost"]
-	upgrade_button.text = "U"
+	upgrade_button.icon = upgrade_icon
 	upgrade_button.tooltip_text = "Upgrade to " + _upgrade_tiers[tier]["name"]
 
 func _init_upgrade_tier(name: String, cost: int):

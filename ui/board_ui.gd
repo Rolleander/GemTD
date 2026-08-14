@@ -1,8 +1,9 @@
 extends CanvasLayer
 
-@onready var wave = $WaveLabel as Label
+@onready var wave = $MarginContainer5/Panel/HBoxContainer/HBoxContainer/WaveLabel as Label
+@onready var money = $MarginContainer5/Panel/HBoxContainer/HBoxContainer2/MoneyLabel as Label
+@onready var path = $MarginContainer5/Panel/HBoxContainer/HBoxContainer3/PathLabel as Label
 @onready var fps = $FpsLabel as Label
-@onready var money = $MoneyLabel as Label
 
 func _ready():
 	$MarginContainer2/MarginContainer/GemInfo.visible = false
@@ -13,6 +14,7 @@ func _ready():
 	visible = true
 
 func _process(delta):
-	wave.text = "Wave: " + str(Game.wave.current + 1)
+	wave.text = str(Game.wave.current + 1)
+	money.text = str(Game.money)
+	path.text = str(Game.path_length)
 	fps.text = "FPS: " + str(Engine.get_frames_per_second())
-	money.text = "Money: " + str(Game.money)

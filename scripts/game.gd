@@ -1,6 +1,6 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 5
+const PLACEMENTS_PER_ROUND = 50
 
 var construction_phase = true
 var remaining_placements = PLACEMENTS_PER_ROUND
@@ -12,6 +12,7 @@ var selected_gem: Gem
 var selected_enemy: Enemy
 var gem_chances: GemChances = GemChances.new()
 var lives = 10
+var path_length = 0
 
 func _ready():
 	Engine.time_scale = 1.5

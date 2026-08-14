@@ -31,6 +31,10 @@ func _ready():
 	var start = rect.position * Globals.TILE_SIZE
 	var end = rect.end * Globals.TILE_SIZE
 	camera.set_map_limits(start, end)
+	path_map.waypoints.append(spawn_point.position)
+	for w in waypoints.get_children():
+		path_map.waypoints.append(w.position)
+	Game.path_length = await path_map.calc_path_length()
 
 func _get_camera_rect() -> Rect2:
 	var pos = camera.get_screen_center_position()
@@ -38,8 +42,7 @@ func _get_camera_rect() -> Rect2:
 	#half_size.x = half_size.x / camera.scale.x
 	#half_size.y = half_size.y / camera.scale.y
 	return Rect2(pos - half_size, pos + half_size)
-	
-			
+				
 func _unhandled_input(event):
 	if event.is_action_pressed("click"):
 		_click()
@@ -56,10 +59,7 @@ func _click():
 		Events.field_clicked.emit(placement_position)
 		
 func _placement_allowed(pos: Vector2) -> bool:
-	var path = [spawn_point.position]
-	for w in waypoints.get_children():
-		path.append(w.position)
-	return await path_map.placing_allowed(pos, path)
+	return await path_map.placing_allowed(pos)
 		
 func place_gem():
 	if !Game.construction_phase:
@@ -73,6 +73,7 @@ func place_gem():
 	var quality = Game.gem_chances.get_random_quality()
 	gem.init_basic_gem(type, quality)
 	path_map.block_path(pos)
+	Game.path_length = await path_map.calc_path_length()
 	Game.placed_gem(gem)
 	$WorldPerspective/Marker.visible = false
 	if Game.remaining_placements == 0:
