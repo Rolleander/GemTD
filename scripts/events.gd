@@ -1,5 +1,6 @@
 extends Node
 
+signal building_phase_started()
 signal wave_started()
 signal wave_ended()
 signal unselect()
@@ -9,6 +10,7 @@ signal enemy_selected(enemy: Enemy)
 signal enemy_spawned(enemy: Enemy)
 signal enemy_killed(enemy: Enemy, killer: Gem)
 signal enemy_reached_end(enemy: Enemy)
+
 
 @onready var overlay_text_scene = preload("res://board/overlay_text.tscn")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=32 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Texture2D" uid="uid://dr15h2pvjsvj4" path="res://sprites/icons/coin_01.png" id="2_4fxvh"]
@@ -11,7 +11,9 @@
 [ext_resource type="Script" uid="uid://xp3ufep1adt3" path="res://ui/GemInfo.gd" id="4_vuwf8"]
 [ext_resource type="PackedScene" uid="uid://dpqg4gejg3m4s" path="res://ui/BuffList.tscn" id="5_cjofp"]
 [ext_resource type="Script" uid="uid://bkghq8xqgnmng" path="res://ui/RockMenu.gd" id="5_e8wht"]
+[ext_resource type="Texture2D" uid="uid://l5lr3usctglw" path="res://sprites/icons/Icon381.png" id="5_ya63g"]
 [ext_resource type="Shortcut" uid="uid://bfwc0v5ig06nm" path="res://resources/shortcuts/keep.tres" id="6_2msh0"]
+[ext_resource type="Texture2D" uid="uid://bqumcibbdi1qd" path="res://sprites/icons/dice_01.png" id="6_psmgc"]
 [ext_resource type="Shortcut" uid="uid://bodt36xthb64s" path="res://resources/shortcuts/reroll.tres" id="6_xbq5d"]
 [ext_resource type="Texture2D" uid="uid://b56f4j0ppk2ji" path="res://sprites/icons/diamond.png" id="7_sx5do"]
 [ext_resource type="Script" uid="uid://bfbf6v2mr8kur" path="res://ui/StatsPanel.gd" id="7_vpxac"]
@@ -66,14 +68,19 @@ mouse_filter = 2
 
 [node name="MarginContainer5" type="MarginContainer" parent="."]
 offset_right = 366.0
-offset_bottom = 61.0
+offset_bottom = 172.0
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 
-[node name="Panel" type="Panel" parent="MarginContainer5"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer5"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Panel" type="Panel" parent="MarginContainer5/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,71 +90,142 @@ offset_bottom = 3.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer5/Panel/HBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 tooltip_text = "Coins"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer2/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer2/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("2_4fxvh")
 expand_mode = 2
 
-[node name="MoneyLabel" type="Label" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer2"]
+[node name="MoneyLabel" type="Label" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "1000"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/Panel/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 tooltip_text = "Current enemy wave"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("3_ya63g")
 expand_mode = 2
 
-[node name="WaveLabel" type="Label" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer"]
+[node name="WaveLabel" type="Label" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "10"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer5/Panel/HBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer"]
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 tooltip_text = "Length of maze"
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer3/MarginContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer3/MarginContainer"]
 layout_mode = 2
 texture = ExtResource("4_psmgc")
 expand_mode = 2
 
-[node name="PathLabel" type="Label" parent="MarginContainer5/Panel/HBoxContainer/HBoxContainer3"]
+[node name="PathLabel" type="Label" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 27
 text = "1000"
+
+[node name="BuildingPhaseInfo" type="Panel" parent="MarginContainer5/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 337.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.431373, 0.756863, 0.882353, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Construction phase"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="Label2" type="Label" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Remaining:"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("5_ya63g")
+expand_mode = 2
+
+[node name="PlacingLabel" type="Label" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.317647, 0.788235, 0.854902, 1)
+theme_override_font_sizes/font_size = 22
+text = "0/5"
+
+[node name="Label3" type="Label" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Free re-rolls:"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer/MarginContainer2"]
+layout_mode = 2
+texture = ExtResource("6_psmgc")
+expand_mode = 2
+
+[node name="FreeRerollLabel" type="Label" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.733333, 0.627451, 0.470588, 1)
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="Control" type="Control" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer"]
+layout_mode = 2
 
 [node name="MarginContainer4" type="MarginContainer" parent="."]
 anchors_preset = 1
@@ -252,18 +330,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
 alignment = 2
-
-[node name="Reroll" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
-layout_mode = 2
-tooltip_text = "Roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
-type = 1
-cost = 1
-
-[node name="Remove" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
-layout_mode = 2
-tooltip_text = "Removes the rock from the maze"
-type = 1
 
 [node name="Upgrade" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
@@ -391,7 +457,6 @@ alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 1
 
 [node name="AtkLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2

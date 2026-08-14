@@ -1,13 +1,12 @@
 extends Node
 
-const PLACEMENTS_PER_ROUND = 50
-
 var construction_phase = true
-var remaining_placements = PLACEMENTS_PER_ROUND
+var placements_per_round = 5
+var remaining_placements = placements_per_round
 var free_rerolls = 0
 var reroll_count = 0
 var wave = Wave.new("")
-var money = 1000
+var money = 10
 var selected_gem: Gem
 var selected_enemy: Enemy
 var gem_chances: GemChances = GemChances.new()
@@ -62,7 +61,8 @@ func _wave_ended():
 func _start_building():
 	reroll_count = 0
 	construction_phase = true
-	remaining_placements = PLACEMENTS_PER_ROUND
+	remaining_placements = placements_per_round
+	Events.building_phase_started.emit()
 	
 func get_enemies():
 	return get_tree().get_first_node_in_group("enemies_node").get_children()
