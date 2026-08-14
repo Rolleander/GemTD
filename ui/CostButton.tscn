@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://crtuc0o7i7mny"]
+[gd_scene load_steps=7 format=3 uid="uid://crtuc0o7i7mny"]
 
 [ext_resource type="Script" uid="uid://c05qvhbu71sec" path="res://ui/CostButton.gd" id="1_yy545"]
-[ext_resource type="Texture2D" uid="uid://bf6xkn1b3y1p7" path="res://sprites/icons/gem.png" id="2_wttni"]
-[ext_resource type="Texture2D" uid="uid://blq4hq3omm705" path="res://sprites/icons/dice.png" id="3_npxu8"]
+[ext_resource type="Texture2D" uid="uid://l5lr3usctglw" path="res://sprites/icons/Icon381.png" id="2_4aft4"]
+[ext_resource type="Texture2D" uid="uid://bqumcibbdi1qd" path="res://sprites/icons/dice_01.png" id="3_4aft4"]
+[ext_resource type="Texture2D" uid="uid://dr15h2pvjsvj4" path="res://sprites/icons/coin_01.png" id="4_4aft4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pigug"]
 bg_color = Color(0.309804, 0.309804, 0.309804, 1)
@@ -26,30 +27,36 @@ focus_mode = 0
 script = ExtResource("1_yy545")
 
 [node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.666667)
 layout_mode = 0
 offset_right = 60.0
-offset_bottom = 22.0
+offset_bottom = 20.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pigug")
 
 [node name="Label" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 1.0
-offset_right = 38.0
-offset_bottom = 22.0
-text = "1000
+offset_left = -3.0
+offset_top = -4.0
+offset_right = 39.0
+offset_bottom = 51.0
+text = "999
 "
 label_settings = SubResource("LabelSettings_2q4wo")
 horizontal_alignment = 2
 
-[node name="IconM" type="Sprite2D" parent="Panel"]
-position = Vector2(49, 11)
+[node name="IconP" type="Sprite2D" parent="Panel"]
+position = Vector2(50, 9)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("2_wttni")
+texture = ExtResource("2_4aft4")
 
 [node name="IconR" type="Sprite2D" parent="Panel"]
-visible = false
-position = Vector2(49, 11)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("3_npxu8")
+position = Vector2(50, 9)
+scale = Vector2(0.329688, 0.329688)
+texture = ExtResource("3_4aft4")
+
+[node name="IconM" type="Sprite2D" parent="Panel"]
+position = Vector2(50, 8)
+scale = Vector2(0.27375, 0.27375)
+texture = ExtResource("4_4aft4")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -112,6 +112,7 @@ enemy types:
 - teleporter (jumps to waypoints) ?
 - airborne (ground, become air units after taking % of dmg)
 - crashlanding (air, become ground units after taking % of dmg)  <- doesnt work with pathing 
+- speeder: short bursts of extra speed
 
 - damage check boss: two waves parallel, one with single unit and one with multiple. 
 switches between them periodically by time or after damage thresholds?  

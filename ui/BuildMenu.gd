@@ -19,7 +19,8 @@ func _open(gem: Gem):
 		fusion4.disabled = true
 		combine.disabled = true
 		if Game.free_rerolls > 0:
-			reroll.cost = 0
+			reroll.cost = 1
+			reroll.type = CostButton.CostType.ROLLS
 			reroll.disabled = false
 		else:
 			reroll.cost = 50 + Game.reroll_count * 25
@@ -85,10 +86,7 @@ func _on_combine_pressed():
 				_end_building(c.combine(selected_gem))
 
 func _on_reroll_pressed():
-	if reroll.cost == 0:
-		#free reroll
-		Game.free_rerolls -= 1
-	else:
+	if reroll.type == CostButton.CostType.MONEY:
 		Game.reroll_count += 1
 	var selected_gem = Game.selected_gem
 	selected_gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())

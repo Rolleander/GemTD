@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=27 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Theme" uid="uid://6i6l70xtnywh" path="res://ui/theme.tres" id="2_48epx"]
@@ -10,10 +10,18 @@
 [ext_resource type="Script" uid="uid://bkghq8xqgnmng" path="res://ui/RockMenu.gd" id="5_e8wht"]
 [ext_resource type="Shortcut" uid="uid://bfwc0v5ig06nm" path="res://resources/shortcuts/keep.tres" id="6_2msh0"]
 [ext_resource type="Shortcut" uid="uid://bodt36xthb64s" path="res://resources/shortcuts/reroll.tres" id="6_xbq5d"]
+[ext_resource type="Texture2D" uid="uid://b56f4j0ppk2ji" path="res://sprites/icons/diamond.png" id="7_sx5do"]
 [ext_resource type="Script" uid="uid://bfbf6v2mr8kur" path="res://ui/StatsPanel.gd" id="7_vpxac"]
 [ext_resource type="Script" uid="uid://cxyr8e56r7856" path="res://ui/gem_menu.gd" id="11_g022i"]
 [ext_resource type="PackedScene" uid="uid://crtuc0o7i7mny" path="res://ui/CostButton.tscn" id="11_ux7db"]
 [ext_resource type="Script" uid="uid://mb2xdswtgcfp" path="res://ui/EnemyPanel.gd" id="12_ur731"]
+[ext_resource type="Texture2D" uid="uid://bnd6oac3nm7rp" path="res://sprites/icons/blessed-orb.png" id="13_ikuvs"]
+[ext_resource type="Texture2D" uid="uid://cfe5h6hpq8tw2" path="res://sprites/icons/aqua-stone.png" id="13_jrmmq"]
+[ext_resource type="Texture2D" uid="uid://dglhs5fj172je" path="res://sprites/icons/charm-stone.png" id="14_358n2"]
+[ext_resource type="Texture2D" uid="uid://cgegiq4pojhif" path="res://sprites/icons/nature-heal.png" id="16_2xmuo"]
+[ext_resource type="Texture2D" uid="uid://da8mj07mqjwry" path="res://sprites/icons/clear-gem.png" id="16_ec3ih"]
+[ext_resource type="Texture2D" uid="uid://qi0wi52rt1ue" path="res://sprites/icons/rainbow-rocks.png" id="18_13hgj"]
+[ext_resource type="Texture2D" uid="uid://dn1xkfnfkga0h" path="res://sprites/icons/earth-spike.png" id="19_sx5do"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n3b1d"]
 font = ExtResource("4_5kyyh")
@@ -182,6 +190,9 @@ type = 1
 [node name="Upgrade" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Roll for a new gem"
+icon = ExtResource("7_sx5do")
+icon_alignment = 1
+expand_icon = true
 cost = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="."]
@@ -465,44 +476,61 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 shortcut = ExtResource("6_2msh0")
-text = "Keep"
+icon = ExtResource("13_jrmmq")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Downgrade" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
-text = "Down
+text = "
 "
+icon = ExtResource("14_358n2")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Fusion2" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
-text = "Fus2
+text = "
 "
+icon = ExtResource("16_2xmuo")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Fusion4" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
-text = "Fus4
+text = "
 "
+icon = ExtResource("13_ikuvs")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Combine" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 tooltip_text = "Keep the gem and start next wave"
 disabled = true
-text = "Comb
+text = "
 "
+icon = ExtResource("18_13hgj")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Reroll" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Roll for a new gem"
 shortcut = ExtResource("6_xbq5d")
+icon = ExtResource("16_ec3ih")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
@@ -589,12 +617,19 @@ alignment = 2
 layout_mode = 2
 tooltip_text = "Roll for a new gem"
 shortcut = ExtResource("6_xbq5d")
+icon = ExtResource("16_ec3ih")
+icon_alignment = 1
+expand_icon = true
 type = 1
 cost = 1
 
 [node name="Remove" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Removes the rock from the maze"
+icon = ExtResource("19_sx5do")
+icon_alignment = 1
+vertical_icon_alignment = 2
+expand_icon = true
 type = 1
 
 [connection signal="tab_changed" from="StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]

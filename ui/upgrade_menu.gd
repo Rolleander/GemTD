@@ -17,4 +17,4 @@ func _update_level():
 	if _upgrade_allowed():
 		upgrade_button.cost = Game.gem_chances.get_upgrade_cost()
 	else:
-		upgrade_button.set_hidden(true)
+		UiUtils.hide_element(upgrade_button)
