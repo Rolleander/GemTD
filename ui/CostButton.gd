@@ -17,7 +17,6 @@ enum EnabledType {
 @export var type = CostType.MONEY
 @export var enabled_type = EnabledType.BUILDING
 @export var cost: int = 0
-@export var sprite: Sprite2D = null
 
 @onready var panel = $Panel
 @onready var c_icon_m = $Panel/IconM
@@ -26,12 +25,6 @@ enum EnabledType {
 @onready var c_label = $Panel/Label as Label
 
 func _ready():
-	if sprite != null:
-		add_child(sprite)
-		sprite.centered = true
-		sprite.position.x = 30
-		sprite.position.y = 30
-		move_child(sprite, 0)
 	c_icon_m.visible = false
 	c_icon_r.visible = false
 	c_icon_p.visible = false

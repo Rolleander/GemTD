@@ -6,7 +6,7 @@ var remaining_placements = placements_per_round
 var free_rerolls = 0
 var reroll_count = 0
 var wave = Wave.new("")
-var money = 10
+var money = 1000
 var selected_gem: Gem
 var selected_enemy: Enemy
 var gem_chances: GemChances = GemChances.new()

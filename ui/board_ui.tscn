@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=36 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Texture2D" uid="uid://dr15h2pvjsvj4" path="res://sprites/icons/coin_01.png" id="2_4fxvh"]
@@ -15,10 +15,12 @@
 [ext_resource type="Shortcut" uid="uid://bfwc0v5ig06nm" path="res://resources/shortcuts/keep.tres" id="6_2msh0"]
 [ext_resource type="Texture2D" uid="uid://bqumcibbdi1qd" path="res://sprites/icons/dice_01.png" id="6_psmgc"]
 [ext_resource type="Shortcut" uid="uid://bodt36xthb64s" path="res://resources/shortcuts/reroll.tres" id="6_xbq5d"]
+[ext_resource type="Texture2D" uid="uid://nf86pmr4r58w" path="res://sprites/icons/crimson-demon.png" id="7_nht25"]
 [ext_resource type="Texture2D" uid="uid://b56f4j0ppk2ji" path="res://sprites/icons/diamond.png" id="7_sx5do"]
 [ext_resource type="Script" uid="uid://bfbf6v2mr8kur" path="res://ui/StatsPanel.gd" id="7_vpxac"]
 [ext_resource type="Script" uid="uid://cxyr8e56r7856" path="res://ui/gem_menu.gd" id="11_g022i"]
 [ext_resource type="PackedScene" uid="uid://crtuc0o7i7mny" path="res://ui/CostButton.tscn" id="11_ux7db"]
+[ext_resource type="Texture2D" uid="uid://ygc235rcu716" path="res://sprites/icons/polyfire.png" id="12_8luob"]
 [ext_resource type="Script" uid="uid://mb2xdswtgcfp" path="res://ui/EnemyPanel.gd" id="12_ur731"]
 [ext_resource type="Texture2D" uid="uid://bnd6oac3nm7rp" path="res://sprites/icons/blessed-orb.png" id="13_ikuvs"]
 [ext_resource type="Texture2D" uid="uid://cfe5h6hpq8tw2" path="res://sprites/icons/aqua-stone.png" id="13_jrmmq"]
@@ -28,9 +30,15 @@
 [ext_resource type="Texture2D" uid="uid://qi0wi52rt1ue" path="res://sprites/icons/rainbow-rocks.png" id="18_13hgj"]
 [ext_resource type="Texture2D" uid="uid://dn1xkfnfkga0h" path="res://sprites/icons/earth-spike.png" id="19_sx5do"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8luob"]
+bg_color = Color(0.160269, 0.160269, 0.160269, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7rpd"]
+bg_color = Color(0.878431, 0.305882, 0.00392157, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_n3b1d"]
 font = ExtResource("4_5kyyh")
-font_size = 20
+font_size = 21
 font_color = Color(0.196078, 1, 0.262745, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ksh6u"]
@@ -78,7 +86,7 @@ layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="Panel" type="Panel" parent="MarginContainer5/VBoxContainer"]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/VBoxContainer/Panel"]
@@ -110,7 +118,7 @@ expand_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 24
 text = "1000"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer"]
@@ -132,7 +140,7 @@ expand_mode = 2
 
 [node name="WaveLabel" type="Label" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 24
 text = "10"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer"]
@@ -154,7 +162,7 @@ expand_mode = 2
 
 [node name="PathLabel" type="Label" parent="MarginContainer5/VBoxContainer/Panel/HBoxContainer/HBoxContainer3"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 27
+theme_override_font_sizes/font_size = 24
 text = "1000"
 
 [node name="BuildingPhaseInfo" type="Panel" parent="MarginContainer5/VBoxContainer"]
@@ -169,6 +177,9 @@ offset_right = 337.0
 offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer"]
+layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer"]
 layout_mode = 2
@@ -187,7 +198,7 @@ columns = 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Remaining:"
-horizontal_alignment = 1
+horizontal_alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -208,7 +219,7 @@ text = "0/5"
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Free re-rolls:"
-horizontal_alignment = 1
+horizontal_alignment = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -224,6 +235,74 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.733333, 0.627451, 0.470588, 1)
 theme_override_font_sizes/font_size = 22
 text = "0"
+
+[node name="WavePhaseInfo" type="Panel" parent="MarginContainer5/VBoxContainer"]
+custom_minimum_size = Vector2(0, 105)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer5/VBoxContainer/WavePhaseInfo"]
+layout_mode = 2
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 337.0
+offset_bottom = 102.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer"]
+layout_mode = 2
+
+[node name="WaveTitleLabel" type="Label" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.352941, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Wave"
+horizontal_alignment = 1
+
+[node name="WaveDescriptionLabel" type="Label" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.460347, 0.460347, 0.460347, 1)
+theme_override_font_sizes/font_size = 20
+text = "Wave description"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="Label2" type="Label" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Remaining:"
+horizontal_alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer/GridContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer/GridContainer/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("7_nht25")
+expand_mode = 2
+
+[node name="WaveProgress" type="ProgressBar" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(70, 18)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_8luob")
+theme_override_styles/fill = SubResource("StyleBoxFlat_u7rpd")
+value = 50.0
+show_percentage = false
+
+[node name="EnemyCountLabel" type="Label" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer/GridContainer/WaveProgress"]
+layout_mode = 2
+offset_top = -4.0
+offset_right = 69.0
+offset_bottom = 27.0
+theme_override_font_sizes/font_size = 18
+text = "0/5"
+horizontal_alignment = 1
 
 [node name="RecipeInfo" type="VBoxContainer" parent="MarginContainer5/VBoxContainer"]
 layout_mode = 2
@@ -333,6 +412,15 @@ grow_vertical = 2
 theme_override_constants/separation = 5
 alignment = 2
 
+[node name="Upgrade2" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Allows placing an additional gem in all construction phases"
+icon = ExtResource("12_8luob")
+icon_alignment = 1
+expand_icon = true
+enabled_type = 2
+cost = 350
+
 [node name="Upgrade" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Upgrade the chances to receive higher quality gems"
@@ -430,9 +518,9 @@ script = ExtResource("4_vuwf8")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/MarginContainer/GemInfo"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 8
+theme_override_constants/margin_right = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer"]
 layout_mode = 2
@@ -459,17 +547,20 @@ alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 5
 
 [node name="AtkLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.60933, 0.60933, 0.60933, 1)
 text = "ATK:"
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="AtkValue" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 1
 text = "ATK"
 label_settings = SubResource("LabelSettings_n3b1d")
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="AtkBuff" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer"]
 layout_mode = 2
@@ -479,18 +570,20 @@ vertical_alignment = 1
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 1
+theme_override_constants/separation = 5
 
 [node name="SpdLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.588235, 0.588235, 0.588235, 1)
 text = "SPD:"
 vertical_alignment = 1
 
 [node name="SpdValue" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 1
 text = "SPD"
 label_settings = SubResource("LabelSettings_n3b1d")
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="SpdBuff" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer2"]
 layout_mode = 2
@@ -500,18 +593,20 @@ vertical_alignment = 1
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 1
+theme_override_constants/separation = 5
 
 [node name="RngLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.556863, 0.556863, 0.556863, 1)
 text = "RNG:"
 vertical_alignment = 1
 
 [node name="RngValue" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
 layout_mode = 2
+size_flags_vertical = 1
 text = "RNG"
 label_settings = SubResource("LabelSettings_n3b1d")
-vertical_alignment = 1
+vertical_alignment = 2
 
 [node name="RngBuff" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer2/HBoxContainer3"]
 layout_mode = 2
@@ -523,12 +618,14 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(146, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.23
+theme_override_constants/separation = 5
 
 [node name="killLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.560784, 0.560784, 0.560784, 1)
 text = "Kills:"
 vertical_alignment = 1
 
@@ -543,9 +640,11 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.31
+theme_override_constants/separation = 5
 
 [node name="killLabel" type="Label" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3/HBoxContainer2"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.564706, 0.564706, 0.564706, 1)
 text = "EXP:"
 vertical_alignment = 1
 
@@ -779,6 +878,7 @@ type = 1
 
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="MarginContainer4/StatsPanel" method="_on_tab_bar_tab_changed"]
+[connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade2" to="MarginContainer/UpgradeMenu" method="_on_upgrade_2_pressed"]
 [connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]

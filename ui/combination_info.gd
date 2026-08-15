@@ -16,8 +16,8 @@ func _ready():
 		var entry = preload("res://ui/recipe_entry.tscn").instantiate()
 		var label = entry.find_child("Label") as Label
 		label.text = gem_name
-		if i < gem.recipe.size() - 1:
-			label.text += " +"
+		if i == gem.recipe.size() - 1:
+			entry.find_child("Plus").free()
 		name_label.text = gem.name
 		label.add_theme_color_override("font_color", Color.GREEN if _has_gem(recipe) else Color.GRAY)
 		container.add_child(entry)

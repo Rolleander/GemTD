@@ -56,3 +56,9 @@ func _enemy_killed(enemy: Enemy, killer: Gem):
 func _wave_ended():
 	current += 1
 	Events.emit_signal("wave_ended")
+
+func get_enemy_description(wave_count: int = current):
+	var air = waves[current].Enemy == "A"
+	if air:
+		return "Air"
+	return "Ground"
