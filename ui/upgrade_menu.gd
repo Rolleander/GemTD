@@ -1,6 +1,8 @@
 extends Panel
 
-@onready var upgrade_button = $LevelMenu/HBoxContainer/Upgrade as CostButton
+@export var chancesInfo: GemChancesInfo
+@onready var upgrade_button = $MarginContainer/LevelMenu/HBoxContainer/Upgrade as CostButton
+
 
 func _ready():
 	_update_level()
@@ -14,6 +16,7 @@ func _update_level():
 		upgrade_button.cost = Game.gem_chances.get_upgrade_cost()
 	else:
 		UiUtils.hide_element(upgrade_button)
+	chancesInfo.update_labels()
 
 func _on_upgrade_pressed():
 	Game.gem_chances.inc_level()

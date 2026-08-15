@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=37 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Texture2D" uid="uid://dr15h2pvjsvj4" path="res://sprites/icons/coin_01.png" id="2_4fxvh"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://nf86pmr4r58w" path="res://sprites/icons/crimson-demon.png" id="7_nht25"]
 [ext_resource type="Texture2D" uid="uid://b56f4j0ppk2ji" path="res://sprites/icons/diamond.png" id="7_sx5do"]
 [ext_resource type="Script" uid="uid://bfbf6v2mr8kur" path="res://ui/StatsPanel.gd" id="7_vpxac"]
+[ext_resource type="Script" uid="uid://dhb2fema1wn2q" path="res://ui/gem_chances.gd" id="10_u7rpd"]
 [ext_resource type="Script" uid="uid://cxyr8e56r7856" path="res://ui/gem_menu.gd" id="11_g022i"]
 [ext_resource type="PackedScene" uid="uid://crtuc0o7i7mny" path="res://ui/CostButton.tscn" id="11_ux7db"]
 [ext_resource type="Texture2D" uid="uid://ygc235rcu716" path="res://sprites/icons/polyfire.png" id="12_8luob"]
@@ -262,7 +263,7 @@ horizontal_alignment = 1
 
 [node name="WaveDescriptionLabel" type="Label" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.460347, 0.460347, 0.460347, 1)
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
 theme_override_font_sizes/font_size = 20
 text = "Wave description"
 horizontal_alignment = 1
@@ -372,31 +373,169 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -388.0
-offset_top = -91.0
+offset_top = -252.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="UpgradeMenu" type="Panel" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-script = ExtResource("4_g022i")
+alignment = 2
 
-[node name="LevelMenu" type="VBoxContainer" parent="MarginContainer/UpgradeMenu"]
+[node name="GemChances" type="Panel" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(185, 150)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 2
+script = ExtResource("10_u7rpd")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GemChances"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UpgradeMenu/LevelMenu"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+tooltip_text = "Coins"
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = -5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("6_psmgc")
+expand_mode = 2
+
+[node name="WaveDescriptionLabel2" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 18
+text = "Gem roll chances:"
+horizontal_alignment = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = -4
+columns = 2
+
+[node name="WaveDescriptionLabel2" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 18
+text = "Chipped:"
+horizontal_alignment = 2
+
+[node name="ChippedChance" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(55, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100%"
+horizontal_alignment = 2
+
+[node name="WaveDescriptionLabel3" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 18
+text = "Flawed:"
+horizontal_alignment = 2
+
+[node name="FlawedChance" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "10%"
+horizontal_alignment = 2
+
+[node name="WaveDescriptionLabel4" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 18
+text = "Normal:"
+horizontal_alignment = 2
+
+[node name="NormalChance" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "10%"
+horizontal_alignment = 2
+
+[node name="WaveDescriptionLabel5" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 18
+text = "Flawless:"
+horizontal_alignment = 2
+
+[node name="FlawlessChance" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "10%"
+horizontal_alignment = 2
+
+[node name="WaveDescriptionLabel6" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.629675, 0.629675, 0.629675, 1)
+theme_override_font_sizes/font_size = 18
+text = "Perfect:"
+horizontal_alignment = 2
+
+[node name="PerfectChance" type="Label" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "10%"
+horizontal_alignment = 2
+
+[node name="UpgradeMenu" type="Panel" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("chancesInfo")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_g022i")
+chancesInfo = NodePath("../GemChances")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/UpgradeMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="LevelMenu" type="VBoxContainer" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu"]
 layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Upgrade2" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+[node name="Upgrade2" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Allows placing an additional gem in all construction phases"
 icon = ExtResource("12_8luob")
@@ -406,12 +545,13 @@ enabled_type = 2
 cost = 350
 hide_after_use = true
 
-[node name="Upgrade" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+[node name="Upgrade" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Upgrade the chances to receive higher quality gems"
 icon = ExtResource("7_sx5do")
 icon_alignment = 1
 expand_icon = true
+enabled_type = 2
 cost = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="."]
@@ -859,8 +999,8 @@ cost = 1
 
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="MarginContainer4/StatsPanel" method="_on_tab_bar_tab_changed"]
-[connection signal="pressed" from="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer/Upgrade2" to="MarginContainer/UpgradeMenu" method="_on_upgrade_2_pressed"]
-[connection signal="pressed" from="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu" method="_on_upgrade_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade2" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_2_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
