@@ -1,7 +1,10 @@
 extends Panel
 
+
 @export var chancesInfo: GemChancesInfo
 @onready var upgrade_button = $MarginContainer/LevelMenu/HBoxContainer/Upgrade as CostButton
+
+var selected_gem_type = -1
 
 
 func _ready():
@@ -25,3 +28,13 @@ func _on_upgrade_pressed():
 func _on_upgrade_2_pressed():
 	Game.placements_per_round += 1
 	Game.remaining_placements += 1
+
+func _on_upgrade_3_pressed() -> void:
+	var selection = get_tree().get_first_node_in_group("gem_type_selection") as GemTypeSelection
+	if selection == null:
+		push_error("Gem type selection modal was not found.")
+		return
+	selected_gem_type = await selection.select_type()
+	var type = Globals.get_gem_info(selected_gem_type)
+	Events.screen_text("Increased chance for " + type.label + " gems this turn", Color.LIGHT_GREEN, 50)
+	Game.gem_chances.prefer_type = type.type

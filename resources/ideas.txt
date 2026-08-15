@@ -2,9 +2,9 @@ rolling:
 
 - color picker: increase chance for rolls/rerolls this turn to get specific color
 - upgrade color picker (3 tiers):
-	-15%
-	-20%
-	-25%
+	-30%
+	-50%
+	-70%
 - color reroll:  only rerolls the color  (once per building gem or per turn?)
 - place swap: select another gem to switch places (once per game?)
 - increase placing slots 

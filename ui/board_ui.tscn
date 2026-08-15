@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=39 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Texture2D" uid="uid://dr15h2pvjsvj4" path="res://sprites/icons/coin_01.png" id="2_4fxvh"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://crtuc0o7i7mny" path="res://ui/CostButton.tscn" id="11_ux7db"]
 [ext_resource type="Texture2D" uid="uid://ygc235rcu716" path="res://sprites/icons/polyfire.png" id="12_8luob"]
 [ext_resource type="Script" uid="uid://mb2xdswtgcfp" path="res://ui/EnemyPanel.gd" id="12_ur731"]
+[ext_resource type="Texture2D" uid="uid://cof7jn5gsk4dt" path="res://sprites/icons/zephyr.png" id="13_gnpib"]
 [ext_resource type="Texture2D" uid="uid://bnd6oac3nm7rp" path="res://sprites/icons/blessed-orb.png" id="13_ikuvs"]
 [ext_resource type="Texture2D" uid="uid://cfe5h6hpq8tw2" path="res://sprites/icons/aqua-stone.png" id="13_jrmmq"]
 [ext_resource type="Texture2D" uid="uid://dglhs5fj172je" path="res://sprites/icons/charm-stone.png" id="14_358n2"]
@@ -30,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://da8mj07mqjwry" path="res://sprites/icons/clear-gem.png" id="16_ec3ih"]
 [ext_resource type="Texture2D" uid="uid://qi0wi52rt1ue" path="res://sprites/icons/rainbow-rocks.png" id="18_13hgj"]
 [ext_resource type="Texture2D" uid="uid://dn1xkfnfkga0h" path="res://sprites/icons/earth-spike.png" id="19_sx5do"]
+[ext_resource type="PackedScene" uid="uid://q6m06muatim3" path="res://ui/GemTypeSelection.tscn" id="32_8dh4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8luob"]
 bg_color = Color(0.160269, 0.160269, 0.160269, 1)
@@ -178,6 +180,7 @@ offset_right = 337.0
 offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="Control" type="Control" parent="MarginContainer5/VBoxContainer/BuildingPhaseInfo/VBoxContainer"]
 layout_mode = 2
@@ -238,7 +241,7 @@ theme_override_font_sizes/font_size = 22
 text = "0"
 
 [node name="WavePhaseInfo" type="Panel" parent="MarginContainer5/VBoxContainer"]
-custom_minimum_size = Vector2(0, 105)
+custom_minimum_size = Vector2(0, 95)
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer5/VBoxContainer/WavePhaseInfo"]
@@ -249,6 +252,7 @@ offset_right = 337.0
 offset_bottom = 102.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
 [node name="Control" type="Control" parent="MarginContainer5/VBoxContainer/WavePhaseInfo/VBoxContainer"]
 layout_mode = 2
@@ -350,6 +354,7 @@ tab_3/title = "Level"
 
 [node name="GemTable" type="GridContainer" parent="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/v_separation = 0
 columns = 2
 
 [node name="GemName" type="Label" parent="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/GemTable"]
@@ -384,7 +389,7 @@ layout_mode = 2
 alignment = 2
 
 [node name="GemChances" type="Panel" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(185, 150)
+custom_minimum_size = Vector2(155, 150)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 2
@@ -397,10 +402,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer"]
 layout_mode = 2
@@ -415,7 +420,7 @@ theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-theme_override_constants/margin_left = -5
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
@@ -429,7 +434,7 @@ expand_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 18
-text = "Gem roll chances:"
+text = "Roll chances:"
 horizontal_alignment = 2
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/GemChances/MarginContainer/VBoxContainer"]
@@ -534,6 +539,14 @@ alignment = 2
 layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 2
+
+[node name="Upgrade3" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Pick a gem type. Its chance to appear is increased for all rolls this turn."
+icon = ExtResource("13_gnpib")
+icon_alignment = 1
+expand_icon = true
+cost = 100
 
 [node name="Upgrade2" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
@@ -997,8 +1010,12 @@ expand_icon = true
 type = 1
 cost = 1
 
+[node name="GemTypeSelection" parent="." instance=ExtResource("32_8dh4y")]
+visible = false
+
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="MarginContainer4/StatsPanel" method="_on_tab_bar_tab_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade3" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_3_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade2" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_2_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]

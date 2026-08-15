@@ -6,7 +6,7 @@ var remaining_placements = placements_per_round
 var free_rerolls = 0
 var reroll_count = 0
 var wave = Wave.new("")
-var money = 10
+var money = 10000
 var selected_gem: Gem
 var selected_enemy: Enemy
 var gem_chances: GemChances = GemChances.new()
@@ -63,6 +63,7 @@ func _start_building():
 	construction_phase = true
 	remaining_placements = placements_per_round
 	Events.building_phase_started.emit()
+	gem_chances.reset_on_turn()
 	
 func get_enemies():
 	return get_tree().get_first_node_in_group("enemies_node").get_children() as Array[Enemy]
