@@ -312,7 +312,7 @@ size_flags_vertical = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -380.0
+offset_left = -338.0
 offset_bottom = 436.0
 grow_horizontal = 0
 theme_override_constants/margin_top = 25
@@ -323,9 +323,12 @@ layout_mode = 2
 script = ExtResource("7_vpxac")
 
 [node name="MarginContainer2" type="MarginContainer" parent="MarginContainer4/StatsPanel"]
-layout_mode = 2
-offset_right = 353.0
-offset_bottom = 409.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -369,7 +372,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -388.0
-offset_top = -229.0
+offset_top = -91.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/margin_right = 25
@@ -380,39 +383,20 @@ layout_mode = 2
 script = ExtResource("4_g022i")
 
 [node name="LevelMenu" type="VBoxContainer" parent="MarginContainer/UpgradeMenu"]
-layout_mode = 0
-offset_left = 9.0
-offset_top = 7.0
-offset_right = 307.0
-offset_bottom = 150.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UpgradeMenu/LevelMenu"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer"]
-layout_mode = 2
-text = "GemLevel:"
-
-[node name="GemLevel" type="Label" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UpgradeMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 137.0
-offset_right = -7.0
-offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UpgradeMenu/LevelMenu"]
+layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Upgrade2" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+[node name="Upgrade2" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Allows placing an additional gem in all construction phases"
 icon = ExtResource("12_8luob")
@@ -420,8 +404,9 @@ icon_alignment = 1
 expand_icon = true
 enabled_type = 2
 cost = 350
+hide_after_use = true
 
-[node name="Upgrade" parent="MarginContainer/UpgradeMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+[node name="Upgrade" parent="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Upgrade the chances to receive higher quality gems"
 icon = ExtResource("7_sx5do")
@@ -497,7 +482,7 @@ anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -458.0
-offset_right = 479.0
+offset_right = 418.0
 grow_vertical = 0
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_bottom = 25
@@ -618,7 +603,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/GemInfo/MarginContainer/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(146, 0)
+custom_minimum_size = Vector2(126, 0)
 layout_mode = 2
 size_flags_stretch_ratio = 2.23
 theme_override_constants/separation = 5
@@ -692,9 +677,8 @@ theme_override_constants/margin_right = 10
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_colors/font_color = Color(0.854902, 0.74902, 0.301961, 1)
-theme_override_font_sizes/font_size = 17
+theme_override_font_sizes/font_size = 15
 text = "test"
-horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="BuildMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
@@ -850,12 +834,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 6.0
 offset_top = 5.0
-offset_right = -7.0
+offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 5
 alignment = 2
+
+[node name="Remove" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Removes the rock from the maze"
+icon = ExtResource("19_sx5do")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Reroll" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
@@ -867,24 +857,15 @@ expand_icon = true
 type = 1
 cost = 1
 
-[node name="Remove" parent="MarginContainer2/MarginContainer/RockMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
-layout_mode = 2
-tooltip_text = "Removes the rock from the maze"
-icon = ExtResource("19_sx5do")
-icon_alignment = 1
-vertical_icon_alignment = 2
-expand_icon = true
-type = 1
-
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="MarginContainer4/StatsPanel" method="_on_tab_bar_tab_changed"]
-[connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade2" to="MarginContainer/UpgradeMenu" method="_on_upgrade_2_pressed"]
-[connection signal="pressed" from="MarginContainer/UpgradeMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu" method="_on_upgrade_pressed"]
+[connection signal="pressed" from="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer/Upgrade2" to="MarginContainer/UpgradeMenu" method="_on_upgrade_2_pressed"]
+[connection signal="pressed" from="MarginContainer/UpgradeMenu/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/UpgradeMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion4" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_4_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_combine_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_reroll_pressed"]
-[connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/RockMenu" method="_on_reroll_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Remove" to="MarginContainer2/MarginContainer/RockMenu" method="_on_remove_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/RockMenu" method="_on_reroll_pressed"]

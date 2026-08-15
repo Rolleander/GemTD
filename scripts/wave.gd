@@ -25,7 +25,7 @@ func start_wave():
 	spawn_target = waves[current].Count
 	spawn_timer.start(0.5)
 	Events.emit_signal("wave_started")
-	Events.screen_text("WAVE " + str(current + 1), Color.ORANGE, 100, 3, Vector2(0, -60))
+	Events.screen_text("WAVE " + str(current + 1), Color.ORANGE_RED, 100, 3, Vector2(0, -60))
 
 func _spawn_enemy():
 	var enemies = get_tree().get_first_node_in_group("enemies_node")

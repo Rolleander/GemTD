@@ -2,8 +2,8 @@ extends Panel
 
 @onready var reroll = $HBoxContainer/Reroll
 @onready var remove = $HBoxContainer/Remove
-var field_position : Vector2 
-var rock : Gem
+var field_position: Vector2
+var rock: Gem
 
 func _ready():
 	Events.wave_started.connect(func(): visible = false)
@@ -11,18 +11,15 @@ func _ready():
 	Events.field_clicked.connect(_open_field)
 	Events.unselect.connect(func(): visible = false)
 
-func _open(gem : Gem):
-	visible = gem.rock && Game.construction_phase
-	reroll.disabled  = Game.remaining_placements == 0
-	remove.visible = true
-	remove.disabled = !Game.construction_phase 
+func _open(gem: Gem):
+	visible = gem.rock
+	UiUtils.hide_element(remove, false)
 	field_position = gem.position
 	rock = gem
 
-func _open_field(position : Vector2):	
+func _open_field(position: Vector2):
 	visible = Game.construction_phase
-	reroll.disabled  = Game.remaining_placements == 0
-	remove.visible = false
+	UiUtils.hide_element(remove, true)
 	field_position = position
 	rock = null
 	

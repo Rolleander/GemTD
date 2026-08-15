@@ -12,8 +12,8 @@ func _ready():
 	for i in MAX_ROWS:
 		var name = name_label.duplicate()
 		var value = value_label.duplicate()
-		table.add_child(name)		
-		table.add_child(value)		
+		table.add_child(name)
+		table.add_child(value)
 	_fill_stats()
 	Events.wave_started.connect(_wave_started)
 
@@ -24,17 +24,17 @@ func _wave_started():
 func _fill_stats():
 	var stats = _calc_stats()
 	for i in MAX_ROWS:
-		var name = table.get_child(i*2+2)
-		var value = table.get_child(i*2+3)
+		var name = table.get_child(i * 2 + 2)
+		var value = table.get_child(i * 2 + 3)
 		if i < stats.size():
 			var stat = stats[i]["value"]
 			name.text = stats[i]["name"]
-			value.text = str(round(stat))
+			value.text = str(roundi(stat))
 		else:
-			name.text=""
-			value.text=""
+			name.text = ""
+			value.text = ""
 	table.get_child(0).text = "Total"
-	table.get_child(1).text = str(round(total))
+	table.get_child(1).text = str(roundi(total))
 	
 			
 func _calc_stats():
@@ -49,16 +49,16 @@ func _calc_stats():
 		if tab == 2:
 			value = gem.kills
 		if tab == 3:
-			value = gem.level	
+			value = gem.level
 		total += value
-		stats.append({"name": gem.gem_name,"value" :value })		
+		stats.append({"name": gem.gem_name, "value": value})
 	stats.sort_custom(_sort_by_value)
 	return stats.slice(0, min(stats.size(), MAX_ROWS))
 	
-func _sort_by_value(a ,b ):
+func _sort_by_value(a, b):
 	return a.value > b.value
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	_fill_stats()
 
 func _on_tab_bar_tab_changed(tab):

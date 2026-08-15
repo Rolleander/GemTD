@@ -89,5 +89,10 @@ func _on_reroll_pressed():
 	if reroll.type == CostButton.CostType.MONEY:
 		Game.reroll_count += 1
 	var selected_gem = Game.selected_gem
-	selected_gem.init_basic_gem(Game.gem_chances.get_random_type(), Game.gem_chances.get_random_quality())
+	var type = Game.gem_chances.get_random_type()
+	var quality = Game.gem_chances.get_random_quality()
+	while type == selected_gem.type && quality == selected_gem.quality:
+		type = Game.gem_chances.get_random_type()
+		quality = Game.gem_chances.get_random_quality()
+	selected_gem.init_basic_gem(type, quality)
 	Game.placed_gem(selected_gem)

@@ -19,17 +19,17 @@ func _ready():
 	Events.gem_selected.connect(_open)
 	Events.unselect.connect(func(): visible = false; buffList.visible = false)
 	
-func _open(gem : Gem):
-	visible =true
+func _open(gem: Gem):
+	visible = true
 	name_label.text = gem.gem_name
-	level_label.text = "Lv. "+str(gem.level)
+	level_label.text = "Lv. " + str(gem.level)
 	_set_buffed_value(damage_label, damage_buff_label, gem.damage)
 	_set_buffed_value(speed_label, speed_buff_label, gem.attack_delay, true)
 	_set_buffed_value(range_label, range_buff_label, gem.attack_range)
 	var show_exp := !gem.rock && gem.level < LevelUp.SHARE_LEVEL
 	exp_container.visible = show_exp
 	if show_exp:
-		exp_bar.tooltip_text = str(gem.exp)+" / "+str(gem.levelup_exp)
+		exp_bar.tooltip_text = str(gem.exp) + " / " + str(gem.levelup_exp)
 		exp_bar.min_value = LevelUp.get_levelup_exp(gem.level)
 		exp_bar.max_value = gem.levelup_exp
 		exp_bar.value = gem.exp
@@ -58,11 +58,11 @@ func _open(gem : Gem):
 	if !gem.rock:
 		buffList.open(gem.buffs)
 
-func _enem_buff_text(buff : EnemyBuff):
-	var text =  buff.description
+func _enem_buff_text(buff: EnemyBuff):
+	var text = buff.description
 	if buff.duration > 0:
-		text += " for "+str(buff.duration)+"s"
-	text += " ["+buff.name+"]"
+		text += " for " + str(buff.duration) + "s"
+	text += " [" + buff.name + "]"
 	return text
 
 func _format_exp_value(value: float) -> String:
@@ -74,7 +74,10 @@ func _set_buffed_value(
 	value: BuffableValue,
 	invert_percent: bool = false
 ) -> void:
-	value_label.text = str(snappedf(value.value, 0.01))
+	var buffed_value = value.value
+	if invert_percent:
+		buffed_value = 1.0 / buffed_value
+	value_label.text = str(snappedf(buffed_value, 0.01))
 	var buff: float = value.value - value.root
 	if is_zero_approx(buff) || is_zero_approx(value.root):
 		percent_label.visible = false
