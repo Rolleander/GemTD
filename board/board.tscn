@@ -102,6 +102,15 @@ shader_parameter/near_y = 1.0
 y_sort_enabled = true
 script = ExtResource("1_5hojr")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = -1
+offset_left = -1249.0
+offset_top = -1244.0
+offset_right = 2981.0
+offset_bottom = 2363.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [node name="WorldPerspective" type="CanvasGroup" parent="."]
 material = SubResource("ShaderMaterial_perspective")
 fit_margin = 256.0

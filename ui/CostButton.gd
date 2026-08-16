@@ -18,6 +18,7 @@ enum EnabledType {
 @export var enabled_type = EnabledType.BUILDING
 @export var cost: int = 0
 @export var hide_after_use = false
+@export var uses_per_turn: int = 0
 
 @onready var panel = $Panel
 @onready var c_icon_m = $Panel/IconM
@@ -25,11 +26,14 @@ enum EnabledType {
 @onready var c_icon_p = $Panel/IconP
 @onready var c_label = $Panel/Label as Label
 
+var _turn_uses = 0
+
 func _ready():
 	c_icon_m.visible = false
 	c_icon_r.visible = false
 	c_icon_p.visible = false
 	disabled = true
+	Events.wave_ended.connect(func(): _turn_uses = 0)
 		
 func _update_label(value):
 	c_label.text = str(cost)
@@ -60,6 +64,8 @@ func _process(delta):
 	panel.visible = cost > 0
 	if panel.visible:
 		_update_panel()
+	if uses_per_turn > 0 && _turn_uses >= uses_per_turn:
+		return
 	_update_state()
 
 func _get_value():
@@ -79,5 +85,8 @@ func _on_pressed():
 		else:
 			Game.free_rerolls -= cost
 	action_pressed.emit()
+	_turn_uses += 1
+	if uses_per_turn > 0 && _turn_uses >= uses_per_turn:
+		disabled = true
 	if hide_after_use:
 		UiUtils.hide_element(self)

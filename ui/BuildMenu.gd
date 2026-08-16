@@ -90,9 +90,12 @@ func _on_reroll_pressed():
 		Game.reroll_count += 1
 	var selected_gem = Game.selected_gem
 	var type = Game.gem_chances.get_random_type()
-	var quality = Game.gem_chances.get_random_quality()
+	var quality = selected_gem.quality if selected_gem.lock_quality else Game.gem_chances.get_random_quality()
 	while type == selected_gem.type && quality == selected_gem.quality:
 		type = Game.gem_chances.get_random_type()
-		quality = Game.gem_chances.get_random_quality()
+		quality = selected_gem.quality if selected_gem.lock_quality else Game.gem_chances.get_random_quality()
 	selected_gem.init_basic_gem(type, quality)
 	Game.placed_gem(selected_gem)
+
+func _on_lock_pressed() -> void:
+	Game.selected_gem.lock_quality = true

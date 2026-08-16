@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dpufs3fxsxh4a"]
+[gd_scene load_steps=40 format=3 uid="uid://dpufs3fxsxh4a"]
 
 [ext_resource type="Script" uid="uid://bl5drvxjl7b6i" path="res://ui/board_ui.gd" id="1_883fb"]
 [ext_resource type="Texture2D" uid="uid://dr15h2pvjsvj4" path="res://sprites/icons/coin_01.png" id="2_4fxvh"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://da8mj07mqjwry" path="res://sprites/icons/clear-gem.png" id="16_ec3ih"]
 [ext_resource type="Texture2D" uid="uid://qi0wi52rt1ue" path="res://sprites/icons/rainbow-rocks.png" id="18_13hgj"]
 [ext_resource type="Texture2D" uid="uid://dn1xkfnfkga0h" path="res://sprites/icons/earth-spike.png" id="19_sx5do"]
+[ext_resource type="Texture2D" uid="uid://1f7uy5t32osj" path="res://sprites/icons/lock_02.png" id="26_bixm8"]
 [ext_resource type="PackedScene" uid="uid://q6m06muatim3" path="res://ui/GemTypeSelection.tscn" id="32_8dh4y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8luob"]
@@ -540,6 +541,14 @@ layout_mode = 2
 theme_override_constants/separation = 5
 alignment = 2
 
+[node name="Upgrade4" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Pick a gem type. Its chance to appear is increased for all rolls this turn."
+icon = ExtResource("13_gnpib")
+icon_alignment = 1
+expand_icon = true
+cost = 100
+
 [node name="Upgrade3" parent="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
 layout_mode = 2
 tooltip_text = "Pick a gem type. Its chance to appear is increased for all rolls this turn."
@@ -835,11 +844,11 @@ text = "test"
 autowrap_mode = 2
 
 [node name="BuildMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 135)
 layout_mode = 2
 script = ExtResource("3_x7hxt")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/MarginContainer/BuildMenu"]
+[node name="HBoxContainer" type="GridContainer" parent="MarginContainer2/MarginContainer/BuildMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -847,10 +856,10 @@ anchor_bottom = 1.0
 offset_left = 6.0
 offset_top = 5.0
 offset_right = -5.0
-offset_bottom = -5.0
+offset_bottom = 315.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 2
+columns = 6
 
 [node name="Keep" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
@@ -871,6 +880,41 @@ text = "
 icon = ExtResource("14_358n2")
 icon_alignment = 1
 expand_icon = true
+
+[node name="Empty" type="Control" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Empty2" type="Control" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Lock" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Locks the gem quality for re-rolls. Can be used only one time per turn. "
+icon = ExtResource("26_bixm8")
+icon_alignment = 1
+expand_icon = true
+cost = 75
+uses_per_turn = 1
+
+[node name="Reroll" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
+layout_mode = 2
+tooltip_text = "Re-roll for a new gem"
+shortcut = ExtResource("6_xbq5d")
+icon = ExtResource("16_ec3ih")
+icon_alignment = 1
+expand_icon = true
+type = 1
+cost = 1
+
+[node name="Empty4" type="Control" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+
+[node name="Empty5" type="Control" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
 
 [node name="Fusion2" type="Button" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer"]
 custom_minimum_size = Vector2(60, 60)
@@ -904,16 +948,6 @@ text = "
 icon = ExtResource("18_13hgj")
 icon_alignment = 1
 expand_icon = true
-
-[node name="Reroll" parent="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer" instance=ExtResource("11_ux7db")]
-layout_mode = 2
-tooltip_text = "Re-roll for a new gem"
-shortcut = ExtResource("6_xbq5d")
-icon = ExtResource("16_ec3ih")
-icon_alignment = 1
-expand_icon = true
-type = 1
-cost = 1
 
 [node name="GemMenu" type="Panel" parent="MarginContainer2/MarginContainer" groups=["BuildMenu"]]
 custom_minimum_size = Vector2(0, 70)
@@ -1015,14 +1049,16 @@ visible = false
 
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="tab_changed" from="MarginContainer4/StatsPanel/MarginContainer2/VBoxContainer/TabBar" to="MarginContainer4/StatsPanel" method="_on_tab_bar_tab_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade4" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_4_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade3" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_3_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade2" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_2_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/UpgradeMenu/MarginContainer/LevelMenu/HBoxContainer/Upgrade" to="MarginContainer/VBoxContainer/UpgradeMenu" method="_on_upgrade_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Keep" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_keep_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Downgrade" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_downgrade_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Lock" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_lock_pressed"]
+[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_reroll_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion2" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_2_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Fusion4" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_fusion_4_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Combine" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_combine_pressed"]
-[connection signal="pressed" from="MarginContainer2/MarginContainer/BuildMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/BuildMenu" method="_on_reroll_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Remove" to="MarginContainer2/MarginContainer/RockMenu" method="_on_remove_pressed"]
 [connection signal="pressed" from="MarginContainer2/MarginContainer/RockMenu/HBoxContainer/Reroll" to="MarginContainer2/MarginContainer/RockMenu" method="_on_reroll_pressed"]

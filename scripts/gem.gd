@@ -23,6 +23,7 @@ var exp = 0
 var levelup_exp = 10
 var level = 0
 var under_construction = false
+var lock_quality = false
 var attack: Attack
 var gem_name: String
 var damage = TowerBuffableValue.new(self, TowerBuff.Attribute.DAMAGE)

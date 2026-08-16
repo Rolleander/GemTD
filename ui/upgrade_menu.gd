@@ -31,10 +31,15 @@ func _on_upgrade_2_pressed():
 
 func _on_upgrade_3_pressed() -> void:
 	var selection = get_tree().get_first_node_in_group("gem_type_selection") as GemTypeSelection
-	if selection == null:
-		push_error("Gem type selection modal was not found.")
-		return
 	selected_gem_type = await selection.select_type()
 	var type = Globals.get_gem_info(selected_gem_type)
 	Events.screen_text("Increased chance for " + type.label + " gems this turn", Color.LIGHT_GREEN, 50)
 	Game.gem_chances.prefer_type = type.type
+
+
+func _on_upgrade_4_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_upgrade_5_pressed() -> void:
+	pass # Replace with function body.
