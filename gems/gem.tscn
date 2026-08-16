@@ -194,9 +194,9 @@ material = SubResource("ShaderMaterial_range_circle")
 texture = ExtResource("7_8j4da")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.224235
+energy = 0.05
 texture = ExtResource("9_7x51v")
-texture_scale = 0.224442
+texture_scale = 0.2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D"]
 libraries = {

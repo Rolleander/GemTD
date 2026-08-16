@@ -103,7 +103,6 @@ y_sort_enabled = true
 script = ExtResource("1_5hojr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = -1
 offset_left = -1249.0
 offset_top = -1244.0
 offset_right = 2981.0

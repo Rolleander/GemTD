@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="SpecialGem" load_steps=10 format=3 uid="uid://dpgrprmcm2ao1"]
+
+[ext_resource type="Script" uid="uid://dr2tcdhdjlok1" path="res://scripts/basic_gem_id.gd" id="1_e6w22"]
+[ext_resource type="PackedScene" uid="uid://sf31by7vb4cx" path="res://gems/special/blub_gem.tscn" id="2_2a3br"]
+[ext_resource type="Script" uid="uid://26qmlrxb2ahx" path="res://scripts/special_gem.gd" id="3_53hlv"]
+[ext_resource type="Script" uid="uid://bwhecv2sedq8" path="res://scripts/special_gem_tier.gd" id="4_nixj6"]
+
+[sub_resource type="Resource" id="Resource_fw6n6"]
+script = ExtResource("1_e6w22")
+quality = 0
+type = 6
+
+[sub_resource type="Resource" id="Resource_eeyno"]
+script = ExtResource("1_e6w22")
+quality = 0
+type = 5
+
+[sub_resource type="Resource" id="Resource_a3ris"]
+script = ExtResource("1_e6w22")
+quality = 0
+type = 7
+
+[sub_resource type="Resource" id="Resource_1ftk8"]
+script = ExtResource("4_nixj6")
+name = "Moss Agate"
+upgrade_cost = 25
+metadata/_custom_type_script = "uid://bwhecv2sedq8"
+
+[sub_resource type="Resource" id="Resource_o68vg"]
+script = ExtResource("4_nixj6")
+name = "Venom Agate"
+upgrade_cost = 165
+metadata/_custom_type_script = "uid://bwhecv2sedq8"
+
+[resource]
+script = ExtResource("3_53hlv")
+recipe = Array[ExtResource("1_e6w22")]([SubResource("Resource_fw6n6"), SubResource("Resource_eeyno"), SubResource("Resource_a3ris")])
+name = "Green Agate"
+description = "Poison splash"
+type = 6
+tiers = Array[ExtResource("4_nixj6")]([SubResource("Resource_1ftk8"), SubResource("Resource_o68vg")])
+scene = ExtResource("2_2a3br")

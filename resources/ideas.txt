@@ -12,20 +12,25 @@ rolling:
 
 early combos:
 
-splash + slow = SA:1 + AQ:1 + DI:1
+pearl: splash + slow = SA:1 + AQ:1 + DI:1
 
-aoe attack = AM:1 + QZ:1 + RU:1
+sulfur: aoe attack = TO:1 + QZ:1 + RU:1
+tiers: brimstone -> bright brimstone -> burning brimstone
 
-poison + splash  = AQ:1 + EM:1 + OP:1
+poison + splash  = AM:1 + EM:1 + OP:1
+green agate ->  moss agate  -> venom agate
 
 mid combos:
 
 money gem = EM:3 + SA:2 + OP:3	
+tiers: lazulite -> lapis lazuli -> lucky lapis lazuli
 -tier2: attacks give +1 money up to half of current wave count (round up)
 
 air defence (air armor loss)= AM:2 + QZ:2 + RU:3
+tiers: moonstone -> rainbow moonstone
 
 range buffer (tower aura) = EM:4 + RU:2 + QZ:3
+tiers: cobalt -> cobaltite -> cobaltoan calcite
 -base: +1.5 range
 -tier1: +2 range
 -tier2: +3 range
@@ -75,7 +80,12 @@ effect ideas:
 
 combo name ideas:
 
+- golden beryl
 - lucky lapislazuli
+- neptunite -> mangan neptunite
+- quartzite -> milky qzartz / smoky quartz
+- pyrite
+- turquoise
 - massive meteorite
 - amber 
 - azurite
@@ -86,6 +96,7 @@ combo name ideas:
 - obsidian
 - onyx
 - pearl
+- chrome tourmaline
 - smoky quartz
 - tigers eye
 - turquoise 
@@ -96,6 +107,7 @@ combo name ideas:
 - pyrite
 - copper
 - platinum
+-titanite
 - graviton :  buff that makes unit targetable by ground & air
 
 enemy types:

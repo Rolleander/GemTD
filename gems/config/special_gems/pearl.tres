@@ -22,20 +22,20 @@ type = 4
 
 [sub_resource type="Resource" id="Resource_1ftk8"]
 script = ExtResource("4_vv085")
-name = "Silver Bubbler"
+name = "Giant Pearl"
 upgrade_cost = 25
 metadata/_custom_type_script = "uid://bwhecv2sedq8"
 
 [sub_resource type="Resource" id="Resource_o68vg"]
 script = ExtResource("4_vv085")
-name = "Crystal Bubbler"
+name = "Crystal Pearl"
 upgrade_cost = 190
 metadata/_custom_type_script = "uid://bwhecv2sedq8"
 
 [resource]
 script = ExtResource("3_3wt6j")
 recipe = Array[ExtResource("1_vxq2k")]([SubResource("Resource_fw6n6"), SubResource("Resource_eeyno"), SubResource("Resource_a3ris")])
-name = "Bubbler"
+name = "River Pearl"
 description = "Splash damage with slow"
 type = 1
 tiers = Array[ExtResource("4_vv085")]([SubResource("Resource_1ftk8"), SubResource("Resource_o68vg")])
