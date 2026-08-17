@@ -34,7 +34,6 @@ func _configure_showcase_state():
 	var board_ui = board.get_node_or_null("board_ui") as CanvasLayer
 	if board_ui != null:
 		board_ui.visible = true
-
 func _start_showcase_wave():
 	Game.wave.alive = 1
 	Game.wave.spawned = 1
@@ -57,6 +56,7 @@ func _create_special_gem() -> Gem:
 	gem.under_construction = false
 	board.maze.add_child(gem)
 	gem.add_to_group("gems")
+	gem.label.visible = false
 	gem.selection.visible = false
 	gem.range_ring.visible = false
 	gem.get_node("BuildingRing").hide()

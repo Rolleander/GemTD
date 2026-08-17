@@ -54,7 +54,7 @@ tracks/0/path = NodePath(".:energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
+"times": PackedFloat32Array(0, 1, 1.7624),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.2, 1.3, 0.2]
@@ -179,7 +179,7 @@ _data = {
 script = ExtResource("1_38bbv")
 metadata/_custom_type_script = "uid://dtho5hq78o5mn"
 
-[node name="base" type="Node" parent="."]
+[node name="base" type="Node2D" parent="."]
 
 [node name="Graphic" type="Sprite2D" parent="base"]
 visible = false
@@ -217,7 +217,7 @@ attack_delay = 0.25
 parallel_targets = 100
 metadata/_custom_type_script = "uid://1avxbht4guw8"
 
-[node name="upgrade1" type="Node" parent="."]
+[node name="upgrade1" type="Node2D" parent="."]
 
 [node name="Graphic" type="Sprite2D" parent="upgrade1"]
 visible = false
@@ -255,7 +255,7 @@ attack_delay = 0.25
 parallel_targets = 100
 metadata/_custom_type_script = "uid://1avxbht4guw8"
 
-[node name="upgrade2" type="Node" parent="."]
+[node name="upgrade2" type="Node2D" parent="."]
 
 [node name="Graphic" type="Sprite2D" parent="upgrade2"]
 texture_filter = 1

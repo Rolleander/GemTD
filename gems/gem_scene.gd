@@ -13,7 +13,7 @@ var glow_phase: float = 0.0
 var base_light_energy: float = 0.0
 var base_light_texture_scale: float = 0.0
 var glow_quality_strength: float = 0.0
-var projected_point_lights = []
+var special_graphic_lights = []
 
 func _ready():
 	process_priority = 10
@@ -25,60 +25,79 @@ func _ready():
 	$CombineRing.hide()
 
 func _remove_billboard():
-	_clear_projected_point_lights()
+	_clear_special_graphic_lights()
 	if is_instance_valid(billboard):
 		billboard.queue_free()
 
 func sync_billboard():
 	board.update_billboard(billboard, global_position)
-	_sync_projected_point_lights()
 
 func refresh_billboard_effects():
 	board.configure_billboard_particles(billboard)
-	_refresh_projected_point_lights()
+	_extract_special_graphic_lights()
 
 func disable_default_glow():
 	super()
 	base_light_energy = 0.0
 	$PointLight2D.visible = false
 
-func _refresh_projected_point_lights():
-	_clear_projected_point_lights()
-	var world_effects = get_tree().get_first_node_in_group("Effects") as Node2D
-	if world_effects == null:
-		return
+func _extract_special_graphic_lights():
+	_clear_special_graphic_lights()
 	for node in graphic.find_children("*", "PointLight2D", true, false):
-		var light = node as PointLight2D
-		if light == null:
+		var world_light = node as PointLight2D
+		if world_light == null:
 			continue
-		var anchor = light.get_parent() as Node2D
+		var anchor = world_light.get_parent() as Node2D
 		if anchor == null:
 			continue
-		var local_light_transform = light.transform
-		light.reparent(world_effects, false)
-		projected_point_lights.append({
-			"light": light,
-			"anchor": anchor,
-			"local_transform": local_light_transform,
+		var local_transform = world_light.transform
+		var billboard_light = Sprite2D.new()
+		var billboard_material = CanvasItemMaterial.new()
+		billboard_material.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+		billboard_material.light_mode = CanvasItemMaterial.LIGHT_MODE_UNSHADED
+		billboard_light.material = billboard_material
+		anchor.add_child(billboard_light)
+		billboard_light.transform = local_transform
+		world_light.reparent(self, false)
+		world_light.position = Vector2.ZERO
+		special_graphic_lights.append({
+			"world": world_light,
+			"billboard": billboard_light,
+			"local_transform": local_transform,
 		})
-	_sync_projected_point_lights()
+	_sync_special_graphic_lights()
 
-func _sync_projected_point_lights():
-	for entry in projected_point_lights:
-		var light = entry["light"] as PointLight2D
-		var anchor = entry["anchor"] as Node2D
-		if !is_instance_valid(light) || !is_instance_valid(anchor):
+func _sync_special_graphic_lights():
+	for entry in special_graphic_lights:
+		var world_light = entry["world"] as PointLight2D
+		var billboard_light = entry["billboard"] as Sprite2D
+		if !is_instance_valid(world_light) || !is_instance_valid(billboard_light):
 			continue
-		var local_light_transform: Transform2D = entry["local_transform"]
-		var light_screen_position = anchor.get_global_transform_with_canvas() * local_light_transform.origin
-		light.global_position = board.screen_to_world_position(light_screen_position)
+		var energy = maxf(world_light.energy, 0.0) * 0.25
+		var light_color = world_light.color
+		billboard_light.texture = world_light.texture
+		billboard_light.transform = entry["local_transform"]
+		billboard_light.scale *= world_light.texture_scale
+		billboard_light.modulate = Color(
+			light_color.r * energy,
+			light_color.g * energy,
+			light_color.b * energy,
+			clampf(light_color.a * energy, 0.0, 1.0)
+		)
+		billboard_light.visible = world_light.visible && world_light.enabled
 
-func _clear_projected_point_lights():
-	for entry in projected_point_lights:
-		var light = entry["light"] as PointLight2D
-		if is_instance_valid(light):
-			light.queue_free()
-	projected_point_lights.clear()
+func _clear_special_graphic_lights():
+	for entry in special_graphic_lights:
+		var world_light = entry["world"] as PointLight2D
+		var billboard_light = entry["billboard"] as Sprite2D
+		if is_instance_valid(world_light):
+			world_light.queue_free()
+		if is_instance_valid(billboard_light):
+			var parent = billboard_light.get_parent()
+			if parent != null:
+				parent.remove_child(billboard_light)
+			billboard_light.free()
+	special_graphic_lights.clear()
 
 func get_attack_origin_screen_position() -> Vector2:
 	var renders = graphic.find_children("*", "Sprite2D", true, false)
@@ -130,6 +149,7 @@ func activate_combination():
 
 func _process(delta: float) -> void:
 	sync_billboard()
+	_sync_special_graphic_lights()
 	if base_light_energy <= 0.0 || rock:
 		return
 	glow_phase += delta * lerpf(1.35, 1.7, glow_quality_strength)

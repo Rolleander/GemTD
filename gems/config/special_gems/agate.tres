@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpecialGem" load_steps=10 format=3 uid="uid://dpgrprmcm2ao1"]
 
 [ext_resource type="Script" uid="uid://dr2tcdhdjlok1" path="res://scripts/basic_gem_id.gd" id="1_e6w22"]
-[ext_resource type="PackedScene" uid="uid://sf31by7vb4cx" path="res://gems/special/blub_gem.tscn" id="2_2a3br"]
+[ext_resource type="PackedScene" uid="uid://dkoa66sliapg2" path="res://gems/special/agate.tscn" id="2_e6w22"]
 [ext_resource type="Script" uid="uid://26qmlrxb2ahx" path="res://scripts/special_gem.gd" id="3_53hlv"]
 [ext_resource type="Script" uid="uid://bwhecv2sedq8" path="res://scripts/special_gem_tier.gd" id="4_nixj6"]
 
@@ -39,4 +39,4 @@ name = "Green Agate"
 description = "Poison splash"
 type = 6
 tiers = Array[ExtResource("4_nixj6")]([SubResource("Resource_1ftk8"), SubResource("Resource_o68vg")])
-scene = ExtResource("2_2a3br")
+scene = ExtResource("2_e6w22")
