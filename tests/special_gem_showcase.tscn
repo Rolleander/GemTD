@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1v341m3vp5x2"]
+
+[ext_resource type="Script" uid="uid://fw8wiislav5h" path="res://tests/special_gem_showcase.gd" id="1_showcase"]
+[ext_resource type="PackedScene" uid="uid://h3iwjdc165q0" path="res://board/board.tscn" id="2_board"]
+
+[node name="SpecialGemShowcase" type="Node"]
+script = ExtResource("1_showcase")
+
+[node name="Board" parent="." instance=ExtResource("2_board")]
+
+[node name="ShowcaseControls" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="ReloadButton" type="Button" parent="ShowcaseControls"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 18.0
+offset_right = 100.0
+offset_bottom = 62.0
+grow_horizontal = 2
+focus_mode = 0
+text = "Reload special gem"
+
+[connection signal="pressed" from="ShowcaseControls/ReloadButton" to="." method="_on_reload_button_pressed"]

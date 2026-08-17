@@ -10,6 +10,7 @@ const MAX_ZOOM = 2
 const MAP_EDGE_BORDER = 500
 var _zoom_level = 1.5
 var _zoom_tween: Tween
+var edge_scrolling_enabled = true
 
 func _ready() -> void:
 	zoom = _world_zoom(_zoom_level)
@@ -54,6 +55,9 @@ func _world_zoom(value: float) -> Vector2:
 	return Vector2(value, value * Globals.WORLD_DEPTH_SCALE)
 
 func _process(delta: float) -> void:
+	if !edge_scrolling_enabled:
+		return
+
 	# Mouse positions use viewport coordinates, so the edge checks must use the
 	# viewport size too. DisplayServer.window_get_size() is in a different
 	# coordinate space when stretch or display scaling is enabled.

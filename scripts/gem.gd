@@ -54,6 +54,9 @@ func sync_billboard():
 func refresh_billboard_effects():
 	pass
 
+func disable_default_glow():
+	glow.visible = false
+
 func get_attack_origin_screen_position() -> Vector2:
 	return get_viewport().get_canvas_transform() * global_position
 

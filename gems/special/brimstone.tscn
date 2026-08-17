@@ -1,0 +1,294 @@
+[gd_scene load_steps=21 format=3 uid="uid://db8stwvhsd15p"]
+
+[ext_resource type="Script" uid="uid://dtho5hq78o5mn" path="res://scripts/special_gem_scene.gd" id="1_38bbv"]
+[ext_resource type="Texture2D" uid="uid://c61f40yd5gnq8" path="res://sprites/gems/brimstone.png" id="2_efn5o"]
+[ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="3_uvger"]
+[ext_resource type="Texture2D" uid="uid://bd5tx2sa1aau" path="res://sprites/whitelight.png" id="4_0fsw8"]
+[ext_resource type="Script" uid="uid://1avxbht4guw8" path="res://gems/basic/attacks/direct_attack.gd" id="5_nwkmd"]
+
+[sub_resource type="Curve" id="Curve_0fsw8"]
+_data = [Vector2(0.00915331, 0.144936), 0.0, 0.0, 0, 0, Vector2(0.423341, 0.487971), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_nwkmd"]
+curve = SubResource("Curve_0fsw8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_w1ij3"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 12.58
+angle_min = -467.0
+angle_max = 467.7
+gravity = Vector3(0, -30, 0)
+scale_min = 0.05
+scale_max = 0.1
+color = Color(1, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_nwkmd")
+turbulence_enabled = true
+turbulence_noise_strength = 0.77
+turbulence_noise_scale = 1.973
+
+[sub_resource type="Animation" id="Animation_w1ij3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+
+[sub_resource type="Animation" id="Animation_nwkmd"]
+resource_name = "light"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.2, 1.3, 0.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8wqu0"]
+_data = {
+&"RESET": SubResource("Animation_w1ij3"),
+&"light": SubResource("Animation_nwkmd")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nwkmd"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 12.58
+angle_min = -467.0
+angle_max = 467.7
+gravity = Vector3(0, -30, 0)
+scale_min = 0.05
+scale_max = 0.15
+color = Color(1, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_nwkmd")
+turbulence_enabled = true
+turbulence_noise_strength = 0.38
+turbulence_noise_scale = 4.405
+
+[sub_resource type="Animation" id="Animation_reset_upgrade1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+
+[sub_resource type="Animation" id="Animation_light_upgrade1"]
+resource_name = "light"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.2, 1.0, 0.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_upgrade1"]
+_data = {
+&"RESET": SubResource("Animation_reset_upgrade1"),
+&"light": SubResource("Animation_light_upgrade1")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fsw8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8wqu0"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 21.91
+angle_min = -467.0
+angle_max = 467.7
+gravity = Vector3(0, -30, 0)
+scale_min = 0.05
+scale_max = 0.2
+color = Color(1, 1, 0, 1)
+alpha_curve = SubResource("CurveTexture_nwkmd")
+turbulence_enabled = true
+turbulence_noise_strength = 0.61
+turbulence_noise_scale = 1.123
+turbulence_noise_speed_random = 0.29
+
+[sub_resource type="Animation" id="Animation_reset_upgrade2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+
+[sub_resource type="Animation" id="Animation_light_upgrade2"]
+resource_name = "light"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.2, 0.6, 0.2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_upgrade2"]
+_data = {
+&"RESET": SubResource("Animation_reset_upgrade2"),
+&"light": SubResource("Animation_light_upgrade2")
+}
+
+[node name="Brimstone" type="Node2D"]
+script = ExtResource("1_38bbv")
+metadata/_custom_type_script = "uid://dtho5hq78o5mn"
+
+[node name="base" type="Node" parent="."]
+
+[node name="Graphic" type="Sprite2D" parent="base"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -2)
+texture = ExtResource("2_efn5o")
+region_enabled = true
+region_rect = Rect2(10.8765, 20.9506, 27.6543, 30.4198)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="base/Graphic"]
+position = Vector2(0, -14)
+amount = 30
+texture = ExtResource("3_uvger")
+lifetime = 4.48
+process_material = SubResource("ParticleProcessMaterial_w1ij3")
+
+[node name="PointLight2D" type="PointLight2D" parent="base/Graphic"]
+position = Vector2(2.00001, -0.999998)
+scale = Vector2(0.15, 0.15)
+color = Color(0.94902, 0.988235, 0.141176, 1)
+energy = 0.2
+texture = ExtResource("4_0fsw8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="base/Graphic/PointLight2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_8wqu0")
+}
+autoplay = "light"
+
+[node name="Attack" type="Node2D" parent="base"]
+script = ExtResource("5_nwkmd")
+damage = 5.0
+attack_range = 7.0
+attack_delay = 0.25
+parallel_targets = 100
+metadata/_custom_type_script = "uid://1avxbht4guw8"
+
+[node name="upgrade1" type="Node" parent="."]
+
+[node name="Graphic" type="Sprite2D" parent="upgrade1"]
+visible = false
+texture_filter = 1
+position = Vector2(0, -4)
+texture = ExtResource("2_efn5o")
+region_enabled = true
+region_rect = Rect2(45.7527, 19.5064, 28.642, 34.963)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="upgrade1/Graphic"]
+position = Vector2(0, -18)
+amount = 45
+texture = ExtResource("3_uvger")
+lifetime = 4.66
+process_material = SubResource("ParticleProcessMaterial_nwkmd")
+
+[node name="PointLight2D2" type="PointLight2D" parent="upgrade1/Graphic"]
+position = Vector2(2.00001, -0.999998)
+scale = Vector2(0.2, 0.2)
+color = Color(0.94902, 0.988235, 0.141176, 1)
+energy = 0.2
+texture = ExtResource("4_0fsw8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="upgrade1/Graphic/PointLight2D2"]
+libraries = {
+&"": SubResource("AnimationLibrary_upgrade1")
+}
+autoplay = "light"
+
+[node name="Attack" type="Node2D" parent="upgrade1"]
+script = ExtResource("5_nwkmd")
+damage = 10.0
+attack_range = 9.0
+attack_delay = 0.25
+parallel_targets = 100
+metadata/_custom_type_script = "uid://1avxbht4guw8"
+
+[node name="upgrade2" type="Node" parent="."]
+
+[node name="Graphic" type="Sprite2D" parent="upgrade2"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_0fsw8")
+position = Vector2(-1, -7)
+texture = ExtResource("2_efn5o")
+region_enabled = true
+region_rect = Rect2(85.654, 12.5929, 40.5926, 43.9506)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="upgrade2/Graphic"]
+position = Vector2(1, -7)
+amount = 80
+texture = ExtResource("3_uvger")
+lifetime = 4.86
+process_material = SubResource("ParticleProcessMaterial_8wqu0")
+
+[node name="PointLight2D2" type="PointLight2D" parent="upgrade2/Graphic"]
+position = Vector2(2.00001, 2)
+scale = Vector2(0.3, 0.3)
+color = Color(0.94902, 0.988235, 0.141176, 1)
+energy = 0.2
+texture = ExtResource("4_0fsw8")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="upgrade2/Graphic/PointLight2D2"]
+libraries = {
+&"": SubResource("AnimationLibrary_upgrade2")
+}
+autoplay = "light"
+
+[node name="Attack" type="Node2D" parent="upgrade2"]
+script = ExtResource("5_nwkmd")
+damage = 37.0
+attack_range = 10.0
+attack_delay = 0.25
+parallel_targets = 100
+metadata/_custom_type_script = "uid://1avxbht4guw8"

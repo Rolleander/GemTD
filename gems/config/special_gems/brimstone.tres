@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SpecialGem" load_steps=10 format=3 uid="uid://bmtun2n6o1bgx"]
 
 [ext_resource type="Script" uid="uid://dr2tcdhdjlok1" path="res://scripts/basic_gem_id.gd" id="1_5nxuy"]
-[ext_resource type="PackedScene" uid="uid://sf31by7vb4cx" path="res://gems/special/blub_gem.tscn" id="2_8x8bg"]
+[ext_resource type="PackedScene" uid="uid://db8stwvhsd15p" path="res://gems/special/brimstone.tscn" id="2_5nxuy"]
 [ext_resource type="Script" uid="uid://26qmlrxb2ahx" path="res://scripts/special_gem.gd" id="3_xq82l"]
 [ext_resource type="Script" uid="uid://bwhecv2sedq8" path="res://scripts/special_gem_tier.gd" id="4_d7ir4"]
 
@@ -36,7 +36,7 @@ metadata/_custom_type_script = "uid://bwhecv2sedq8"
 script = ExtResource("3_xq82l")
 recipe = Array[ExtResource("1_5nxuy")]([SubResource("Resource_fw6n6"), SubResource("Resource_eeyno"), SubResource("Resource_a3ris")])
 name = "Brimstone"
-description = "Aoe damage"
+description = "Rapidly damages all enemies in range"
 type = 2
 tiers = Array[ExtResource("4_d7ir4")]([SubResource("Resource_1ftk8"), SubResource("Resource_o68vg")])
-scene = ExtResource("2_8x8bg")
+scene = ExtResource("2_5nxuy")

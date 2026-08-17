@@ -43,6 +43,7 @@ func install_template(template_name: StringName = &"base"):
 
 	new_graphic.visible = true
 	gem.special_combination = self
+	gem.disable_default_glow()
 	gem.graphic.add_child(new_graphic)
 	gem.refresh_billboard_effects()
 	gem.set_attack(new_attack)

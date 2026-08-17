@@ -55,7 +55,7 @@ void fragment() {
 	vec2 local_uv = (UV - region_min_uv) / region_size_uv;
 	vec2 wave_uv = wave(local_uv, TIME);
 	vec4 ns = texture(noise, wave_uv);
-	
+
 	vec2 motion = vec2(0.0, 1.0);
 	float pi = 3.14159265358979323846;
 	vec2 uv = local_uv * 2.0 - 1.0;
@@ -66,7 +66,7 @@ void fragment() {
 	float ripple = sin(dist * -frequency * pi + rippleRate * TIME) * amplitude / (dist + 1.0);
 
 
-	float alphaScalar = (1.0 - min(dist, 1.0)) * ns.x * 2.5; 
+	float alphaScalar = (1.0 - min(dist, 1.0)) * ns.x * 2.5;
 	float wave_mask = 2.0 * ripple * alphaScalar * (ripple + ns.x * ns.y);
 	wave_mask = max(wave_mask - ns.y * 0.45, 0.0);
 	wave_mask = clamp(wave_mask * blendingAmount, 0.0, 1.0);
@@ -231,15 +231,14 @@ script = ExtResource("1_m5kkc")
 metadata/_custom_type_script = "uid://dtho5hq78o5mn"
 
 [node name="base" type="Node2D" parent="."]
-visible = false
 
 [node name="Graphic" type="Sprite2D" parent="base"]
-visible = false
 texture = ExtResource("2_id5pr")
 region_enabled = true
 region_rect = Rect2(273.808, 28.6146, 29.2662, 31.194)
 
 [node name="WaveOverlay" type="Sprite2D" parent="base/Graphic"]
+visible = false
 z_index = 1
 material = SubResource("ShaderMaterial_wave")
 position = Vector2(0, -1)
@@ -262,6 +261,7 @@ energy = 1.2
 texture = ExtResource("6_st5ga")
 
 [node name="Attack" type="Node2D" parent="base" node_paths=PackedStringArray("bullet_source")]
+visible = false
 script = ExtResource("2_wcdhm")
 bullet_speed = 13.5
 bullet_source = NodePath("Bullet")
@@ -347,6 +347,7 @@ energy = 1.41
 texture = SubResource("GradientTexture2D_6ce46")
 
 [node name="upgrade2" type="Node2D" parent="."]
+visible = false
 position = Vector2(0, 3)
 
 [node name="Graphic" type="Sprite2D" parent="upgrade2"]

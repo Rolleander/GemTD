@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://bwhecv2sedq8"
 [sub_resource type="Resource" id="Resource_o68vg"]
 script = ExtResource("4_nixj6")
 name = "Venom Agate"
-upgrade_cost = 165
+upgrade_cost = 175
 metadata/_custom_type_script = "uid://bwhecv2sedq8"
 
 [resource]

@@ -37,6 +37,11 @@ func refresh_billboard_effects():
 	board.configure_billboard_particles(billboard)
 	_refresh_projected_point_lights()
 
+func disable_default_glow():
+	super()
+	base_light_energy = 0.0
+	$PointLight2D.visible = false
+
 func _refresh_projected_point_lights():
 	_clear_projected_point_lights()
 	var world_effects = get_tree().get_first_node_in_group("Effects") as Node2D

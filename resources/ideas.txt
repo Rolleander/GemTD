@@ -24,7 +24,7 @@ mid combos:
 
 money gem = EM:3 + SA:2 + OP:3	
 tiers: lazulite -> lapis lazuli -> lucky lapis lazuli
--tier2: attacks give +1 money up to half of current wave count (round up)
+-tier2:  +5 (+ wave / 5) gold at end of turn.  10% interest at start of turn capped to 20.  payout per button
 
 air defence (air armor loss)= AM:2 + QZ:2 + RU:3
 tiers: moonstone -> rainbow moonstone
