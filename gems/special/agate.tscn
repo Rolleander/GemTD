@@ -1,10 +1,27 @@
-[gd_scene load_steps=15 format=3 uid="uid://dkoa66sliapg2"]
+[gd_scene load_steps=25 format=3 uid="uid://dkoa66sliapg2"]
 
 [ext_resource type="Script" uid="uid://dtho5hq78o5mn" path="res://scripts/special_gem_scene.gd" id="1_ufx21"]
 [ext_resource type="Texture2D" uid="uid://bky8xs1onkecu" path="res://sprites/gems/agate.png" id="2_8fe5i"]
 [ext_resource type="Texture2D" uid="uid://bd5tx2sa1aau" path="res://sprites/whitelight.png" id="3_ibcew"]
 [ext_resource type="Shader" uid="uid://6diloqopvvgw" path="res://resources/shaders/halo.gdshader" id="4_5ckvr"]
 [ext_resource type="Script" uid="uid://dhl77wk4o2611" path="res://gems/basic/attacks/projectile_attack.gd" id="4_svefq"]
+[ext_resource type="Script" uid="uid://dnn2mgo3mu4vl" path="res://scripts/buffs/enemy/enemy_buff.gd" id="5_1otbk"]
+[ext_resource type="Texture2D" uid="uid://cko6goykdvlt3" path="res://sprites/smoke_particle.png" id="5_x2dvs"]
+
+[sub_resource type="Animation" id="Animation_svefq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
 
 [sub_resource type="Animation" id="Animation_5ckvr"]
 resource_name = "light"
@@ -23,26 +40,72 @@ tracks/0/keys = {
 "values": [0.2, 1.04, 0.2]
 }
 
-[sub_resource type="Animation" id="Animation_svefq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.2]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x2dvs"]
 _data = {
 &"RESET": SubResource("Animation_svefq"),
 &"light": SubResource("Animation_5ckvr")
 }
+
+[sub_resource type="Resource" id="Resource_1otbk"]
+script = ExtResource("5_1otbk")
+duration = 5
+value = -40.0
+operation = 1
+attribute = 0
+continous = true
+permanent = true
+aura_range = 0.0
+name = "Agate Poison 1"
+description = "8 Damage per second"
+stack_group = "AgatePoison"
+stack_size = 1
+priority = 0
+order = 0
+metadata/_custom_type_script = "uid://dnn2mgo3mu4vl"
+
+[sub_resource type="Curve" id="Curve_1otbk"]
+_data = [Vector2(0.0389016, 0.334109), 0.0, 0.0, 0, 0, Vector2(0.363844, 0.904152), 0.0, 0.0, 0, 0, Vector2(1, 0.0944898), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_bk6mj"]
+curve = SubResource("Curve_1otbk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1otbk"]
+particle_flag_disable_z = true
+angle_min = -332.5
+angle_max = 465.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.2
+color = Color(0.847875, 1, 0.832078, 1)
+alpha_curve = SubResource("CurveTexture_bk6mj")
+
+[sub_resource type="Resource" id="Resource_bk6mj"]
+script = ExtResource("5_1otbk")
+duration = 5
+value = -75.0
+operation = 1
+attribute = 0
+continous = true
+permanent = true
+aura_range = 0.0
+name = "Agate Poison 2"
+description = "15 Damage per second"
+stack_group = "AgatePoison"
+stack_size = 1
+priority = 1
+order = 0
+metadata/_custom_type_script = "uid://dnn2mgo3mu4vl"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bk6mj"]
+particle_flag_disable_z = true
+angle_min = -332.5
+angle_max = 465.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.25
+color = Color(0.847875, 1, 0.832078, 1)
+alpha_curve = SubResource("CurveTexture_bk6mj")
 
 [sub_resource type="Gradient" id="Gradient_svefq"]
 colors = PackedColorArray(0, 1, 0, 1, 1, 1, 1, 1)
@@ -65,6 +128,21 @@ shader_parameter/core_intensity = -0.11
 shader_parameter/hdr = false
 shader_parameter/seed = 1.0
 
+[sub_resource type="Animation" id="Animation_x2dvs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.2]
+}
+
 [sub_resource type="Animation" id="Animation_ibcew"]
 resource_name = "light"
 length = 3.0
@@ -82,26 +160,38 @@ tracks/0/keys = {
 "values": [0.2, 3.11, 0.622519, 1.41]
 }
 
-[sub_resource type="Animation" id="Animation_x2dvs"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.2]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1otbk"]
 _data = {
 &"RESET": SubResource("Animation_x2dvs"),
 &"light": SubResource("Animation_ibcew")
 }
+
+[sub_resource type="Resource" id="Resource_8l277"]
+script = ExtResource("5_1otbk")
+duration = 5
+value = -400.0
+operation = 1
+attribute = 0
+continous = true
+permanent = true
+aura_range = 0.0
+name = "Agate Poison 3"
+description = "80 Damage per second"
+stack_group = "AgatePoison"
+stack_size = 1
+priority = 2
+order = 0
+metadata/_custom_type_script = "uid://dnn2mgo3mu4vl"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8l277"]
+particle_flag_disable_z = true
+angle_min = -332.5
+angle_max = 465.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.3
+color = Color(0.847875, 1, 0.832078, 1)
+alpha_curve = SubResource("CurveTexture_bk6mj")
 
 [node name="Agate" type="Node2D"]
 script = ExtResource("1_ufx21")
@@ -131,10 +221,36 @@ autoplay = "light"
 
 [node name="Attack" type="Node2D" parent="base" node_paths=PackedStringArray("bullet_source")]
 script = ExtResource("4_svefq")
+bullet_speed = 12.0
 bullet_source = NodePath("Sprite2D")
+angle_spread = 0.5
+curve_strength = 0.2
+damage = 15.0
+attack_range = 7.0
+attack_delay = 1.3
+description = "Does splash damage with poison"
+hit_buffs = Array[ExtResource("5_1otbk")]([SubResource("Resource_1otbk")])
+splash_range = 2.0
 metadata/_custom_type_script = "uid://dhl77wk4o2611"
 
 [node name="Sprite2D" type="Sprite2D" parent="base/Attack"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_8fe5i")
+region_enabled = true
+region_rect = Rect2(30.7527, 3.74106, 17.5802, 17.9753)
+
+[node name="PointLight2D2" type="PointLight2D" parent="base/Attack/Sprite2D"]
+position = Vector2(2.38419e-07, -1)
+scale = Vector2(0.15, 0.15)
+color = Color(0, 0.988235, 0.141176, 1)
+energy = 0.3
+texture = ExtResource("3_ibcew")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="base/Attack/Sprite2D"]
+show_behind_parent = true
+amount = 30
+texture = ExtResource("5_x2dvs")
+process_material = SubResource("ParticleProcessMaterial_1otbk")
 
 [node name="upgrade1" type="Node2D" parent="."]
 visible = false
@@ -160,10 +276,35 @@ autoplay = "light"
 
 [node name="Attack" type="Node2D" parent="upgrade1" node_paths=PackedStringArray("bullet_source")]
 script = ExtResource("4_svefq")
+bullet_speed = 12.0
 bullet_source = NodePath("Sprite2D")
+angle_spread = 0.5
+curve_strength = 0.2
+damage = 25.0
+attack_range = 7.0
+attack_delay = 1.2
+description = "Does splash damage with poison"
+hit_buffs = Array[ExtResource("5_1otbk")]([SubResource("Resource_bk6mj")])
+splash_range = 2.0
 metadata/_custom_type_script = "uid://dhl77wk4o2611"
 
 [node name="Sprite2D" type="Sprite2D" parent="upgrade1/Attack"]
+texture = ExtResource("2_8fe5i")
+region_enabled = true
+region_rect = Rect2(30.7527, 3.74106, 17.5802, 17.9753)
+
+[node name="PointLight2D2" type="PointLight2D" parent="upgrade1/Attack/Sprite2D"]
+position = Vector2(2.38419e-07, -1)
+scale = Vector2(0.15, 0.15)
+color = Color(0, 0.988235, 0.141176, 1)
+energy = 0.3
+texture = ExtResource("3_ibcew")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="upgrade1/Attack/Sprite2D"]
+show_behind_parent = true
+amount = 30
+texture = ExtResource("5_x2dvs")
+process_material = SubResource("ParticleProcessMaterial_bk6mj")
 
 [node name="upgrade2" type="Node2D" parent="."]
 
@@ -197,7 +338,32 @@ autoplay = "light"
 
 [node name="Attack" type="Node2D" parent="upgrade2" node_paths=PackedStringArray("bullet_source")]
 script = ExtResource("4_svefq")
+bullet_speed = 12.0
 bullet_source = NodePath("Sprite2D")
+angle_spread = 0.5
+curve_strength = 0.2
+damage = 100.0
+attack_range = 8.0
+description = "Does splash damage with poison"
+hit_buffs = Array[ExtResource("5_1otbk")]([SubResource("Resource_8l277")])
+splash_range = 2.0
 metadata/_custom_type_script = "uid://dhl77wk4o2611"
 
 [node name="Sprite2D" type="Sprite2D" parent="upgrade2/Attack"]
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_8fe5i")
+region_enabled = true
+region_rect = Rect2(30.7527, 3.74106, 17.5802, 17.9753)
+
+[node name="PointLight2D2" type="PointLight2D" parent="upgrade2/Attack/Sprite2D"]
+position = Vector2(2.38419e-07, -1)
+scale = Vector2(0.15, 0.15)
+color = Color(0, 0.988235, 0.141176, 1)
+energy = 0.45
+texture = ExtResource("3_ibcew")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="upgrade2/Attack/Sprite2D"]
+show_behind_parent = true
+amount = 30
+texture = ExtResource("5_x2dvs")
+process_material = SubResource("ParticleProcessMaterial_8l277")

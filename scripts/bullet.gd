@@ -27,6 +27,7 @@ var flight_time: float = 0.0
 var projectile_render: Node2D
 var visual_billboard: Node2D
 var world_particle_render: GPUParticles2D
+var world_particle_children = []
 var board: Board
 
 func set_render(render: Node2D):
@@ -69,9 +70,9 @@ func _ready():
 			light.reparent(self, true)
 	remove_child(projectile_render)
 	add_child(visual_billboard)
+	var particle_layer = get_tree().get_first_node_in_group("projectile_particle_layer") as Node2D
 	if projectile_render is GPUParticles2D:
 		world_particle_render = projectile_render as GPUParticles2D
-		var particle_layer = get_tree().get_first_node_in_group("projectile_particle_layer") as Node2D
 		if particle_layer != null:
 			particle_layer.add_child(world_particle_render)
 		else:
@@ -79,6 +80,14 @@ func _ready():
 			world_particle_render = null
 	else:
 		visual_billboard.add_child(projectile_render)
+		if particle_layer != null:
+			for emitter in particle_emitters:
+				var local_transform = visual_billboard.global_transform.affine_inverse() * emitter.global_transform
+				emitter.reparent(particle_layer, false)
+				world_particle_children.append({
+					"emitter": emitter,
+					"local_transform": local_transform,
+				})
 	board.attach_billboard(visual_billboard)
 	# Projectile particles must remain where they were emitted. Making them local
 	# causes smoke-based bullets such as Emerald to collapse into a dark clump.
@@ -111,6 +120,15 @@ func sync_billboard():
 	if is_instance_valid(world_particle_render):
 		world_particle_render.global_position = global_position
 		world_particle_render.global_rotation = rotation
+	for entry in world_particle_children:
+		var emitter = entry["emitter"] as GPUParticles2D
+		if !is_instance_valid(emitter):
+			continue
+		var local_transform: Transform2D = entry["local_transform"]
+		var emitter_transform = global_transform * local_transform
+		emitter.global_position = emitter_transform.origin
+		emitter.global_rotation = emitter_transform.get_rotation()
+		emitter.scale = local_transform.get_scale()
 	board.update_billboard(visual_billboard, global_position)
 	visual_billboard.z_index = Globals.ATTACK_PROJECTILE_Z_INDEX
 	var screen_position = board.world_to_screen_position(global_position)
@@ -121,6 +139,11 @@ func sync_billboard():
 func _remove_visual_billboard():
 	if is_instance_valid(world_particle_render):
 		world_particle_render.queue_free()
+	for entry in world_particle_children:
+		var emitter = entry["emitter"] as GPUParticles2D
+		if is_instance_valid(emitter):
+			emitter.queue_free()
+	world_particle_children.clear()
 	if is_instance_valid(visual_billboard):
 		visual_billboard.queue_free()
 
@@ -151,20 +174,33 @@ func _stop():
 	for light in find_children("*", "PointLight2D", true, false):
 		(light as PointLight2D).visible = false
 
-	var fade_target: CanvasItem = visual_billboard
+	var fade_targets = [] as Array[CanvasItem]
+	if is_instance_valid(visual_billboard):
+		fade_targets.append(visual_billboard)
 	if is_instance_valid(world_particle_render):
-		fade_target = world_particle_render
-	var tween = create_tween()
-	tween.tween_interval(particle_lifetime * 0.2)
-	tween.set_trans(Tween.TRANS_QUAD)
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property(fade_target, "modulate:a", 0.0, particle_lifetime * 0.8)
-	tween.tween_callback(queue_free)
+		fade_targets.append(world_particle_render)
+	for entry in world_particle_children:
+		var emitter = entry["emitter"] as GPUParticles2D
+		if is_instance_valid(emitter):
+			fade_targets.append(emitter)
+	for fade_target in fade_targets:
+		var fade_tween = create_tween()
+		fade_tween.tween_interval(particle_lifetime * 0.2)
+		fade_tween.set_trans(Tween.TRANS_QUAD)
+		fade_tween.set_ease(Tween.EASE_IN)
+		fade_tween.tween_property(fade_target, "modulate:a", 0.0, particle_lifetime * 0.8)
+	var cleanup_tween = create_tween()
+	cleanup_tween.tween_interval(particle_lifetime)
+	cleanup_tween.tween_callback(queue_free)
 
 func _get_particle_emitters() -> Array[GPUParticles2D]:
 	var emitters = [] as Array[GPUParticles2D]
 	if is_instance_valid(world_particle_render):
 		emitters.append(world_particle_render)
+	for entry in world_particle_children:
+		var emitter = entry["emitter"] as GPUParticles2D
+		if is_instance_valid(emitter):
+			emitters.append(emitter)
 	if !is_instance_valid(visual_billboard):
 		return emitters
 	for node in visual_billboard.find_children("*", "GPUParticles2D", true, false):

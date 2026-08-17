@@ -34,7 +34,8 @@ func _track_damage(delta):
 		target.health.root -= tick_dmg
 		if target.health.value <= 0:
 			target.killer = source
-		source.damage_dealt.dealt(tick_dmg)
+		if is_instance_valid(source):
+			source.damage_dealt.dealt(tick_dmg)
 	
 func update(delta):
 	if buff.duration >0:
