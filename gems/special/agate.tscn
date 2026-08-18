@@ -344,6 +344,7 @@ angle_spread = 0.5
 curve_strength = 0.2
 damage = 100.0
 attack_range = 8.0
+attack_delay = 1.1
 description = "Does splash damage with poison"
 hit_buffs = Array[ExtResource("5_1otbk")]([SubResource("Resource_8l277")])
 splash_range = 2.0

@@ -56,14 +56,20 @@ func _is_playable_map_cell(grid_cell: Vector2i) -> bool:
 
 func update_position_from_mouse() -> void:
 	var board = get_tree().get_first_node_in_group("board") as Board
-	var mouse_position = board.get_world_mouse_position()
-	var grid_pos := Vector2i((mouse_position / Globals.GRID_SIZE).round())
+	update_position(board.get_viewport().get_mouse_position())
+
+func update_position(screen_position: Vector2) -> void:
+	var board = get_tree().get_first_node_in_group("board") as Board
+	var world_position = board.screen_to_world_position(screen_position)
+	var grid_pos = Vector2i((world_position / Globals.GRID_SIZE).round())
 	position = grid_pos * Globals.GRID_SIZE
 	visible = valid_place()
 
 
 func _process(_delta):
-	if Game.construction_phase && Game.remaining_placements > 0:
+	var board = get_tree().get_first_node_in_group("board") as Board
+	var touch_active = board != null && board.camera.should_suppress_mouse_click()
+	if Game.construction_phase && Game.remaining_placements > 0 && !OS.has_feature("mobile") && !touch_active:
 		update_position_from_mouse()
 	else:
 		visible = false

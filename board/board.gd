@@ -16,6 +16,7 @@ class_name Board
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	camera.touch_tapped.connect(_on_touch_tapped)
 	var perspective_material = world_perspective.material as ShaderMaterial
 	perspective_material.set_shader_parameter("far_width", Globals.WORLD_FAR_WIDTH)
 	perspective_material.set_shader_parameter("near_width", Globals.WORLD_NEAR_WIDTH)
@@ -45,11 +46,19 @@ func _get_camera_rect() -> Rect2:
 				
 func _unhandled_input(event):
 	if event.is_action_pressed("click"):
+		if OS.has_feature("mobile") || camera.should_suppress_mouse_click():
+			return
 		_click()
 
 func _click():
-	selection.update_position_from_mouse()
-	if _select_object_at(get_viewport().get_mouse_position()):
+	_click_at(get_viewport().get_mouse_position())
+
+func _on_touch_tapped(screen_position: Vector2):
+	_click_at(screen_position)
+
+func _click_at(screen_position: Vector2):
+	selection.update_position(screen_position)
+	if _select_object_at(screen_position):
 		return
 	Game.clear_selection()
 	if !selection.visible || !selection.valid_place():

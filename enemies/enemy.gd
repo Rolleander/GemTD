@@ -306,4 +306,6 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity):
 
 func _on_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("click"):
+		if OS.has_feature("mobile") || (board != null && board.camera.should_suppress_mouse_click()):
+			return
 		Events.enemy_selected.emit(self)

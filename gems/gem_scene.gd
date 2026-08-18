@@ -250,4 +250,6 @@ func _init_attack_stats(attack: Attack):
 
 func _on_static_body_2d_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("click"):
+		if OS.has_feature("mobile") || (board != null && board.camera.should_suppress_mouse_click()):
+			return
 		Events.emit_signal("gem_selected", self)
